@@ -1,7 +1,32 @@
 @import "~bootswatch/dist/united/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/united/bootswatch";
+@import "projectVar";
+
+
+
+
+
+
+html {
+  height: 100%;
+}
+
 body {
-  background-color: lightgray;
-  font-family: 'Montserrat', sans-serif;
+background-color: $bodyColor;
+font-family: 'Montserrat', sans-serif;
+position: relative;
+min-height: 100%;
+  margin: 0;
+padding: 0;
+}
+.container-fluid
+{
+  padding: 0;
+  margin: 0;
+}
+footer
+{
+  position: absolute;
+  bottom:0;
 }
