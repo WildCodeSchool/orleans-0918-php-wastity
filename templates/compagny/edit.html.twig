@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ compagny.name }}{% endblock %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    {% block header %}
+        <div class="row">
+            <a class="col-1" href="{{ path('compagny_index') }}">retour</a>
+            <h1 class="col text-center">Modifier {{ compagny.name }}</h1>
+        </div>
+    {% endblock %}
+    <div class="container">
+        {{ include('compagny/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {{ include('compagny/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

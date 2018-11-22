@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ compagny.name }}{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <div class="row">
+            <a class="col-1" href="{{ path('compagny_index') }}">retour</a>
+            <h1 class="col text-center">{{ compagny.name }}</h1>
+        </div>
+    {% endblock %}
+    <div class="container">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Type</th>
+                <td>{{ compagny.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ compagny.adress }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ compagny.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ compagny.city }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ compagny.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ compagny.email }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('compagny_edit', {'id': compagny.id}) }}">edit</a>
+
+        {{ include('compagny/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

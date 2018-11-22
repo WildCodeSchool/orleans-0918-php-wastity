@@ -1,0 +1,18 @@
+@import "~bootswatch/dist/united/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/united/bootswatch";
+@import "projectVar";
+@import "formCompagny";
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: $bodyColor;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
