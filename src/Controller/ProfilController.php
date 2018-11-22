@@ -15,5 +15,4 @@ class ProfilController extends AbstractController
     {
         return $this->render('defineProfil.html.twig');
     }
-
 }
