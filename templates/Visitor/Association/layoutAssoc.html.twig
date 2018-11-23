@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-
-{% block stylesheet %}{% endblock %}
+{% block stylesheet %}{{ encore_entry_link_tags('appAssoc') }}{% endblock %}
 {% block header %}{% endblock %}
 {% block body %}{% endblock %}
-{% block footer %}{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('appAssoc') }}
+{% endblock %}
