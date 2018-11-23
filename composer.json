@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "sensio/framework-extra-bundle": "^5.1",
+        "squizlabs/php_codesniffer": "*",
         "symfony/asset": "4.1.*",
         "symfony/console": "4.1.*",
         "symfony/expression-language": "4.1.*",

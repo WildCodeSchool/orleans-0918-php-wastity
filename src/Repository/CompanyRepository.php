@@ -8,21 +8,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Compagny;
+use App\Entity\Company;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Compagny|null find($id, $lockMode = null, $lockVersion = null)
- * @method Compagny|null findOneBy(array $criteria, array $orderBy = null)
- * @method Compagny[]    findAll()
- * @method Compagny[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Company|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Company|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Company[]    findAll()
+ * @method Company[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompagnyRepository extends ServiceEntityRepository
+class CompanyRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Compagny::class);
+        parent::__construct($registry, Company::class);
     }
 
     // /**

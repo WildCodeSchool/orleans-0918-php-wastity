@@ -1,0 +1,46 @@
+{% extends 'Visitor/Company/layaoutCompany.html.twig' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <div class="row">
+            <a class="col-1" href="{{ path('company_index') }}">retour</a>
+            <h1 class="col text-center">{{ company.name }}</h1>
+        </div>
+    {% endblock %}
+    <div class="container">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Type</th>
+                <td>{{ company.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ company.adress }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ company.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ company.city }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ company.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ company.email }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+
+        {{ include('Visitor/Company/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

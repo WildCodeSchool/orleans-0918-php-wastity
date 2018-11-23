@@ -24,18 +24,18 @@
             </tr>
             </thead>
             <tbody>
-            {% for compagny in compagnyes %}
+            {% for company in companyes %}
                 <tr>
-                    <td>{{ compagny.type }}</td>
-                    <td>{{ compagny.name }}</td>
-                    <td>{{ compagny.adress }}</td>
-                    <td>{{ compagny.postalCode }}</td>
-                    <td>{{ compagny.city }}</td>
-                    <td>{{ compagny.phone }}</td>
-                    <td>{{ compagny.email }}</td>
+                    <td>{{ company.type }}</td>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.adress }}</td>
+                    <td>{{ company.postalCode }}</td>
+                    <td>{{ company.city }}</td>
+                    <td>{{ company.phone }}</td>
+                    <td>{{ company.email }}</td>
                     <td>
-                        <a href="{{ path('compagny_show', {'id': compagny.id}) }}">show</a>
-                        <a href="{{ path('compagny_edit', {'id': compagny.id}) }}">edit</a>
+                        <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
+                        <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
                     </td>
                 </tr>
             {% else %}
@@ -45,7 +45,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <a href="{{ path('compagny_new') }}">Nouveau</a>
+        <a href="{{ path('company_new') }}">Nouveau</a>
     </div>
 
 {% endblock %}

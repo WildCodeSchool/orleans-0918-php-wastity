@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CompagnyRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  */
-class Compagny
+class Company
 {
     /**
      * @ORM\Id()
@@ -109,7 +109,7 @@ class Compagny
 
     /**
      * @param $type
-     * @return Compagny
+     * @return Company
      */
     public function setType($type): self
     {
@@ -129,7 +129,7 @@ class Compagny
 
     /**
      * @param $name
-     * @return Compagny
+     * @return Company
      */
     public function setName($name): self
     {
@@ -149,7 +149,7 @@ class Compagny
 
     /**
      * @param $adress
-     * @return Compagny
+     * @return Company
      */
     public function setAdress($adress): self
     {
@@ -169,7 +169,7 @@ class Compagny
 
     /**
      * @param $postalCode
-     * @return Compagny
+     * @return Company
      */
     public function setPostalCode($postalCode): self
     {
@@ -189,7 +189,7 @@ class Compagny
 
     /**
      * @param $city
-     * @return Compagny
+     * @return Company
      */
     public function setCity($city): self
     {
@@ -209,7 +209,7 @@ class Compagny
 
     /**
      * @param $phone
-     * @return Compagny
+     * @return Company
      */
     public function setPhone($phone): self
     {
@@ -229,7 +229,7 @@ class Compagny
 
     /**
      * @param $email
-     * @return Compagny
+     * @return Company
      */
     public function setEmail($email): self
     {
