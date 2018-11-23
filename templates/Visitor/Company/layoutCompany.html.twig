@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier {{ company.name }}{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block stylesheet %}{% endblock %}
+
 {% block header %}{% endblock %}
+
 {% block body %}{% endblock %}
-{% block javascripts %}
-{% endblock %}
+
+{% block javascripts %}{% endblock %}
