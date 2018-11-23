@@ -1,5 +1,11 @@
 @import "app";
 
+a{
+  color: $companyColor;
+}
+a:hover{
+  color: $companyColorHover;
+}
 .navbar {
   background-color: darken($primaryColor, 10%);
   margin: 0;
@@ -11,7 +17,6 @@
   width: 20%;
   border-radius: 15%;
   margin-top: 0.5em;
-
 
   .fas {
     color: $companyColor;
