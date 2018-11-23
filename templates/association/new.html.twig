@@ -1,15 +1,15 @@
-{% extends 'layoutAssociation.html.twig' %}
+{% extends 'Visitor/Association/layoutAssociation.html.twig' %}
 
 {% block title %}Inscription Association{% endblock %}
 
-{% block body %}
+{% block header %}
+    <div class="row">
+        <a class="col-1" href="#"><i class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Inscription Association</h1>
+    </div>
+{% endblock %}
 
-    {% block header %}
-        <div class="row">
-            <a class="col-1" href="#"><i class="fas fa-chevron-left"></i></a>
-            <h1 class="col text-center">Inscription Association</h1>
-        </div>
-    {% endblock %}
+{% block body %}
 
     <div class="form-inline justify-content-center">
         <p class="text-center mt-3 mb-3">
