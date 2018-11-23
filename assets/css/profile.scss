@@ -1,0 +1,64 @@
+@import "projectVar";
+
+header {
+  background-color: darken($primaryColor, 10%);
+  margin: 0;
+  padding: 3%;
+
+  p {
+    margin: 0;
+  }
+}
+
+section {
+  .title {
+    padding: 2.5%;
+    margin-top: 0.5em;
+  }
+
+  article {
+    height: 20vh;
+    margin: 1em;
+    vertical-align: center;
+
+    h1 {
+      font-weight: bold;
+      padding-top: 0.3em;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+
+      &:hover {
+        text-decoration: none;
+        color: darken($primaryColor, 100%);
+      }
+    }
+
+  }
+
+  .foodHeroProfile {
+    background-color: $foodHeroColor;
+
+    &:hover {
+      background-color: $foodHeroColorHover;
+    }
+  }
+
+  .companyProfile {
+    background-color: $companyColor;
+
+    &:hover {
+      background-color: $companyColorHover;
+    }
+  }
+
+  .associationProfile {
+    background-color: $assoColor;
+
+    &:hover {
+      background-color: $assoColorHover;
+    }
+  }
+}
