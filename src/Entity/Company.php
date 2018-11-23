@@ -48,7 +48,7 @@ class Company
      *      maxMessage = "Le nombre de caractères maximum est de 255"
      * )
      */
-    private $adress;
+    private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -78,7 +78,7 @@ class Company
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message = "Veuillez renseigner un numéro de téléphone pour l'entreprise")
-     * @Assert\Regex("/[0-9 +-.]+/",
+     * @Assert\Regex("/[0-9 +-\.]+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
      *      max = 10,
@@ -119,7 +119,7 @@ class Company
      * @param $type
      * @return Company
      */
-    public function setType($type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
         return $this;
@@ -139,7 +139,7 @@ class Company
      * @param $name
      * @return Company
      */
-    public function setName($name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
@@ -149,19 +149,19 @@ class Company
     /**
      * @return null|string
      */
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
 
     /**
-     * @param $adress
+     * @param $address
      * @return Company
      */
-    public function setAdress($adress): self
+    public function setAddress(string $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
         return $this;
     }
 
@@ -179,7 +179,7 @@ class Company
      * @param $postalCode
      * @return Company
      */
-    public function setPostalCode($postalCode): self
+    public function setPostalCode(int $postalCode): self
     {
         $this->postalCode = $postalCode;
         return $this;
@@ -199,7 +199,7 @@ class Company
      * @param $city
      * @return Company
      */
-    public function setCity($city): self
+    public function setCity(string $city): self
     {
         $this->city = $city;
         return $this;
@@ -219,7 +219,7 @@ class Company
      * @param $phone
      * @return Company
      */
-    public function setPhone($phone): self
+    public function setPhone(int $phone): self
     {
         $this->phone = $phone;
         return $this;
@@ -239,7 +239,7 @@ class Company
      * @param $email
      * @return Company
      */
-    public function setEmail($email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
