@@ -20,34 +20,40 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
-     * @Assert\Regex("/^[a-zA-Zéèàïëê ]+$/i",
-     *     message = "Le nom '{{ value }}' n'est pas valide")
+     *     message = "Veuillez renseigner le type de l'entreprise")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     * )
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
-     * @Assert\Regex("/^[a-zA-Zéèàïëê ]+$/i",
-     *     message = "Le nom '{{ value }}' n'est pas valide")
+     *     message = "Veuillez renseigner le nom de l'entreprise")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
-     * @Assert\Regex("/^[a-zA-Zéèàïëê0-9 ]+$/i",
-     *     message = "L'adresse '{{ value }}' n'est pas valide")
+     *     message = "Veuillez renseigner l'adresse de l'entreprise")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     * )
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
+     *     message = "Veuillez renseigner un code postal pour l'entreprise")
      * @Assert\Regex("/[0-9]{5}/",
      *     message = "Le code postal'{{ value }}' n'est pas valide")
      * @Assert\Length(
@@ -60,7 +66,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
+     *     message = "Veuillez renseigner une adresse pour l'entreprise")
      * @Assert\Regex("/^[a-zA-Zéèàïëê ]+$/i",
      *     message = "La ville'{{ value }}' n'est pas valide")
      */
@@ -69,8 +75,8 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
-     * @Assert\Regex("/(0)[1-9][0-9]{8}/",
+     *     message = "Veuillez renseigner un numéro de téléphone pour l'entreprise")
+     * @Assert\Regex("/[0-9]+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
      *      max = 10,
@@ -82,7 +88,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner le champ du formulaire")
+     *     message = "Veuillez renseigner un email pour l'entreprise")
      * @Assert\Email(
      *     message = "Le mail '{{ value }}' n'est pas un mail valide",
      *     checkMX = true

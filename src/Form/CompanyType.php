@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,7 @@ class CompanyType extends AbstractType
                 'placeholder' => '45000', 'class' => 'form-control']))
             ->add('city', TextType::class, array('label' => 'Ville', 'attr' =>[
                 'placeholder' => 'Orléans', 'class' => 'form-control']))
-            ->add('phone', TextType::class, array('label' => 'Téléphone', 'attr' =>[
+            ->add('phone', TelType::class, array('label' => 'Téléphone', 'attr' =>[
                 'placeholder' => '0202030303', 'class' => 'form-control']))
             ->add('email', EmailType::class, array('label' => 'Email', 'attr' =>[
                 'placeholder' => 'votreassociation@email.com', 'class' => 'form-control']))
