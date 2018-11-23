@@ -5,13 +5,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/foodhero", name="foodhero_")
+ */
 class FoodHeroController extends AbstractController
 {
     /**
-     * @Route("/foodHero", name="foodHero_index")
+     * @Route("/", name="index")
      */
     public function index():Response
     {
-        return $this->render('foodHero/index.html.twig');
+        return $this->render('foodHero/layout.html.twig');
     }
 }
