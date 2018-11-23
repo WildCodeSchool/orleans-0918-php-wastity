@@ -11,11 +11,14 @@ require('../css/app.scss');
 
 require('../css/projectVar.scss');
 require('../css/profile.scss');
+require('../css/appAssociation.scss');
 require('../css/company.scss');
 require('../css/foodHero.scss');
+
 require('@fortawesome/fontawesome-free/css/all.min.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 var $ = require('jquery');
+
 require('bootstrap');
 

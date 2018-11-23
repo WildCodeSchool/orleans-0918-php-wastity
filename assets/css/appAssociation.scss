@@ -1,0 +1,17 @@
+@import "app";
+
+.form-group{
+  margin-bottom: 5px;
+}
+label{
+  margin-bottom: 1px;
+}
+h1{
+  font-size: $headerTitle;
+}
+a{
+  color: $assoColor;
+}
+.fa-chevron-left{
+  color: $assoColor;
+}
