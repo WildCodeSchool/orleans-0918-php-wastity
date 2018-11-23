@@ -179,7 +179,7 @@ class Company
      * @param $postalCode
      * @return Company
      */
-    public function setPostalCode(int $postalCode): self
+    public function setPostalCode(string $postalCode): self
     {
         $this->postalCode = $postalCode;
         return $this;
@@ -219,7 +219,7 @@ class Company
      * @param $phone
      * @return Company
      */
-    public function setPhone(int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
         return $this;
