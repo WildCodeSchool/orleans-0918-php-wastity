@@ -9,7 +9,7 @@
 
 require('../css/app.scss');
 require('../css/projectVar.scss');
-require('../css/profil.scss');
+require('../css/profile.scss');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require("bootstrap");
 
