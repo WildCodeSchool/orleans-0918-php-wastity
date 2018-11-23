@@ -9,6 +9,7 @@
 
 require('../css/app.scss');
 require('../css/company.scss');
+require('../css/foodHero.scss');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
