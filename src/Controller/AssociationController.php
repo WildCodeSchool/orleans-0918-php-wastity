@@ -20,7 +20,9 @@ class AssociationController extends AbstractController
      */
     public function index(AssociationRepository $associationRepository): Response
     {
-        return $this->render('Visitor/Association/index.html.twig', ['associations' => $associationRepository->findAll()]);
+        return $this->render('Visitor/Association/index.html.twig', [
+            'associations' => $associationRepository->findAll()
+        ]);
     }
 
     /**
