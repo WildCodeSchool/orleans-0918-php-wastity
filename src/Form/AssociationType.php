@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Association;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +35,7 @@ class AssociationType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Orléans',
                 ]])
-            ->add('phone', TextType::class, [
+            ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
                 'attr' => [
                     'placeholder' => '0202030303',
