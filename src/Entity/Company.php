@@ -66,9 +66,11 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner une adresse pour l'entreprise")
-     * @Assert\Regex("/^[a-zA-Zéèàïëê ]+$/i",
-     *     message = "La ville'{{ value }}' n'est pas valide")
+     *     message = "Veuillez renseigner la ville de l'entreprise")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     * )
      */
     private $city;
 
@@ -76,7 +78,7 @@ class Company
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message = "Veuillez renseigner un numéro de téléphone pour l'entreprise")
-     * @Assert\Regex("/[0-9]+/",
+     * @Assert\Regex("/[0-9 +-.]+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
      *      max = 10,
