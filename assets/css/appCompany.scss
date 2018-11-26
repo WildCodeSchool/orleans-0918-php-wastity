@@ -11,7 +11,9 @@ a:hover{
   margin: 0;
   padding: 0;
 }
-
+h1{
+  font-size: $headerTitle;
+}
 .navbar-brand {
   text-align: center;
   width: 20%;
@@ -26,4 +28,10 @@ a:hover{
     font-size: 0.8em;
     margin-bottom: 0;
   }
+}
+.form-group{
+  margin-bottom: 5px;
+}
+label{
+  margin-bottom: 1px;
 }

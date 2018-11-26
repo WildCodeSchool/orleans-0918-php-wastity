@@ -1,10 +1,11 @@
-{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 {% block title %}Création Entreprise{% endblock %}
 
 {% block header %}
     <div class="row">
-        <a class="col-1" href="{{ path('company_index') }}">Retour</a>
+        <a class="col-1" href="{{ path('company_index') }}"><i class="fas fa-chevron-left"></i></a>
         <h1 class="col text-center">Inscription Entreprise</h1>
     </div>
 {% endblock %}
