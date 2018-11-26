@@ -4,7 +4,6 @@ php:
 before_script:
     - if [ -d "./.idea" ]; then echo "Forbidden idea folder found !"; exit 2; fi
     - if [ -d "./.env.local" ]; then echo "Forbidden configuration file found !"; exit 2; fi
-    - if [ -d "./vendor" ]; then echo "Forbidden vendor folder found !"; exit 2; fi
     - if [ -d "./node_modules" ]; then echo "Forbidden node_modules folder found !"; exit 2; fi
     - if [ -d "./public/build" ]; then echo "Forbidden public/build folder found !"; exit 2; fi
 install:
