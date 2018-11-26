@@ -1,0 +1,53 @@
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+
+{% block title %}Présentation Entreprise{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <h1 class="col text-center">Présentation Entreprise</h1>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for company in companies %}
+                <tr>
+                    <td>{{ company.type }}</td>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.address }}</td>
+                    <td>{{ company.postalCode }}</td>
+                    <td>{{ company.city }}</td>
+                    <td>{{ company.phone }}</td>
+                    <td>{{ company.email }}</td>
+                    <td>
+                        <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
+                        <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('company_new') }}">Nouveau</a>
+    </div>
+
+{% endblock %}

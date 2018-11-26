@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('css/appProfile') }}{% endblock %}
+
+        {% block header %}
+            <div class="row justify-content-start align-items-center">
+                <a href="#" class="col-1"><i class="fas fa-chevron-left"></i></a>
+                <p class="col text-center">Choisissez votre profil</p>
+                <p class="offset-1"></p>
+            </div>
+        {% endblock %}
+{% block body %}
+    <main class="container">
+
+        <section class="text-center">
+            <div class="title">
+                <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
+                <p>Indiquez-nous comment vous souhaitez agir.</p>
+            </div>
+            <article class="foodHeroProfile d-flex align-items-center justify-content-center"><a href="#">
+                    <h1>Food Hero</h1>
+                    <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
+            </article>
+            <article class="companyProfile d-flex align-items-center justify-content-center"><a href="#">
+                    <h1>Entreprise</h1>
+                    <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p></a>
+            </article>
+            <article class="associationProfile d-flex align-items-center justify-content-center"><a href="#">
+                    <h1>Association</h1>
+                    <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p></a>
+            </article>
+
+        </section>
+    </main>
+
+{% endblock %}
