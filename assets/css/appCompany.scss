@@ -1,0 +1,28 @@
+@import 'app';
+
+.header {
+  padding-bottom: 2px;
+  padding-top:20px;
+  top : 0;
+  background-color: darken($primaryColor, 10%);
+  border-bottom : 1px grey solid;
+}
+.headerReturn{
+  margin-top:10px;
+  font-size:1em;
+}
+.headerText{
+  margin-top:10px;
+  margin-left:-30px;
+  font-size:1em;
+}
+
+.custom-file-label{
+  margin-top:100px;
+  margin-left:38%;
+  width:76px;
+}
+.form-control {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+}
