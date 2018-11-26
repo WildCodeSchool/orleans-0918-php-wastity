@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
@@ -19,41 +19,57 @@ class Offer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Veuillez mettre une image de vos produits")
+     *
      */
     private $picture;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner une adresse pour l'association")
+     *
+     *  @Assert\Regex("/[0-9]{1,}/",
+     *     message="Le poids n'est pas valide")
+     * )
      */
     private $weight;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime(message="Coucou")
+     *
      */
     private $start;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime(format="Y-m-d H:i", message="xxx")
      */
     private $end;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     *  @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     *  @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     * )
      */
     private $complementary;
 
-
-    /**
-     * @var File
-     *
-     *
-     */
-    private $file;
 
     public function getId(): ?int
     {
@@ -130,22 +146,6 @@ class Offer
         $this->complementary = $complementary;
 
         return $this;
-    }
-
-    /**
-     * @return File/null
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param File $file/null
-     */
-    public function setFile(File $file): void
-    {
-        $this->file = $file;
     }
 
 

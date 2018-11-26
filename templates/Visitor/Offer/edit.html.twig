@@ -1,6 +1,7 @@
-{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Edit Offer{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 
 {% block header %}
 <div class="row header">
@@ -15,6 +16,6 @@
 
 {% block body %}
 <div class="container-fluid">
-    {{ include('Visitor/Company/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Visitor/Offer/_form.html.twig', {'button_label': 'Update'}) }}
 </div>
 {% endblock %}

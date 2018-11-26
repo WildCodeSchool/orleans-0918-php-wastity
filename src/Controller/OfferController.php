@@ -20,7 +20,7 @@ class OfferController extends AbstractController
      */
     public function index(OfferRepository $offerRepository): Response
     {
-        return $this->render('Visitor/Company/index.html.twig', ['offers' => $offerRepository->findAll()]);
+        return $this->render('Visitor/Offer/index.html.twig', ['offers' => $offerRepository->findAll()]);
     }
 
     /**
@@ -40,7 +40,7 @@ class OfferController extends AbstractController
             return $this->redirectToRoute('offer_index');
         }
 
-        return $this->render('Visitor/Company/new.html.twig', [
+        return $this->render('Visitor/Offer/new.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
@@ -51,7 +51,7 @@ class OfferController extends AbstractController
      */
     public function show(Offer $offer): Response
     {
-        return $this->render('Visitor/Company/show.html.twig', ['offer' => $offer]);
+        return $this->render('Visitor/Offer/show.html.twig', ['offer' => $offer]);
     }
 
     /**
@@ -68,7 +68,7 @@ class OfferController extends AbstractController
             return $this->redirectToRoute('offer_index', ['id' => $offer->getId()]);
         }
 
-        return $this->render('Visitor/Company/edit.html.twig', [
+        return $this->render('Visitor/Offer/edit.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
         ]);

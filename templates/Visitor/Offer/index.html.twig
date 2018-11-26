@@ -1,6 +1,7 @@
-{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Offer index{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 
 {% block body %}
     <h1>Offer index</h1>
@@ -15,8 +16,6 @@
                 <th>End</th>
                 <th>Description</th>
                 <th>Complementary</th>
-                <th>Start_time</th>
-                <th>End_time</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,8 +29,6 @@
                 <td>{{ offer.end ? offer.end|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ offer.description }}</td>
                 <td>{{ offer.complementary }}</td>
-                <td>{{ offer.startTime ? offer.startTime|date('H:i:s') : '' }}</td>
-                <td>{{ offer.endTime ? offer.endTime|date('H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('offer_show', {'id': offer.id}) }}">show</a>
                     <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
