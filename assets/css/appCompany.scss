@@ -1,0 +1,37 @@
+@import "app";
+
+a{
+  color: $companyColor;
+}
+a:hover{
+  color: $companyColorHover;
+}
+.navbar {
+  background-color: darken($primaryColor, 10%);
+  margin: 0;
+  padding: 0;
+}
+h1{
+  font-size: $headerTitle;
+}
+.navbar-brand {
+  text-align: center;
+  width: 20%;
+  border-radius: 15%;
+  margin-top: 0.5em;
+
+  .fas {
+    color: $companyColor;
+    font-size:1.5em;
+  }
+  p {
+    font-size: 0.8em;
+    margin-bottom: 0;
+  }
+}
+.form-group{
+  margin-bottom: 5px;
+}
+label{
+  margin-bottom: 1px;
+}

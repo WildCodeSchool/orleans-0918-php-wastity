@@ -6,15 +6,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/foodhero", name="foodhero_")
+ * @Route("/profile", name="profile_")
  */
-class FoodHeroController extends AbstractController
+class ProfileController extends AbstractController
 {
     /**
      * @Route("/", name="index")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index():Response
     {
-        return $this->render('Visitor/FoodHero/layoutFoodHero.html.twig');
+        return $this->render('defineProfile.html.twig');
     }
 }

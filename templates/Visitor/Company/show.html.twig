@@ -1,0 +1,42 @@
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Entreprise</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Type</th>
+                <td>{{ company.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ company.address }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ company.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ company.city }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ company.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ company.email }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+
+        {{ include('Visitor/Company/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

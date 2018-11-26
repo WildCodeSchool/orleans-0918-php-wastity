@@ -1,11 +1,8 @@
 @import "~bootswatch/dist/united/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/united/bootswatch";
-
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "projectVar";
-
-
-
 html {
   height: 100%;
 }
@@ -19,16 +16,10 @@ body {
   padding: 0;
   }
 
+
 .container-fluid
 {
   padding: 0;
   margin: 0;
-}
-
-
-footer
-{
-  position: absolute;
-  bottom:0;
 }
 
