@@ -15,6 +15,6 @@ class FoodHeroController extends AbstractController
      */
     public function index():Response
     {
-        return $this->render('foodHero/layout.html.twig');
+        return $this->render('Visitor/FoodHero/layoutFoodHero.html.twig');
     }
 }

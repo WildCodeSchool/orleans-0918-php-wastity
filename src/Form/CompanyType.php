@@ -29,7 +29,7 @@ class CompanyType extends AbstractType
                     'class' => 'form-control'
                 ]
             ))
-            ->add('adress', TextType::class, array(
+            ->add('address', TextType::class, array(
                 'label' => 'Adresse', 'attr' =>[
                 'placeholder' => '1 rue de votre entreprise',
                     'class' => 'form-control'

@@ -20,7 +20,9 @@ class AssociationController extends AbstractController
      */
     public function index(AssociationRepository $associationRepository): Response
     {
-        return $this->render('association/index.html.twig', ['associations' => $associationRepository->findAll()]);
+        return $this->render('Visitor/Association/index.html.twig', [
+            'associations' => $associationRepository->findAll()
+        ]);
     }
 
     /**
@@ -40,7 +42,7 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_index');
         }
 
-        return $this->render('association/new.html.twig', [
+        return $this->render('Visitor/Association/new.html.twig', [
             'association' => $association,
             'form' => $form->createView(),
         ]);
@@ -51,7 +53,7 @@ class AssociationController extends AbstractController
      */
     public function show(Association $association): Response
     {
-        return $this->render('association/show.html.twig', ['association' => $association]);
+        return $this->render('Visitor/Association/show.html.twig', ['association' => $association]);
     }
 
     /**
@@ -68,7 +70,7 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_index', ['id' => $association->getId()]);
         }
 
-        return $this->render('association/edit.html.twig', [
+        return $this->render('Visitor/Association/edit.html.twig', [
             'association' => $association,
             'form' => $form->createView(),
         ]);
