@@ -1,0 +1,17 @@
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+
+{% block header %}
+    <div class="row">
+        <a class="col-1" href="{{ path('company_index') }}">retour</a>
+        <h1 class="col text-center">Modifier {{ company.name }}</h1>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {{ include('Visitor/Company/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {{ include('Visitor/Company/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
