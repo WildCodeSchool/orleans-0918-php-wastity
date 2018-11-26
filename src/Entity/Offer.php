@@ -29,7 +29,7 @@ class Offer
      * @ORM\Column(type="integer")
      *
      * @Assert\NotBlank(
-     *     message="Veuillez renseigner une adresse pour l'association")
+     *     message="Le poids ne peut pas être vide")
      *
      *  @Assert\Regex("/[0-9]{1,}/",
      *     message="Le poids n'est pas valide")
@@ -39,14 +39,12 @@ class Offer
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime(message="Coucou")
      *
      */
     private $start;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime(format="Y-m-d H:i", message="xxx")
      */
     private $end;
 
