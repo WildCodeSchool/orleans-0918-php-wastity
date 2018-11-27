@@ -1,5 +1,12 @@
 {{ form_start(form) }}
 <div class="row">
+    <div class="col-4 mt-5">
+        {{ form_label(form.picture) }}
+        {{ form_errors(form.picture) }}
+    </div>
+    <div class="col-8 mt-5">
+        {{ form_widget(form.picture) }}
+    </div>
     <div class="col-8 mt-5">
         {{ form_label(form.weight) }}
         {{ form_errors(form.weight) }}
@@ -83,6 +90,6 @@
     </div>
 </div>
 <div class="row justify-content-center mt-4">
-    <button class="btn btn-info">{{ button_placeholder|default('Création') }}</button>
+    <button class="btn btn-info" type="submit">{{ button_placeholder|default('Modification') }}</button>
 </div>
 {{ form_end(form) }}

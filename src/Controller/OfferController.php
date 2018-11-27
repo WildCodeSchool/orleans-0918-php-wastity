@@ -37,6 +37,7 @@ class OfferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            var_dump($form->getData());
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();
