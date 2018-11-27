@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit FoodHero</h1>
 
-    {{ include('FoodHero/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Visitor/FoodHero/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('food_hero_index') }}">back to list</a>
+    <a href="{{ path('foodhero_index') }}">back to list</a>
 
-    {{ include('FoodHero/_delete_form.html.twig') }}
+    {{ include('Visitor/FoodHero/_delete_form.html.twig') }}
 {% endblock %}

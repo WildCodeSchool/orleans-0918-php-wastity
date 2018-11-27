@@ -19,8 +19,8 @@
                 <td>{{ food_hero.id }}</td>
                 <td>{{ food_hero.phone }}</td>
                 <td>
-                    <a href="{{ path('food_hero_show', {'id': food_hero.id}) }}">show</a>
-                    <a href="{{ path('food_hero_edit', {'id': food_hero.id}) }}">edit</a>
+                    <a href="{{ path('foodhero_show', {'id': food_hero.id}) }}">show</a>
+                    <a href="{{ path('foodhero_edit', {'id': food_hero.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('food_hero_new') }}">Create new</a>
+    <a href="{{ path('foodhero_new') }}">Create new</a>
 {% endblock %}

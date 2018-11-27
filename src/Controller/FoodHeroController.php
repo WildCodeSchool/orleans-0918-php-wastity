@@ -24,7 +24,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="food_hero_new", methods="GET|POST")
+     * @Route("/new", name="foodhero_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class FoodHeroController extends AbstractController
             $em->persist($foodHero);
             $em->flush();
 
-            return $this->redirectToRoute('food_hero_index');
+            return $this->redirectToRoute('foodhero_index');
         }
 
         return $this->render('Visitor/FoodHero/new.html.twig', [
@@ -47,7 +47,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="food_hero_show", methods="GET")
+     * @Route("/{id}", name="foodhero_show", methods="GET")
      */
     public function show(FoodHero $foodHero): Response
     {
@@ -55,7 +55,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="food_hero_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="foodhero_edit", methods="GET|POST")
      */
     public function edit(Request $request, FoodHero $foodHero): Response
     {
@@ -65,7 +65,7 @@ class FoodHeroController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('food_hero_index', ['id' => $foodHero->getId()]);
+            return $this->redirectToRoute('foodhero_index', ['id' => $foodHero->getId()]);
         }
 
         return $this->render('Visitor/FoodHero/edit.html.twig', [
@@ -75,7 +75,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="food_hero_delete", methods="DELETE")
+     * @Route("/{id}", name="foodhero_delete", methods="DELETE")
      */
     public function delete(Request $request, FoodHero $foodHero): Response
     {
@@ -85,6 +85,6 @@ class FoodHeroController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('food_hero_index');
+        return $this->redirectToRoute('foodhero_index');
     }
 }
