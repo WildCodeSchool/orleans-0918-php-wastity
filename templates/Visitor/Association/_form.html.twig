@@ -1,0 +1,7 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<div class="container text-center mt-1">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-success mt-5 mb-3">{{ button_label|default('Enregister mon Association') }}</button>
+    {{ form_end(form) }}
+</div>
