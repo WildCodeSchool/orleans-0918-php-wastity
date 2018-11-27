@@ -16,7 +16,7 @@ class CompanyType extends AbstractType
     {
         $builder
             ->add('type', TextType::class, array(
-                'label' => 'Type',
+                'label' => 'Type d\'entreprise',
                 'attr' =>[
                 'placeholder' => 'Boulangerie',
                     'class' => 'form-control'
