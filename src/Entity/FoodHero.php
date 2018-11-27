@@ -19,12 +19,10 @@ class FoodHero
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner un mail pour l'association")
-     * @Assert\Email(
-     *     message = "Le mail '{{ value }}' n'est pas un mail valide",
-     *     checkMX = true
-     * )
-     *  @Assert\Length(
+     *     message = "Veuillez renseigner un numéro de téléphone pour l'association")
+     * @Assert\Regex("/[0-9 +-\.]+/",
+     *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
+     * @Assert\Length(
      *      max = 255,
      *      maxMessage = "Le nombre de caractères maximum est de 255"
      * )
