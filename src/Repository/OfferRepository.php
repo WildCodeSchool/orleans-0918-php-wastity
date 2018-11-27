@@ -18,5 +18,4 @@ class OfferRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offer::class);
     }
-
 }
