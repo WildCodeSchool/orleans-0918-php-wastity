@@ -31,7 +31,10 @@ class Offer
      * @Assert\NotBlank(
      *     message="Le poids ne peut pas être vide")
      *
-     *  @Assert\Regex("/[0-9]{1,}/",
+     * @Assert\GreaterThan(0,
+     *     message="Le poids doit être supérieur à 0kg")
+     *
+     *  @Assert\Type("integer"),
      *     message="Le poids n'est pas valide")
      * )
      */
@@ -40,31 +43,29 @@ class Offer
     /**
      * @ORM\Column(type="datetime")
      *
+     * @Assert\DateTime(format="Y-m-d H:i",
+     *     message="Votre date doit etre de la forme AAAA-MM-JJ HH:MM")
+     *
      */
     private $start;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Assert\DateTime(format="Y-m-d H:i",
+     *     message="Votre date doit etre de la forme AAAA-MM-JJ HH:MM")
      */
     private $end;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     *  @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Le nombre de caractères maximum est de 255"
-     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     *  @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Le nombre de caractères maximum est de 255"
-     * )
      */
     private $complementary;
 

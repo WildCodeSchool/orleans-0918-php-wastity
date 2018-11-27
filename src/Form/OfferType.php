@@ -20,7 +20,8 @@ class OfferType extends AbstractType
                 'label' => 'Image'
             ])
             ->add('weight', IntegerType::class, [
-                'label' => 'Poids estimé en kg'
+                'label' => 'Poids',
+                'help' => 'estimé en kg'
             ])
             ->add('start', DateTimeType::class, [
                 'label' => 'Disponible à partir de',
