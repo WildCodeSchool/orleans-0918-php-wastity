@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FoodHero{% endblock %}
+
+{% block body %}
+    <h1>FoodHero</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ food_hero.id }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ food_hero.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('food_hero_index') }}">back to list</a>
+
+    <a href="{{ path('food_hero_edit', {'id': food_hero.id}) }}">edit</a>
+
+    {{ include('FoodHero/_delete_form.html.twig') }}
+{% endblock %}
