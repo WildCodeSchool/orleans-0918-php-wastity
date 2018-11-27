@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Offer{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
+
+{% block header %}
+<div class="row header">
+    <div class="col-4">
+        <a href=""><p class="headerReturn"><span class="fas fa-chevron-left"></span> Retour</p></a>
+    </div>
+    <div class="col-6">
+        <h1 class="headerText">Modifier mon offre</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    {{ include('Visitor/Offer/_form.html.twig', {'button_label': 'Update'}) }}
+</div>
+{% endblock %}

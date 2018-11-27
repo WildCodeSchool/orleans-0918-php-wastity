@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
+{% block title %}Création Entreprise{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <a class="col-1" href="{{ path('offer_index') }}"><i class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Création d'une offre</h1>
+    </div>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        {{ include('Visitor/Offer/_form.html.twig', {'button_label': 'Création'}) }}
+    </div>
+{% endblock %}
