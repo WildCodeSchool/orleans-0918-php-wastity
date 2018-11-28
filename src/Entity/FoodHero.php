@@ -18,14 +18,14 @@ class FoodHero
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
      * @Assert\NotBlank(
      *     message = "Veuillez renseigner un numéro de téléphone pour l'association")
      * @Assert\Regex("/[0-9 +-\.]+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Le nombre de caractères maximum est de 255"
+     *      max = 20,
+     *      maxMessage = "Le nombre de caractères maximum est de 20"
      * )
      */
     private $phone;
