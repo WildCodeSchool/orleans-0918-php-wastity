@@ -9,9 +9,7 @@
                 <div class="col-7">
                     <p class="fa-2x text-center text-primary"><strong>Bienvenue</strong></p>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-7 ">
+                <div class="col-7">
                     <p class="text-primary text-center community"><strong>dans la communauté</strong></p>
                 </div>
             </div>
@@ -37,12 +35,14 @@
             {{ form_start(form) }}
             <div class="row justify-content-center">
                 <div class="col-5">
+                    {{ form_errors(form.email) }}
                     {{ form_label(form.email) }}
                 </div>
                 <div class="col-5">
                     {{ form_widget(form.email) }}
                 </div>
                 <div class="col-5 pt-2">
+                    {{ form_errors(form.password) }}
                     {{ form_label(form.password) }}
                 </div>
                 <div class="col-5 pt-2">
@@ -55,7 +55,7 @@
             {{ form_end(form) }}
             <div class="row justify-content-center pt-5">
                 <div class="col-11 col-md-10">
-                    <a href="{{ path('app_register') }}"><p class="fa-1x text-primary text-center"><strong>Je suis nouveau, je m'inscris ! </strong></p></a>
+                    <a href="#"><p class="fa-1x text-primary text-center"><strong>Je suis nouveau, je m'inscris ! </strong></p></a>
                 </div>
             </div>
         </div>

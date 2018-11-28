@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -18,7 +19,11 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank(message="Vous devez renseigner un email")
+     *
+     * @Assert\Length(max="255", maxMessage="Votre email doit être de maximum {{limit}} caractères")
      */
     private $email;
 
@@ -30,16 +35,25 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Veuillez renseigner le mot de passe")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner un email")
+     *
+     * @Assert\Length(max="255", maxMessage="Votre email doit être de maximum {{limit}} caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank(message="Vous devez renseigner un email")
+     *
+     * @Assert\Length(max="255", maxMessage="Votre email doit être de maximum {{limit}} caractères")
      */
     private $lastname;
 
@@ -112,7 +126,7 @@ class User implements UserInterface
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    /**
+    /**+
      * @see UserInterface
      */
     public function eraseCredentials()
