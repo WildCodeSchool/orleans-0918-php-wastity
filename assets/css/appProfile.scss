@@ -9,7 +9,9 @@ header {
     margin: 0;
   }
 }
-
+body{
+  padding-bottom: 0;
+}
 section {
   .title {
     padding: 2.5%;
@@ -28,7 +30,7 @@ section {
 
     a {
       text-decoration: none;
-      color: #000;
+      color: #eee;
 
       &:hover {
         text-decoration: none;
