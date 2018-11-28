@@ -27,9 +27,10 @@ class UserTypeAuthenticator extends AbstractFormLoginAuthenticator
     private $csrfTokenManager;
 
     public function __construct(
-        EntityManagerInterface $entityManager, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager
-    )
-    {
+        EntityManagerInterface $entityManager,
+        RouterInterface $router,
+        CsrfTokenManagerInterface $csrfTokenManager
+    ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
