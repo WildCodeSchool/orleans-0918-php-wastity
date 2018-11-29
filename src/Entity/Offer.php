@@ -54,20 +54,20 @@ class Offer
      *
      * @Assert\DateTime(format="Y-m-d H:i",
      *     message="Votre date doit etre de la forme AAAA-MM-JJ HH:MM")
+     * @Assert\GreaterThanOrEqual(propertyPath="start",
+     *     message="Votre date de fin ne doit pas être antérieure à la date de début")
      */
     private $end;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     * )
      */
     private $complementary;
 
