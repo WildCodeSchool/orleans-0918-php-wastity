@@ -2,8 +2,9 @@
 
 {% block header %}
     <div class="row">
-        <a class="col-1" href="{{ path('company_index') }}">retour</a>
-        <h1 class="col text-center">Modifier {{ company.name }}</h1>
+        <a class="col-1" href="{{ path('company_index') }}"><i class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Enregistrement des horaires</h1>
+        <i class="far fa-calendar-alt"></i>
     </div>
 {% endblock %}
 
@@ -11,6 +12,7 @@
 
     <div class="container">
 
-        {{ include('Visitor/Company/_formSchedule.html.twig', {'button_label': 'Update'}) }}
+        {{ include('Visitor/Company/_formSchedule.html.twig', {'button_label': 'Enregistrer les horaires'}) }}
     </div>
 {% endblock %}
+{% block footer %}{% endblock %}

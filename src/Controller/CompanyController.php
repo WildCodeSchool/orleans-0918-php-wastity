@@ -35,11 +35,19 @@ class CompanyController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository): Response
     {
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
+
+        $days = $daysOfWeekRepository->findAll();
+        foreach ($days as $day) {
+            $schedule = new Schedule();
+            $schedule->setDay($day);
+            $company->addSchedule($schedule);
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -76,12 +84,12 @@ class CompanyController extends AbstractController
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
         }
-
         return $this->render('Visitor/Company/edit.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
@@ -114,16 +122,8 @@ class CompanyController extends AbstractController
      */
     public function editSchedule(Request $request, Company $company, DaysOfWeekRepository $daysOfWeekRepository): Response
     {
-        $days=$daysOfWeekRepository->findAll();
-        foreach($days as $day) {
-            $schedule=new Schedule();
-            $schedule->setDay($day);
-//var_dump($schedule);
-           $company->addSchedule($schedule);
-
             $form = $this->createForm(CompanyScheduleType::class, $company);
             $form->handleRequest($request);
-        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

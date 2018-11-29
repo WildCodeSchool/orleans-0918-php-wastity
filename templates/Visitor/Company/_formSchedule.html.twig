@@ -1,14 +1,37 @@
-<div class="row">
-    <div class="col text-center mt-1">
-        {{ form_start(form) }}
-        <div class="form-group">
 
-            {% for scheduleForm in form.schedules %}
-                {{ form_label(scheduleForm, scheduleForm.vars.data.day.name) }}
-                {{ form_widget(scheduleForm) }}
-            {% endfor %}
-        </div>
-        <button class="btn btn-info mt-5 mb-3">{{ button_label|default('Création') }}</button>
-        {{ form_end(form) }}
-    </div>
-</div>
+
+  {{ form_start(form) }}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">MATIN</th>
+        <th scope="col">APRÈS-MIDI</th>
+        <th scope="col">MATIN</th>
+        <th scope="col">APRÈS-MIDI</th>
+    </tr>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">OUVERTURE</th>
+        <th scope="col">FERMETURE</th>
+        <th scope="col">OUVERTURE</th>
+        <th scope="col">FERMETURE</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for scheduleForm in form.schedules %}
+    <tr>
+
+        <th scope="row">{{ scheduleForm.vars.data.day.name }}</th>
+        <td>{{ form_widget (scheduleForm.openingAM) }}</td>
+        <td>{{ form_widget (scheduleForm.closingAM) }}</td>
+        <td>{{ form_widget (scheduleForm.openingPM) }}</td>
+        <td>{{ form_widget (scheduleForm.closingPM) }}</td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+<button class="btn btn-info mt-5 mb-3">{{ button_label|default('Création') }}</button>
+
+{{ form_end(form) }}

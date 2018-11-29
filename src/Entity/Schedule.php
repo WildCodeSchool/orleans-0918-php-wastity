@@ -43,7 +43,7 @@ class Schedule
     private $company;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\DaysOfWeek", inversedBy="schedules")
+     * @ORM\ManyToOne(targetEntity="App\Entity\DaysOfWeek", inversedBy="schedules", fetch="EAGER")
      */
     private $day;
 
