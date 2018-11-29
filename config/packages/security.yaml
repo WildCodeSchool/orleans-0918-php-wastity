@@ -40,6 +40,7 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/association, roles: ROLE_USER }
+         - { path: ^/offer, roles: ROLE_USER }
          - { path: ^/company, roles: ROLE_USER }
          - { path: ^/foodhero, roles: ROLE_USER }
          - { path: ^/profile, roles: ROLE_USER }
