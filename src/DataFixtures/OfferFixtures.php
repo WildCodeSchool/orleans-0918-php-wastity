@@ -21,12 +21,8 @@ class OfferFixtures extends Fixture
             $offer=new Offer();
             $faker  =  Faker\Factory::create('fr_FR');
             $offer->setWeight(rand(0, 10));
-            $startDate=$endDate=\DateTime::createFromFormat(
-                'j-m-Y H:i:s',
-                rand(1, 28).'-'.rand(1, 12).'-2018 '.rand(17, 20).':'.rand(0, 59).':00'
-            );
-            $duration=[15,30,45];
-            $endDate->modify('+'.$duration[array_rand($duration)].' minutes');
+            $startDate=$endDate=new \DateTime();
+            $endDate->modify('+1 hour');
             $offer->setStart($startDate);
             $offer->setEnd($endDate);
             $offer->setDescription($faker->text);
