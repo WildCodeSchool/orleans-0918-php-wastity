@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Schedule;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +15,18 @@ class ScheduleType extends AbstractType
     {
         $builder
 
-            ->add('openingAM')
-            ->add('closingAM')
-            ->add('openingPM')
-            ->add('closingPM')
+            ->add('openingAM', TimeType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add('closingAM', TimeType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add('openingPM', TimeType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add('closingPM', TimeType::class, [
+                'widget' => 'single_text'
+            ])
         ;
     }
 
