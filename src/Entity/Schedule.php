@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,32 +18,44 @@ class Schedule
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     *  @Assert\Time(
+     *     message="Le format de l'heure doit être HH:MM")
      */
     private $openingAM;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     *  @Assert\Time(
+     *     message="Le format de l'heure doit être HH:MM")
+     * @Assert\GreaterThan(propertyPath="openingAM",
+     *     message="Votre heure de fermeture ne doit pas être antèrieure à votre heure d'ouverture")
      */
     private $closingAM;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     *  @Assert\Time(
+     *     message="Le format de l'heure doit être HH:MM")
+     *  @Assert\GreaterThanOrEqual(propertyPath="openingPM",
+     *     message="Votre heure d\'ouverture ne doit pas être antèrieure à votre heure de fermeture du matin")
      */
     private $openingPM;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Time(
+     *     message="Le format de l'heure doit être HH:MM")
+     * @Assert\GreaterThan(propertyPath="closingAM",
+     *     message="Votre heure de fermeture ne doit pas être antèrieure à votre heure d'ouverture")
      */
     private $closingPM;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="schedules")
      * @ORM\JoinColumn(nullable=false)
      */
     private $company;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="App\Entity\DaysOfWeek", inversedBy="schedules", fetch="EAGER")
      */
     private $day;
