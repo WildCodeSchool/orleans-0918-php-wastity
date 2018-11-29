@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
+ * @UniqueEntity("email", message="L'email est déjà utilisé")
  */
 class User implements UserInterface
 {
@@ -21,8 +24,9 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      *
-     * @Assert\NotBlank(message="Votre email doit etre renseigné")
+     * @Assert\NotBlank(message="Votre email doit être renseigné")
      * @Assert\Email(message="Vous devez entrer un email", checkMX=true)
+     *
      *
      */
     private $email;
@@ -41,7 +45,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez renseigné un prénom")
+     * @Assert\NotBlank(message="Vous devez renseigner un prénom")
      *
      * @Assert\Length(max="255", maxMessage="Votre nom doit contenir au maximum {{limit}} caractères")
      */
@@ -50,7 +54,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="Vous devez renseigné un prénom")
+     * @Assert\NotBlank(message="Vous devez renseigner un prénom")
      *
      * @Assert\Length(max="255", maxMessage="Votre nom doit contenir au maximum {{limit}} caractères")
      */
