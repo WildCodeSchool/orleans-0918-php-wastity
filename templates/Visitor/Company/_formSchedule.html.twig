@@ -1,39 +1,3 @@
-
-
-{#{{ form_start(form) }}#}
-{#<table class="table table-borderless">#}
-    {#<thead>#}
-    {#<tr>#}
-        {#<th scope="col"></th>#}
-        {#<th scope="col" class=" text-center" colspan="2">MATIN</th>#}
-        {#<th scope="col"  class=" text-center" colspan="2">APRÈS-MIDI</th>#}
-    {#</tr>#}
-    {#<tr>#}
-        {#<th scope="col"></th>#}
-        {#<th scope="col" class=" text-center">ouverture</th>#}
-        {#<th scope="col" class=" text-center">fermeture</th>#}
-        {#<th scope="col" class=" text-center">ouverture</th>#}
-        {#<th scope="col" class=" text-center">fermeture</th>#}
-    {#</tr>#}
-    {#</thead>#}
-    {#<tbody>#}
-    {#{% for scheduleForm in form.schedules %}#}
-    {#<tr>#}
-
-        {#<th scope="row">{{ scheduleForm.vars.data.day.name }}</th>#}
-        {#<td>{{ form_widget (scheduleForm.openingAM) }}</td>#}
-        {#<td>{{ form_widget (scheduleForm.closingAM) }}</td>#}
-        {#<td>{{ form_widget (scheduleForm.openingPM) }}</td>#}
-        {#<td>{{ form_widget (scheduleForm.closingPM) }}</td>#}
-    {#</tr>#}
-    {#{% endfor %}#}
-
-    {#</tbody>#}
-{#</table>#}
-{#<button class="btn btn-info mt-3 mb-1">{{ button_label|default('Création') }}</button>#}
-
-{#{{ form_end(form) }}#}
-
     {{ form_start(form) }}
 <main class="container">
     <div class="row ">

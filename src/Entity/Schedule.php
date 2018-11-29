@@ -27,7 +27,7 @@ class Schedule
      *  @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      * @Assert\GreaterThan(propertyPath="openingAM",
-     *     message="Votre heure de fermeture ne doit pas être antèrieure à votre heure d'ouverture")
+     *     message="Votre heure de fermeture ne doit pas être antérieure à votre heure d'ouverture")
      */
     private $closingAM;
 
@@ -35,7 +35,7 @@ class Schedule
      *  @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      *  @Assert\GreaterThanOrEqual(propertyPath="openingPM",
-     *     message="Votre heure d\'ouverture ne doit pas être antèrieure à votre heure de fermeture du matin")
+     *     message="Votre heure d\'ouverture ne doit pas être antérieure à votre heure de fermeture du matin")
      */
     private $openingPM;
 
@@ -43,7 +43,7 @@ class Schedule
      * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      * @Assert\GreaterThan(propertyPath="closingAM",
-     *     message="Votre heure de fermeture ne doit pas être antèrieure à votre heure d'ouverture")
+     *     message="Votre heure de fermeture ne doit pas être antérieure à votre heure d'ouverture")
      */
     private $closingPM;
 
