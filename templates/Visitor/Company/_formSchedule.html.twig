@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col text-center mt-1">
+        {{ form_start(form) }}
+        <div class="form-group">
+
+            {% for scheduleForm in form.schedules %}
+                {{ form_label(scheduleForm, scheduleForm.vars.data.day.name) }}
+                {{ form_widget(scheduleForm) }}
+            {% endfor %}
+        </div>
+        <button class="btn btn-info mt-5 mb-3">{{ button_label|default('Création') }}</button>
+        {{ form_end(form) }}
+    </div>
+</div>

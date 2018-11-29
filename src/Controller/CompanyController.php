@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Entity\DaysOfWeek;
+use App\Entity\Schedule;
+use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Repository\DaysOfWeekRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -99,5 +103,37 @@ class CompanyController extends AbstractController
         }
 
         return $this->redirectToRoute('company_index');
+    }
+
+
+    /**
+     * @Route("/{id}/editschedule", name="company_edit_shedule", methods="GET|POST")
+     * @param Request $request
+     * @param company $company
+     * @return Response
+     */
+    public function editSchedule(Request $request, Company $company, DaysOfWeekRepository $daysOfWeekRepository): Response
+    {
+        $days=$daysOfWeekRepository->findAll();
+        foreach($days as $day) {
+            $schedule=new Schedule();
+            $schedule->setDay($day);
+//var_dump($schedule);
+           $company->addSchedule($schedule);
+
+            $form = $this->createForm(CompanyScheduleType::class, $company);
+            $form->handleRequest($request);
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
+        }
+
+        return $this->render('Visitor/Company/editSchedule.html.twig', [
+            'company' => $company,
+            'form' => $form->createView(),
+        ]);
     }
 }
