@@ -24,7 +24,6 @@ class User implements UserInterface
      * @Assert\NotBlank(message="Votre email doit etre renseigné")
      * @Assert\Email(message="Vous devez entrer un email", checkMX=true)
      *
-     *
      */
     private $email;
 
@@ -36,6 +35,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez renseigner un mot de passe")
      */
     private $password;
 
