@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181122090304 extends AbstractMigration
+final class Version20181128151121 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -20,10 +20,11 @@ final class Version20181122090304 extends AbstractMigration
 
         $this->addSql(
             'CREATE TABLE offer (id INT AUTO_INCREMENT NOT NULL, picture VARCHAR(255) NOT NULL,
-weight INT NOT NULL, start DATETIME NOT NULL, end DATETIME NOT NULL, description LONGTEXT DEFAULT NULL,
-complementary LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4
+ weight INT NOT NULL, start DATETIME NOT NULL, end DATETIME NOT NULL, description LONGTEXT DEFAULT NULL,
+ complementary LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
         );
+        $this->addSql('ALTER TABLE food_hero CHANGE phone phone VARCHAR(20) NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -35,5 +36,6 @@ complementary LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8
         );
 
         $this->addSql('DROP TABLE offer');
+        $this->addSql('ALTER TABLE food_hero CHANGE phone phone VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci');
     }
 }

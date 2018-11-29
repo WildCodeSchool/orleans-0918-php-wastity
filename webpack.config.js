@@ -22,6 +22,7 @@ Encore
     .addStyleEntry('css/appCompany', './assets/css/appCompany.scss')
     .addStyleEntry('css/appFoodHero', './assets/css/appFoodHero.scss')
     .addStyleEntry('css/appProfile', './assets/css/appProfile.scss')
+    .addStyleEntry('css/appLogin', './assets/css/appLogin.scss')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -50,6 +51,13 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+    .copyFiles({
+        from: './assets/images',
+
+        to: 'images/[path][name].[ext]',
+    })
+// only copy files matching this pattern
+//pattern: /.(png|jpg|jpeg)$/
 ;
 
 module.exports = Encore.getWebpackConfig();
