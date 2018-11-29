@@ -1,0 +1,23 @@
+@import "app";
+
+.mission{
+  font-size:0.9em;
+  font-weight:normal;
+  color:black;
+}
+.community{
+  margin-top:-20px;
+}
+
+.wastity{
+   margin-top:-17px;
+}
+
+@media screen and (min-width:900px) {
+    .wastity{
+        width:700px;
+        height:200px;
+    }
+}
+
+
