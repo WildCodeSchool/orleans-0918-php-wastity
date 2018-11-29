@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
+ * @UniqueEntity("email", message="L'email est déjà utilisée")
  */
 class User implements UserInterface
 {
@@ -23,6 +26,7 @@ class User implements UserInterface
      *
      * @Assert\NotBlank(message="Votre email doit etre renseigné")
      * @Assert\Email(message="Vous devez entrer un email", checkMX=true)
+     *
      *
      */
     private $email;
