@@ -29,7 +29,7 @@ class AssociationFixtures extends Fixture
             $faker  =  Faker\Factory::create('fr_FR');
             $fakerUS = Faker\Factory::create('en_US');
             $association->setName($fakerUS->company);
-            $association->setAdress(rand(1, 100).' '.$this->streetAdress[array_rand($this->streetAdress)]);
+            $association->setAdress(rand(1, 9).' '.$this->streetAdress[array_rand($this->streetAdress)]);
             $association->setPostalCode('45000');
             $association->setTown('Orléans');
             $association->setMail($faker->email);

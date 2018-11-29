@@ -39,7 +39,7 @@ class CompanyFixtures extends Fixture
             $fakerUS = Faker\Factory::create('en_US');
             $company->setType($this->companyType[array_rand($this->companyType)]);
             $company->setName($fakerUS->company);
-            $company->setAddress(rand(1, 100).' '.$this->streetAdress[array_rand($this->streetAdress)]);
+            $company->setAddress(rand(1, 9).' '.$this->streetAdress[array_rand($this->streetAdress)]);
             $company->setPostalCode('45000');
             $company->setCity('Orléans');
             $company->setEmail($faker->email);

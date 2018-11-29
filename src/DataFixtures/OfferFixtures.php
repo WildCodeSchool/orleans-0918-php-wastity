@@ -27,7 +27,7 @@ class OfferFixtures extends Fixture
             $offer->setEnd($endDate);
             $offer->setDescription($faker->text);
             $offer->setComplementary($faker->text);
-            $offer->setPicture('https://lardoisier.com/media/coffret-sandwich.jpg');
+            $offer->setPicture($faker->imageUrl($width = 320, $height = 240));
             
             $manager->persist($offer);
         }
