@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'Visitor/FoodHero/layoutFoodHero.html.twig' %}
 
-{% block title %}Edit FoodHero{% endblock %}
-
+{% block title %}Modifier FoodHero{% endblock %}
+{% block header %}
+    <div class="row">
+        <a class="col-1" href="{{ path('foodhero_index') }}"><i class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Modifier mes informations</h1>
+    </div>
+{% endblock %}
 {% block body %}
-    <h1>Edit FoodHero</h1>
 
-    {{ include('Visitor/FoodHero/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Visitor/FoodHero/_form.html.twig', {'button_label': 'Mettre à jour mes informations'}) }}
 
-    <a href="{{ path('foodhero_index') }}">back to list</a>
-
-    {{ include('Visitor/FoodHero/_delete_form.html.twig') }}
 {% endblock %}
