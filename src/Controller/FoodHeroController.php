@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/foodhero")
@@ -24,6 +25,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="foodhero_new", methods="GET|POST")
      */
     public function new(Request $request): Response
@@ -31,8 +33,7 @@ class FoodHeroController extends AbstractController
         $foodHero = new FoodHero();
         $form = $this->createForm(FoodHeroType::class, $foodHero);
         $form->handleRequest($request);
-    
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
@@ -48,7 +49,6 @@ class FoodHeroController extends AbstractController
         return $this->render('Visitor/FoodHero/new.html.twig', [
             'FoodHero' => $foodHero,
             'form' => $form->createView(),
-            'user' => $user,
         ]);
     }
 

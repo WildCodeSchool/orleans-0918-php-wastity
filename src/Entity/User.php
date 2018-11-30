@@ -61,7 +61,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
      */
     private $foodHero;
 

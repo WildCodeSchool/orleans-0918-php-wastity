@@ -31,7 +31,7 @@ class FoodHero
     private $phone;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="foodHero", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="foodHero")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
