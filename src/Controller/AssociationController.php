@@ -49,7 +49,7 @@ class AssociationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="association_show", methods="GET")
+     * @Route("/{id}/admin", name="association_show", methods="GET")
      */
     public function show(Association $association): Response
     {
