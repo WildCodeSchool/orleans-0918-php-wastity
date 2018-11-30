@@ -48,7 +48,6 @@ class Schedule
     private $closingPM;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="schedules")
      * @ORM\JoinColumn(nullable=true)
      */
