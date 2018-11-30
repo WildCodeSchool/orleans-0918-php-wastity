@@ -4,8 +4,7 @@
 
         {% block header %}
             <div class="row justify-content-start align-items-center">
-                <a href="#" class="col-1"><i class="fas fa-chevron-left"></i></a>
-                <p class="col text-center">Choisissez votre profil</p>
+                <p class="col-12 text-center">Choisissez votre profil</p>
                 <p class="offset-1"></p>
             </div>
         {% endblock %}
@@ -17,15 +16,15 @@
                 <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
                 <p>Indiquez-nous comment vous souhaitez agir.</p>
             </div>
-            <article class="foodHeroProfile d-flex align-items-center justify-content-center"><a href="#">
+            <article class="foodHeroProfileBorder d-flex align-items-center justify-content-center"><a class="foodHeroProfile" href="{{ path('foodhero_new') }}">
                     <h1>Food Hero</h1>
                     <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
             </article>
-            <article class="companyProfile d-flex align-items-center justify-content-center"><a href="#">
+            <article class="companyProfileBorder d-flex align-items-center justify-content-center"><a class="companyProfile" href="{{ path('company_new') }}">
                     <h1>Entreprise</h1>
                     <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p></a>
             </article>
-            <article class="associationProfile d-flex align-items-center justify-content-center"><a href="#">
+            <article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{{ path('association_new') }}">
                     <h1>Association</h1>
                     <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p></a>
             </article>
