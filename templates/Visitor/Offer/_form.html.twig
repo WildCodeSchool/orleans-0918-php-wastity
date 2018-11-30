@@ -1,0 +1,95 @@
+{{ form_start(form) }}
+<div class="row justify-content-center">
+    <div class="col-4 mt-5 mr-2 ml-2">
+        {{ form_label(form.picture) }}
+        {{ form_errors(form.picture) }}
+    </div>
+    <div class="col-8 mt-5 mr-2 ml-2">
+        {{ form_widget(form.picture) }}
+    </div>
+    <div class="col-7 mt-5 mr-2 ml-2">
+        {{ form_label(form.weight) }}
+        {{ form_errors(form.weight) }}
+    </div>
+    <div class="col-4 mt-5 mr-2 ml-2">
+        {{ form_widget(form.weight) }}
+    </div>
+    <div class="col-8 mt-4 mr-2 ml-2">
+        {{ form_label(form.start) }}
+
+    </div>
+    <div class="col-3 mt-4 mr-2 ml-2">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalDebut">
+            Début
+        </button>
+    </div>
+
+
+    <div class="modal fade" id="ModalDebut" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Disponible à partir de</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form_widget(form.start) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 mt-4 mr-2 ml-2">
+        {{ form_label(form.end) }}
+    </div>
+    <div class="col-3 mt-4 mr-2 ml-2">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalFin">
+            Fin
+        </button>
+
+        <div class="modal fade" id="ModalFin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel">Jusqu'à</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form_widget(form.end) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-11 mt-4 mr-2 ml-2">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+    <div class="col-11 mt-4 mr-2 ml-2">
+        {{ form_label(form.complementary) }}
+        {{ form_widget(form.complementary) }}
+    </div>
+</div>
+<div class="row justify-content-center mt-4">
+    <button class="btn btn-info" type="submit">{{ button_placeholder|default('Modification') }}</button>
+</div>
+{{ form_end(form) }}
