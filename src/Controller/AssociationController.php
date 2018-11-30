@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssociationController extends AbstractController
 {
     /**
-     * @Route("/", name="association_index", methods="GET")
+     * @Route("/admin", name="association_index", methods="GET")
      */
     public function index(AssociationRepository $associationRepository): Response
     {

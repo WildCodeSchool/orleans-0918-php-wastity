@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FoodHeroController extends AbstractController
 {
     /**
-     * @Route("/", name="foodhero_index", methods="GET")
+     * @Route("/admin", name="foodhero_index", methods="GET")
      */
     public function index(FoodHeroRepository $foodHeroRepository): Response
     {
