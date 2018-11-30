@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
+{% block title %}Inscription FoodHero{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <a class="col-1" href="#"><i class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Inscription FoodHero</h1>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div>
+            <p class="text-center mt-3 mb-3">
+                <strong>
+                    Devenez acteur de la lutte contre le gaspillage alimentaire en faveur des plus démunis !
+                </strong><br/>
+            </p>
+            <p class="text-left mt-3 mb-3">
+                <strong>
+                    Comment ça marche ?
+                </strong>
+                <br/>
+            </p>
+            <ul>
+                <li>Repérez les commerces à proximité</li>
+                <li>Acceptez les missions de votre choix</li>
+                <li>Rendez-vous à l'heure indiquée</li>
+                <li>Récupérez les produits et apportez-les directement à l'association bénéficiaire</li>
+            </ul>
+
+            <p class="text-left pt-3">Pour permettre au commerçant de vous contacter en cas de besoin
+                    : </p>
+        </div>
+        <div class="form-inline justify-content-center">
+
+            {{ include('Visitor/FoodHero/_form.html.twig') }}
+
+        </div>
+    </div>
+{% endblock %}
