@@ -50,7 +50,7 @@ class Schedule
     /**
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="schedules")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $company;
 
