@@ -13,7 +13,6 @@ class ScheduleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
             ->add('openingAM', TimeType::class, [
                 'widget' => 'single_text'
             ])

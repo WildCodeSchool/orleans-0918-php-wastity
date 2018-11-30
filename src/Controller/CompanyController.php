@@ -120,11 +120,10 @@ class CompanyController extends AbstractController
      * @param company $company
      * @return Response
      */
-    public function editSchedule(Request $request, Company $company,DaysOfWeekRepository
-    $daysOfWeekRepository): Response
+    public function editSchedule(Request $request, Company $company, DaysOfWeekRepository $daysOfWeekRepository): Response
     {
-            $form = $this->createForm(CompanyScheduleType::class, $company);
-            $form->handleRequest($request);
+        $form = $this->createForm(CompanyScheduleType::class, $company);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
