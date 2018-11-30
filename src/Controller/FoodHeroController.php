@@ -25,7 +25,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      * @Route("/new", name="foodhero_new", methods="GET|POST")
      */
     public function new(Request $request): Response
