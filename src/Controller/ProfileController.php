@@ -16,6 +16,13 @@ class ProfileController extends AbstractController
      */
     public function index():Response
     {
-        return $this->render('defineProfile.html.twig');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    
+        /**
+         * @var \App\Entity\User $user
+         */
+        $user = $this->getUser();
+        
+        return $this->render('defineProfile.html.twig', ['user' => $user]);
     }
 }

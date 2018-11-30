@@ -31,9 +31,14 @@ class FoodHeroController extends AbstractController
         $foodHero = new FoodHero();
         $form = $this->createForm(FoodHeroType::class, $foodHero);
         $form->handleRequest($request);
+    
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $foodHero->setUser($user);
             $em->persist($foodHero);
             $em->flush();
 
@@ -43,6 +48,7 @@ class FoodHeroController extends AbstractController
         return $this->render('Visitor/FoodHero/new.html.twig', [
             'FoodHero' => $foodHero,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 

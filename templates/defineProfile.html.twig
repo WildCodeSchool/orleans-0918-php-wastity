@@ -11,13 +11,14 @@
         {% endblock %}
 {% block body %}
     <main class="container">
-
         <section class="text-center">
             <div class="title">
                 <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
                 <p>Indiquez-nous comment vous souhaitez agir.</p>
             </div>
-            <article class="foodHeroProfile d-flex align-items-center justify-content-center"><a href="#">
+            <article class="foodHeroProfile d-flex align-items-center justify-content-center">
+                <a href="{% if user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('offer_index') }}{% endif %}
+">
                     <h1>Food Hero</h1>
                     <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
             </article>
