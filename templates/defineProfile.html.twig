@@ -17,7 +17,7 @@
                 <p>Indiquez-nous comment vous souhaitez agir.</p>
             </div>
             <article class="foodHeroProfile d-flex align-items-center justify-content-center">
-                <a href="{% if user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('offer_index') }}{% endif %}
+                <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('offer_index') }}{% endif %}
 ">
                     <h1>Food Hero</h1>
                     <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
