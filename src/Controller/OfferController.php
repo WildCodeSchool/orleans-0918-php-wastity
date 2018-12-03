@@ -35,7 +35,8 @@ class OfferController extends AbstractController
     {
         $date = new \DateTime();
         
-        return $this->render('Visitor/Offer/index.html.twig',
+        return $this->render(
+            'Visitor/Offer/index.html.twig',
             ['offers' => $offerRepository->findAllBeforeEndDate($date)]
         );
     }

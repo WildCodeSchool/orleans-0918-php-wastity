@@ -28,6 +28,5 @@ class OfferRepository extends ServiceEntityRepository
             ->getQuery();
         
         return $qb->execute();
-        
     }
 }
