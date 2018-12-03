@@ -94,3 +94,25 @@ section {
     }
   }
 }
+
+@media screen and (min-width:800px) {
+  section {
+    .companyProfileBorder {
+      border-radius: 1%;
+    }
+    .associationProfileBorder {
+      border-radius: 1%;
+    }
+    .foodHeroProfileBorder {
+      border-radius: 1%;
+    }
+  }
+}
+
+@media screen and (max-width:370px) {
+  section{
+    article{
+      height:25vh;
+    }
+  }
+}
