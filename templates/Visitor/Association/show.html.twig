@@ -3,39 +3,40 @@
 {% block title %}Association{% endblock %}
 
 {% block body %}
-    <div class="container"
-    <h1 class="text-center mt-2">Association {{ association.name }}</h1>
+    <div class="container">
+        <h1 class="text-center mt-2">Association {{ association.name }}</h1>
 
-    <table class="table table table-striped mt-5 mb-5">
-        <tbody>
-        <tr>
-            <th scope="col">Nom</th>
-            <td>{{ association.name }}</td>
-        </tr>
-        <tr>
-            <th scope="col">Adresse</th>
-            <td>{{ association.adress }}</td>
-        </tr>
-        <tr>
-            <th scope="col">Code Postal</th>
-            <td>{{ association.postalCode }}</td>
-        </tr>
-        <tr>
-            <th scope="col">Ville</th>
-            <td>{{ association.town }}</td>
-        </tr>
-        <tr>
-            <th scope="col">Téléphone</th>
-            <td>{{ association.phone }}</td>
-        </tr>
-        <tr>
-            <th scope="col">Email</th>
-            <td>{{ association.mail }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="row">
-        <a class="col text-center" href="{{ path('association_index') }}">Retour à la liste des Associations</a>
+        <table class="table table table-striped mt-5 mb-5">
+            <tbody>
+            <tr>
+                <th scope="col">Nom</th>
+                <td>{{ association.name }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Adresse</th>
+                <td>{{ association.adress }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Code Postal</th>
+                <td>{{ association.postalCode }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Ville</th>
+                <td>{{ association.town }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Téléphone</th>
+                <td>{{ association.phone }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Email</th>
+                <td>{{ association.mail }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <a class="col text-center" href="{{ path('association_index') }}">Retour à la liste des Associations</a>
+        </div>
     </div>
 
 {% endblock %}
