@@ -277,7 +277,7 @@ class Company
     public function getOffers(): Collection
     {
         return $this->offers;
-
+    }
     /**
      * @return Collection|Schedule[]
      */
