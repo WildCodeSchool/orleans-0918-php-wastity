@@ -37,6 +37,7 @@ a:hover{
   background-color: darken($primaryColor, 10%);
   margin: 0;
   padding: 0;
+  display:block;
 }
 h1{
   font-size: $headerTitle;
@@ -66,4 +67,12 @@ label{
 .modal-title{
   font-size:1.2em;
   font-weight:bold;
+}
+
+@media screen and (max-width:370px){
+  .navbar-brand{
+    .fas{
+      font-size:1.2em;
+    }
+  }
 }
