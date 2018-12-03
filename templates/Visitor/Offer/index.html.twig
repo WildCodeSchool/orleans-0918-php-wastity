@@ -5,7 +5,6 @@
 
 {% block body %}
     <h1>Offer index</h1>
-
     <table class="table">
         <thead>
             <tr>
@@ -30,7 +29,7 @@
                 <td>{{ offer.description }}</td>
                 <td>{{ offer.complementary }}</td>
                 <td>
-                    <a href="{{ path('offer_show', {'id': offer.id}) }}">show</a>
+                    <a href="{{ path('company_show', {'id': offer.company.id}) }}">show</a>
                     <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
                 </td>
             </tr>

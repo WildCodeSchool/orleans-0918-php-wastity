@@ -55,16 +55,6 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="offer_show", methods="GET")
-     * @param Company $company
-     * @return Response
-     */
-    public function show(Company $company): Response
-    {
-        return $this->render('Visitor/Offer/show.html.twig', ['company' => $company, "offers"=>$company->getOffers()]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="offer_edit", methods="GET|POST")
      * @param Request $request
      * @param Offer $offer
