@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin")
  */
-class AdminOfferController  extends AbstractController
+class AdminOfferController extends AbstractController
 {
     /**
      * @Route("/offers", name="offer_index", methods="GET")
