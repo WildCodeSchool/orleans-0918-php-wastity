@@ -1,45 +1,53 @@
-{% extends 'Visitor/Association/layoutAssociation.html.twig' %}
+{% extends 'Admin/layoutAdmin.html.twig' %}
 
 {% block title %}Association index{% endblock %}
 
+{% block header %}
+    <div class="row">
+        <a class="col-md-3 text-md-right text-left" href="{{ path('admin_index') }}">
+            <i class="fas fa-chevron-left text-secondary">Retour au panneau d'administration</i></a>
+        <h1 class="col-md text-center">Liste des Associations</h1>
+        <div class="offset-md-3"></div>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <h1>Association index</h1>
+    <div class="container">
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Adress</th>
-            <th>PostalCode</th>
-            <th>Town</th>
-            <th>Phone</th>
-            <th>Mail</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for association in associations %}
+        <table class="table table table table-striped mt-5 mb-2">
+            <thead>
             <tr>
-                <td>{{ association.id }}</td>
-                <td>{{ association.name }}</td>
-                <td>{{ association.adress }}</td>
-                <td>{{ association.postalCode }}</td>
-                <td>{{ association.town }}</td>
-                <td>{{ association.phone }}</td>
-                <td>{{ association.mail }}</td>
-                <td>
-                    <a href="{{ path('association_show', {'id': association.id}) }}">show</a>
-                    <a href="{{ path('association_edit', {'id': association.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <th scope="col">Nom</th>
+                <th scope="col">Ville</th>
 
-    <a href="{{ path('association_new') }}">Create new</a>
+                <th scope="col">
+                    <div class="d-none d-md-block">Adresse</div>
+                </th>
+
+                <th class="text-center" scope="col">Voir plus</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for association in associations %}
+                <tr>
+                    <td>{{ association.name }}</td>
+                    <td>{{ association.town }}</td>
+                    <td>
+                        <div class="d-none d-md-block">{{ association.adress }}</div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <a href="{{ path('association_admin_show', {'id': association.id}) }}">
+                                <i class="far fa-eye text-center"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune Association à afficher</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
