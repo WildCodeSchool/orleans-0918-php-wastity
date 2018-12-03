@@ -1,54 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
 
-{% block title %}Offer{% endblock %}
+{% block title %}Annonces{% endblock %}
 
 {% block body %}
-    <h1>Offer</h1>
+    <div class="container">
+        <div class="row">
+            <a class="col-1" href="{{ path('company_index') }}"><i class="fas fa-chevron-left"></i></a>
+            <h1 class="col text-center">Annonces</h1>
+        </div>
+        {% for offer in offers %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <h2 class="col-12"> {{ company.name }} </h2>
+                        <h5 class="col-12"> {{ company.address }} </h5>
+                        <h4 class="col-6"> Débuté le : {{ offer.start ? offer.start|date('Y-m-d H:i:s') : '' }} </h4>
+                        <h4 class="col-6"> Finit le : {{ offer.end ? offer.end|date('Y-m-d H:i:s') : '' }} </h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col-6">Quantités : {{ offer.weight }} Kg</h4>
+                        <img class="col-6" src="{{ offer.picture }}" alt="ImageOffre">
+                    </div>
+                    <div class="row">
+                        <h5 class="col-4">Description :</h5>
+                        <h5 class="col-8">{{ offer.description }} </h5>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ offer.id }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ offer.picture }}</td>
-            </tr>
-            <tr>
-                <th>Weight</th>
-                <td>{{ offer.weight }}</td>
-            </tr>
-            <tr>
-                <th>Start</th>
-                <td>{{ offer.start ? offer.start|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>End</th>
-                <td>{{ offer.end ? offer.end|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ offer.description }}</td>
-            </tr>
-            <tr>
-                <th>Complementary</th>
-                <td>{{ offer.complementary }}</td>
-            </tr>
-            <tr>
-                <th>Start_time</th>
-                <td>{{ offer.startTime ? offer.startTime|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>End_time</th>
-                <td>{{ offer.endTime ? offer.endTime|date('H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+                        <h5 class="col-4">Information complémentaire : </h5>
+                        <h5 class="col-8">{{ offer.complementary }} </h5>
+                    </div>
+                </div>
 
-    <a href="{{ path('offer_index') }}">back to list</a>
-
-    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
-
-    {{ include('offer/_delete_form.html.twig') }}
+                <a class="btn btn-info mt-4 mb-1"
+                        href="{{ path('offer_edit', {'id': offer.id}) }}">{{ button_label|default('Modifier') }}</a>
+            </div>
+        {% endfor %}
+        <a class="btn btn-info mt-4 mb-1"
+                href="{{ path('offer_new') }}">{{ button_label|default('Nouvelle offre') }}</a>
+    </div>
 {% endblock %}

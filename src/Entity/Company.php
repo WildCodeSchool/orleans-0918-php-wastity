@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -97,6 +98,18 @@ class Company
      * )
      */
     private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="company")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offers;
 
     /**
      * @return int|null
@@ -243,5 +256,15 @@ class Company
     {
         $this->email = $email;
         return $this;
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function getOffers(): Collection
+    {
+        return $this->offers;
     }
 }
