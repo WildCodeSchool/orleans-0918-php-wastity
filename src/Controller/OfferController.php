@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfferController extends AbstractController
 {
     /**
-     * @Route("/", name="offer_index", methods="GET")
+     * @Route("/all", name="offer_index", methods="GET")
      * @param OfferRepository $offerRepository
      * @return Response
      */
@@ -24,6 +24,22 @@ class OfferController extends AbstractController
     {
         return $this->render('Visitor/Offer/index.html.twig', ['offers' => $offerRepository->findAll()]);
     }
+    
+    /**
+     * @Route("/", name="active_offer_index", methods="GET")
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     */
+    public function showActiveOffers(OfferRepository $offerRepository): Response
+    {
+        $date = new \DateTime();
+        
+        return $this->render('Visitor/Offer/index.html.twig',
+            ['offers' => $offerRepository->findAllBeforeEndDate($date)]
+        );
+    }
+    
 
     /**
      * @Route("/new", name="offer_new", methods="GET|POST")
