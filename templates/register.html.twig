@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('css/appLogin') }}{% endblock %}
+
+{% block body %}
+    <body>
+    <div class="container-fluid">
+        <div class="row justify-content-center pt-5 pb-3 mb-6">
+            <div class="col-7 col-lg-5">
+                <img src="{{ asset('build/images/logo-wastity.png') }}" class="img-fluid wastity">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        {{ form_start(form) }}
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-4">
+                {{ form_label(form.email) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_widget(form.email) }}
+            </div>
+        </div>
+        <div class="row justify-content-center pt-3">
+            <div class="col-12 col-sm-4">
+                {{ form_label(form.firstname) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_widget(form.firstname) }}
+            </div>
+        </div>
+        <div class="row justify-content-center pt-3">
+            <div class="col-12 col-sm-4">
+                {{ form_label(form.lastname) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_widget(form.lastname) }}
+            </div>
+        </div>
+        <div class="row justify-content-center pt-3">
+            <div class="col-12 col-sm-4">
+                {{ form_label(form.password.first) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_widget(form.password.first) }}
+            </div>
+        </div>
+        <div class="row justify-content-center pt-3">
+            <div class="col-12 col-sm-4">
+                {{ form_label(form.password.second) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_widget(form.password.second) }}
+            </div>
+            <div class="col-12 text-center mt-5">
+                <p>En vous inscrivant, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <button class="btn btn-primary mt-3 mb-3 connexion">{{ button_label|default('Je m\'inscris !') }}</button>
+        </div>
+        {{ form_end(form) }}
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 text-center">
+                <p>Déjà un compte sur Wastity ?</p>
+            </div>
+            <div class="col-11 col-md-12">
+                <a href="{{ path('app_login') }}"><p class="fa-1x text-primary text-center"><strong>Je me connecte !</strong></p></a>
+            </div>
+        </div>
+    </div>
+    </body>
+
+
+{% endblock %}
+

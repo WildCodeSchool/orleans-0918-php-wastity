@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheet %}{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
+{% block title %}{% endblock %}
 {% block header %}{% endblock %}
+
 {% block body %}{% endblock %}
+{% block footer %}{% include 'Visitor/Company/navbarCompany.html.twig' %}{% endblock %}
 {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}

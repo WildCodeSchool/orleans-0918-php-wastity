@@ -1,0 +1,118 @@
+@import "app";
+
+header {
+  background-color: darken($primaryColor, 10%);
+  margin: 0;
+  padding: 3%;
+
+  p {
+    margin: 0;
+  }
+}
+body{
+  padding-bottom: 0;
+}
+section {
+  .title {
+    padding: 2.5%;
+    margin-top: 0.5em;
+  }
+
+  article {
+    height: 20vh;
+    margin: 1em;
+    vertical-align: center;
+
+    h1 {
+      font-weight: bold;
+      padding-top: 0.3em;
+    }
+
+    a {
+      text-decoration: none;
+      color: #eee;
+
+      &:hover {
+        text-decoration: none;
+        color: darken($primaryColor, 100%);
+      }
+    }
+
+  }
+
+  .foodHeroProfile {
+    color: $foodHeroColor;
+
+    &:hover {
+      color: $foodHeroColorHover;
+    }
+  }
+
+  .companyProfile {
+    color: $companyColor;
+
+    &:hover {
+      color: $companyColorHover;
+    }
+  }
+
+  .associationProfile {
+    color: $assoColor;
+
+    &:hover {
+      color: $assoColorHover;
+    }
+  }
+
+  .foodHeroProfileBorder {
+    background-color : rgba(234,83,32,0.03);
+    border: 1px $foodHeroColor solid;
+    border-radius:5%;
+
+    &:hover {
+      border: 1px $foodHeroColorHover solid;
+    }
+  }
+
+  .companyProfileBorder {
+    background-color : rgba(23,162,184,0.05);
+    border: 1px $companyColor solid;
+    border-radius:5%;
+
+    &:hover {
+      border: 1px $companyColorHover solid;
+    }
+  }
+
+  .associationProfileBorder {
+    background-color : rgba(87,166,57,0.05);
+    border: 1px $assoColor solid;
+    border-radius:5%;
+
+    &:hover {
+      border: 1px $assoColorHover solid;
+    }
+  }
+}
+
+@media screen and (min-width:800px) {
+  section {
+    .companyProfileBorder {
+      border-radius: 1%;
+    }
+    .associationProfileBorder {
+      border-radius: 1%;
+    }
+    .foodHeroProfileBorder {
+      border-radius: 1%;
+    }
+  }
+}
+
+@media screen and (max-width:370px) {
+  section{
+    article{
+      height:25vh;
+    }
+  }
+}
