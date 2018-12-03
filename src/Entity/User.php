@@ -182,7 +182,7 @@ class User implements UserInterface
         $this->company = $company;
     }
   
-      public function getFoodHero(): ?FoodHero
+    public function getFoodHero(): ?FoodHero
     {
         return $this->foodHero;
     }
