@@ -65,6 +65,10 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=true)
      */
     private $company;
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
+     */
+    private $foodHero;
 
     public function getId(): ?int
     {
@@ -176,7 +180,21 @@ class User implements UserInterface
     public function setCompany($company): self
     {
         $this->company = $company;
+    }
+  
+      public function getFoodHero(): ?FoodHero
+    {
+        return $this->foodHero;
+    }
 
+    public function setFoodHero(FoodHero $foodHero): self
+    {
+        $this->foodHero = $foodHero;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $foodHero->getUser()) {
+            $foodHero->setUser($this);
+        }
         return $this;
     }
 }
