@@ -16,16 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfferController extends AbstractController
 {
     /**
-     * @Route("/all", name="offer_index", methods="GET")
-     * @param OfferRepository $offerRepository
-     * @return Response
-     */
-    public function index(OfferRepository $offerRepository): Response
-    {
-        return $this->render('Visitor/Offer/index.html.twig', ['offers' => $offerRepository->findAll()]);
-    }
-    
-    /**
      * @Route("/", name="active_offer_index", methods="GET")
      * @param OfferRepository $offerRepository
      * @return Response
