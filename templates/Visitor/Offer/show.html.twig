@@ -3,19 +3,19 @@
 {% block title %}Annonces{% endblock %}
 
 {% block body %}
+    <div class="row header">
+        <a class="col-1" href="{{ path('company_index') }}"><i class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Annonces</h1>
+    </div>
     <div class="container">
-        <div class="row">
-            <a class="col-1" href="{{ path('company_index') }}"><i class="fas fa-chevron-left"></i></a>
-            <h1 class="col text-center">Annonces</h1>
-        </div>
+
         {% for offer in offers %}
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <h2 class="col-12"> {{ company.name }} </h2>
+                        <h2 class="col-lg-8 col-md-6"> {{ company.name }} </h2>
+                        <h4 class="col-lg-4 col-md-6"> Finit le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </h4>
                         <h5 class="col-12"> {{ company.address }} </h5>
-                        <h4 class="col-6"> Débuté le : {{ offer.start ? offer.start|date('Y-m-d H:i:s') : '' }} </h4>
-                        <h4 class="col-6"> Finit le : {{ offer.end ? offer.end|date('Y-m-d H:i:s') : '' }} </h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -23,16 +23,9 @@
                         <h4 class="col-6">Quantités : {{ offer.weight }} Kg</h4>
                         <img class="col-6" src="{{ offer.picture }}" alt="ImageOffre">
                     </div>
-                    <div class="row">
-                        <h5 class="col-4">Description :</h5>
-                        <h5 class="col-8">{{ offer.description }} </h5>
-
-                        <h5 class="col-4">Information complémentaire : </h5>
-                        <h5 class="col-8">{{ offer.complementary }} </h5>
-                    </div>
                 </div>
 
-                <a class="btn btn-info mt-4 mb-1"
+                <a class="offset-sm-10 offset-8 col-4 col-sm-2 btn btn-info mt-4"
                         href="{{ path('offer_edit', {'id': offer.id}) }}">{{ button_label|default('Modifier') }}</a>
             </div>
         {% endfor %}
