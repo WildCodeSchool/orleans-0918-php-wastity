@@ -23,6 +23,7 @@ Encore
     .addStyleEntry('css/appFoodHero', './assets/css/appFoodHero.scss')
     .addStyleEntry('css/appProfile', './assets/css/appProfile.scss')
     .addStyleEntry('css/appLogin', './assets/css/appLogin.scss')
+    .addStyleEntry('css/appAdmin', './assets/css/appAdmin.scss')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

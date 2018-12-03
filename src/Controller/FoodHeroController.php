@@ -17,14 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class FoodHeroController extends AbstractController
 {
     /**
-     * @Route("/", name="foodhero_index", methods="GET")
-     */
-    public function index(FoodHeroRepository $foodHeroRepository): Response
-    {
-        return $this->render('Visitor/FoodHero/index.html.twig', ['food_heroes' => $foodHeroRepository->findAll()]);
-    }
-
-    /**
      * @IsGranted("ROLE_USER")
      * @Route("/new", name="foodhero_new", methods="GET|POST")
      */

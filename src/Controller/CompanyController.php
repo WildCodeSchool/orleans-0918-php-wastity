@@ -20,17 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/", name="company_index", methods="GET")
-     * @param CompanyRepository $companyRepository
-     * @return Response
-     */
-    public function index(CompanyRepository $companyRepository): Response
-    {
-
-        return $this->render('Visitor/Company/index.html.twig', ['companies' => $companyRepository->findAll()]);
-    }
-
-    /**
      * @Route("/new", name="company_new", methods="GET|POST")
      * @param Request $request
      * @return Response
