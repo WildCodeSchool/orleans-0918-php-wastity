@@ -18,4 +18,15 @@ class OfferRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offer::class);
     }
+    
+    public function findAllBeforeEndDate(\DateTime $date): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->setParameter('date', $date)
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+        
+        return $qb->execute();
+    }
 }
