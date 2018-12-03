@@ -60,6 +60,11 @@ class User implements UserInterface
      */
     private $lastname;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
+     */
+    private $foodHero;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -158,6 +163,23 @@ class User implements UserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFoodHero(): ?FoodHero
+    {
+        return $this->foodHero;
+    }
+
+    public function setFoodHero(FoodHero $foodHero): self
+    {
+        $this->foodHero = $foodHero;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $foodHero->getUser()) {
+            $foodHero->setUser($this);
+        }
 
         return $this;
     }
