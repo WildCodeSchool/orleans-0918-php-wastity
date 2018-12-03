@@ -7,10 +7,11 @@
     <div class="container-fluid">
         <div class="row justify-content-center pt-2">
             <div class="col-7">
-                <p class="fa-2x text-center text-primary"><strong>Bienvenue</strong></p>
+                <p class="fa-2x text-center text-secondary"><strong>Bienvenue</strong><br>
+                    <i class="fas fa-toolbox fa-2x"></i></p>
             </div>
             <div class="col-7">
-                <p class="text-primary text-center community"><strong>dans le panneau d'administration</strong></p>
+                <p class="text-secondary text-center community"><strong>dans le panneau d'administration</strong></p>
             </div>
         </div>
         <div class="row justify-content-center pb-3">
@@ -18,11 +19,32 @@
                 <img src="{{ asset('build/images/logo-wastity.png') }}" class="img-fluid wastity">
             </div>
         </div>
+        <div class="row justify-content-center pb-3">
+            <div class="col">
+            </div>
+        </div>
+
         <div class="row mt-5">
-            <a href="{{ path('association_index') }}" class="col-md-5 offset-md-1"><button class="btn btn-primary mt-4 mb-3 btn-block">Voir la liste des Associations</button></a>
-            <a href="{{ path('company_index') }}" class="col-md-5"><button class="btn btn-primary mt-4 mb-3 btn-block">Voir la liste des Entreprises</button></a>
-            <a href="{{ path('foodhero_index') }}" class="col-md-5 offset-md-1"><button class="btn btn-primary mt-4 mb-1 btn-block">Voir la liste des Food Heros</button></a>
-            <a href="{{ path('offer_index') }}" class="col-md-5"><button class="btn btn-primary mt-4 mb-1 btn-block">Voir la liste des Offres</button></a>
+            <a href="{{ path('association_index') }}" class="col-md-5 offset-md-1">
+                <button class="btn btn-secondary mt-4 mb-3 btn-block">Voir la liste des Associations
+                    <i class="fas fa-eye"></i>
+                </button>
+            </a>
+            <a href="{{ path('company_index') }}" class="col-md-5">
+                <button class="btn btn-secondary mt-4 mb-3 btn-block">Voir la liste des Entreprises
+                    <i class="fas fa-eye"></i>
+                </button>
+            </a>
+            <a href="{{ path('foodhero_index') }}" class="col-md-5 offset-md-1">
+                <button class="btn btn-secondary mt-4 mb-1 btn-block">Voir la liste des Food Heros
+                    <i class="fas fa-eye"></i>
+                </button>
+            </a>
+            <a href="{{ path('offer_index') }}" class="col-md-5">
+                <button class="btn btn-secondary mt-4 mb-1 btn-block">Voir la liste des Offres
+                    <i class="fas fa-eye"></i>
+                </button>
+            </a>
 
         </div>
     </div>

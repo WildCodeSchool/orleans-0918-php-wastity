@@ -16,14 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class FoodHeroController extends AbstractController
 {
     /**
-     * @Route("/admin", name="foodhero_index", methods="GET")
-     */
-    public function index(FoodHeroRepository $foodHeroRepository): Response
-    {
-        return $this->render('Visitor/FoodHero/index.html.twig', ['food_heroes' => $foodHeroRepository->findAll()]);
-    }
-
-    /**
      * @Route("/new", name="foodhero_new", methods="GET|POST")
      */
     public function new(Request $request): Response
