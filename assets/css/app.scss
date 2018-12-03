@@ -2,8 +2,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/united/bootswatch";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
-
 @import "projectVar";
+
 html {
   height: 100%;
 }
@@ -11,14 +11,20 @@ html {
 body {
   background-color: $primaryColor;
   font-family: $font;
-  position: relative;
   min-height: 100%;
   margin: 0;
-  padding-bottom: 100px;
  }
 
 .container-fluid
 {
   padding: 0;
   margin: 0;
+}
+.row{
+  margin-left:0;
+  margin-right:0;
+}
+
+h1{
+  font-size: $headerTitle;
 }

@@ -19,7 +19,7 @@ section {
   }
 
   article {
-    height: 20vh;
+    height: 25vh;
     margin: 1em;
     vertical-align: center;
 
@@ -41,26 +41,56 @@ section {
   }
 
   .foodHeroProfile {
-    background-color: $foodHeroColor;
+    color: $foodHeroColor;
 
     &:hover {
-      background-color: $foodHeroColorHover;
+      color: $foodHeroColorHover;
     }
   }
 
   .companyProfile {
-    background-color: $companyColor;
+    color: $companyColor;
 
     &:hover {
-      background-color: $companyColorHover;
+      color: $companyColorHover;
     }
   }
 
   .associationProfile {
-    background-color: $assoColor;
+    color: $assoColor;
 
     &:hover {
-      background-color: $assoColorHover;
+      color: $assoColorHover;
+    }
+  }
+
+  .foodHeroProfileBorder {
+    background-color : rgba(234,83,32,0.03);
+    border: 1px $foodHeroColor solid;
+    border-radius:20px;
+
+    &:hover {
+      border: 1px $foodHeroColorHover solid;
+    }
+  }
+
+  .companyProfileBorder {
+    background-color : rgba(23,162,184,0.05);
+    border: 1px $companyColor solid;
+    border-radius:20px;
+
+    &:hover {
+      border: 1px $companyColorHover solid;
+    }
+  }
+
+  .associationProfileBorder {
+    background-color : rgba(87,166,57,0.05);
+    border: 1px $assoColor solid;
+    border-radius:20px;
+
+    &:hover {
+      border: 1px $assoColorHover solid;
     }
   }
 }
