@@ -30,6 +30,12 @@ class FoodHero
      */
     private $phone;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="foodHero")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -43,6 +49,18 @@ class FoodHero
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
