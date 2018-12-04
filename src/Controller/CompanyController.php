@@ -100,18 +100,18 @@ class CompanyController extends AbstractController
     /**
      * @Route("/{id}", name="company_delete", methods="DELETE")
      * @param Request $request
-     * @param Offer $offer
+     * @param Company $company
      * @return Response
      */
-    public function delete(Request $request, Offer $offer): Response
+    public function delete(Request $request, Company $company): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$offer->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$company->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($offer);
+            $em->remove($company);
             $em->flush();
         }
 
-        return $this->redirectToRoute('offer_index');
+        return $this->redirectToRoute('company_index');
     }
 
 
