@@ -1,35 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'Admin/layoutAdmin.html.twig' %}
 
 {% block title %}FoodHero index{% endblock %}
 
+{% block header %}
+    <div class="row">
+        <a class="col-md-3 text-md-right text-left" href="{{ path('admin_index') }}">
+            <i class="fas fa-chevron-left text-secondary">Retour au panneau d'administration</i></a>
+        <h1 class="col-md text-center">Liste des Food Heroes</h1>
+        <div class="offset-md-3"></div>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <h1>FoodHero index</h1>
+    <div class="container">
 
-    <table class="table">
-        <thead>
+        <table class="table table table table-striped mt-5 mb-2">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Phone</th>
-                <th>actions</th>
+                <th scope="col">Numéro de téléphone</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for food_hero in food_heroes %}
-            <tr>
-                <td>{{ food_hero.id }}</td>
-                <td>{{ food_hero.phone }}</td>
-                <td>
-                    <a href="{{ path('foodhero_show', {'id': food_hero.id}) }}">show</a>
-                    <a href="{{ path('foodhero_edit', {'id': food_hero.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('foodhero_new') }}">Create new</a>
+            </thead>
+            <tbody>
+            {% for association in associations %}
+                <tr>
+                    <td>{{ food_hero.phone }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun Food Hero à afficher</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
