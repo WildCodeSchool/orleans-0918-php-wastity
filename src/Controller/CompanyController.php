@@ -65,13 +65,14 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="company_show", methods="GET")
+     * @Route("/offers", name="company_show", methods="GET")
      * @param Company $company
      * @return Response
      */
-    public function show(Company $company): Response
+    public function show(): Response
     {
-        return $this->render('Visitor/Offer/show.html.twig', ['company' => $company, "offers"=>$company->getOffers()]);
+        $company = $this->getUser()->getCompany();
+        return $this->render('Visitor/Offer/show.html.twig', ['company' => $company]);
     }
 
     /**
