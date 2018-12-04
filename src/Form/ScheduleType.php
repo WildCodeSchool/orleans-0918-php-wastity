@@ -14,16 +14,20 @@ class ScheduleType extends AbstractType
     {
         $builder
             ->add('openingAM', TimeType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('closingAM', TimeType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('openingPM', TimeType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('closingPM', TimeType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required'=>false
             ])
         ;
     }
