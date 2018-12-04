@@ -42,14 +42,14 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <a href="{{ path('company_admin_show', {'id': offer.id}) }}">
+                            <a href="{{ path('offer_admin_show', {'id': offer.id}) }}">
                                 <i class="far fa-eye text-center"></i></a>
                         </div>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">Aucune Association à afficher</td>
+                    <td colspan="3">Aucune Offre à afficher</td>
                 </tr>
             {% endfor %}
             </tbody>
