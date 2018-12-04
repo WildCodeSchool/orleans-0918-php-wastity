@@ -1,46 +1,58 @@
-{% extends 'base.html.twig' %}
+{% extends 'Admin/layoutAdmin.html.twig' %}
 
-{% block title %}Offer index{% endblock %}
-{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
+{% block title %}Offres index{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <a class="col-md-3 text-md-right text-left" href="{{ path('admin_index') }}">
+            <i class="fas fa-chevron-left text-secondary">Retour au panneau d'administration</i></a>
+        <h1 class="col-md text-center">Liste des Offres</h1>
+        <div class="offset-md-3"></div>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <h1>Offer index</h1>
+    <div class="container">
 
-    <table class="table">
-        <thead>
+        <table class="table table-striped mt-5 mb-2">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Picture</th>
-                <th>Weight</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Description</th>
-                <th>Complementary</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
-                <td>{{ offer.id }}</td>
-                <td>{{ offer.picture }}</td>
-                <td>{{ offer.weight }}</td>
-                <td>{{ offer.start ? offer.start|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.end ? offer.end|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.description }}</td>
-                <td>{{ offer.complementary }}</td>
-                <td>
-                    <a href="{{ path('offer_show', {'id': offer.id}) }}">show</a>
-                    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <th scope="col">Début</th>
+                <th scope="col">Fin</th>
+                <th scope="col">
+                    <div class="d-none d-md-block">Poids</div>
+                </th>
+                <th scope="col">
+                    <div class="d-none d-md-block">Description</div>
+                </th>
 
-    <a href="{{ path('offer_new') }}">Create new</a>
+                <th class="text-center" scope="col">Voir plus</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for offer in offers %}
+                <tr>
+                    <td>{{ offer.start ? offer.start|date('Y-m-d H:i') : '' }}</td>
+                    <td>{{ offer.end ? offer.end|date('Y-m-d H:i') : '' }}</td>
+                    <td>
+                        <div class="d-none d-md-block">{{ offer.weight }}</div>
+                    </td>
+                    <td>
+                        <div class="d-none d-md-block">{{ offer.description }}</div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <a href="{{ path('company_admin_show', {'id': offer.id}) }}">
+                                <i class="far fa-eye text-center"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune Association à afficher</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
