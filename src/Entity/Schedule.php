@@ -18,13 +18,15 @@ class Schedule
     private $id;
 
     /**
-     *  @Assert\Time(
+     * @ORM\Column(type="time")
+     * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      */
     private $openingAM;
 
     /**
-     *  @Assert\Time(
+     * @ORM\Column(type="time")
+     * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      * @Assert\GreaterThan(propertyPath="openingAM",
      *     message="Votre heure de fermeture ne doit pas être antérieure à votre heure d'ouverture")
@@ -32,7 +34,8 @@ class Schedule
     private $closingAM;
 
     /**
-     *  @Assert\Time(
+     * @ORM\Column(type="time")
+     * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      *  @Assert\GreaterThanOrEqual(propertyPath="closingAM",
      *     message="Votre heure d\'ouverture ne doit pas être antérieure à votre heure de fermeture du matin")
@@ -40,6 +43,7 @@ class Schedule
     private $openingPM;
 
     /**
+     * @ORM\Column(type="time")
      * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      * @Assert\GreaterThan(propertyPath="openingPM",
@@ -64,48 +68,48 @@ class Schedule
         return $this->id;
     }
 
-    public function getOpeningAM(): ?int
+    public function getOpeningAM(): ?\DateTime
     {
         return $this->openingAM;
     }
 
-    public function setOpeningAM(?int $openingAM): self
+    public function setOpeningAM(?\DateTime $openingAM): self
     {
         $this->openingAM = $openingAM;
 
         return $this;
     }
 
-    public function getClosingAM(): ?int
+    public function getClosingAM(): ?\DateTime
     {
         return $this->closingAM;
     }
 
-    public function setClosingAM(?int $closingAM): self
+    public function setClosingAM(?\DateTime $closingAM): self
     {
         $this->closingAM = $closingAM;
 
         return $this;
     }
 
-    public function getOpeningPM(): ?int
+    public function getOpeningPM(): ?\DateTime
     {
         return $this->openingPM;
     }
 
-    public function setOpeningPM(?int $openingPM): self
+    public function setOpeningPM(?\DateTime $openingPM): self
     {
         $this->openingPM = $openingPM;
 
         return $this;
     }
 
-    public function getClosingPM(): ?int
+    public function getClosingPM(): ?\DateTime
     {
         return $this->closingPM;
     }
 
-    public function setClosingPM(?int $closingPM): self
+    public function setClosingPM(?\DateTime $closingPM): self
     {
         $this->closingPM = $closingPM;
 

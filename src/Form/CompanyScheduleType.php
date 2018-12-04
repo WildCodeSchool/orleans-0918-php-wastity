@@ -20,7 +20,7 @@ class CompanyScheduleType extends AbstractType
     {
         $builder
             ->add('schedules', CollectionType::class, [
-                'entry_type' => ScheduleType::class ,
+                'entry_type' => ScheduleType::class,
             ])
 
         ;
