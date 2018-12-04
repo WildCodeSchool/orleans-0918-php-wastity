@@ -16,16 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssociationController extends AbstractController
 {
     /**
-     * @Route("/", name="association_index", methods="GET")
-     */
-    public function index(AssociationRepository $associationRepository): Response
-    {
-        return $this->render('Visitor/Association/index.html.twig', [
-            'associations' => $associationRepository->findAll()
-        ]);
-    }
-
-    /**
      * @Route("/new", name="association_new", methods="GET|POST")
      */
     public function new(Request $request): Response
