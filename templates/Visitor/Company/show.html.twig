@@ -4,39 +4,68 @@
 
 {% block body %}
     <div class="container">
-        <h1>Entreprise</h1>
+        <div class="row justify-content-center">
+            <h1>Administration</h1>
+        </div>
+        <div class="row">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Type</th>
+                    <td>{{ company.type }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ company.address }}</td>
+                </tr>
+                <tr>
+                    <th>Code postal</th>
+                    <td>{{ company.postalCode }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ company.city }}</td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>{{ company.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ company.email }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center">
 
-        <table class="table">
-            <tbody>
-            <tr>
-                <th>Type</th>
-                <td>{{ company.type }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ company.address }}</td>
-            </tr>
-            <tr>
-                <th>Code postal</th>
-                <td>{{ company.postalCode }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ company.city }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ company.phone }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ company.email }}</td>
-            </tr>
-            </tbody>
-        </table>
-        <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+            <a href="{{ path('company_edit', {'id': company.id}) }}">Modifier les informations de l'entreprise</a>
+        </div>
 
-        {{ include('Visitor/Company/_delete_form.html.twig') }}
+
+        <div class="row">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <td>Matin</td>
+                    <td>Après-midi</td>
+                </tr>
+                </thead>
+                {% for shedule in company.schedules %}
+                    <tbody>
+                    <tr>
+                        <th>{{ shedule.day.name }}</th>
+                        <td>{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                        <td>{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="row justify-content-center">
+            <a href="{{ path('company_edit_shedule', {'id': company.id}) }}">Modifier les horaires</a>
+        </div>
+
     </div>
-
 {% endblock %}
