@@ -31,6 +31,21 @@ class OfferController extends AbstractController
         );
     }
     
+    /**
+     * @Route("/association", name="active_offers_index_association", methods="GET")
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     */
+    public function showActiveOffersForAssociations(OfferRepository $offerRepository): Response
+    {
+        $date = new \DateTime();
+        
+        return $this->render(
+            'Visitor/Offer/indexForAssociation.html.twig',
+            ['offers' => $offerRepository->findAllBeforeEndDate($date)]
+        );
+    }
 
     /**
      * @Route("/new", name="offer_new", methods="GET|POST")

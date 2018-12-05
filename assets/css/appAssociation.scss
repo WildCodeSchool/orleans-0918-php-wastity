@@ -37,6 +37,22 @@ a{
   }
 }
 
+.associationOfferBorder {
+  border: 1px $assoColor solid;
+}
+
+.btn-association {
+  color: #fff;
+  background-color: $assoColor;
+  border-color: $assoColor;
+}
+
+.btn-association:hover {
+  color: #fff;
+  background-color: $assoColorHover;
+  border-color: $assoColorHover;
+}
+
 @media screen and (max-width: 360px) {
   .navbar-brand{
     .fas{
