@@ -5,6 +5,7 @@
 /public/bundles/
 /var/
 /vendor/
+/upload/
 
 .idea/
 
