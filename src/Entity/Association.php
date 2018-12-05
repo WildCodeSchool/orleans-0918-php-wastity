@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -91,6 +93,16 @@ class Association
      */
     private $mail;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="association")
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +176,37 @@ class Association
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setAssociation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getAssociation() === $this) {
+                $offer->setAssociation(null);
+            }
+        }
 
         return $this;
     }

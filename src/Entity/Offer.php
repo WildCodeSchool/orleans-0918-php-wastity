@@ -71,6 +71,11 @@ class Offer
      */
     private $complementary;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers")
+     */
+    private $association;
+
 
     public function getId(): ?int
     {
@@ -145,6 +150,18 @@ class Offer
     public function setComplementary(?string $complementary): self
     {
         $this->complementary = $complementary;
+
+        return $this;
+    }
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(?Association $association): self
+    {
+        $this->association = $association;
 
         return $this;
     }
