@@ -8,14 +8,14 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181128141741 extends AbstractMigration
+final class Version20181204100334 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL, CHANGE firstname firstname VARCHAR(255) NOT NULL, CHANGE lastname lastname VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE schedule CHANGE opening_am opening_am TIME DEFAULT NULL, CHANGE closing_am closing_am TIME DEFAULT NULL, CHANGE opening_pm opening_pm TIME DEFAULT NULL, CHANGE closing_pm closing_pm TIME DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -23,6 +23,6 @@ final class Version20181128141741 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user CHANGE roles roles JSON DEFAULT NULL, CHANGE firstname firstname VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, CHANGE lastname lastname VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE schedule CHANGE opening_am opening_am TIME DEFAULT NULL, CHANGE closing_am closing_am TIME DEFAULT NULL, CHANGE opening_pm opening_pm TIME DEFAULT NULL, CHANGE closing_pm closing_pm TIME DEFAULT NULL');
     }
 }

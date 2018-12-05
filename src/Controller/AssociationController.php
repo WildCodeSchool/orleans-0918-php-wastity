@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Association;
+use App\Entity\Schedule;
+use App\Form\AssociationScheduleType;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
+use App\Repository\DaysOfWeekRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,23 +19,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssociationController extends AbstractController
 {
     /**
-     * @Route("/", name="association_index", methods="GET")
-     */
-    public function index(AssociationRepository $associationRepository): Response
-    {
-        return $this->render('Visitor/Association/index.html.twig', [
-            'associations' => $associationRepository->findAll()
-        ]);
-    }
-
-    /**
      * @Route("/new", name="association_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository): Response
     {
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
+
+        $days = $daysOfWeekRepository->findAll();
+        foreach ($days as $day) {
+            $schedule = new Schedule();
+            $schedule->setDay($day);
+            $association->addSchedule($schedule);
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -88,5 +89,30 @@ class AssociationController extends AbstractController
         }
 
         return $this->redirectToRoute('association_index');
+    }
+
+    /**
+     * @Route("/{id}/editschedule", name="association_edit_shedule", methods="GET|POST")
+     * @param Request $request
+     * @param association $association
+     * @return Response
+     */
+    public function editSchedule(
+        Request $request,
+        Association $association,
+        DaysOfWeekRepository $daysOfWeekRepository
+    ): Response {
+        $form = $this->createForm(AssociationScheduleType::class, $association);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
+        }
+
+        return $this->render('Visitor/Company/editSchedule.html.twig', [
+            'association' => $association,
+            'form' => $form->createView(),
+        ]);
     }
 }

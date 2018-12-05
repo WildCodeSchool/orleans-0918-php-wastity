@@ -8,15 +8,16 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181130082906 extends AbstractMigration
+final class Version20181204151328 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE food_hero ADD CONSTRAINT FK_E4E9C657A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_E4E9C657A76ED395 ON food_hero (user_id)');
+        $this->addSql('ALTER TABLE schedule ADD association_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE schedule ADD CONSTRAINT FK_5A3811FBEFB9C8A5 FOREIGN KEY (association_id) REFERENCES association (id)');
+        $this->addSql('CREATE INDEX IDX_5A3811FBEFB9C8A5 ON schedule (association_id)');
     }
 
     public function down(Schema $schema) : void
@@ -24,7 +25,8 @@ final class Version20181130082906 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE food_hero DROP FOREIGN KEY FK_E4E9C657A76ED395');
-        $this->addSql('DROP INDEX UNIQ_E4E9C657A76ED395 ON food_hero');
+        $this->addSql('ALTER TABLE schedule DROP FOREIGN KEY FK_5A3811FBEFB9C8A5');
+        $this->addSql('DROP INDEX IDX_5A3811FBEFB9C8A5 ON schedule');
+        $this->addSql('ALTER TABLE schedule DROP association_id');
     }
 }

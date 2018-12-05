@@ -17,14 +17,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfferController extends AbstractController
 {
     /**
-     * @Route("/", name="offer_index", methods="GET")
+     * @Route("/", name="active_offer_index", methods="GET")
      * @param OfferRepository $offerRepository
      * @return Response
+     * @throws \Exception
      */
-    public function index(OfferRepository $offerRepository): Response
+    public function showActiveOffers(OfferRepository $offerRepository): Response
     {
-        return $this->render('Visitor/Offer/index.html.twig', ['offers' => $offerRepository->findAll()]);
+        $date = new \DateTime();
+        
+        return $this->render(
+            'Visitor/Offer/index.html.twig',
+            ['offers' => $offerRepository->findAllBeforeEndDate($date)]
+        );
     }
+    
 
     /**
      * @Route("/new", name="offer_new", methods="GET|POST")
