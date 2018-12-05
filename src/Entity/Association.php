@@ -98,6 +98,12 @@ class Association
      */
     private $offers;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="association")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
@@ -207,6 +213,18 @@ class Association
                 $offer->setAssociation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -65,6 +65,11 @@ class User implements UserInterface
      */
     private $foodHero;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Association", mappedBy="user")
+     */
+    private $association;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -179,6 +184,23 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($this !== $foodHero->getUser()) {
             $foodHero->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(Association $association): self
+    {
+        $this->association = $association;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $association->getUser()) {
+            $association->setUser($this);
         }
 
         return $this;
