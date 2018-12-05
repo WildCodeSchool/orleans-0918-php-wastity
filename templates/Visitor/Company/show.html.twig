@@ -3,68 +3,85 @@
 {% block title %}{{ company.name }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <h1>Administration</h1>
+    <div class="container mb-5 pb-5">
+        <div class="row justify-content-center text-center">
+            <div>
+                <p class="fa-2x text-center text-info mt-3 mb-2"><strong>Administration</strong><br>
+                    <i class="fas fa-toolbox fa-2x"></i></p>
+            </div>
         </div>
-        <div class="row">
-            <table class="table">
+
+        <div class="row text-info">
+            <h1><strong>Votre entreprise</strong></h1>
+        </div>
+        <div class="row justify-content-center ">
+            <table class="infos">
                 <tbody>
-                <tr>
-                    <th>Type</th>
-                    <td>{{ company.type }}</td>
-                </tr>
-                <tr>
-                    <th>Adresse</th>
-                    <td>{{ company.address }}</td>
-                </tr>
-                <tr>
-                    <th>Code postal</th>
-                    <td>{{ company.postalCode }}</td>
-                </tr>
-                <tr>
-                    <th>Ville</th>
-                    <td>{{ company.city }}</td>
-                </tr>
-                <tr>
-                    <th>Téléphone</th>
-                    <td>{{ company.phone }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ company.email }}</td>
-                </tr>
+
+                    <tr>
+                        <th>Type</th>
+                        <td >{{ company.type }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td >{{ company.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>Code postal</th>
+                        <td >{{ company.postalCode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td >{{ company.city }}</td>
+                    </tr>
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>{{ company.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td >{{ company.email}}</td>
+                    </tr>
                 </tbody>
+
             </table>
+
         </div>
+
         <div class="row justify-content-center">
 
-            <a href="{{ path('company_edit', {'id': company.id}) }}">Modifier les informations de l'entreprise</a>
+            <a class="btn btn-info  mt-5 mb-5" href="{{ path('company_edit', {'id': company.id}) }}">Modifier les informations</a>
         </div>
 
 
-        <div class="row">
+        <div class="row text-info">
+            <h1><strong>Vos horaires</strong></h1>
+        </div>
+        <div class="row justify-content-center">
             <table>
                 <thead>
                 <tr>
-                    <th></th>
-                    <td>Matin</td>
-                    <td>Après-midi</td>
+                    <th class="col-md-3"></th>
+                    <td class="col-md-3 text-center"><strong>Matin</strong></td>
+                    <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
                 </tr>
                 </thead>
+                <tbody>
+
                 {% for shedule in company.schedules %}
-                    <tbody>
                     <tr>
                         <th>{{ shedule.day.name }}</th>
-                        <td>{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
-                        <td>{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                        <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                        <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
                     </tr>
-                    </tbody>
                 {% endfor %}
+                </tbody>
+
             </table>
         </div>
         <div class="row justify-content-center">
-            <a href="{{ path('company_edit_shedule', {'id': company.id}) }}">Modifier les horaires</a>
+            <a class="btn btn-info mt-5 mb-5" href="{{ path('company_edit_shedule', {'id': company.id}) }}">Modifier les
+                horaires</a>
         </div>
 
     </div>
