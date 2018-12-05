@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,5 +28,14 @@ class AdminCompanyController extends AbstractController
     {
 
         return $this->render('Admin/companyIndex.html.twig', ['companies' => $companyRepository->findAll()]);
+    }
+
+
+    /**
+     * @Route("/company/{id}", name="company_admin_show", methods="GET")
+     */
+    public function show(Company $company): Response
+    {
+        return $this->render('Admin/companyShow.html.twig', ['company' => $company]);
     }
 }
