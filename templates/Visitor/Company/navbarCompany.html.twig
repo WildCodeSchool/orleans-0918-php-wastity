@@ -1,18 +1,18 @@
- <nav class="navbar navbar-light fixed-bottom">
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-clipboard-list fa-2x"></i>
-            <p>Offres</p>
-        </a>
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-history fa-2x"></i>
-            <p>Historique</p>
-        </a>
-        <a class="navbar-brand ml-2" href="#">
-            <i class="fas fa-chart-line fa-2x"></i>
-            <p>Stats</p>
-        </a>
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-user-tie fa-2x"></i>
-            <p>Admin</p>
-        </a>
-    </nav>
+<nav class="navbar navbar-light fixed-bottom">
+    <a class="navbar-brand" href="{{ path('company_show', {'id': company.id}) }}">
+        <i class="fas fa-clipboard-list fa-2x"></i>
+        <p>Offres</p>
+    </a>
+    <a class="navbar-brand" href="#">
+        <i class="fas fa-history fa-2x"></i>
+        <p>Historique</p>
+    </a>
+    <a class="navbar-brand ml-2" href="#">
+        <i class="fas fa-chart-line fa-2x"></i>
+        <p>Stats</p>
+    </a>
+    <a class="navbar-brand" href="#">
+        <i class="fas fa-user-tie fa-2x"></i>
+        <p>Admin</p>
+    </a>
+</nav>

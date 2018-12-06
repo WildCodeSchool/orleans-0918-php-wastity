@@ -70,6 +70,12 @@ label{
   font-weight:bold;
 }
 
+.container {
+  .card {
+    border-color: $companyColor;
+  }
+}
+
 @media screen and (max-width:370px){
   .navbar-brand{
     .fas{

@@ -61,6 +61,11 @@ class User implements UserInterface
     private $lastname;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $company;
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
      */
     private $foodHero;
@@ -167,6 +172,16 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany($company): self
+    {
+        $this->company = $company;
+    }
+  
     public function getFoodHero(): ?FoodHero
     {
         return $this->foodHero;
@@ -180,7 +195,6 @@ class User implements UserInterface
         if ($this !== $foodHero->getUser()) {
             $foodHero->setUser($this);
         }
-
         return $this;
     }
 }

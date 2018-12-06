@@ -13,6 +13,13 @@ body {
   font-family: $font;
   min-height: 100%;
   margin: 0;
+  padding-bottom: 100px;
+  .container {
+    .card {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+  }
  }
 
 .container-fluid

@@ -101,6 +101,17 @@ class Company
     private $email;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="company")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offers;
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="company", cascade={"persist"})
      */
     private $schedules;
@@ -257,6 +268,15 @@ class Company
         return $this;
     }
 
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
     /**
      * @return Collection|Schedule[]
      */
