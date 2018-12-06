@@ -19,9 +19,6 @@ class FoodHeroType extends AbstractType
         $builder
             ->add('profileImageFile', FileType::class, [
                 'label' => 'Votre Image de Profil',
-                'attr' => [
-                    'class' => false,
-                ]
                 ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
