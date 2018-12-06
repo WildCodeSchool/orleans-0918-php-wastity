@@ -56,7 +56,6 @@ class AssociationController extends AbstractController
     {
         return $this->render('Visitor/Association/show.html.twig', [
             'association' => $association,
-            'schedules'=>$association->getSchedules()
         ]);
     }
 
