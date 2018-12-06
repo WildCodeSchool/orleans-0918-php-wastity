@@ -18,14 +18,14 @@ class Schedule
     private $id;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      */
     private $openingAM;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      * @Assert\GreaterThan(propertyPath="openingAM",
@@ -34,7 +34,7 @@ class Schedule
     private $closingAM;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      *  @Assert\GreaterThanOrEqual(propertyPath="closingAM",
@@ -43,7 +43,7 @@ class Schedule
     private $openingPM;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      * @Assert\Time(
      *     message="Le format de l'heure doit être HH:MM")
      * @Assert\GreaterThan(propertyPath="openingPM",
@@ -62,6 +62,11 @@ class Schedule
      * @ORM\ManyToOne(targetEntity="App\Entity\DaysOfWeek", inversedBy="schedules", fetch="EAGER")
      */
     private $day;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="schedules")
+     */
+    private $association;
 
     public function getId(): ?int
     {
@@ -136,6 +141,18 @@ class Schedule
     public function setDay(?DaysOfWeek $day): self
     {
         $this->day = $day;
+
+        return $this;
+    }
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(?Association $association): self
+    {
+        $this->association = $association;
 
         return $this;
     }

@@ -1,53 +1,53 @@
-{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+{% extends 'Admin/layoutAdmin.html.twig' %}
 
-{% block title %}Présentation Entreprise{% endblock %}
+{% block title %}Entreprise index{% endblock %}
 
 {% block header %}
     <div class="row">
-        <h1 class="col text-center">Présentation Entreprise</h1>
+        <a class="col-md-3 text-md-right text-left" href="{{ path('admin_index') }}">
+            <i class="fas fa-chevron-left text-secondary">Retour au panneau d'administration</i></a>
+        <h1 class="col-md text-center">Liste des Entreprises</h1>
+        <div class="offset-md-3"></div>
     </div>
 {% endblock %}
 
 {% block body %}
-
     <div class="container">
 
-        <table class="table">
+        <table class="table table-striped mt-5 mb-2">
             <thead>
             <tr>
-                <th>Type</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Code Postal</th>
-                <th>Ville</th>
-                <th>Telephone</th>
-                <th>Email</th>
-                <th>actions</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Ville</th>
+
+                <th scope="col">
+                    <div class="d-none d-md-block">Type d'entreprise</div>
+                </th>
+
+                <th class="text-center" scope="col">Voir plus</th>
             </tr>
             </thead>
             <tbody>
             {% for company in companies %}
                 <tr>
-                    <td>{{ company.type }}</td>
                     <td>{{ company.name }}</td>
-                    <td>{{ company.address }}</td>
-                    <td>{{ company.postalCode }}</td>
-                    <td>{{ company.city }}</td>
-                    <td>{{ company.phone }}</td>
-                    <td>{{ company.email }}</td>
+                    <td>{{ company.town }}</td>
                     <td>
-                        <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                        <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+                        <div class="d-none d-md-block">{{ company.type }}</div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <a href="{{ path('company_admin_show', {'id': company.id}) }}">
+                                <i class="far fa-eye text-center"></i></a>
+                        </div>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="9">no records found</td>
+                    <td colspan="4">Aucune Entreprise à afficher</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-        <a href="{{ path('company_new') }}">Nouveau</a>
     </div>
-
 {% endblock %}
