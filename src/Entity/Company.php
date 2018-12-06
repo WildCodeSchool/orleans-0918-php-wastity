@@ -101,7 +101,7 @@ class Company
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="company", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="company", cascade={"persist"},  fetch="EAGER")
      */
     private $schedules;
 
