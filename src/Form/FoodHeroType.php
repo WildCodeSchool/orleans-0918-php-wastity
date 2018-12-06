@@ -11,15 +11,20 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class FoodHeroType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('profileImageFile', FileType::class, [
-                'label' => 'Votre Image de Profil',
-                ])
+            ->add('profileImageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'label' => 'Ajouter votre image de profil',
+                'download_uri' => true,
+                'image_uri' => true,
+            ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
                 'attr' => [
