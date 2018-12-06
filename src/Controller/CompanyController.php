@@ -61,7 +61,6 @@ class CompanyController extends AbstractController
     {
         return $this->render('Visitor/Company/show.html.twig', [
             'company' => $company,
-            'schedules'=>$company->getSchedules()
         ]);
     }
 
