@@ -29,7 +29,7 @@ class AssociationController extends AbstractController
             $em->persist($association);
             $em->flush();
 
-            return $this->redirectToRoute('association_index');
+            return $this->redirectToRoute('association_list_offers');
         }
 
         return $this->render('Visitor/Association/new.html.twig', [
