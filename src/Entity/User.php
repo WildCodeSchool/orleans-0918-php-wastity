@@ -60,15 +60,17 @@ class User implements UserInterface
      */
     private $lastname;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="users")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $company;
+
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
      */
     private $foodHero;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Company", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $company;
 
     public function getId(): ?int
     {
@@ -171,16 +173,6 @@ class User implements UserInterface
 
         return $this;
     }
-
-    public function getCompany(): ?Company
-    {
-        return $this->company;
-    }
-
-    public function setCompany($company): self
-    {
-        $this->company = $company;
-    }
   
     public function getFoodHero(): ?FoodHero
     {
@@ -195,6 +187,23 @@ class User implements UserInterface
         if ($this !== $foodHero->getUser()) {
             $foodHero->setUser($this);
         }
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(Company $company): self
+    {
+        $this->company = $company;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $company->getUser()) {
+            $company->setUser($this);
+        }
+
         return $this;
     }
 }

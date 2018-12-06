@@ -101,12 +101,6 @@ class Company
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="company")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $users;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="company")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -116,9 +110,16 @@ class Company
      */
     private $schedules;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="company", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->schedules = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     /**
@@ -268,10 +269,6 @@ class Company
         return $this;
     }
 
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
 
     public function getOffers(): Collection
     {
@@ -304,6 +301,41 @@ class Company
                 $schedule->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getCompany() === $this) {
+                $offer->setCompany(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

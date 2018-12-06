@@ -54,13 +54,19 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/offers", name="company_show", methods="GET")
+     * @Route("/{id}/offers", name="company_show", methods="GET")
      * @param Company $company
      * @return Response
      */
-    public function show(): Response
+    public function show(Company $company): Response
     {
-        $company = $this->getUser()->getCompany();
+        if ($company->getId() !== $this->getUser()->getCompany()->getId()) {
+            $this->addFlash(
+                'danger',
+                'Vous n\'avez pas accès à cette page'
+            );
+            return $this->redirectToRoute('company_edit', ['id' => $this->getUser()->getCompany()->getId()]);
+        }
         return $this->render('Visitor/Offer/show.html.twig', ['company' => $company]);
     }
 
