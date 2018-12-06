@@ -48,6 +48,12 @@ class FoodHero
     /**
      * @Vich\UploadableField(mapping="profile", fileNameProperty="profileImage")
      * @var File
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "Veuillez ajouter une image de moins de 2 Mo",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Veuillez ajouter un fichier image"
+     * )
      */
     private $profileImageFile;
     /**
