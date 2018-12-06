@@ -1,0 +1,36 @@
+{{ form_start(form) }}
+<main class="container">
+    <div class="row ">
+        <div class="offset-1 offset-md-2"></div>
+        <div class="col-md-4 text-center d-none d-lg-block">MATIN</div>
+        <div class="col-md-4 text-center d-none d-lg-block">APRÈS-MIDI</div>
+        <div class="offset-md-1"></div>
+
+    </div>
+    <div class="row">
+        <div class="offset-1 offset-md-2"></div>
+        <div class="col-md-2 col-5 text-center d-none d-lg-block">ouverture</div>
+        <div class="col-md-2 col-5 text-center d-none d-lg-block">fermeture</div>
+        <div class="col-md-2 col-5 text-center d-none d-lg-block">ouverture</div>
+        <div class="col-md-2 col-5 text-center d-none d-lg-block">fermeture</div>
+        <div class="offset-md-1"></div>
+
+    </div>
+    <div class="row">
+        {% for scheduleForm in form.schedules %}
+            <div class="col-md-2 col-12 day mb-1"><strong>{{ scheduleForm.vars.data.day.name }}</strong></div>
+            <div class="col-4 text-center d-lg-none d-block">matin</div>
+            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.openingAM) }}</div>
+            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.closingAM) }}</div>
+
+            <div class="col-4 text-center d-lg-none d-block">après-midi</div>
+            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.openingPM) }}</div>
+            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.closingPM) }}</div>
+            <div class="offset-md-1"></div>
+        {% endfor %}
+
+    </div>
+</main>
+<button class="btn btn-info mt-4 mb-1">{{ button_label|default('Création') }}</button>
+
+{{ form_end(form) }}

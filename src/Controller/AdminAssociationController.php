@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Association;
 use App\Repository\AssociationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,5 +27,13 @@ class AdminAssociationController extends AbstractController
         return $this->render('Admin/associationIndex.html.twig', [
             'associations' => $associationRepository->findAll()
         ]);
+    }
+
+    /**
+     * @Route("/association/{id}", name="association_admin_show", methods="GET")
+     */
+    public function show(Association $association): Response
+    {
+        return $this->render('Admin/associationShow.html.twig', ['association' => $association]);
     }
 }
