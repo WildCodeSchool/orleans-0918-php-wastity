@@ -46,5 +46,13 @@ a{
       font-size: 0.5em;
       margin-bottom: 0;
     }
+    .infos {
+      width: 100%;
+      table-layout: fixed;
+      td {
+        width: 60%;
+        word-wrap: break-word;
+      }
+    }
   }
 }
