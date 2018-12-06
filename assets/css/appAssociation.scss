@@ -42,13 +42,13 @@ a{
 }
 
 .btn-association {
-  color: #fff;
+  color: $primaryColor;
   background-color: $assoColor;
   border-color: $assoColor;
 }
 
 .btn-association:hover {
-  color: #fff;
+  color: $primaryColor;
   background-color: $assoColorHover;
   border-color: $assoColorHover;
 }
