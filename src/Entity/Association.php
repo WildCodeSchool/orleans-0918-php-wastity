@@ -94,7 +94,7 @@ class Association
     private $mail;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="association", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="association", cascade={"persist"}, fetch="EAGER")
      */
     private $schedules;
 
