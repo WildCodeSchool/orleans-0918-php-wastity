@@ -54,7 +54,9 @@ class AssociationController extends AbstractController
      */
     public function show(Association $association): Response
     {
-        return $this->render('Visitor/Association/show.html.twig', ['association' => $association]);
+        return $this->render('Visitor/Association/show.html.twig', [
+            'association' => $association,
+        ]);
     }
 
     /**
@@ -92,7 +94,7 @@ class AssociationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/editschedule", name="association_edit_shedule", methods="GET|POST")
+     * @Route("/{id}/editschedule", name="association_edit_schedule", methods="GET|POST")
      * @param Request $request
      * @param association $association
      * @return Response
