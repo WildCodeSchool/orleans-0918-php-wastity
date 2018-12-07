@@ -20,10 +20,10 @@ class FoodHeroType extends AbstractType
         $builder
             ->add('profileImageFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'label' => 'Ajouter votre image de profil',
-                'download_uri' => true,
-                'image_uri' => true,
+                'allow_delete' => false,
+                'label' => 'Votre image de profil',
+                'download_uri' => false,
+                'image_uri' => false,
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
