@@ -1,39 +1,11 @@
 @import "app";
 
-.navbar {
-  background-color: darken($primaryColor, 10%);
-  margin: 0;
-  padding: 0;
-}
-
 h1{
   font-size: $headerTitle;
 }
 
-  .navbar-brand {
-    text-align: center;
-    width: 20%;
-    border-radius: 15%;
-    margin-top: 0.5em;
-    margin-left: 1em;
-    margin-right: 1em;
-    @media (min-width: 768px)
-    {
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-
-
-
-    .fas {
-      color: $foodHeroColor;
-    }
-
-    p {
-      font-size: 0.8em;
-      margin-bottom: 0;
-    }
-  }
-
+.fas{
+  color: $foodHeroColor;
+}
 
 
