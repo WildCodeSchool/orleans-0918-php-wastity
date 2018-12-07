@@ -33,7 +33,8 @@ class OfferRepository extends ServiceEntityRepository
     public function findAllBeforeEndDateAssociation(\DateTime $date): array
     {
         $qb = $this->createQueryBuilder('o')
-            ->where('o.end > :date', 'o.association is null')
+            ->where('o.end > :date')
+            ->andWhere('o.association is null')
             ->setParameter('date', $date)
             ->orderBy('o.end', 'ASC')
             ->getQuery();

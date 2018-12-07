@@ -101,15 +101,6 @@ class AssociationController extends AbstractController
      */
     public function listOffers(Association $association, OfferRepository $offerRepository)
     {
-        if ($association->getId() !== $this->getUser()->getAssociation()->getId()) {
-            $this->addFlash(
-                'danger',
-                'Vous n\'avez pas accès à cette page'
-            );
-            
-            return $this->redirectToRoute('profile_index');
-        }
-        
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
         
         return $this->render('Visitor/Association/listOffers.html.twig', [
@@ -117,6 +108,7 @@ class AssociationController extends AbstractController
             'association' => $association
         ]);
     }
+    
     
     /**
      * @Route("/{association}/offres/{offer}", name="association_show_offer", methods="GET")
@@ -126,18 +118,6 @@ class AssociationController extends AbstractController
      */
     public function showOffer(Association $association, Offer $offer)
     {
-        if ($association->getId() !== $this->getUser()->getAssociation()->getId()) {
-            $this->addFlash(
-                'danger',
-                'Vous n\'avez pas accès à cette page'
-            );
-            
-            return $this->redirectToRoute(
-                'association_edit',
-                ['id' => $this->getUser()->getAssociation()->getId()]
-            );
-        }
-        
         return $this->render('Visitor/Association/showOffer.html.twig', [
             'offer' => $offer,
             'association' => $association
