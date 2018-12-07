@@ -110,7 +110,7 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('profile_index');
         }
         
-        $offers = $offerRepository->findAllBeforeEndDate(new \DateTime());
+        $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
         
         return $this->render('Visitor/Association/listOffers.html.twig', [
             'offers' => $offers,
