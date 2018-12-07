@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FoodHeroRepository")
+ * @Vich\Uploadable()
  */
 class FoodHero
 {
@@ -36,6 +40,44 @@ class FoodHero
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profileImage;
+
+    /**
+     * @Vich\UploadableField(mapping="profile", fileNameProperty="profileImage")
+     * @var File
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "Veuillez ajouter une image de moins de 2 Mo",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Veuillez ajouter un fichier image"
+     * )
+     */
+    private $profileImageFile;
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    public function setProfileImageFile(File $image = null) : void
+    {
+        $this->profileImageFile = $image;
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+    public function getProfileImageFile()
+    {
+        return $this->profileImageFile;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +103,30 @@ class FoodHero
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage($profileImage): self
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

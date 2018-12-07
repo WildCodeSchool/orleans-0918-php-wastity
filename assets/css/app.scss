@@ -9,6 +9,12 @@ body {
   font-family: $font;
   margin: 0;
   margin-bottom: $marginBottom;
+  .container {
+    .card {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+  }
  }
 
 .container-fluid
@@ -44,4 +50,10 @@ h1{
     font-size: 0.8em;
     margin-bottom: 0;
   }
+.msg-flash{
+  font-size:1.5em;
+}
+
+.custom-file-label::after {
+  content: $browse;
 }

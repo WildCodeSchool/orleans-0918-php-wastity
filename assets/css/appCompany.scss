@@ -53,3 +53,26 @@ label{
 .fas{
   color: $companyColor;
 }
+
+.container {
+  .card {
+    border-color: $companyColor;
+  }
+}
+
+@media screen and (max-width:370px){
+  .navbar-brand{
+    .fas{
+      font-size:1.2em;
+    }
+  }
+
+  .infos {
+    width: 100%;
+    table-layout: fixed;
+    td {
+      width: 60%;
+      word-wrap: break-word;
+    }
+  }
+}

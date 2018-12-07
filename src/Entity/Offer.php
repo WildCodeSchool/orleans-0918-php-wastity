@@ -34,7 +34,7 @@ class Offer
      * @Assert\GreaterThan(0,
      *     message="Le poids doit être supérieur à 0kg")
      *
-     *  @Assert\Type("integer"),
+     * @Assert\Type("integer"),
      *     message="Le poids n'est pas valide")
      * )
      */
@@ -70,6 +70,12 @@ class Offer
      *
      */
     private $complementary;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $company;
 
 
     public function getId(): ?int
@@ -145,6 +151,18 @@ class Offer
     public function setComplementary(?string $complementary): self
     {
         $this->complementary = $complementary;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany($company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
