@@ -3,6 +3,10 @@ vich_uploader:
 
     mappings:
         profile:
-            uri_prefix: public/upload/foodhero
+            uri_prefix: /upload/foodhero
             upload_destination: '%kernel.project_dir%/public/upload/foodhero'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        offers:
+            uri_prefix: /upload/offers
+            upload_destination: '%kernel.project_dir%/public/upload/offers'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
