@@ -64,11 +64,11 @@
                 </thead>
                 <tbody>
 
-                {% for shedule in association.schedules %}
+                {% for schedule in association.schedules %}
                     <tr>
-                        <th>{{ shedule.day.name }}</th>
-                        <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
-                        <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                        <th>{{ schedule.day.name }}</th>
+                        <td class="text-center">{% if schedule.openingAM== null and schedule.closingAM==null %} fermé {% else %} {{ schedule.openingAM|date('H:i') }}-{{ schedule.closingAM|date('H:i') }}{% endif %}</td>
+                        <td class="text-center">{% if schedule.openingPM== null and schedule.closingPM==null %} fermé {% else %}{{ schedule.openingPM|date('H:i') }}-{{ schedule.closingPM|date('H:i') }}{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -76,7 +76,7 @@
             </table>
         </div>
         <div class="row justify-content-center">
-            <a class="btn btn-info mt-5 mb-5" href="{{ path('association_edit_shedule', {'id': association.id}) }}">Modifier les horaires</a>
+            <a class="btn btn-info mt-5 mb-5" href="{{ path('association_edit_schedule', {'id': association.id}) }}">Modifier les horaires</a>
         </div>
 
     </div>

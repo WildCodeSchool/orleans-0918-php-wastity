@@ -94,7 +94,7 @@ class AssociationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/editschedule", name="association_edit_shedule", methods="GET|POST")
+     * @Route("/{id}/editschedule", name="association_edit_schedule", methods="GET|POST")
      * @param Request $request
      * @param association $association
      * @return Response
