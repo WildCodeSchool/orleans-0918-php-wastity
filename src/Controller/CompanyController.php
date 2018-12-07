@@ -60,13 +60,6 @@ class CompanyController extends AbstractController
      */
     public function show(Company $company): Response
     {
-        if ($company->getId() !== $this->getUser()->getCompany()->getId()) {
-            $this->addFlash(
-                'danger',
-                'Vous n\'avez pas accès à cette page'
-            );
-            return $this->redirectToRoute('company_edit', ['id' => $this->getUser()->getCompany()->getId()]);
-        }
         return $this->render('Visitor/Offer/show.html.twig', ['company' => $company]);
     }
 
