@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Association;
+
 use App\Entity\Offer;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
 use App\Repository\OfferRepository;
+use App\Entity\Schedule;
+use App\Form\AssociationScheduleType;
+use App\Repository\DaysOfWeekRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +27,7 @@ class AssociationController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/new", name="association_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository): Response
     {
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
@@ -31,6 +35,14 @@ class AssociationController extends AbstractController
     
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
+
+        $days = $daysOfWeekRepository->findAll();
+        foreach ($days as $day) {
+            $schedule = new Schedule();
+            $schedule->setDay($day);
+            $association->addSchedule($schedule);
+        }
+
         
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -38,7 +50,7 @@ class AssociationController extends AbstractController
             $em->persist($association);
             $em->flush();
 
-            return $this->redirectToRoute('association_index');
+            return $this->redirectToRoute('association_list_offers');
         }
 
         return $this->render('Visitor/Association/new.html.twig', [
@@ -52,7 +64,9 @@ class AssociationController extends AbstractController
      */
     public function show(Association $association): Response
     {
-        return $this->render('Visitor/Association/show.html.twig', ['association' => $association]);
+        return $this->render('Visitor/Association/show.html.twig', [
+            'association' => $association,
+        ]);
     }
 
     /**
@@ -138,5 +152,30 @@ class AssociationController extends AbstractController
         $em->flush();
         
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
+    }
+
+    /**
+     * @Route("/{id}/editschedule", name="association_edit_schedule", methods="GET|POST")
+     * @param Request $request
+     * @param association $association
+     * @return Response
+     */
+    public function editSchedule(
+        Request $request,
+        Association $association,
+        DaysOfWeekRepository $daysOfWeekRepository
+    ): Response {
+        $form = $this->createForm(AssociationScheduleType::class, $association);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
+        }
+
+        return $this->render('Visitor/Company/editSchedule.html.twig', [
+            'association' => $association,
+            'form' => $form->createView(),
+        ]);
     }
 }

@@ -1,45 +1,85 @@
 {% extends 'Visitor/Association/layoutAssociation.html.twig' %}
 
-{% block title %}Association{% endblock %}
+{% block title %}{{ association.name }}{% endblock %}
 
 {% block body %}
-    <h1>Association</h1>
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ association.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ association.name }}</td>
-        </tr>
-        <tr>
-            <th>Adress</th>
-            <td>{{ association.adress }}</td>
-        </tr>
-        <tr>
-            <th>PostalCode</th>
-            <td>{{ association.postalCode }}</td>
-        </tr>
-        <tr>
-            <th>Town</th>
-            <td>{{ association.town }}</td>
-        </tr>
-        <tr>
-            <th>Phone</th>
-            <td>{{ association.phone }}</td>
-        </tr>
-        <tr>
-            <th>Mail</th>
-            <td>{{ association.mail }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="container mb-5 pb-5">
+        <div class="row justify-content-center text-center">
+            <div>
+                <p class="fa-2x text-center text-info mt-3 mb-2"><strong>Administration</strong><br>
+                    <i class="fas fa-toolbox fa-2x"></i></p>
+            </div>
+        </div>
 
-    <a href="{{ path('association_index') }}">back to list</a>
+        <div class="row text-info">
+            <h1><strong>Votre association</strong></h1>
+        </div>
+        <div class="row justify-content-center ">
+            <table class="infos">
+                <tbody>
 
-    <a href="{{ path('association_edit', {'id': association.id}) }}">edit</a>
+                <tr>
+                    <th>Adresse</th>
+                    <td >{{ association.adress }}</td>
+                </tr>
+                <tr>
+                    <th>Code postal</th>
+                    <td >{{ association.postalCode }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td >{{ association.town }}</td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>{{ association.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td >{{ association.mail }}</td>
+                </tr>
+                </tbody>
 
+            </table>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <a class="btn btn-info  mt-5 mb-5" href="{{ path('association_edit', {'id': association.id}) }}">Modifier les informations</a>
+        </div>
+
+
+        <div class="row text-info">
+            <h1><strong>Vos horaires</strong></h1>
+        </div>
+        <div class="row justify-content-center">
+            <table>
+                <thead>
+                <tr>
+                    <th class="col-md-3"></th>
+                    <td class="col-md-3 text-center"><strong>Matin</strong></td>
+                    <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for schedule in association.schedules %}
+                    <tr>
+                        <th>{{ schedule.day.name }}</th>
+                        <td class="text-center">{% if schedule.openingAM== null and schedule.closingAM==null %} fermé {% else %} {{ schedule.openingAM|date('H:i') }}-{{ schedule.closingAM|date('H:i') }}{% endif %}</td>
+                        <td class="text-center">{% if schedule.openingPM== null and schedule.closingPM==null %} fermé {% else %}{{ schedule.openingPM|date('H:i') }}-{{ schedule.closingPM|date('H:i') }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="row justify-content-center">
+            <a class="btn btn-info mt-5 mb-5" href="{{ path('association_edit_schedule', {'id': association.id}) }}">Modifier les horaires</a>
+        </div>
+
+    </div>
 {% endblock %}
+

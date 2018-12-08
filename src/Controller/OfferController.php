@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
@@ -58,8 +59,11 @@ class OfferController extends AbstractController
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
+        $company= $this->getUser()->getCompany();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $offer->setCompany($company);
             $em->persist($offer);
             $em->flush();
 
@@ -70,16 +74,6 @@ class OfferController extends AbstractController
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="offer_show", methods="GET")
-     * @param Offer $offer
-     * @return Response
-     */
-    public function show(Offer $offer): Response
-    {
-        return $this->render('Visitor/Offer/show.html.twig', ['offer' => $offer]);
     }
 
     /**

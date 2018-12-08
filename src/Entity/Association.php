@@ -103,11 +103,18 @@ class Association
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="association", cascade={"persist"}, fetch="EAGER")
+     */
+    private $schedules;
+    
     public function __construct()
     {
         $this->offers = new ArrayCollection();
+        $this->schedules = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {
@@ -200,9 +207,26 @@ class Association
             $this->offers[] = $offer;
             $offer->setAssociation($this);
         }
+    }
+
+     /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedules(): Collection
+    {
+        return $this->schedules;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
+            $schedule->setAssociation($this);
+        }
 
         return $this;
     }
+
 
     public function removeOffer(Offer $offer): self
     {
@@ -213,9 +237,22 @@ class Association
                 $offer->setAssociation(null);
             }
         }
+    }
+    
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedules->contains($schedule)) {
+            $this->schedules->removeElement($schedule);
+            // set the owning side to null (unless already changed)
+            if ($schedule->getAssociation() === $this) {
+                $schedule->setAssociation(null);
+            }
+        }
 
         return $this;
     }
+
 
     public function getUser(): ?User
     {

@@ -1,0 +1,23 @@
+{% extends 'Visitor/Association/layoutAssociation.html.twig' %}
+
+{% block header %}
+    <div>
+        <div class="row">
+            <a class="col-1 text-center" href="{{ path('association_index') }}"><i class="fas fa-chevron-left"></i></a>
+            <h1 class="col text-center">Enregistrement des horaires</h1>
+            <div class="offset-1"></div>
+        </div>
+        <div class="col-12 text-center text-info mt-3 mb-3"><i class="far fa-calendar-alt fa-7x"></i></div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class=" text-center ">
+                {{ include('Visitor/Association/_formSchedule.html.twig', {'button_label': 'Enregistrer les horaires'}) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block footer %}{% endblock %}
