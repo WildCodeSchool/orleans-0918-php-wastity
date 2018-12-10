@@ -26,10 +26,10 @@
                 </div>
 
                 <a class="offset-sm-10 offset-8 col-4 col-sm-2 btn btn-info mt-4"
-                        href="{{ path('offer_edit', {'id': offer.id}) }}">{{ button_label|default('Modifier') }}</a>
+                   href="{{ path('offer_edit', {'id': offer.id}) }}">{{ button_label|default('Modifier') }}</a>
             </div>
         {% endfor %}
         <a class="btn btn-info mt-4 mb-1"
-                href="{{ path('offer_new') }}">{{ button_label|default('Nouvelle offre') }}</a>
+           href="{{ path('offer_new') }}">{{ button_label|default('Nouvelle offre') }}</a>
     </div>
 {% endblock %}

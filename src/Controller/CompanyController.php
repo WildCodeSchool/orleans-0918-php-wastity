@@ -64,7 +64,7 @@ class CompanyController extends AbstractController
     public function show(Company $company): Response
     {
 
-        return $this->render('Visitor/Offer/show.html.twig', [
+        return $this->render('Visitor/Company/listOffers.html.twig', [
             'company' => $company,
         ]);
     }
