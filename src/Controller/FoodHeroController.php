@@ -35,7 +35,7 @@ class FoodHeroController extends AbstractController
             $em->persist($foodHero);
             $em->flush();
 
-            return $this->redirectToRoute('foodhero_edit');
+            return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
 
         return $this->render('Visitor/FoodHero/new.html.twig', [
@@ -67,7 +67,7 @@ class FoodHeroController extends AbstractController
         }
 
         return $this->render('Visitor/FoodHero/edit.html.twig', [
-            'FoodHero' => $foodHero,
+            'foodHero' => $foodHero,
             'form' => $form->createView(),
         ]);
     }
