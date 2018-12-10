@@ -50,7 +50,7 @@ class AssociationController extends AbstractController
             $em->persist($association);
             $em->flush();
 
-            return $this->redirectToRoute('association_list_offers');
+            return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
         }
 
         return $this->render('Visitor/Association/new.html.twig', [

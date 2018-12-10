@@ -47,7 +47,7 @@ class CompanyController extends AbstractController
             $em->persist($company);
             $em->flush();
 
-            return $this->redirectToRoute('company_show_offers');
+            return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
         }
 
         return $this->render('Visitor/Company/new.html.twig', [
