@@ -67,7 +67,7 @@ class OfferController extends AbstractController
             $em->persist($offer);
             $em->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
         return $this->render('Visitor/Offer/new.html.twig', [
@@ -90,7 +90,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_index', ['id' => $offer->getId()]);
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
         return $this->render('Visitor/Offer/edit.html.twig', [

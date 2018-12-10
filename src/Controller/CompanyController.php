@@ -38,9 +38,12 @@ class CompanyController extends AbstractController
             $company->addSchedule($schedule);
         }
 
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $company->setUser($user);
             $em->persist($company);
             $em->flush();
 
@@ -54,14 +57,14 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/offers", name="company_show", methods="GET")
+     * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
      * @return Response
      */
     public function show(Company $company): Response
     {
 
-        return $this->render('Visitor/Company/show.html.twig', [
+        return $this->render('Visitor/Company/listOffers.html.twig', [
             'company' => $company,
         ]);
     }
@@ -83,7 +86,7 @@ class CompanyController extends AbstractController
 
             return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
         }
-        return $this->render('Visitor/Company/edit.html.twig', [
+        return $this->render('Visitor/Company/show.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
         ]);
