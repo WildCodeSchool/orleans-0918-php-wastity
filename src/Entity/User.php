@@ -60,10 +60,22 @@ class User implements UserInterface
      */
     private $lastname;
 
+
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
      */
     private $foodHero;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Association", mappedBy="user")
+     */
+    private $association;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Company", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $company;
 
     public function getId(): ?int
     {
@@ -166,7 +178,7 @@ class User implements UserInterface
 
         return $this;
     }
-
+  
     public function getFoodHero(): ?FoodHero
     {
         return $this->foodHero;
@@ -179,6 +191,39 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($this !== $foodHero->getUser()) {
             $foodHero->setUser($this);
+        }
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(Company $company): self
+    {
+        $this->company = $company;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $company->getUser()) {
+            $company->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(Association $association): self
+    {
+        $this->association = $association;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $association->getUser()) {
+            $association->setUser($this);
         }
 
         return $this;

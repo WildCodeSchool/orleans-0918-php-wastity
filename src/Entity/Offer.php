@@ -19,8 +19,6 @@ class Offer
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(
-     *     message = "Veuillez mettre une image de vos produits")
      *
      */
     private $picture;
@@ -34,7 +32,7 @@ class Offer
      * @Assert\GreaterThan(0,
      *     message="Le poids doit être supérieur à 0kg")
      *
-     *  @Assert\Type("integer"),
+     * @Assert\Type("integer"),
      *     message="Le poids n'est pas valide")
      * )
      */
@@ -70,6 +68,17 @@ class Offer
      *
      */
     private $complementary;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers")
+     */
+    private $association;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $company;
 
 
     public function getId(): ?int
@@ -145,6 +154,31 @@ class Offer
     public function setComplementary(?string $complementary): self
     {
         $this->complementary = $complementary;
+
+        return $this;
+    }
+
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(?Association $association): self
+    {
+        $this->association = $association;
+    
+        return $this;
+    }
+    
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany($company): self
+    {
+        $this->company = $company;
 
         return $this;
     }

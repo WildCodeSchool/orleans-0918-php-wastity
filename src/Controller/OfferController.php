@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
@@ -31,6 +32,21 @@ class OfferController extends AbstractController
         );
     }
     
+    /**
+     * @Route("/association", name="active_offers_index_association", methods="GET")
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     */
+    public function showActiveOffersForAssociations(OfferRepository $offerRepository): Response
+    {
+        $date = new \DateTime();
+        
+        return $this->render(
+            'Visitor/Offer/indexForAssociation.html.twig',
+            ['offers' => $offerRepository->findAllBeforeEndDate($date)]
+        );
+    }
 
     /**
      * @Route("/new", name="offer_new", methods="GET|POST")
@@ -43,28 +59,21 @@ class OfferController extends AbstractController
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
+        $company= $this->getUser()->getCompany();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $offer->setCompany($company);
             $em->persist($offer);
             $em->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
         return $this->render('Visitor/Offer/new.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="offer_show", methods="GET")
-     * @param Offer $offer
-     * @return Response
-     */
-    public function show(Offer $offer): Response
-    {
-        return $this->render('Visitor/Offer/show.html.twig', ['offer' => $offer]);
     }
 
     /**
@@ -81,7 +90,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_index', ['id' => $offer->getId()]);
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
         return $this->render('Visitor/Offer/edit.html.twig', [

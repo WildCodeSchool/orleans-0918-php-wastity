@@ -16,9 +16,6 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('picture', TextType::class, [
-                'label' => 'Image'
-            ])
             ->add('weight', IntegerType::class, [
                 'label' => 'Poids',
                 'help' => 'estimé en kg'

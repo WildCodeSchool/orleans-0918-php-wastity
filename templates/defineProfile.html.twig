@@ -17,7 +17,7 @@
             </div>
 
             <article class="foodHeroProfileBorder d-flex align-items-center justify-content-center">
-                <a class="foodHeroProfile" href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('offer_index') }}{% endif %}
+                <a class="foodHeroProfile" href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit') }}{% endif %}
 ">
 
                     <h1>Food Hero</h1>
