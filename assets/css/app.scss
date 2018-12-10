@@ -4,16 +4,11 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "projectVar";
 
-html {
-  height: 100%;
-}
-
 body {
   background-color: $primaryColor;
   font-family: $font;
-  min-height: 100%;
   margin: 0;
-  padding-bottom: 100px;
+  margin-bottom: $marginBottom;
   .container {
     .card {
       margin-top: 5%;
@@ -34,6 +29,27 @@ body {
 
 h1{
   font-size: $headerTitle;
+}
+
+.navbar {
+  background-color: darken($primaryColor, 10%);
+  padding: 0;
+  display:block;
+}
+
+.navbar-brand {
+  text-align: center;
+  border-radius: 15%;
+  margin-top: 0.5em;
+
+  .fas {
+    font-size: 1.5em;
+  }
+
+  p {
+    font-size: 0.8em;
+    margin-bottom: 0;
+  }
 }
 .msg-flash{
   font-size:1.5em;

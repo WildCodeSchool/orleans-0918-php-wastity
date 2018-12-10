@@ -72,6 +72,11 @@ class Offer
     private $complementary;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers")
+     */
+    private $association;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -155,6 +160,19 @@ class Offer
         return $this;
     }
 
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(?Association $association): self
+    {
+        $this->association = $association;
+    
+        return $this;
+    }
+    
     public function getCompany(): ?Company
     {
         return $this->company;

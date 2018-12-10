@@ -15,26 +15,25 @@ a{
 .fa-chevron-left{
   color: $assoColor;
 }
-.navbar {
-  background-color: darken($primaryColor, 10%);
-  margin: 0;
-  padding: 0;
-  display:block;
-}
-.navbar-brand {
-  text-align: center;
-  width: 20%;
-  border-radius: 15%;
-  margin-top: 0.5em;
 
-  .fas {
-    color: $assoColor;
-    font-size:1.5em;
-  }
-  p {
-    font-size: 0.8em;
-    margin-bottom: 0;
-  }
+.fas{
+  color: $assoColor;
+}
+
+.associationOfferBorder {
+  border: 1px $assoColor solid;
+}
+
+.btn-association {
+  color: $primaryColor;
+  background-color: $assoColor;
+  border-color: $assoColor;
+}
+
+.btn-association:hover {
+  color: $primaryColor;
+  background-color: $assoColorHover;
+  border-color: $assoColorHover;
 }
 
 @media screen and (max-width: 360px) {
@@ -46,13 +45,6 @@ a{
       font-size: 0.5em;
       margin-bottom: 0;
     }
-    .infos {
-      width: 100%;
-      table-layout: fixed;
-      td {
-        width: 60%;
-        word-wrap: break-word;
-      }
-    }
   }
 }
+

@@ -3,15 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Association;
-use App\Entity\Schedule;
-use App\Form\AssociationScheduleType;
+
+use App\Entity\Offer;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
+use App\Repository\OfferRepository;
+use App\Entity\Schedule;
+use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route("/association")
@@ -19,6 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssociationController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/new", name="association_new", methods="GET|POST")
      */
     public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository): Response
@@ -26,6 +32,9 @@ class AssociationController extends AbstractController
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
+    
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $days = $daysOfWeekRepository->findAll();
         foreach ($days as $day) {
@@ -34,13 +43,14 @@ class AssociationController extends AbstractController
             $association->addSchedule($schedule);
         }
 
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $association->setUser($user);
             $em->persist($association);
             $em->flush();
 
-            return $this->redirectToRoute('association_index');
+            return $this->redirectToRoute('association_list_offers');
         }
 
         return $this->render('Visitor/Association/new.html.twig', [
@@ -78,8 +88,11 @@ class AssociationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
     /**
+     * @param Request $request
+     * @param Association $association
+     * @return Response
      * @Route("/{id}", name="association_delete", methods="DELETE")
      */
     public function delete(Request $request, Association $association): Response
@@ -91,6 +104,54 @@ class AssociationController extends AbstractController
         }
 
         return $this->redirectToRoute('association_index');
+    }
+    
+    /**
+     * @param OfferRepository $offerRepository
+     * @param Association $association
+     * @Route("/{id}/offres", name="association_list_offers", methods="GET")
+     * @return Response
+     * @throws \Exception
+     */
+    public function listOffers(Association $association, OfferRepository $offerRepository)
+    {
+        $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
+        
+        return $this->render('Visitor/Association/listOffers.html.twig', [
+            'offers' => $offers,
+            'association' => $association
+        ]);
+    }
+    
+    
+    /**
+     * @Route("/{association}/offres/{offer}", name="association_show_offer", methods="GET")
+     * @param Association $association
+     * @param Offer $offer
+     * @return Response
+     */
+    public function showOffer(Association $association, Offer $offer)
+    {
+        return $this->render('Visitor/Association/showOffer.html.twig', [
+            'offer' => $offer,
+            'association' => $association
+        ]);
+    }
+    
+    
+    /**
+     * @Route("/{association}/offres/{offer}/accept", name="association_accept_offer", methods="GET")
+     * @param Association $association
+     * @param Offer $offer
+     * @return Response
+     */
+    public function acceptOffer(Association $association, Offer $offer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offer->setAssociation($association);
+        $em->flush();
+        
+        return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
 
     /**
