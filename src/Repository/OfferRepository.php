@@ -29,4 +29,16 @@ class OfferRepository extends ServiceEntityRepository
         
         return $qb->execute();
     }
+    
+    public function findAllBeforeEndDateAssociation(\DateTime $date): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->andWhere('o.association is null')
+            ->setParameter('date', $date)
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+        
+        return $qb->execute();
+    }
 }
