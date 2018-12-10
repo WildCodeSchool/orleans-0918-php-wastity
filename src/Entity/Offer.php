@@ -77,7 +77,7 @@ class Offer
     private $association;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $company;
