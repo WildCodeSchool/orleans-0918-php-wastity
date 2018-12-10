@@ -19,3 +19,32 @@ a{
 .fas{
   color: $assoColor;
 }
+
+.associationOfferBorder {
+  border: 1px $assoColor solid;
+}
+
+.btn-association {
+  color: $primaryColor;
+  background-color: $assoColor;
+  border-color: $assoColor;
+}
+
+.btn-association:hover {
+  color: $primaryColor;
+  background-color: $assoColorHover;
+  border-color: $assoColorHover;
+}
+
+@media screen and (max-width: 360px) {
+  .navbar-brand{
+    .fas{
+      font-size:1em;
+    }
+    p {
+      font-size: 0.5em;
+      margin-bottom: 0;
+    }
+  }
+}
+
