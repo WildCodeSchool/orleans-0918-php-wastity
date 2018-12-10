@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
+ * @Vich\Uploadable()
  */
 class Offer
 {
@@ -19,9 +23,39 @@ class Offer
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $picture;
+    /**
+     * @Vich\UploadableField(mapping="offer", fileNameProperty="picture")
+     * @var File
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "Veuillez ajouter une image de moins de 2 Mo",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Veuillez ajouter un fichier image"
+     * )
+     */
+    private $pictureFile;
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+    public function setPictureFile(File $image = null) : void
+    {
+        $this->pictureFile = $image;
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+    public function getPictureFile()
+    {
+        return $this->pictureFile;
+    }
 
     /**
      * @ORM\Column(type="integer")
@@ -91,7 +125,7 @@ class Offer
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture($picture): self
     {
         $this->picture = $picture;
 
@@ -179,6 +213,18 @@ class Offer
     public function setCompany($company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
