@@ -94,14 +94,27 @@ class Association
     private $mail;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="association", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="association")
+     */
+    private $offers;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="association")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="association", cascade={"persist"}, fetch="EAGER")
      */
     private $schedules;
-
+    
     public function __construct()
     {
+        $this->offers = new ArrayCollection();
         $this->schedules = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {
@@ -181,6 +194,22 @@ class Association
     }
 
     /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setAssociation($this);
+        }
+    }
+
+     /**
      * @return Collection|Schedule[]
      */
     public function getSchedules(): Collection
@@ -198,6 +227,19 @@ class Association
         return $this;
     }
 
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getAssociation() === $this) {
+                $offer->setAssociation(null);
+            }
+        }
+    }
+    
+
     public function removeSchedule(Schedule $schedule): self
     {
         if ($this->schedules->contains($schedule)) {
@@ -207,6 +249,19 @@ class Association
                 $schedule->setAssociation(null);
             }
         }
+
+        return $this;
+    }
+
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
