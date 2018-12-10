@@ -19,8 +19,6 @@ class Offer
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(
-     *     message = "Veuillez mettre une image de vos produits")
      *
      */
     private $picture;
