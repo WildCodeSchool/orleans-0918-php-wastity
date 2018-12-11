@@ -68,7 +68,7 @@ class FoodHeroController extends AbstractController
         }
 
         return $this->render('Visitor/FoodHero/edit.html.twig', [
-            'foodHero' => $foodHero,
+            'foodhero' => $foodHero,
             'form' => $form->createView(),
         ]);
     }
