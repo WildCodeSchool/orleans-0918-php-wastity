@@ -14,3 +14,19 @@ img {
   height: 100px;
   width: 100px;
 }
+
+.foodheroOfferBorder {
+  border: 1px $foodHeroColor solid;
+}
+
+.btn-foodhero {
+  color: $primaryColor;
+  background-color: $foodHeroColor;
+  border-color: $foodHeroColor;
+}
+
+.btn-foodhero:hover {
+  color: $primaryColor;
+  background-color: $foodHeroColorHover;
+  border-color: $foodHeroColorHover;
+}

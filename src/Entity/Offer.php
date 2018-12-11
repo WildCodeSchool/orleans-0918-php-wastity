@@ -114,6 +114,11 @@ class Offer
      */
     private $company;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\FoodHero", inversedBy="offers")
+     */
+    private $foodhero;
+
 
     public function getId(): ?int
     {
@@ -225,6 +230,15 @@ class Offer
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+    public function getFoodhero(): ?FoodHero
+    {
+        return $this->foodhero;
+    }
+
+    public function setFoodhero(?FoodHero $foodhero): self
+    {
+        $this->foodhero = $foodhero;
 
         return $this;
     }
