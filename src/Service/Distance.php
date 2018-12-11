@@ -8,11 +8,9 @@
 
 namespace App\Service;
 
-
 use App\Entity\Association;
 use App\Entity\Company;
 use GuzzleHttp\Client;
-
 
 class Distance
 {
@@ -39,8 +37,7 @@ class Distance
 
         $dlo = ($rlo2 - $rlo1) / 2;
         $dla = ($rla2 - $rla1) / 2;
-        $a = (sin($dla) * sin($dla)) + cos($rla1) * cos($rla2) * (sin($dlo) * sin($dlo
-                ));
+        $a = (sin($dla) * sin($dla)) + cos($rla1) * cos($rla2) * (sin($dlo) * sin($dlo));
         $d = 2 * atan2(sqrt($a), sqrt(1 - $a));
         return round($earth_radius * $d / 1000, 2);
     }

@@ -8,7 +8,6 @@
 
 namespace App\Controller;
 
-
 interface HasAddress
 {
     public function fullAddress():string;

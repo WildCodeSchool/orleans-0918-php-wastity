@@ -114,7 +114,7 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository,Distance $service)
+    public function listOffers(Association $association, OfferRepository $offerRepository, Distance $service)
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
