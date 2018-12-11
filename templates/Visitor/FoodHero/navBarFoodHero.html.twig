@@ -1,7 +1,7 @@
  <nav class="navbar navbar-light fixed-bottom">
      <div class="row text-center">
          <div class="col-3">
-             <a class="navbar-brand" href="#">
+             <a class="navbar-brand" href="{{ path('foodhero_list_offers', {'id' : foodhero.id} ) }}">
                  <i class="fas fa-clipboard-list fa-2x"></i>
                  <p>Missions</p>
              </a>
@@ -19,7 +19,7 @@
              </a>
          </div>
          <div class="col-3">
-             <a class="navbar-brand" href="{{ path('foodhero_edit', {'id' : foodHero.id}) }}">
+             <a class="navbar-brand" href="{{ path('foodhero_edit', {'id' : foodhero.id}) }}">
                  <i class="fas fa-user-tie fa-2x"></i>
                  <p>Admin</p>
              </a>
