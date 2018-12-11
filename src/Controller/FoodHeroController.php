@@ -103,5 +103,4 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodHero
         ]);
     }
-    
 }
