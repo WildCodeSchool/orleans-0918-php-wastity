@@ -11,6 +11,7 @@ use App\Repository\OfferRepository;
 use App\Entity\Schedule;
 use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
+use App\Service\Distance;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,12 +114,20 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository)
+    public function listOffers(Association $association, OfferRepository $offerRepository,Distance $service)
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
-        
+
+        $distanceArr=[];
+        foreach ($offers as $offer) {
+            $company=$offer->getCompany();
+            $id=$offer->getCompany()->getId();
+            $distanceArr[$id]=$service->calculateDistanceCompanyAsso($company, $association);
+        }
+
         return $this->render('Visitor/Association/listOffers.html.twig', [
             'offers' => $offers,
+            'distances'=>$distanceArr,
             'association' => $association
         ]);
     }
