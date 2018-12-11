@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <div class="row">
                         <h4 class="col-6">Quantité : {{ offer.weight }} Kg</h4>
-                        <img class="col-6" src="{{ offer.picture }}" alt="ImageOffre">
+                        <img class="col-6" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
                     </div>
                 </div>
 
