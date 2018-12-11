@@ -58,7 +58,7 @@ class Offer
     }
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      *
      * @Assert\NotBlank(
      *     message="Le poids ne peut pas être vide")
@@ -66,7 +66,7 @@ class Offer
      * @Assert\GreaterThan(0,
      *     message="Le poids doit être supérieur à 0kg")
      *
-     * @Assert\Type("integer"),
+     * @Assert\Type("numeric"),
      *     message="Le poids n'est pas valide")
      * )
      */
@@ -132,12 +132,12 @@ class Offer
         return $this;
     }
 
-    public function getWeight(): ?int
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
 
-    public function setWeight(int $weight): self
+    public function setWeight(float $weight): self
     {
         $this->weight = $weight;
 
