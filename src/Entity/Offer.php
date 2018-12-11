@@ -230,7 +230,7 @@ class Offer
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
+    }
     public function getFoodhero(): ?FoodHero
     {
         return $this->foodhero;
