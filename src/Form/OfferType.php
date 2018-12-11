@@ -25,6 +25,7 @@ class OfferType extends AbstractType
                 'image_uri' => false,
             ])
             ->add('weight', NumberType::class, [
+                'scale' => 2,
                 'label' => 'Poids',
                 'help' => 'estimé en kg'
             ])
