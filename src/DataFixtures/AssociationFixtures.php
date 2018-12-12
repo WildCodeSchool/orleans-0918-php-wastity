@@ -33,7 +33,7 @@ class AssociationFixtures extends Fixture implements DependentFixtureInterface
             $association->setName($fakerUS->company);
             $association->setAddress(rand(1, 9).' '.$this->streetAddress[array_rand($this->streetAddress)]);
             $association->setPostalCode('45000');
-            $association->setTown('Orléans');
+            $association->setCity('Orléans');
             $association->setMail($faker->email);
             $association->setPhone($faker->phoneNumber);
             $this->addReference('association_'.$i, $association);
