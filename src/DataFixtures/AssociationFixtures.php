@@ -31,7 +31,7 @@ class AssociationFixtures extends Fixture implements DependentFixtureInterface
             $faker  =  Faker\Factory::create('fr_FR');
             $fakerUS = Faker\Factory::create('en_US');
             $association->setName($fakerUS->company);
-            $association->setAdress(rand(1, 9).' '.$this->streetAddress[array_rand($this->streetAddress)]);
+            $association->setAddress(rand(1, 9).' '.$this->streetAddress[array_rand($this->streetAddress)]);
             $association->setPostalCode('45000');
             $association->setTown('Orléans');
             $association->setMail($faker->email);

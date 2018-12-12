@@ -14,12 +14,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-
 class ScheduleFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        for($a = 0; $a < 7; $a++) {
+        for ($a = 0; $a < 7; $a++) {
             for ($i = 0; $i <= 3; $i++) {
                 $schedule = new Schedule();
                 $openingAM = new \DateTime('08:00');

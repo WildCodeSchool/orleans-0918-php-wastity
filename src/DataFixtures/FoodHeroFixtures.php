@@ -9,12 +9,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\FoodHero;
-use App\Repository\UserRepository;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
 
 class FoodHeroFixtures extends Fixture implements DependentFixtureInterface
 {
