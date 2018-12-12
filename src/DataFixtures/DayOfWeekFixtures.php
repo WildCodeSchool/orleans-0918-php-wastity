@@ -9,21 +9,29 @@
 namespace App\DataFixtures;
 
 use App\Entity\DaysOfWeek;
-use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class DayOfWeekFixtures extends Fixture
 {
+    private $dayOfWeekArray = [
+        'Lundi',
+        'Mardi',
+        'Mercredi',
+        'Jeudi',
+        'Vendredi',
+        'Samedi',
+        'Dimanche'
+    ];
+
     public function load(ObjectManager $manager)
     {
-        for ($i=1; $i <=15; $i++) {
+        for ($i=0; $i <= 6; $i++) {
             $dayOfWeek=new DaysOfWeek();
-            $faker  =  Faker\Factory::create('fr_FR');
-            $dayOfWeek->setName($faker->company);
+            $dayOfWeek->setName($this->dayOfWeekArray[$i]);
+            $this->addReference('dayOfWeek_'.$i, $dayOfWeek);
             $manager->persist($dayOfWeek);
         }
-
         $manager->flush();
     }
 }

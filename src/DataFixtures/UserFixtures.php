@@ -17,14 +17,15 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 15; $i++) {
+        for ($i = 0; $i <= 15; $i++) {
             $user = new User();
             $faker = Faker\Factory::create('fr_FR');
             $user->setEmail($faker->email);
-            $user->setRoles($faker->text);
+            $user->setRoles(['ROLE_USER']);
             $user->setPassword($faker->password);
             $user->setFirstname($faker->text);
             $user->setLastname($faker->text);
+            $this->addReference('user_'.$i, $user);
             $manager->persist($user);
         }
         $manager->flush();
