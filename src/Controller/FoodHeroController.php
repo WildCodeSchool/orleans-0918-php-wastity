@@ -64,7 +64,7 @@ class FoodHeroController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('foodhero_index');
+            return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
 
         return $this->render('Visitor/FoodHero/edit.html.twig', [
