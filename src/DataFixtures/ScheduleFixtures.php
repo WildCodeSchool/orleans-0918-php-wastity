@@ -12,6 +12,7 @@ use App\Entity\Schedule;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+
 class ScheduleFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
