@@ -1,5 +1,8 @@
 {{ form_start(form) }}
 <div class="row justify-content-center">
+    <div class="col-12 mt-5 mr-2 ml-2 text-center">
+        {{ form_row(form.pictureFile) }}
+    </div>
     <div class="col-6 mt-5 mr-1 ml-1">
         {{ form_label(form.weight) }}
         {{ form_errors(form.weight) }}

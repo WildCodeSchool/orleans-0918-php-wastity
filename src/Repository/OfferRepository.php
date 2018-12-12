@@ -41,4 +41,17 @@ class OfferRepository extends ServiceEntityRepository
         
         return $qb->execute();
     }
+    
+    public function findAllBeforeEndDateFoodhero(\DateTime $date): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->andWhere('o.association is not null')
+            ->andWhere('o.foodhero is null')
+            ->setParameter('date', $date)
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+        
+        return $qb->execute();
+    }
 }

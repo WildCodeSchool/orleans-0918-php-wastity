@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\FoodHero;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
+use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,7 +68,7 @@ class FoodHeroController extends AbstractController
         }
 
         return $this->render('Visitor/FoodHero/edit.html.twig', [
-            'foodHero' => $foodHero,
+            'foodhero' => $foodHero,
             'form' => $form->createView(),
         ]);
     }
@@ -84,5 +85,22 @@ class FoodHeroController extends AbstractController
         }
 
         return $this->redirectToRoute('foodhero_index');
+    }
+    
+    /**
+     * @param FoodHero $foodHero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     * @Route("/{id}/offres", name="foodhero_list_offers", methods="GET")
+     */
+    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository)
+    {
+        $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
+        
+        return $this->render('Visitor/FoodHero/listOffers.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodHero
+        ]);
     }
 }
