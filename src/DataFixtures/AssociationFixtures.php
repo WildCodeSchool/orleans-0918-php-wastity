@@ -34,6 +34,7 @@ class AssociationFixtures extends Fixture
             $association->setTown('Orléans');
             $association->setMail($faker->email);
             $association->setPhone($faker->phoneNumber);
+            $association->setUser(rand(0, 10));
             $manager->persist($association);
         }
 

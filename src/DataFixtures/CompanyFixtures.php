@@ -44,6 +44,7 @@ class CompanyFixtures extends Fixture
             $company->setCity('Orléans');
             $company->setEmail($faker->email);
             $company->setPhone($faker->phoneNumber);
+            $company->setUser(rand(0, 10));
             $manager->persist($company);
         }
 
