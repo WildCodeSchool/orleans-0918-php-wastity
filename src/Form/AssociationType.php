@@ -20,7 +20,7 @@ class AssociationType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Votre association',
                 ]])
-            ->add('adress', TextType::class, [
+            ->add('address', TextType::class, [
                 'label' => 'Adresse',
                 'attr' => [
                     'placeholder' => '1 rue de votre association',
@@ -30,7 +30,7 @@ class AssociationType extends AbstractType
                 'attr' => [
                     'placeholder' => '45000',
                 ]])
-            ->add('town', TextType::class, [
+            ->add('city', TextType::class, [
                 'label' => 'Ville',
                 'attr' => [
                     'placeholder' => 'Orléans',

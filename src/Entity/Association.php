@@ -39,7 +39,7 @@ class Association
      *      maxMessage = "Le nombre de caractères maximum est de 255"
      * )
      */
-    private $adress;
+    private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -63,7 +63,7 @@ class Association
      *      maxMessage = "Le nombre de caractères maximum est de 255"
      * )
      */
-    private $town;
+    private $city;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -133,14 +133,14 @@ class Association
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(string $adress): self
+    public function setAddress(string $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
@@ -157,14 +157,14 @@ class Association
         return $this;
     }
 
-    public function getTown(): ?string
+    public function getCity(): ?string
     {
-        return $this->town;
+        return $this->city;
     }
 
-    public function setTown(string $town): self
+    public function setCity(string $city): self
     {
-        $this->town = $town;
+        $this->city = $city;
 
         return $this;
     }
