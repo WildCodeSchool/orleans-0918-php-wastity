@@ -15,12 +15,12 @@ class DistanceCalculator
 {
     const EARTH_RADIUS = 6378137;
 
-    public function calculateDistance (HasAddress $start, HasAddress $end): ?float
+    public function calculateDistance(HasAddress $start, HasAddress $end): ?float
     {
         $client = new Client(['base_uri' => 'https://api-adresse.data.gouv.fr']);
 
-        $resStart= $client->request('GET','search', ['query' => ['q' => $start->fullAddress()]]);
-        $resEnd= $client->request('GET','search', ['query' => ['q' => $end->fullAddress()]]);
+        $resStart= $client->request('GET', 'search', ['query' => ['q' => $start->fullAddress()]]);
+        $resEnd= $client->request('GET', 'search', ['query' => ['q' => $end->fullAddress()]]);
 
         $resStart = json_decode($resStart->getBody(), true);
         $resEnd = json_decode($resEnd->getBody(), true);
