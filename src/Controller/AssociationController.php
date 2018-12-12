@@ -109,7 +109,7 @@ class AssociationController extends AbstractController
     /**
      * @param OfferRepository $offerRepository
      * @param Association $association
-     * @Route("/{id}/offres", name="association_list_offers", methods="GET")
+     * @Route("/{id}/offers", name="association_list_offers", methods="GET")
      * @return Response
      * @throws \Exception
      */
@@ -125,7 +125,7 @@ class AssociationController extends AbstractController
     
     
     /**
-     * @Route("/{association}/offres/{offer}", name="association_show_offer", methods="GET")
+     * @Route("/{association}/offer/{offer}", name="association_show_offer", methods="GET")
      * @param Association $association
      * @param Offer $offer
      * @return Response
@@ -140,7 +140,7 @@ class AssociationController extends AbstractController
     
     
     /**
-     * @Route("/{association}/offres/{offer}/accept", name="association_accept_offer", methods="GET")
+     * @Route("/{association}/offer/{offer}/accept", name="association_accept_offer", methods="GET")
      * @param Association $association
      * @param Offer $offer
      * @return Response

@@ -10,7 +10,7 @@
             {% for offer in offers %}
                 <div class="col-12 col-sm-6 col-lg-4 pb-3">
                     <div class=" associationOfferBorder">
-                        <img class="card-img-top" src="{{ offer.picture }}" alt="Image de l'offre">
+                        <img class="card-img-top" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre">
                         <div class="card-body">
 
                             <p class="card-text"><strong>Produits:</strong> {{ offer.description }}</p>

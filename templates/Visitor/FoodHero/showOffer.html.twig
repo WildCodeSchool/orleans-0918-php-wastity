@@ -1,21 +1,21 @@
-{% extends 'Visitor/Association/layoutAssociation.html.twig' %}
+{% extends 'Visitor/FoodHero/layoutFoodHero.html.twig' %}
 
 {% block title %}Offer index{% endblock %}
-{% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <h1 class="text-center">Liste des offres en attente</h1>
         <div class="row justify-content-center">
             <div class="col-12 col-sm-6 col-lg-4 pb-3">
-                <div class=" associationOfferBorder">
+                <div class=" foodheroOfferBorder">
                     <img class="card-img-top" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre">
                     <div class="card-body">
                         <p class="card-text"><strong>Produits:</strong> {{ offer.description }}</p>
                         <p class="card-text"><strong>Quantité:</strong> {{ offer.weight }} kg </p>
 
                         <div class=" d-flex justify-content-end">
-                            <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}" class="btn btn-association align-content-end">Accepter l'offre</a>
+                            <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}" class="btn btn-foodhero align-content-end">Accepter l'offre</a>
                         </div>
                     </div>
                 </div>
