@@ -129,7 +129,8 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function showOneOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator): Response
+    public function showOneOffer(Association $association, Offer $offer,
+                                 DistanceCalculator $distanceCalculator): Response
     {
         $company = $offer->getCompany();
         $distance = $distanceCalculator->calculateDistance($company, $association);
@@ -180,8 +181,7 @@ class AssociationController extends AbstractController
     public function editSchedule(
         Request $request,
         Association $association,
-        DaysOfWeekRepository $daysOfWeekRepository
-    ): Response
+        DaysOfWeekRepository $daysOfWeekRepository): Response
     {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
