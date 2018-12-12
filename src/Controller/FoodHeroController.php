@@ -134,5 +134,4 @@ class FoodHeroController extends AbstractController
         
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
     }
-    
 }
