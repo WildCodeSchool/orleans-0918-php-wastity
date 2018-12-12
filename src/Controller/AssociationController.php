@@ -33,7 +33,7 @@ class AssociationController extends AbstractController
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
-    
+
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
@@ -44,7 +44,7 @@ class AssociationController extends AbstractController
             $association->addSchedule($schedule);
         }
 
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $association->setUser($user);
@@ -89,7 +89,7 @@ class AssociationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
     /**
      * @param Request $request
      * @param Association $association
@@ -106,7 +106,7 @@ class AssociationController extends AbstractController
 
         return $this->redirectToRoute('association_index');
     }
-    
+
     /**
      * @param OfferRepository $offerRepository
      * @param Association $association
@@ -114,25 +114,33 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository, DistanceCalculator $distance)
+    public function listOffers(Association $association, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
-        $distanceArr=[];
-        foreach ($offers as $offer) {
-            $company=$offer->getCompany();
-            $id=$offer->getCompany()->getId();
-            $distanceArr[$id]=$distance->calculateDistance($company,$association);
-        }
-
         return $this->render('Visitor/Association/listOffers.html.twig', [
             'offers' => $offers,
-            'distances'=>$distanceArr,
-            'association' => $association
+            'association' => $association,
         ]);
     }
-    
-    
+
+    /**
+     * @Route("/{association}/oneOffer/{offer}", name="association_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator): Response
+    {
+        $company = $offer->getCompany();
+        $distance = $distanceCalculator->calculateDistance($company, $association);
+
+        return $this->render('Visitor/Association/showCard.html.twig', [
+            'association' => $association,
+            'distance' => $distance,
+            'offer' => $offer,
+        ]);
+    }
+
     /**
      * @Route("/{association}/offres/{offer}", name="association_show_offer", methods="GET")
      * @param Association $association
@@ -146,8 +154,8 @@ class AssociationController extends AbstractController
             'association' => $association
         ]);
     }
-    
-    
+
+
     /**
      * @Route("/{association}/offres/{offer}/accept", name="association_accept_offer", methods="GET")
      * @param Association $association
@@ -159,7 +167,7 @@ class AssociationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);
         $em->flush();
-        
+
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
 
@@ -173,7 +181,8 @@ class AssociationController extends AbstractController
         Request $request,
         Association $association,
         DaysOfWeekRepository $daysOfWeekRepository
-    ): Response {
+    ): Response
+    {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
