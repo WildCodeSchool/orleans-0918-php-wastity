@@ -58,6 +58,7 @@ class FoodHero implements \Serializable
      * )
      */
     private $profileImageFile;
+
     /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
