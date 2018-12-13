@@ -91,6 +91,19 @@ class AssociationController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/showAssociation", name="association_show", methods="GET")
+     * @param Association $association
+     * @return Response
+     */
+    public function showCompany(Association $association): Response
+    {
+
+        return $this->render('Visitor/Association/show.html.twig', [
+            'association' => $association,
+        ]);
+    }
+
+    /**
      * @param Request $request
      * @param Association $association
      * @return Response

@@ -21,13 +21,13 @@ class ScheduleFixtures extends Fixture implements DependentFixtureInterface
         for ($a = 0; $a < 7; $a++) {
             for ($i = 0; $i <= 3; $i++) {
                 $schedule = new Schedule();
-                $openingAM = new \DateTime('08:00');
+                $openingAM = null;
                 $schedule->setOpeningAM($openingAM);
-                $closingAM = new \DateTime('12:00');
+                $closingAM = null;
                 $schedule->setClosingAM($closingAM);
-                $openingPM = new \DateTime('14:00');
+                $openingPM = null;
                 $schedule->setOpeningPM($openingPM);
-                $closingAM = new \DateTime('18:00');
+                $closingAM = null;
                 $schedule->setClosingPM($closingAM);
                 $schedule->setDay(
                     $this->getReference('dayOfWeek_' . $a)
@@ -35,9 +35,9 @@ class ScheduleFixtures extends Fixture implements DependentFixtureInterface
                 $schedule->setCompany(
                     $this->getReference('company_' . $i)
                 );
-                $schedule->setAssociation(
-                    $this->getReference('association_' . $i)
-                );
+//                $schedule->setAssociation(
+//                    $this->getReference('association_' . $i)
+//                );
                 $manager->persist($schedule);
             }
         }
@@ -48,7 +48,7 @@ class ScheduleFixtures extends Fixture implements DependentFixtureInterface
     {
         return array(
             DayOfWeekFixtures::class,
-            AssociationFixtures::class,
+//            AssociationFixtures::class,
             CompanyFixtures::class,
         );
     }

@@ -1,3 +1,42 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block stylesheets %}{{ encore_entry_link_tags('css/appProfile') }}{% endblock %}#}
+
+        {#{% block header %}#}
+            {#<div class="row justify-content-start align-items-center">#}
+                {#<p class="col-12 text-center">Choisissez votre profil</p>#}
+                {#<p class="offset-1"></p>#}
+            {#</div>#}
+        {#{% endblock %}#}
+{#{% block body %}#}
+    {#<main class="container">#}
+        {#<section class="text-center">#}
+            {#<div class="title">#}
+                {#<b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>#}
+                {#<p>Indiquez-nous comment vous souhaitez agir.</p>#}
+            {#</div>#}
+
+            {#<article class="foodHeroProfileBorder d-flex align-items-center justify-content-center">#}
+                {#<a class="foodHeroProfile" href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}#}
+{#">#}
+
+                    {#<h1>Food Hero</h1>#}
+                    {#<p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>#}
+            {#</article>#}
+            {#<article class="companyProfileBorder d-flex align-items-center justify-content-center"><a class="companyProfile" href="{{ path('company_new') }}">#}
+                    {#<h1>Entreprise</h1>#}
+                    {#<p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p></a>#}
+            {#</article>#}
+            {#<article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{{ path('association_new') }}">#}
+                    {#<h1>Association</h1>#}
+                    {#<p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p></a>#}
+            {#</article>#}
+
+        {#</section>#}
+    {#</main>#}
+
+{#{% endblock %}#}
+
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}{{ encore_entry_link_tags('css/appProfile') }}{% endblock %}
@@ -23,11 +62,12 @@
                     <h1>Food Hero</h1>
                     <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
             </article>
-            <article class="companyProfileBorder d-flex align-items-center justify-content-center"><a class="companyProfile" href="{{ path('company_new') }}">
+            <article class="companyProfileBorder d-flex align-items-center justify-content-center">
+                <a class="companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
                     <h1>Entreprise</h1>
                     <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p></a>
             </article>
-            <article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{{ path('association_new') }}">
+            <article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{% if app.user.association is null %}{{ path('association_new') }}{% else %}{{ path('association_show', {'id' : app.user.association.id}) }}{% endif %}">
                     <h1>Association</h1>
                     <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p></a>
             </article>
