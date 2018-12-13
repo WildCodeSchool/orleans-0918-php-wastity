@@ -19,7 +19,7 @@ class ScheduleFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($a = 0; $a < 7; $a++) {
-            for ($i = 0; $i <= 3; $i++) {
+            for ($i = 0; $i <= 15; $i++) {
                 $schedule = new Schedule();
                 $openingAM = new \DateTime('08:00');
                 $schedule->setOpeningAM($openingAM);
