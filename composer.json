@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.6",
+        "guzzlehttp/guzzle": "^6.3",
         "sensio/framework-extra-bundle": "^5.1",
         "squizlabs/php_codesniffer": "^3.3",
         "symfony/asset": "4.1.*",

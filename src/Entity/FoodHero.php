@@ -14,7 +14,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\FoodHeroRepository")
  * @Vich\Uploadable()
  */
-class FoodHero
+class FoodHero implements \Serializable
 {
     /**
      * @ORM\Id()
@@ -58,6 +58,7 @@ class FoodHero
      * )
      */
     private $profileImageFile;
+
     /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
@@ -172,5 +173,24 @@ class FoodHero
         }
 
         return $this;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->profileImage,
+
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+
+            ) = unserialize($serialized);
     }
 }
