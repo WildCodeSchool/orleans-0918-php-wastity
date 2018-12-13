@@ -269,7 +269,7 @@ class Association implements HasAddress
 
     public function fullAddress():string
     {
-        $fullAddress=$this->adress.' '.$this->postalCode.' '.$this->town;
+        $fullAddress=$this->address.' '.$this->postalCode.' '.$this->city;
         return $fullAddress;
     }
 }
