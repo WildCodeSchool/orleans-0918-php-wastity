@@ -45,7 +45,8 @@ class OfferType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('complementary', TextareaType::class, [
-                'label' => 'Information complémantaire'
+                'label' => 'Information complémentaire',
+                'required'=> false
             ]);
     }
 
