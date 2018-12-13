@@ -3,13 +3,15 @@
 namespace App\DataFixtures;
 
 use App\Entity\Company;
+use App\Entity\User;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class CompanyFixtures extends Fixture
+class CompanyFixtures extends Fixture implements DependentFixtureInterface
 {
-    private $streetAdress = [
+    private $streetAddress = [
         'Rue Jules Lemaitre',
         'Boulevard Dupanloup',
         'Avenue de Paris',
@@ -33,20 +35,31 @@ class CompanyFixtures extends Fixture
     
     public function load(ObjectManager $manager)
     {
-        for ($i=1; $i <=15; $i++) {
+        for ($i=0; $i <=15; $i++) {
             $company=new Company();
             $faker  =  Faker\Factory::create('fr_FR');
             $fakerUS = Faker\Factory::create('en_US');
             $company->setType($this->companyType[array_rand($this->companyType)]);
             $company->setName($fakerUS->company);
-            $company->setAddress(rand(1, 9).' '.$this->streetAdress[array_rand($this->streetAdress)]);
+            $company->setAddress(rand(1, 9).' '.$this->streetAddress[array_rand($this->streetAddress)]);
             $company->setPostalCode('45000');
             $company->setCity('Orléans');
             $company->setEmail($faker->email);
             $company->setPhone($faker->phoneNumber);
+            $this->addReference('company_'.$i, $company);
+            $company->setUser(
+                $this->getReference('user_'.$i)
+            );
             $manager->persist($company);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return array(
+            UserFixtures::class,
+        );
     }
 }

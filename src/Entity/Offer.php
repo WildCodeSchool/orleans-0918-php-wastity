@@ -25,6 +25,7 @@ class Offer
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
+
     /**
      * @Vich\UploadableField(mapping="offer", fileNameProperty="picture")
      * @var File
@@ -36,11 +37,13 @@ class Offer
      * )
      */
     private $pictureFile;
+
     /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
      */
     private $updatedAt;
+
     public function setPictureFile(File $image = null) : void
     {
         $this->pictureFile = $image;
@@ -227,7 +230,7 @@ class Offer
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }

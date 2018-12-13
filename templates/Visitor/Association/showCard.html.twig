@@ -1,0 +1,12 @@
+<div class="col-12 col-sm-6 col-lg-4 pb-3">
+    <div class="associationOfferBorder">
+        <img class="card-img-top" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="Image de l'offre">
+        <div class="card-body">
+            <p class="card-text"><strong>Produits :</strong> {{ offer.description }}</p>
+            <p class="card-text"><strong>Quantité :</strong> {{ offer.weight }} kg </p>
+                {% if distance %}
+                    <p class="card-text"><strong>Distance :</strong> {{ distance }} km </p>
+                {% endif %}
+        </div>
+    </div>
+</div>

@@ -70,6 +70,19 @@ class CompanyController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/showCompany", name="company_show", methods="GET")
+     * @param Company $company
+     * @return Response
+     */
+    public function showCompany(Company $company): Response
+    {
+
+        return $this->render('Visitor/Company/show.html.twig', [
+            'company' => $company,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/edit", name="company_edit", methods="GET|POST")
      * @param Request $request
      * @param company $company
@@ -84,9 +97,9 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
+            return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
-        return $this->render('Visitor/Company/show.html.twig', [
+        return $this->render('Visitor/Company/edit.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
         ]);
@@ -127,7 +140,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
+            return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
 
         return $this->render('Visitor/Company/editSchedule.html.twig', [
