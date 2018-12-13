@@ -81,7 +81,7 @@ class AssociationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('association_index', ['id' => $association->getId()]);
+            return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
         return $this->render('Visitor/Association/edit.html.twig', [
@@ -207,7 +207,7 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
-        return $this->render('Visitor/Company/editSchedule.html.twig', [
+        return $this->render('Visitor/Association/editSchedule.html.twig', [
             'association' => $association,
             'form' => $form->createView(),
         ]);

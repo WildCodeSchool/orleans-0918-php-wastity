@@ -3,7 +3,7 @@
 {% block header %}
     <div>
         <div class="row">
-            <a class="col-1 text-center" href="{{ path('association_edit') }}"><i class="fas fa-chevron-left"></i></a>
+            <a class="col-1 text-center" href="{{ path('association_edit', {'id': association.id}) }}"><i class="fas fa-chevron-left"></i></a>
             <h1 class="col text-center">Enregistrement des horaires</h1>
             <div class="offset-1"></div>
         </div>

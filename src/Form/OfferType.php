@@ -27,22 +27,29 @@ class OfferType extends AbstractType
             ->add('weight', NumberType::class, [
                 'scale' => 2,
                 'label' => 'Poids',
-                'help' => 'estimé en kg'
+                'attr' => [
+                'placeholder' => 'en kg']
             ])
             ->add('start', DateTimeType::class, [
                 'label' => 'Disponible à partir de',
                 'widget' => 'single_text',
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
+                'attr' => [
+                    'placeholder' => '2018-12-31 20:30']
             ])
             ->add('end', DateTimeType::class, [
                 'label' => 'Jusqu\'à',
                 'widget' => 'single_text',
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
+                'attr' => [
+                    'placeholder' => '2018-12-31 20:30']
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description'
+                'label' => 'Description',
+                'attr' => [
+                    'placeholder' => 'Décrivez votre produit. Ex : Baguettes, Boites de conserves, ...']
             ])
             ->add('complementary', TextareaType::class, [
                 'label' => 'Information complémentaire',

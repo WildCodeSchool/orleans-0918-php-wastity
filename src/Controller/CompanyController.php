@@ -97,7 +97,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
+            return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
         return $this->render('Visitor/Company/edit.html.twig', [
             'company' => $company,
@@ -140,7 +140,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('company_index', ['id' => $company->getId()]);
+            return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
 
         return $this->render('Visitor/Company/editSchedule.html.twig', [
