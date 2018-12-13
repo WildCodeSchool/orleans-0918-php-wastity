@@ -113,12 +113,11 @@ class FoodHeroController extends AbstractController
      */
     public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
     {
-        $offers = $offerRepository->findAllBeforeEndDateOfferAcceptedByFoodhero(new \DateTime(),$foodHero);
+        $offers = $offerRepository->findAllBeforeEndDateOfferAcceptedByFoodhero(new \DateTime(), $foodHero);
         
         return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
             'offers' => $offers,
             'foodhero' => $foodHero
         ]);
     }
-    
 }
