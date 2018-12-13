@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\FoodHero;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -49,6 +50,18 @@ class OfferRepository extends ServiceEntityRepository
             ->andWhere('o.association is not null')
             ->andWhere('o.foodhero is null')
             ->setParameter('date', $date)
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+        
+        return $qb->execute();
+    }
+    
+    public function findAllBeforeEndDateOfferAcceptedByFoodhero(\DateTime $date, FoodHero $foodHero): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->andWhere('o.foodhero = :foodhero')
+            ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
             ->orderBy('o.end', 'ASC')
             ->getQuery();
         
