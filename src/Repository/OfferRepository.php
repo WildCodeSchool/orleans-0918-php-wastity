@@ -56,7 +56,7 @@ class OfferRepository extends ServiceEntityRepository
         return $qb->execute();
     }
     
-    public function findAllBeforeEndDateOfferAcceptedByFoodhero(\DateTime $date, FoodHero $foodHero): array
+    public function findAcceptedByFoodHero(\DateTime $date, FoodHero $foodHero): array
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
