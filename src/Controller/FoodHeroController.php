@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\FoodHero;
+use App\Entity\Offer;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
@@ -64,7 +65,7 @@ class FoodHeroController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('foodhero_index');
+            return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
 
         return $this->render('Visitor/FoodHero/edit.html.twig', [
@@ -92,7 +93,7 @@ class FoodHeroController extends AbstractController
      * @param OfferRepository $offerRepository
      * @return Response
      * @throws \Exception
-     * @Route("/{id}/offres", name="foodhero_list_offers", methods="GET")
+     * @Route("/{id}/offers", name="foodhero_list_offers", methods="GET")
      */
     public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository)
     {
@@ -119,5 +120,36 @@ class FoodHeroController extends AbstractController
             'offers' => $offers,
             'foodhero' => $foodHero
         ]);
+    }
+  
+  
+    /**
+     * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @return Response
+     */
+    public function showOffer(FoodHero $foodhero, Offer $offer)
+    {
+        return $this->render('Visitor/FoodHero/showOffer.html.twig', [
+            'offer' => $offer,
+            'foodhero' => $foodhero
+        ]);
+    }
+    
+    
+    /**
+     * @Route("/{foodhero}/offer/{offer}/accept", name="foodhero_accept_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @return Response
+     */
+    public function acceptOffer(FoodHero $foodhero, Offer $offer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offer->setFoodhero($foodhero);
+        $em->flush();
+        
+        return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
     }
 }
