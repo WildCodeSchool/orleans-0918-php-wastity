@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,6 +66,12 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer->setCompany($company);
+
+            $status = $this->getDoctrine()
+                ->getRepository(Status::class)
+                ->findOneBy(['id' => 'AssociationResearch']);
+
+            $offer->setStatusKey($status);
             $em->persist($offer);
             $em->flush();
 

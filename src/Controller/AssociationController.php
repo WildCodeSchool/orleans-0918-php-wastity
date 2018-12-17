@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Association;
 
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
 use App\Repository\OfferRepository;
@@ -147,8 +148,13 @@ class AssociationController extends AbstractController
      */
     public function acceptOffer(Association $association, Offer $offer)
     {
+        $status = $this->getDoctrine()
+            ->getRepository(Status::class)
+            ->findOneBy(['id' => 'FoodHeroResearch']);
+
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);
+        $offer->setStatusKey($status);
         $em->flush();
         
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);

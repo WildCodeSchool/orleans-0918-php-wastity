@@ -11,15 +11,9 @@ class Status
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $constKey;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -31,21 +25,17 @@ class Status
      */
     private $statusText;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getConstKey(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId(string $id): void
     {
-        return $this->constKey;
-    }
-
-    public function setConstKey(string $constKey): self
-    {
-        $this->constKey = $constKey;
-
-        return $this;
+        $this->id = $id;
     }
 
     public function getClassColorName(): ?string

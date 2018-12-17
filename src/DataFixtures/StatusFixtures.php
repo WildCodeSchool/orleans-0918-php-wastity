@@ -36,7 +36,7 @@ class StatusFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $status = new Status();
             $this->addReference('status_'.$i, $status);
-            $status->setConstKey(self::CONST_KEYS_AND_CLASS[$i]);
+            $status->setId(self::CONST_KEYS_AND_CLASS[$i]);
             $status->setClassColorName(self::CONST_KEYS_AND_CLASS[$i]);
             $status->setStatusText(self::STATUS_TEXT[$i]);
             $manager->persist($status);
