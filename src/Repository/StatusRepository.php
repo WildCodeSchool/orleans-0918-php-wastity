@@ -19,32 +19,14 @@ class StatusRepository extends ServiceEntityRepository
         parent::__construct($registry, Status::class);
     }
 
-    // /**
-    //  * @return Status[] Returns an array of Status objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Status
+    public function findOneByConstStatus($value): ?Status
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('s.constStatus = :value')
+            ->setParameter('value', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

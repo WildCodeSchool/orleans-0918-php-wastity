@@ -12,6 +12,7 @@ use App\Repository\OfferRepository;
 use App\Entity\Schedule;
 use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
+use App\Repository\StatusRepository;
 use App\Service\DistanceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -179,11 +180,9 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(Association $association, Offer $offer)
+    public function acceptOffer(Association $association, Offer $offer, StatusRepository $statusRepository)
     {
-        $status = $this->getDoctrine()
-            ->getRepository(Status::class)
-            ->findOneBy(['constStatus' => 'FoodHeroResearch']);
+        $status = $statusRepository->findOneByConstStatus('FoodHeroResearch');
 
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);

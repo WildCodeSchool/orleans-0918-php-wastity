@@ -8,6 +8,7 @@ use App\Entity\Status;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -127,11 +128,9 @@ class FoodHeroController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(FoodHero $foodhero, Offer $offer)
+    public function acceptOffer(FoodHero $foodhero, Offer $offer, StatusRepository $statusRepository)
     {
-        $status = $this->getDoctrine()
-            ->getRepository(Status::class)
-            ->findOneBy(['constStatus' => 'WaitingForRecuperation']);
+        $status = $statusRepository->findOneByConstStatus('WaitingForRecuperation');
 
         $em = $this->getDoctrine()->getManager();
         $offer->setStatus($status);
