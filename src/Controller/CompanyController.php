@@ -61,7 +61,7 @@ class CompanyController extends AbstractController
      * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
      * @return Response
-     * @IsGranted("LIST_OFFERS", subject="company")
+     * @IsGranted("view", subject="company")
      */
     public function show(Company $company): Response
     {
