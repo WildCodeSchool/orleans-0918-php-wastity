@@ -14,7 +14,7 @@ class CompanyVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['EDIT', 'VIEW', 'LIST_OFFERS'])
+        return in_array($attribute, ['LIST_OFFERS'])
             && $subject instanceof Company;
     }
 
