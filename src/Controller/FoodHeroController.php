@@ -106,6 +106,24 @@ class FoodHeroController extends AbstractController
     }
     
     /**
+     * @param FoodHero $foodHero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
+     */
+    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
+    {
+        $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
+        
+        return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodHero
+        ]);
+    }
+  
+  
+    /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
