@@ -75,8 +75,14 @@ h1{
       object-fit: cover;
       height: 120px;
     }
+    li{
+      font-size: 0.8em;
+    }
   }
 }
 body .container .card{
   margin-bottom: 0;
+}
+ul {
+  list-style-type: none;
 }

@@ -17,13 +17,15 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <p class="col-6"><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg <br>
+                    <ul class="col-6">
+                        <li ><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg </li>
 
                         {% if distance %}
-                            <strong class="text-success">Distance :</strong> {{ distance }} km <br>
+                        <li class="mt-1"><strong class="text-success">Distance :</strong> {{ distance }} km </li>
                         {% endif %}
-                        <strong class="text-success">Entreprise :</strong> {{ offer.company.name }}
-                    </p>
+                        <li class="mt-1"><strong class="text-success">Entreprise :</strong> {{ offer.company.name }}</li>
+
+                    </ul>
                     <img class="col-6"
                          src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                          alt="ImageOffre"/>
@@ -34,8 +36,6 @@
 
                 </div>
             </div>
-
-
         </div>
         <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}"
            class="offset-sm-10 offset-6 col-6 col-sm-2 btn btn-success">Accepter l'offre</a>

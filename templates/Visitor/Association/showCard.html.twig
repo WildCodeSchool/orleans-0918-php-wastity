@@ -8,11 +8,15 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <p class="col-6"><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg <br>
+            <ul class="col-6">
+                <li class="mt-1"><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg </li>
+
                 {% if distance %}
-                    <strong class="text-success">Distance :</strong> {{ distance }} km <br>
+                    <li class="mt-1"><strong class="text-success">Distance :</strong> {{ distance }} km </li>
                 {% endif %}
-                    <strong class="text-success">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}
+                <li class="mt-1"><strong class="text-success">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}</li>
+
+            </ul>
             </p>
             <img class="col-6"
                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
