@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Offer;
 use App\Form\OfferType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,6 +49,7 @@ class OfferController extends AbstractController
      * @param Request $request
      * @param Offer $offer
      * @return Response
+     * @IsGranted("SHOW", subject="offer")
      */
     public function edit(Request $request, Offer $offer): Response
     {
