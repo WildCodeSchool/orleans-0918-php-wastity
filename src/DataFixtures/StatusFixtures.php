@@ -42,7 +42,7 @@ class StatusFixtures extends Fixture
     const CLASS_FONTAWESOME = [
         'fa-hands-helping',
         'fa-user-ninja',
-        'fa-truck',
+        'fa-bicycle',
         'fa-box',
         'fa-box-check',
     ];

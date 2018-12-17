@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FoodHero;
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
@@ -128,7 +129,12 @@ class FoodHeroController extends AbstractController
      */
     public function acceptOffer(FoodHero $foodhero, Offer $offer)
     {
+        $status = $this->getDoctrine()
+            ->getRepository(Status::class)
+            ->findOneBy(['constStatus' => 'WaitingForRecuperation']);
+
         $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
         $offer->setFoodhero($foodhero);
         $em->flush();
         

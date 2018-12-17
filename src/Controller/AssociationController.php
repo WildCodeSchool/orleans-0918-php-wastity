@@ -183,7 +183,7 @@ class AssociationController extends AbstractController
     {
         $status = $this->getDoctrine()
             ->getRepository(Status::class)
-            ->findOneBy(['constKey' => 'FoodHeroResearch']);
+            ->findOneBy(['constStatus' => 'FoodHeroResearch']);
 
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);
