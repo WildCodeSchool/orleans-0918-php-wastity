@@ -10,19 +10,28 @@
     </div>
     <div class="container">
 
-        <h1 class="text-center">Liste des offres en attente</h1>
-        <div class="row justify-content-center">
+    <h1 class="text-center">Liste des offres en attente</h1>
+    <div class="row justify-content-center">
 
-            {% for offer in offers %}
+    {% for offer in offers %}
+        <div class="card">
+            <a href="{{ path('association_show_offer', {'association' : association.id , 'offer' : offer.id}) }}">
+
                 {{ render(controller(
-                'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
+                    'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
                 )) }}
-                <div class=" d-flex justify-content-end">
-                    <a href="{{ path('association_show_offer', {'association' : association.id , 'offer' : offer.id} ) }}"
-                       class="btn btn-association align-content-end">Voir l'offre</a>
-                </div>
-            {% endfor %}
+                <strong>Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}
+                </p>
+
+                <img class="col-6" src="{{ vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
 
         </div>
+        </div>
+        </a>
+        </div>
+
+    {% endfor %}
+
+    </div>
     </div>
 {% endblock %}

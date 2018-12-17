@@ -48,3 +48,11 @@ a{
   }
 }
 
+.card {
+  a:link, a:hover, a:visited
+  {
+    text-decoration:none;
+    color: $assoColor;
+  }
+}
+

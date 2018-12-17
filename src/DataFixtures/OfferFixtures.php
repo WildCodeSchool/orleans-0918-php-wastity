@@ -22,7 +22,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         for ($i=0; $i <=15; $i++) {
             $offer=new Offer();
             $faker  =  Faker\Factory::create('fr_FR');
-            $offer->setPicture($faker->imageUrl($width = 320, $height = 240));
+            $offer->setPicture('5c0ea1f1d5d86481502498.jpg');
             $offer->setWeight(rand(0, 10));
             $startDate=new \DateTime();
             $endDate=new \DateTime('now + 30min');

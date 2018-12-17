@@ -10,14 +10,24 @@
     <div class="container">
         <h1 class="text-center">Offre sélectionnée</h1>
         <div class="row justify-content-center">
+            <div class="card">
 
             {{ render(controller(
                 'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
             )) }}
 
+            <strong>Entreprise :</strong> {{ offer.company.name }}
+            </p>
+                <img class="col-6" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
+            <p class="col-12 mt-1"><strong>Description</strong> : {{ offer.description}}</p>
+            <p class="col-12 mt-1"><strong>Informations complémentaires</strong> : {{ offer.complementary}}</p>
+
         </div>
-        <div class=" d-flex justify-content-center">
-            <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}" class="btn btn-association align-content-end">Accepter l'offre</a>
+    </div>
+
+
         </div>
+    <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}"
+       class="offset-sm-10 offset-6 col-6 col-sm-2 btn btn-success">Accepter l'offre</a>
     </div>
 {% endblock %}
