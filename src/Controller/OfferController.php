@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\Status;
 use App\Form\OfferType;
-use App\Repository\OfferRepository;
-use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,37 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class OfferController extends AbstractController
 {
-    /**
-     * @Route("/", name="active_offer_index", methods="GET")
-     * @param OfferRepository $offerRepository
-     * @return Response
-     * @throws \Exception
-     */
-    public function showActiveOffers(OfferRepository $offerRepository): Response
-    {
-        $date = new \DateTime();
-        
-        return $this->render(
-            'Visitor/Offer/index.html.twig',
-            ['offers' => $offerRepository->findAllBeforeEndDate($date)]
-        );
-    }
-    
-    /**
-     * @Route("/association", name="active_offers_index_association", methods="GET")
-     * @param OfferRepository $offerRepository
-     * @return Response
-     * @throws \Exception
-     */
-    public function showActiveOffersForAssociations(OfferRepository $offerRepository): Response
-    {
-        $date = new \DateTime();
-        
-        return $this->render(
-            'Visitor/Offer/indexForAssociation.html.twig',
-            ['offers' => $offerRepository->findAllBeforeEndDate($date)]
-        );
-    }
 
     /**
      * @Route("/new", name="offer_new", methods="GET|POST")

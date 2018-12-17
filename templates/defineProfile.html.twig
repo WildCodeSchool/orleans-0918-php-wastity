@@ -23,11 +23,12 @@
                     <h1>Food Hero</h1>
                     <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
             </article>
-            <article class="companyProfileBorder d-flex align-items-center justify-content-center"><a class="companyProfile" href="{{ path('company_new') }}">
+            <article class="companyProfileBorder d-flex align-items-center justify-content-center">
+                <a class="companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
                     <h1>Entreprise</h1>
                     <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p></a>
             </article>
-            <article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{{ path('association_new') }}">
+            <article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{% if app.user.association is null %}{{ path('association_new') }}{% else %}{{ path('association_show', {'id' : app.user.association.id}) }}{% endif %}">
                     <h1>Association</h1>
                     <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p></a>
             </article>

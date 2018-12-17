@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row header">
-        <a class="col-1" href="{{ path('company_index') }}"><i class="fas fa-chevron-left"></i></a>
+        <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-home"></i></a>
         <h1 class="col text-center">Annonces</h1>
     </div>
     <div class="container">
@@ -22,6 +22,9 @@
                     <div class="row">
                         <h4 class="col-6">Quantité : {{ offer.weight }} Kg</h4>
                         <img class="col-6" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
+                        {% if offer.association is empty %}
+                        <p class="col-12 mt-5 text-sm-center status"><i class="fas fasResearchAssoc fa-circle"></i> En recherche d'association</p>
+                        {% endif %}
                     </div>
                 </div>
 

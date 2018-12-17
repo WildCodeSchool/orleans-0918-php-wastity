@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\HasAddress;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  */
-class Company
+class Company implements HasAddress
 {
     /**
      * @ORM\Id()
@@ -339,5 +340,11 @@ class Company
         $this->user = $user;
 
         return $this;
+    }
+
+    public function fullAddress():string
+    {
+        $fullAddress=$this->address.' '.$this->postalCode.' '.$this->city;
+        return $fullAddress;
     }
 }

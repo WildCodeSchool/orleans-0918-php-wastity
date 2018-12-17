@@ -12,6 +12,7 @@ use App\Repository\OfferRepository;
 use App\Entity\Schedule;
 use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
+use App\Service\DistanceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +34,7 @@ class AssociationController extends AbstractController
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
-    
+
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
@@ -44,7 +45,7 @@ class AssociationController extends AbstractController
             $association->addSchedule($schedule);
         }
 
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $association->setUser($user);
@@ -81,7 +82,7 @@ class AssociationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('association_index', ['id' => $association->getId()]);
+            return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
         return $this->render('Visitor/Association/edit.html.twig', [
@@ -89,7 +90,20 @@ class AssociationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
+    /**
+     * @Route("/{id}/showAssociation", name="association_show", methods="GET")
+     * @param Association $association
+     * @return Response
+     */
+    public function showCompany(Association $association): Response
+    {
+
+        return $this->render('Visitor/Association/show.html.twig', [
+            'association' => $association,
+        ]);
+    }
+
     /**
      * @param Request $request
      * @param Association $association
@@ -106,27 +120,46 @@ class AssociationController extends AbstractController
 
         return $this->redirectToRoute('association_index');
     }
-    
+
     /**
      * @param OfferRepository $offerRepository
      * @param Association $association
-     * @Route("/{id}/offres", name="association_list_offers", methods="GET")
+     * @Route("/{id}/offers", name="association_list_offers", methods="GET")
      * @return Response
      * @throws \Exception
      */
     public function listOffers(Association $association, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
-        
+
         return $this->render('Visitor/Association/listOffers.html.twig', [
             'offers' => $offers,
-            'association' => $association
+            'association' => $association,
         ]);
     }
-    
-    
+
     /**
-     * @Route("/{association}/offres/{offer}", name="association_show_offer", methods="GET")
+     * @Route("/{association}/oneOffer/{offer}", name="association_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(
+        Association $association,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator
+    ): Response {
+        $company = $offer->getCompany();
+        $distance = $distanceCalculator->calculateDistance($company, $association);
+
+        return $this->render('Visitor/Association/showCard.html.twig', [
+            'association' => $association,
+            'distance' => $distance,
+            'offer' => $offer,
+        ]);
+    }
+
+    /**
+     * @Route("/{association}/offer/{offer}", name="association_show_offer", methods="GET")
      * @param Association $association
      * @param Offer $offer
      * @return Response
@@ -138,10 +171,10 @@ class AssociationController extends AbstractController
             'association' => $association
         ]);
     }
-    
-    
+
+
     /**
-     * @Route("/{association}/offres/{offer}/accept", name="association_accept_offer", methods="GET")
+     * @Route("/{association}/offer/{offer}/accept", name="association_accept_offer", methods="GET")
      * @param Association $association
      * @param Offer $offer
      * @return Response
@@ -156,7 +189,7 @@ class AssociationController extends AbstractController
         $offer->setAssociation($association);
         $offer->setStatusKey($status);
         $em->flush();
-        
+
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
 
@@ -171,6 +204,7 @@ class AssociationController extends AbstractController
         Association $association,
         DaysOfWeekRepository $daysOfWeekRepository
     ): Response {
+
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
@@ -179,7 +213,7 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
-        return $this->render('Visitor/Company/editSchedule.html.twig', [
+        return $this->render('Visitor/Association/editSchedule.html.twig', [
             'association' => $association,
             'form' => $form->createView(),
         ]);
