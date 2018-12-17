@@ -20,10 +20,13 @@
                 {{ render(controller(
                     'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
                 )) }}
-                <strong>Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}
+                <strong class="text-success">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}
                 </p>
-
+                {% if  vich_uploader_asset(offer, 'pictureFile') == "/upload/offer/assets/images/wastityPlaceHolder.png" %}
+                <img class="col-6" src="{{ asset('build/images/wastityPlaceHolder.png') }}" alt="ImageOffre"/>
+                {% else %}
                 <img class="col-6" src="{{ vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
+                {% endif %}
 
                 </div>
             </div>

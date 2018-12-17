@@ -1,11 +1,11 @@
     <div class="card-header">
         <div class="row">
-            <p class="col"> Finit le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
+            <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
         </div>
     </div>
     <div class="card-body">
         <div class="row">
-            <p class="col-6"><strong>Quantité :</strong> {{ offer.weight }} Kg <br>
+            <p class="col-6"><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg <br>
                 {% if distance %}
-                    <strong>Distance :</strong> {{ distance }} km <br>
+                    <strong class="text-success">Distance :</strong> {{ distance }} km <br>
                 {% endif %}

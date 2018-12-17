@@ -49,10 +49,15 @@ a{
 }
 
 .card {
-  a:link, a:hover, a:visited
+  a:link
   {
     text-decoration:none;
-    color: $assoColor;
+  }
+  a{
+    color : black;
+  }
+  a:hover{
+    color : $assoColor;
   }
 }
 

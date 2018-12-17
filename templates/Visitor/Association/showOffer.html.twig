@@ -16,11 +16,14 @@
                 'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
             )) }}
 
-            <strong>Entreprise :</strong> {{ offer.company.name }}
+            <strong class="text-success">Entreprise :</strong> {{ offer.company.name }}
             </p>
-                <img class="col-6" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
-            <p class="col-12 mt-1"><strong>Description</strong> : {{ offer.description}}</p>
-            <p class="col-12 mt-1"><strong>Informations complémentaires</strong> : {{ offer.complementary}}</p>
+                {% if  vich_uploader_asset(offer, 'pictureFile') == "/upload/offer/assets/images/wastityPlaceHolder.png" %}
+                    <img class="col-6" src="{{ asset('build/images/wastityPlaceHolder.png') }}" alt="ImageOffre"/>
+                {% else %}
+                    <img class="col-6" src="{{ vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
+                {% endif %}            <p class="col-12 mt-1"><strong class="text-success">Description</strong> : {{ offer.description}}</p>
+            <p class="col-12 mt-1"><strong class="text-success">Informations complémentaires</strong> : {{ offer.complementary}}</p>
 
         </div>
     </div>
