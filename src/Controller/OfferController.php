@@ -49,7 +49,7 @@ class OfferController extends AbstractController
      * @param Request $request
      * @param Offer $offer
      * @return Response
-     * @IsGranted("SHOW", subject="offer")
+     * @IsGranted("edit", subject="offer")
      */
     public function edit(Request $request, Offer $offer): Response
     {

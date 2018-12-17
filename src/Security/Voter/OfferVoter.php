@@ -11,11 +11,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class OfferVoter extends Voter
 {
+    const EDIT = 'edit';
+    
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['LIST_OFFERS', 'SHOW'])
+        return in_array($attribute, [self::EDIT])
             && $subject instanceof Offer;
     }
 
@@ -31,13 +33,9 @@ class OfferVoter extends Voter
         
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case 'SHOW':
+            case self::EDIT:
                 return $user === $offer->getCompany()->getUser();
                 break;
-//            case 'SHOW_OFFER':
-//                $company->getUser();
-//                return $user === $company->getUser();
-//                break;
         }
         
         return false;
