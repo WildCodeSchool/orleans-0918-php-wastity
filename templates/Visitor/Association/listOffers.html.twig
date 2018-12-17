@@ -10,30 +10,14 @@
     </div>
     <div class="container">
 
-    <h1 class="text-center">Liste des offres en attente</h1>
-    <div class="row justify-content-center">
+        <h1 class="text-center">Liste des offres en attente</h1>
+        <div class="row justify-content-center">
 
-    {% for offer in offers %}
-        <div class="card">
-            <a href="{{ path('association_show_offer', {'association' : association.id , 'offer' : offer.id}) }}">
-
+            {% for offer in offers %}
                 {{ render(controller(
                     'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
                 )) }}
-                <strong class="text-success">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}
-                </p>
-                {% if  vich_uploader_asset(offer, 'pictureFile') == "/upload/offer/assets/images/wastityPlaceHolder.png" %}
-                <img class="col-6" src="{{ asset('build/images/wastityPlaceHolder.png') }}" alt="ImageOffre"/>
-                {% else %}
-                <img class="col-6" src="{{ vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
-                {% endif %}
-
-                </div>
-            </div>
-            </a>
-        </div>
-
-    {% endfor %}
+            {% endfor %}
 
         </div>
     </div>

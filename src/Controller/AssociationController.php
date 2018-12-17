@@ -163,11 +163,17 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function showOffer(Association $association, Offer $offer)
-    {
+    public function showOffer(
+        Association $association,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator
+    ): Response {
+        $company = $offer->getCompany();
+        $distance = $distanceCalculator->calculateDistance($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
             'offer' => $offer,
-            'association' => $association
+            'association' => $association,
+            'distance' => $distance,
         ]);
     }
 

@@ -22,10 +22,10 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         for ($i=0; $i <=15; $i++) {
             $offer=new Offer();
             $faker  =  Faker\Factory::create('fr_FR');
-            $offer->setPicture('assets/images/wastityPlaceHolder.png');
+            $offer->setPicture('');
             $offer->setWeight(rand(0, 10));
             $startDate=new \DateTime();
-            $endDate=new \DateTime('now + 30min');
+            $endDate=new \DateTime('now + 15days');
             $offer->setStart($startDate);
             $offer->setEnd($endDate);
             $offer->setDescription($faker->text);
