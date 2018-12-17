@@ -28,10 +28,24 @@ class OfferFixtures extends Fixture
             $offer->setDescription($faker->text);
             $offer->setComplementary($faker->text);
             $offer->setPicture($faker->imageUrl($width = 320, $height = 240));
-            
+            $offer->setCompany(
+                $this->getReference('company_'.$i)
+            );
+            $updatedAt = new \DateTime('now');
+            $offer->setUpdatedAt($updatedAt);
+            $offer->setStatusKey(
+                $this->getReference('status_0')
+            );
             $manager->persist($offer);
         }
         
         $manager->flush();
+    }
+    public function getDependencies()
+    {
+        return array(
+            CompanyFixtures::class,
+            StatusFixtures::class,
+        );
     }
 }

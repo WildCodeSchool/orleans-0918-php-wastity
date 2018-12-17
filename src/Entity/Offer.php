@@ -119,6 +119,12 @@ class Offer
      */
     private $foodhero;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status_key;
+
 
     public function getId(): ?int
     {
@@ -241,5 +247,21 @@ class Offer
         $this->foodhero = $foodhero;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatusKey()
+    {
+        return $this->status_key;
+    }
+
+    /**
+     * @param mixed $status_key
+     */
+    public function setStatusKey($status_key): void
+    {
+        $this->status_key = $status_key;
     }
 }
