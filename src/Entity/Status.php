@@ -11,41 +11,56 @@ class Status
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string", length=255)
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $classColorName;
+    private $constStatus;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $statusText;
 
-    public function getId(): ?string
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $classFontAwesome;
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId(string $id): void
+    public function getConstStatus(): ?string
     {
-        $this->id = $id;
+        return $this->constStatus;
     }
 
-    public function getClassColorName(): ?string
+    public function setConstStatus(string $constStatus): self
     {
-        return $this->classColorName;
+        $this->constStatus = $constStatus;
+
+        return $this;
     }
 
-    public function setClassColorName(string $classColorName): self
+    public function getColor(): ?string
     {
-        $this->classColorName = $classColorName;
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }
@@ -58,6 +73,18 @@ class Status
     public function setStatusText(string $statusText): self
     {
         $this->statusText = $statusText;
+
+        return $this;
+    }
+
+    public function getClassFontAwesome(): ?string
+    {
+        return $this->classFontAwesome;
+    }
+
+    public function setClassFontAwesome(string $classFontAwesome): self
+    {
+        $this->classFontAwesome = $classFontAwesome;
 
         return $this;
     }

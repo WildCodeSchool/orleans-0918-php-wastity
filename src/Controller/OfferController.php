@@ -35,9 +35,9 @@ class OfferController extends AbstractController
 
             $status = $this->getDoctrine()
                 ->getRepository(Status::class)
-                ->findOneBy(['id' => 'AssociationResearch']);
+                ->findOneBy(['constStatus' => 'AssociationResearch']);
 
-            $offer->setStatusKey($status);
+            $offer->setStatus($status);
             $em->persist($offer);
             $em->flush();
 

@@ -15,12 +15,20 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class StatusFixtures extends Fixture
 {
-    const CONST_KEYS_AND_CLASS = [
+    const CONST_STATUS = [
         'AssociationResearch',
         'FoodHeroResearch',
         'WaitingForRecuperation',
         'WaitingForDelivery',
         'Delivered',
+    ];
+
+    const COLORS = [
+        '#E77471',
+        '#000000',
+        '#E95420',
+        '#FFFF00',
+        '#57a639',
     ];
 
     const STATUS_TEXT = [
@@ -31,14 +39,23 @@ class StatusFixtures extends Fixture
         'Livré',
     ];
 
+    const CLASS_FONTAWESOME = [
+        'fa-hands-helping',
+        'fa-user-ninja',
+        'fa-truck',
+        'fa-box',
+        'fa-box-check',
+    ];
+
     public function load(ObjectManager $manager)
     {
         for ($i = 0; $i < 5; $i++) {
             $status = new Status();
             $this->addReference('status_'.$i, $status);
-            $status->setId(self::CONST_KEYS_AND_CLASS[$i]);
-            $status->setClassColorName(self::CONST_KEYS_AND_CLASS[$i]);
+            $status->setConstStatus(self::CONST_STATUS[$i]);
+            $status->setColor(self::COLORS[$i]);
             $status->setStatusText(self::STATUS_TEXT[$i]);
+            $status->setClassFontAwesome(self::CLASS_FONTAWESOME[$i]);
             $manager->persist($status);
         }
 
