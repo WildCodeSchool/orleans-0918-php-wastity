@@ -1,0 +1,28 @@
+{% extends 'Visitor/FoodHero/layoutFoodHero.html.twig' %}
+
+{% block title %}Offres acceptées{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Liste des offres en cours de livraison</h1>
+        <div class="row justify-content-center">
+            {% for offer in offers %}
+                <div class="col-12 col-sm-6 col-lg-4 pb-3">
+                    <div class=" foodheroOfferBorder">
+                        <img class="card-img-top" src="{{ offer.picture }}" alt="Image de l'offre">
+                        <div class="card-body">
+
+                            <p class="card-text"><strong>Produits :</strong> {{ offer.description }}</p>
+                            <p class="card-text"><strong>Quantité :</strong> {{ offer.weight }} kg </p>
+
+                            <div class=" d-flex justify-content-end">
+                                <a href="#" class="btn btn-foodhero align-content-end">Voir l'offre</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

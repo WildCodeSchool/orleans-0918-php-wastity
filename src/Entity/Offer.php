@@ -122,6 +122,11 @@ class Offer
      */
     private $foodhero;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
 
     public function getId(): ?int
     {
@@ -242,6 +247,18 @@ class Offer
     public function setFoodhero(?FoodHero $foodhero): self
     {
         $this->foodhero = $foodhero;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

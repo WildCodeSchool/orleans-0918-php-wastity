@@ -2,27 +2,22 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Offer;
 use App\Entity\Company;
-use App\Entity\Offer;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class OfferVoter extends Voter
+class CompanyVoter extends Voter
 {
-    const VIEW_ASSO = 'view_asso';
-    const EDIT = 'edit';
+    const VIEW = 'view';
     
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-
-        return in_array($attribute, [self::VIEW_ASSO, self::EDIT])
-
-            && $subject instanceof Offer;
+        return in_array($attribute, [self::VIEW])
+            && $subject instanceof Company;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -32,18 +27,16 @@ class OfferVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-        
-        $offer=$subject;
 
+        $company=$subject;
+        
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case self::VIEW_ASSO:
-                return ((null === $offer->getAssociation()) or ($user === $offer->getAssociation()->getUser()));
-                break;
-            case self::EDIT:
-                return $user === $offer->getCompany()->getUser();
+            case self::VIEW:
+                return $user === $company->getUser();
                 break;
         }
+        
         return false;
     }
 }

@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\FoodHero;
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,6 +108,24 @@ class FoodHeroController extends AbstractController
     }
     
     /**
+     * @param FoodHero $foodHero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
+     */
+    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
+    {
+        $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
+        
+        return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodHero
+        ]);
+    }
+  
+  
+    /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
@@ -126,9 +146,12 @@ class FoodHeroController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(FoodHero $foodhero, Offer $offer)
+    public function acceptOffer(FoodHero $foodhero, Offer $offer, StatusRepository $statusRepository)
     {
+        $status = $statusRepository->findOneByConstStatus('WaitingForRecuperation');
+
         $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
         $offer->setFoodhero($foodhero);
         $em->flush();
         
