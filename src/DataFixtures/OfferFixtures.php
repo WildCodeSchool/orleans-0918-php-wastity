@@ -30,7 +30,6 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer->setEnd($endDate);
             $offer->setDescription($faker->text);
             $offer->setComplementary($faker->text);
-            $offer->setPicture($faker->imageUrl($width = 320, $height = 240));
             $offer->setCompany(
                 $this->getReference('company_'.$i)
             );
