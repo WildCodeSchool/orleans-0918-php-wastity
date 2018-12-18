@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Association;
 
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
 use App\Repository\OfferRepository;
 use App\Entity\Schedule;
 use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
+use App\Repository\StatusRepository;
 use App\Service\DistanceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -180,11 +182,17 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function showOffer(Association $association, Offer $offer)
-    {
+    public function showOffer(
+        Association $association,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator
+    ): Response {
+        $company = $offer->getCompany();
+        $distance = $distanceCalculator->calculateDistance($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
             'offer' => $offer,
-            'association' => $association
+            'association' => $association,
+            'distance' => $distance,
         ]);
     }
 
@@ -195,10 +203,13 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(Association $association, Offer $offer)
+    public function acceptOffer(Association $association, Offer $offer, StatusRepository $statusRepository)
     {
+        $status = $statusRepository->findOneByConstStatus('FoodHeroResearch');
+
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);
+        $offer->setStatus($status);
         $em->flush();
 
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
