@@ -26,9 +26,7 @@
                     <div class="row">
                         <h4 class="col-6">Quantité : {{ offer.weight }} Kg</h4>
                         <img class="col-6" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
-                        {% if offer.association is empty %}
-                        <p class="col-12 mt-5 text-sm-center status"><i class="fas fasResearchAssoc fa-circle"></i> En recherche d'association</p>
-                        {% endif %}
+                        <p class="col-12 mt-5 text-sm-center status"><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statusText }}</p>
                     </div>
                 </div>
 
