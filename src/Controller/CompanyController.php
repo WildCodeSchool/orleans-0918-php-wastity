@@ -111,7 +111,7 @@ class CompanyController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function editOffer(Request $request,Company $company, Offer $offer): Response
+    public function editOffer(Request $request, Company $company, Offer $offer): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
