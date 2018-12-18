@@ -150,4 +150,30 @@ class CompanyController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/statistics", name="company_show_statistics", methods="GET|POST")
+     * @param company $company
+     * @return Response
+     */
+    public function showStatistics(Company $company): Response
+    {
+        $offers = $company->getOffers();
+        $weightTotal = 0;
+        $countAssociation = 0;
+        foreach ($offers as $offer) {
+            $weight = $offer->getWeight();
+            $weightTotal += $weight;
+            if ($company == $offer->getAssociation()) {
+                $countAssociation +=1;
+            }
+        }
+
+        return $this->render('Visitor/Company/showStatistics.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+            'weightTotal' => $weightTotal,
+            'countAssociation'=>$countAssociation,
+        ]);
+    }
 }
