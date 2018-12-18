@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,6 +39,7 @@ class OfferController extends AbstractController
         }
 
         return $this->render('Visitor/Offer/new.html.twig', [
+            'company' => $company,
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
@@ -49,7 +51,7 @@ class OfferController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function edit(Request $request, Offer $offer): Response
+    public function edit(Request $request, Offer $offer, Company $company): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
@@ -61,6 +63,7 @@ class OfferController extends AbstractController
         }
 
         return $this->render('Visitor/Offer/edit.html.twig', [
+            'company' => $company,
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
