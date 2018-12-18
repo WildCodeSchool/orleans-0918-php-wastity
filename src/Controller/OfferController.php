@@ -44,29 +44,6 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="offer_edit", methods="GET|POST")
-     * @param Request $request
-     * @param Offer $offer
-     * @return Response
-     */
-    public function edit(Request $request, Offer $offer): Response
-    {
-        $form = $this->createForm(OfferType::class, $offer);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
-        }
-
-        return $this->render('Visitor/Offer/edit.html.twig', [
-            'offer' => $offer,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="offer_delete", methods="DELETE")
      * @param Request $request
      * @param Offer $offer

@@ -8,6 +8,7 @@ use App\Entity\DaysOfWeek;
 use App\Entity\Schedule;
 use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
+use App\Form\OfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -102,6 +103,29 @@ class CompanyController extends AbstractController
         return $this->render('Visitor/Company/edit.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/{company}/offer/{offer}/edit", name="company_offer_edit", methods="GET|POST")
+     * @param Request $request
+     * @param Offer $offer
+     * @return Response
+     */
+    public function editOffer(Request $request,Company $company, Offer $offer): Response
+    {
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
+        }
+
+        return $this->render('Visitor/Offer/edit.html.twig', [
+            'offer' => $offer,
+            'form' => $form->createView(),
+            'company' => $company,
         ]);
     }
 
