@@ -17,7 +17,6 @@
                 <li class="mt-1"><strong class="text-success">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}</li>
 
             </ul>
-            </p>
             <img class="col-6"
                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                  alt="ImageOffre"/>
