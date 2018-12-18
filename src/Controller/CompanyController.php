@@ -158,13 +158,13 @@ class CompanyController extends AbstractController
      */
     public function showStatistics(Company $company): Response
     {
-       $offers = $company->getOffers();
+        $offers = $company->getOffers();
         $weightTotal = 0;
         $countAssociation = 0;
-        foreach ($offers as $offer){
+        foreach ($offers as $offer) {
             $weight = $offer->getWeight();
             $weightTotal += $weight;
-            if($company == $offer->getAssociation()){
+            if ($company == $offer->getAssociation()) {
                 $countAssociation +=1;
             }
         }
