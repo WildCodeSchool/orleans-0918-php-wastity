@@ -171,7 +171,10 @@ class FoodHeroController extends AbstractController
             $association=$offer->getAssociation();
             $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
             $distance = $distanceCalculator->calculateDistanceFromGps(
-                $session->get('latitude'), $session->get('longitude'), $company);
+                $session->get('latitude'),
+                $session->get('longitude'),
+                $company
+            );
             $distanceTotal=$distance+$distanceAssoComp;
 
             return $this->render('Visitor/FoodHero/showCard.html.twig', [
