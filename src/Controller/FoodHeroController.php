@@ -123,8 +123,20 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodHero
         ]);
     }
-  
-  
+
+    /**
+     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response {
+
+        return $this->render('Visitor/FoodHero/showCard.html.twig', [
+            'foodhero' => $foodhero,
+            'offer' => $offer,
+        ]);
+    }
+
     /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
