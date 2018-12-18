@@ -10,6 +10,8 @@ use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
+use App\Repository\OfferRepository;
+use App\Service\OffersCompany;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -146,6 +148,32 @@ class CompanyController extends AbstractController
         return $this->render('Visitor/Company/editSchedule.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/statistics", name="company_show_statistics", methods="GET|POST")
+     * @param company $company
+     * @return Response
+     */
+    public function showStatistics(Company $company): Response
+    {
+       $offers = $company->getOffers();
+        $weightTotal = 0;
+        $countAssociation = 0;
+        foreach ($offers as $offer){
+            $weight = $offer->getWeight();
+            $weightTotal += $weight;
+            if($company == $offer->getAssociation()){
+                $countAssociation +=1;
+            }
+        }
+
+        return $this->render('Visitor/Company/showStatistics.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+            'weightTotal' => $weightTotal,
+            'countAssociation'=>$countAssociation,
         ]);
     }
 }
