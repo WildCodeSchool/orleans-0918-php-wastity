@@ -70,6 +70,19 @@ class CompanyController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/record", name="company_record", methods="GET")
+     * @param Company $company
+     * @return Response
+     */
+    public function record(Company $company): Response
+    {
+
+        return $this->render('Visitor/Company/record.html.twig', [
+            'company' => $company,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/showCompany", name="company_show", methods="GET")
      * @param Company $company
      * @return Response
