@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\OfferType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +23,7 @@ class OfferController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, StatusRepository $statusRepository): Response
     {
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
@@ -32,6 +34,10 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer->setCompany($company);
+
+            $status = $statusRepository->findOneByConstStatus('AssociationResearch');
+
+            $offer->setStatus($status);
             $em->persist($offer);
             $em->flush();
 
