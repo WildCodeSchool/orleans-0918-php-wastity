@@ -125,19 +125,6 @@ class FoodHeroController extends AbstractController
     }
 
     /**
-     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
-     * @return Response
-     * @throws \Exception
-     */
-    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
-    {
-        return $this->render('Visitor/FoodHero/showCard.html.twig', [
-            'foodhero' => $foodhero,
-            'offer' => $offer,
-        ]);
-    }
-
-    /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
@@ -150,7 +137,6 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodhero
         ]);
     }
-    
     
     /**
      * @Route("/{foodhero}/offer/{offer}/accept", name="foodhero_accept_offer", methods="GET")
@@ -168,5 +154,18 @@ class FoodHeroController extends AbstractController
         $em->flush();
         
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
+    }
+
+    /**
+     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
+    {
+        return $this->render('Visitor/FoodHero/showCard.html.twig', [
+            'foodhero' => $foodhero,
+            'offer' => $offer,
+        ]);
     }
 }
