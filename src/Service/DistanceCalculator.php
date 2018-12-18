@@ -16,7 +16,7 @@ class DistanceCalculator
 {
     const EARTH_RADIUS = 6378137;
 
-    private function calculateDistance(array $coordinatesStart,array $coordinatesEnd):float
+    private function calculateDistance(array $coordinatesStart, array $coordinatesEnd):float
     {
         $rlo1 = deg2rad($coordinatesStart[1]);
         $rla1 = deg2rad($coordinatesStart[0]);
@@ -43,11 +43,11 @@ class DistanceCalculator
         $coordinatesStart=$resStart['features'][0]['geometry']['coordinates'];
         $coordinatesEnd=$resEnd['features'][0]['geometry']['coordinates'];
 
-        return self::calculateDistance($coordinatesStart,$coordinatesEnd);
+        return self::calculateDistance($coordinatesStart, $coordinatesEnd);
     }
 
 
-    public function calculateDistanceFromGps(float $startLat,float $startLong, HasAddress $end): ?float
+    public function calculateDistanceFromGps(float $startLat, float $startLong, HasAddress $end): ?float
     {
         $client = new Client(['base_uri' => 'https://api-adresse.data.gouv.fr']);
 
@@ -58,6 +58,6 @@ class DistanceCalculator
         $coordinatesStart=[$startLong,$startLat];
         $coordinatesEnd=$resEnd['features'][0]['geometry']['coordinates'];
 
-        return self::calculateDistance($coordinatesStart,$coordinatesEnd);
+        return self::calculateDistance($coordinatesStart, $coordinatesEnd);
     }
 }
