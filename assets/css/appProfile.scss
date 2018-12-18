@@ -65,7 +65,7 @@ section {
   }
 
   .foodHeroProfileBorder {
-    background-color : rgba(234,83,32,0.03);
+    background-color : $foodHeroBackground;
     border: 1px $foodHeroColor solid;
     border-radius:20px;
 
@@ -75,7 +75,7 @@ section {
   }
 
   .companyProfileBorder {
-    background-color : rgba(23,162,184,0.05);
+    background-color : $companyBackground;
     border: 1px $companyColor solid;
     border-radius:20px;
 
@@ -85,7 +85,7 @@ section {
   }
 
   .associationProfileBorder {
-    background-color : rgba(87,166,57,0.05);
+    background-color : $associationBackground;
     border: 1px $assoColor solid;
     border-radius:20px;
 
