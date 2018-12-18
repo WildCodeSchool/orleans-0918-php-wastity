@@ -1,0 +1,32 @@
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+
+ {% block title %}Entreprise - Historique{% endblock %}
+ {% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
+
+ {% block header %}
+     <div class="row">
+         <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-home"></i></a>
+         <h1 class="col text-center">Historique {{ company.name }}</h1>
+     </div>
+ {% endblock %}
+
+ {% block body %}
+     <table class="table mt-4 mt-md-5 text-center">
+         <thead class="thead bg-info text-center">
+         <tr>
+             <th scope="col">Date</th>
+             <th scope="col" class="ml-3">Poids</th>
+             <th scope="col">Status</th>
+         </tr>
+         </thead>
+         <tbody>
+         {% for offer in company.offers %}
+             <tr>
+                 <th scope="row">{{ offer.end ? offer.end|date('d/m') : '' }}</th>
+                 <td>{{ offer.weight }} kg</td>
+                 <td><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
+             </tr>
+         {% endfor %}
+         </tbody>
+     </table>
+ {% endblock %}
