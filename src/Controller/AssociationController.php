@@ -162,6 +162,7 @@ class AssociationController extends AbstractController
      * @param Association $association
      * @param Offer $offer
      * @return Response
+     * @IsGranted("view_asso", subject="offer")
      */
     public function showOffer(Association $association, Offer $offer)
     {
