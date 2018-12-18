@@ -25,7 +25,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer->setPicture($faker->imageUrl($width = 320, $height = 240));
             $offer->setWeight(rand(0, 10));
             $startDate=new \DateTime();
-            $endDate=new \DateTime('now + 30min');
+            $endDate=new \DateTime('now + 15days');
             $offer->setStart($startDate);
             $offer->setEnd($endDate);
             $offer->setDescription($faker->text);

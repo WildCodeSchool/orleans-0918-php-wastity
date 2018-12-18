@@ -7,9 +7,12 @@ use App\Entity\Offer;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
+use App\Service\DistanceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -126,12 +129,64 @@ class FoodHeroController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(FoodHero $foodhero, Offer $offer)
+    public function acceptOffer(FoodHero $foodhero, Offer $offer) : Response
     {
         $em = $this->getDoctrine()->getManager();
         $offer->setFoodhero($foodhero);
         $em->flush();
         
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
+    }
+
+
+    /**
+     * @Route("/position/{latitude}/{longitude}")
+     * @param float $latitude
+     * @param float $longitude
+     * @param SessionInterface $session
+     * @return Response
+     */
+    public function showCoordinates(float $latitude, float $longitude, SessionInterface $session)  : Response
+    {
+
+            $session->set('latitude', $latitude);
+            $session->set('longitude', $longitude);
+            return $this->json('');
+
+
+    }
+
+    /**
+     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(
+        FoodHero $foodhero,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator, SessionInterface $session
+    ): Response {
+
+        if($session!=null){
+            $company = $offer->getCompany();
+            $association=$offer->getAssociation();
+            $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+            $distance = $distanceCalculator->calculateDistanceFromGps($session->get('latitude'),$session->get('longitude'), $company);
+            $distanceTotal=$distance+$distanceAssoComp;
+
+            return $this->render('Visitor/FoodHero/showCard.html.twig', [
+                'foodHero' => $foodhero,
+                'distance' => $distance,
+                'distanceTotal'=>$distanceTotal,
+                'offer' => $offer,
+            ]);} else {
+            return $this->render('Visitor/FoodHero/showCard.html.twig', [
+                'foodHero' => $foodhero,
+                'distance' => 'non calculée',
+                'distanceTotal'=>'non calculée',
+                'offer' => $offer,
+        ]);
+        }
+
     }
 }
