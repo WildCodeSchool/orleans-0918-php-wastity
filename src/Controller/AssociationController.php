@@ -148,7 +148,7 @@ class AssociationController extends AbstractController
      */
     public function record(Association $association, OfferRepository $offerRepository)
     {
-        $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
+        $offers = $offerRepository->findAcceptedByAssociationBeforeEndDate(new \DateTime(), $association);
 
         return $this->render('Visitor/Association/record.html.twig', [
             'offers' => $offers,

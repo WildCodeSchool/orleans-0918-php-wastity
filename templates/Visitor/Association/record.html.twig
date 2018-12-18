@@ -11,19 +11,19 @@
 {% endblock %}
 
 {% block body %}
-    <table class="table mt-4 mt-md-5">
-        <thead class="thead bg-success">
+    <table class="table mt-4 mt-md-5 text-center">
+        <thead class="thead bg-success text-center">
         <tr>
             <th scope="col">Date</th>
-            <th scope="col">Poids</th>
+            <th scope="col" class="ml-3">Poids</th>
             <th scope="col">Status</th>
         </tr>
         </thead>
         <tbody>
         {% for offer in offers %}
         <tr>
-            <th scope="row">{{ offer.end }}</th>
-            <td>{{ offer.weight }}</td>
+            <th scope="row">{{ offer.end ? offer.end|date('d/m') : '' }}</th>
+            <td>{{ offer.weight }} kg</td>
             <td><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
         </tr>
         {% endfor %}

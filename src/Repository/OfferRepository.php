@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Association;
 use App\Entity\FoodHero;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -53,6 +54,18 @@ class OfferRepository extends ServiceEntityRepository
             ->orderBy('o.end', 'ASC')
             ->getQuery();
         
+        return $qb->execute();
+    }
+
+    public function findAcceptedByAssociationBeforeEndDate(\DateTime $date, Association $association): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->andWhere('o.association = :association')
+            ->setParameters(['date' => $date, 'association' => $association->getId()])
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+
         return $qb->execute();
     }
     
