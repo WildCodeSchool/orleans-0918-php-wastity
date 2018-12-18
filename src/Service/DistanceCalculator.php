@@ -47,7 +47,7 @@ class DistanceCalculator
     }
 
 
-    public function calculateDistanceFromGps(float $startLat, float $startLong, HasAddress $end): ?float
+    public function calculateDistanceFromGps(?float $startLat, ?float $startLong, HasAddress $end): ?float
     {
         $client = new Client(['base_uri' => 'https://api-adresse.data.gouv.fr']);
 

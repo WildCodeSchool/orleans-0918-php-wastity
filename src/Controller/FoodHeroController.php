@@ -146,7 +146,7 @@ class FoodHeroController extends AbstractController
      * @param SessionInterface $session
      * @return Response
      */
-    public function showCoordinates(float $latitude, float $longitude, SessionInterface $session)  : Response
+    public function showCoordinates(?float $latitude, ?float $longitude, SessionInterface $session)  : Response
     {
 
             $session->set('latitude', $latitude);
