@@ -129,8 +129,8 @@ class FoodHeroController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response {
-
+    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
+    {
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
             'foodhero' => $foodhero,
             'offer' => $offer,
