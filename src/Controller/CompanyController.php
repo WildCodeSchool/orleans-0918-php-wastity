@@ -160,15 +160,12 @@ class CompanyController extends AbstractController
     {
         $offers = $company->getOffers();
         $weightTotal = 0;
-        $countAssociation = 0;
         foreach ($offers as $offer) {
             $weight = $offer->getWeight();
             $weightTotal += $weight;
-            if ($company == $offer->getAssociation()) {
-                $countAssociation +=1;
-            }
+            $associations[] = $offer->getassociation();
         }
-
+        $countAssociation = count(array_unique($associations));
         return $this->render('Visitor/Company/showStatistics.html.twig', [
             'company' => $company,
             'offers' => $offers,
