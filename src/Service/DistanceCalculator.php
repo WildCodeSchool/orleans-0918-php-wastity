@@ -43,7 +43,7 @@ class DistanceCalculator
         $coordinatesStart=$resStart['features'][0]['geometry']['coordinates'];
         $coordinatesEnd=$resEnd['features'][0]['geometry']['coordinates'];
 
-        return self::calculateDistance($coordinatesStart, $coordinatesEnd);
+        return $this->calculateDistance($coordinatesStart, $coordinatesEnd);
     }
 
 
@@ -58,6 +58,6 @@ class DistanceCalculator
         $coordinatesStart=[$startLong,$startLat];
         $coordinatesEnd=$resEnd['features'][0]['geometry']['coordinates'];
 
-        return self::calculateDistance($coordinatesStart, $coordinatesEnd);
+        return $this->calculateDistance($coordinatesStart, $coordinatesEnd);
     }
 }

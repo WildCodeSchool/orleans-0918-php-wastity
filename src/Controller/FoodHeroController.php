@@ -151,7 +151,7 @@ class FoodHeroController extends AbstractController
 
             $session->set('latitude', $latitude);
             $session->set('longitude', $longitude);
-            return $this->json('');
+            return new Response("");
     }
 
     /**
@@ -166,30 +166,25 @@ class FoodHeroController extends AbstractController
         SessionInterface $session
     ): Response {
 
-        if ($session!=null) {
+
             $company = $offer->getCompany();
             $association=$offer->getAssociation();
             $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
-            $distance = $distanceCalculator->calculateDistanceFromGps(
-                $session->get('latitude'),
-                $session->get('longitude'),
-                $company
-            );
-            $distanceTotal=$distance+$distanceAssoComp;
+
+            if($session->has('latitude')) {
+                $distance = $distanceCalculator->calculateDistanceFromGps(
+                    $session->get('latitude'),
+                    $session->get('longitude'),
+                    $company
+                );
+                $distanceTotal = $distance + $distanceAssoComp;
+            }
 
             return $this->render('Visitor/FoodHero/showCard.html.twig', [
                 'foodHero' => $foodhero,
-                'distance' => $distance,
-                'distanceTotal'=>$distanceTotal,
+                'distance' => $distance??'non calculée',
+                'distanceTotal'=>$distanceTotal??'non calculée',
                 'offer' => $offer
             ]);
-        } else {
-            return $this->render('Visitor/FoodHero/showCard.html.twig', [
-                'foodHero' => $foodhero,
-                'distance' => 'non calculée',
-                'distanceTotal'=>'non calculée',
-                'offer' => $offer,
-            ]);
-        }
     }
 }
