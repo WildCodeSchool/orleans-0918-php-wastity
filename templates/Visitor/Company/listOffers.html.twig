@@ -21,8 +21,6 @@
             {{ render(controller(
                 'App\\Controller\\CompanyController::showOneOffer', {'company':company.id, 'offer':offer.id}
             )) }}
-            <a class="offset-sm-10 offset-8 col-4 col-sm-2 btn btn-info mt-4"
-                   href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">{{ button_label|default('Modifier') }}</a>
     {% endfor %}
     </div>
     </div>
