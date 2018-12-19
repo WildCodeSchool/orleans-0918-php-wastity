@@ -11,6 +11,8 @@ use App\Form\CompanyType;
 use App\Form\OfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
+use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,12 +62,45 @@ class CompanyController extends AbstractController
     /**
      * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
+     * @param OfferRepository $offerRepository
      * @return Response
+     * @IsGranted("view", subject="company")
      */
-    public function show(Company $company): Response
+    public function listOffers(Company $company, OfferRepository $offerRepository)
     {
+        $offers = $company->getOffers();
 
         return $this->render('Visitor/Company/listOffers.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+        ]);
+    }
+
+    /**
+     * @Route("/{company}/oneOffer/{offer}", name="company_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(
+        Company $company,
+        Offer $offer
+    ): Response {
+
+        return $this->render('Visitor/Company/showCard.html.twig', [
+            'company' => $company,
+            'offer' => $offer,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/record", name="company_record", methods="GET")
+     * @param Company $company
+     * @return Response
+     */
+    public function record(Company $company): Response
+    {
+
+        return $this->render('Visitor/Company/record.html.twig', [
             'company' => $company,
         ]);
     }

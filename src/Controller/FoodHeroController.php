@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\FoodHero;
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,6 +108,23 @@ class FoodHeroController extends AbstractController
     }
     
     /**
+     * @param FoodHero $foodHero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
+     */
+    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
+    {
+        $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
+        
+        return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodHero
+        ]);
+    }
+
+    /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
@@ -119,19 +138,34 @@ class FoodHeroController extends AbstractController
         ]);
     }
     
-    
     /**
      * @Route("/{foodhero}/offer/{offer}/accept", name="foodhero_accept_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(FoodHero $foodhero, Offer $offer)
+    public function acceptOffer(FoodHero $foodhero, Offer $offer, StatusRepository $statusRepository)
     {
+        $status = $statusRepository->findOneByConstStatus('WaitingForRecuperation');
+
         $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
         $offer->setFoodhero($foodhero);
         $em->flush();
         
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
+    }
+
+    /**
+     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
+    {
+        return $this->render('Visitor/FoodHero/showCard.html.twig', [
+            'foodhero' => $foodhero,
+            'offer' => $offer,
+        ]);
     }
 }

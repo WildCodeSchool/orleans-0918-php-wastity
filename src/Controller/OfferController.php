@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\OfferType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +23,7 @@ class OfferController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, StatusRepository $statusRepository): Response
     {
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
@@ -31,6 +34,10 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer->setCompany($company);
+
+            $status = $statusRepository->findOneByConstStatus('AssociationResearch');
+
+            $offer->setStatus($status);
             $em->persist($offer);
             $em->flush();
 
@@ -38,6 +45,31 @@ class OfferController extends AbstractController
         }
 
         return $this->render('Visitor/Offer/new.html.twig', [
+            'offer' => $offer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+
+     * @Route("/{id}/edit", name="offer_edit", methods="GET|POST")
+     * @param Request $request
+     * @param Offer $offer
+     * @return Response
+     * @IsGranted("edit", subject="offer")
+     */
+    public function edit(Request $request, Offer $offer): Response
+    {
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
+        }
+
+        return $this->render('Visitor/Offer/edit.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
         ]);

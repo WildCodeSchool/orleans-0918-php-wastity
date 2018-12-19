@@ -2,22 +2,47 @@
 
 {% block title %}Offer index{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
+
 {% block body %}
-    <div class="row">
-        <a class="col-1 text-center" href="{{ path('association_list_offers', {'id' : association.id}) }}"><i class="fas fa-chevron-left"></i></a>
-        <div class="offset-1"></div>
+    <div class="row header">
+        <a class="col-1" href="{{ path('association_list_offers', {'id' : association.id}) }}"><i
+                    class="fas fa-chevron-left"></i></a>
+        <h1 class="col text-center">Annonces</h1>
     </div>
     <div class="container">
-        <h1 class="text-center">Offre sélectionnée</h1>
         <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <ul class="col-6">
+                            <li><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg</li>
 
-            {{ render(controller(
-                'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
-            )) }}
+                            {% if distance %}
+                                <li class="mt-1"><strong class="text-success">Distance :</strong> {{ distance }} km</li>
+                            {% endif %}
+                            <li class="mt-1"><strong class="text-success">Entreprise :</strong> {{ offer.company.name }}
+                            </li>
 
-        </div>
-        <div class=" d-flex justify-content-center">
-            <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}" class="btn btn-association align-content-end">Accepter l'offre</a>
+                        </ul>
+                        <img class="col-6"
+                             src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                             alt="ImageOffre"/>
+                        <p class="col-12 mt-1"><strong class="text-success">Description</strong>
+                            : {{ offer.description }}
+                        </p>
+                        <p class="col-12 mt-1"><strong class="text-success">Informations complémentaires</strong>
+                            : {{ offer.complementary }}</p>
+
+                    </div>
+                </div>
+                <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}"
+                   class="offset-6 col-6 mt-2 btn btn-success">Accepter l'offre</a>
+            </div>
         </div>
     </div>
 {% endblock %}
