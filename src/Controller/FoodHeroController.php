@@ -30,7 +30,7 @@ class FoodHeroController extends AbstractController
         $foodHero = new FoodHero();
         $form = $this->createForm(FoodHeroType::class, $foodHero);
         $form->handleRequest($request);
-        
+
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
@@ -82,7 +82,7 @@ class FoodHeroController extends AbstractController
      */
     public function delete(Request $request, FoodHero $foodHero): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$foodHero->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $foodHero->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($foodHero);
             $em->flush();
@@ -90,7 +90,7 @@ class FoodHeroController extends AbstractController
 
         return $this->redirectToRoute('foodhero_index');
     }
-    
+
     /**
      * @param FoodHero $foodHero
      * @param OfferRepository $offerRepository
@@ -101,13 +101,13 @@ class FoodHeroController extends AbstractController
     public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
-        
+
         return $this->render('Visitor/FoodHero/listOffers.html.twig', [
             'offers' => $offers,
             'foodhero' => $foodHero
         ]);
     }
-    
+
     /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
@@ -121,20 +121,20 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodhero
         ]);
     }
-    
-    
+
+
     /**
      * @Route("/{foodhero}/offer/{offer}/accept", name="foodhero_accept_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(FoodHero $foodhero, Offer $offer) : Response
+    public function acceptOffer(FoodHero $foodhero, Offer $offer): Response
     {
         $em = $this->getDoctrine()->getManager();
         $offer->setFoodhero($foodhero);
         $em->flush();
-        
+
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
     }
 
@@ -146,12 +146,12 @@ class FoodHeroController extends AbstractController
      * @param SessionInterface $session
      * @return Response
      */
-    public function showCoordinates(?float $latitude, ?float $longitude, SessionInterface $session)  : Response
+    public function showCoordinates(?float $latitude, ?float $longitude, SessionInterface $session): Response
     {
 
-            $session->set('latitude', $latitude);
-            $session->set('longitude', $longitude);
-            return new Response("");
+        $session->set('latitude', $latitude);
+        $session->set('longitude', $longitude);
+        return new Response("");
     }
 
     /**
@@ -166,25 +166,24 @@ class FoodHeroController extends AbstractController
         SessionInterface $session
     ): Response {
 
+        $company = $offer->getCompany();
+        $association = $offer->getAssociation();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
 
-            $company = $offer->getCompany();
-            $association=$offer->getAssociation();
-            $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        if ($session->has('latitude')) {
+            $distance = $distanceCalculator->calculateDistanceFromGps(
+                $session->get('latitude'),
+                $session->get('longitude'),
+                $company
+            );
+            $distanceTotal = $distance + $distanceAssoComp;
+        }
 
-            if($session->has('latitude')) {
-                $distance = $distanceCalculator->calculateDistanceFromGps(
-                    $session->get('latitude'),
-                    $session->get('longitude'),
-                    $company
-                );
-                $distanceTotal = $distance + $distanceAssoComp;
-            }
-
-            return $this->render('Visitor/FoodHero/showCard.html.twig', [
-                'foodHero' => $foodhero,
-                'distance' => $distance??'non calculée',
-                'distanceTotal'=>$distanceTotal??'non calculée',
-                'offer' => $offer
-            ]);
+        return $this->render('Visitor/FoodHero/showCard.html.twig', [
+            'foodHero' => $foodhero,
+            'distance' => $distance ?? 'non calculée',
+            'distanceTotal' => $distanceTotal ?? 'non calculée',
+            'offer' => $offer
+        ]);
     }
 }
