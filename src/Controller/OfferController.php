@@ -51,6 +51,7 @@ class OfferController extends AbstractController
     }
 
     /**
+
      * @Route("/{id}/edit", name="offer_edit", methods="GET|POST")
      * @param Request $request
      * @param Offer $offer
