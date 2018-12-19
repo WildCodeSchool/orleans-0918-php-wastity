@@ -22,6 +22,6 @@
             </div>
         </div>
         <a class="offset-sm-10 offset-6 col-6 col-sm-2 btn btn-info mt-4"
-           href="{{ path('offer_edit', {'id': offer.id}) }}">{{ button_label|default('Modifier') }}</a>
+           href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">{{ button_label|default('Modifier') }}</a>
     </div>
 
