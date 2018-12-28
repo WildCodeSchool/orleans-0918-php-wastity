@@ -73,11 +73,27 @@ class OfferRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
+            ->join('o.status','s')
             ->andWhere('o.foodhero = :foodhero')
+            ->andWhere("s.constStatus = 'WaitingForRecuperation'")
             ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
             ->orderBy('o.end', 'ASC')
             ->getQuery();
         
+        return $qb->execute();
+    }
+
+    public function findCollectedByFoodHero(\DateTime $date, FoodHero $foodHero): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->join('o.status','s')
+            ->andWhere('o.foodhero = :foodhero')
+            ->andWhere("s.constStatus = 'WaitingForDelivery'")
+            ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+
         return $qb->execute();
     }
 }

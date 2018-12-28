@@ -168,4 +168,39 @@ class FoodHeroController extends AbstractController
             'offer' => $offer,
         ]);
     }
+
+    /**
+     * @Route("/{foodhero}/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @return Response
+     */
+    public function collectOffer(FoodHero $foodhero, Offer $offer, StatusRepository $statusRepository)
+    {
+        $status = $statusRepository->findOneByConstStatus('WaitingForDelivery');
+
+        $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
+        $offer->setFoodhero($foodhero);
+        $em->flush();
+
+        return $this->redirectToRoute('foodhero_list_collectedOffers', ['id' => $foodhero->getId()]);
+    }
+
+    /**
+     * @Route("/{id}/collectedOffers", name="foodhero_list_collectedOffers", methods="GET")
+     * @param FoodHero $foodhero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     */
+    public function showOfferCollected(FoodHero $foodhero, OfferRepository $offerRepository)
+
+    {
+        $offers = $offerRepository->findCollectedByFoodHero(new \DateTime(), $foodhero);
+
+        return $this->render('Visitor/FoodHero/listOffersCollected.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodhero
+        ]);
+    }
 }

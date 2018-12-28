@@ -9,7 +9,7 @@
         <h1 class="col text-center">Annonces</h1>
     </div>
     <div class="container">
-        <h1 class="text-center">Liste des offres à récupérer</h1>
+        <h1 class="text-center">Liste des offres à livrer</h1>
         <div class="row justify-content-center">
 
             {% for offer in offers %}
@@ -27,6 +27,7 @@
                                 <li class="mt-1"><strong class="text-primary">Entreprise :</strong> {{ offer.company.name }}
                                 </li>
                                 <li><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</li>
+
                             </ul>
                             <img class="col-6"
                                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
@@ -39,8 +40,8 @@
 
                         </div>
                     </div>
-                    <a href="{{ path('foodhero_collect_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"
-                       class="offset-6 col-6 mt-2 btn btn-primary">Offre récupérée</a>
+                    <a href="#"
+                       class="offset-6 col-6 mt-2 btn btn-primary">Offre Livrée</a>
                 </div>
             {% else %}
                 <p><strong>Aucune Offre à afficher</strong></p>
