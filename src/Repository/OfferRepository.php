@@ -73,7 +73,7 @@ class OfferRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
-            ->join('o.status','s')
+            ->join('o.status', 's')
             ->andWhere('o.foodhero = :foodhero')
             ->andWhere("s.constStatus = 'WaitingForRecuperation'")
             ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
@@ -87,7 +87,7 @@ class OfferRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
-            ->join('o.status','s')
+            ->join('o.status', 's')
             ->andWhere('o.foodhero = :foodhero')
             ->andWhere("s.constStatus = 'WaitingForDelivery'")
             ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
