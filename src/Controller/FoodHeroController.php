@@ -194,7 +194,6 @@ class FoodHeroController extends AbstractController
      * @return Response
      */
     public function showOfferCollected(FoodHero $foodhero, OfferRepository $offerRepository)
-
     {
         $offers = $offerRepository->findCollectedByFoodHero(new \DateTime(), $foodhero);
 
