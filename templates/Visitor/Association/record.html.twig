@@ -27,21 +27,18 @@
                 <td>{{ offer.weight }} kg</td>
                 <td><i class="fas {{ offer.status.classfontawesome }}"
                        style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
-                <td data-toggle="modal" data-target="#ModalOfferAssociation"><i class="far fa-eye text-center text-success"></i></td>
+                <td data-toggle="modal" data-target="#ModalOfferAssociation{{ offer.id }}"><i class="far fa-eye text-center text-success"></i></td>
             </tr>
-            <div class="modal fade" id="ModalOfferAssociation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          <div class="modal fade" id="ModalOfferAssociation{{ offer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <div class="row">git
+                            <div class="row">
                                 <ul class="col-6">
                                     <li><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg</li>
-                                    <li class="mt-1"><strong class="text-success">Entreprise
-                                            :</strong> {{ offer.company.name }}</li>
                                     <li><strong class="text-success">Date
                                             :</strong> {{ offer.end ? offer.end|date('d/m') : '' }}</li>
-
                                 </ul>
                                 <img class="col-6"
                                      src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
@@ -52,6 +49,8 @@
                                 <p class="col-12 mt-1"><strong class="text-success">Informations complémentaires</strong>
                                     : {{ offer.complementary }}</p>
 
+                                <p class="col-12 mt-1"><strong class="text-success">Entreprise
+                                        :</strong> {{ offer.company.name }}</p>
                                 {% if offer.foodhero is not null %}
                                     <p class="col-12 mt-1"><strong class="text-success">FoodHero</strong>
                                         : {{ offer.foodhero.user.firstname ~ ' ' ~ offer.foodhero.user.lastname }}
