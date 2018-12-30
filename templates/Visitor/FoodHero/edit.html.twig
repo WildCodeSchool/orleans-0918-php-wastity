@@ -2,7 +2,12 @@
 
 {% block title %}Modifier FoodHero{% endblock %}
 {% block header %}
-    <h1 class="text-center mb-5 mt-1 ">Comment ça marche ? <i class="fas fa-cogs text-secondary"></i></h1>
+    <div class="row header">
+        <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-home"></i></a>
+
+        <h1 class="text-center col mb-5 mt-1 ">Comment ça marche ? <i class="fas fa-cogs text-secondary"></i></h1>
+        <a class="col-1 mr-2" href="/logout"><i class="fas fa-unlock text-danger"></i></a>
+    </div>
 {% endblock %}
 {% block body %}
     <div class="container">
