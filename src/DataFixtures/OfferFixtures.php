@@ -35,6 +35,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             );
             $updatedAt = new \DateTime('now');
             $offer->setUpdatedAt($updatedAt);
+            $offer->setActive(true);
             $offer->setStatus(
                 $this->getReference('status_0')
             );

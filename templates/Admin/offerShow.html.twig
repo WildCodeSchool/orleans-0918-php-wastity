@@ -1,46 +1,29 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Offer index{% endblock %}
-{% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
-
+{% extends 'Admin/layoutAdmin.html.twig' %}
+{% block title %}Entreprise{% endblock %}
 {% block body %}
-    <h1>Offer index</h1>
-
-    <table class="table">
-        <thead>
+    <div class="container">
+        <table class="table table-striped mt-5 mb-5">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <th>Picture</th>
-                <th>Weight</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Description</th>
-                <th>Complementary</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
+                <th scope="col">Nom</th>
                 <td>{{ offer.id }}</td>
-                <td>{{ offer.picture }}</td>
-                <td>{{ offer.weight }}</td>
-                <td>{{ offer.start ? offer.start|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.end ? offer.end|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.description }}</td>
-                <td>{{ offer.complementary }}</td>
-                <td>
-                    <a href="{{ path('company_admin_show', {'id': company.id})}}">show</a>
-                    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
-                </td>
             </tr>
-        {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <th scope="col">Type d'entreprise</th>
+                <td>{{ offer.weight }}</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <tr>
+                <th scope="col">Action</th>
+                <td>
+                    {{ include('Admin/activeForm.html.twig') }}
+                </td>
 
-    <a href="{{ path('offer_new') }}">Create new</a>
+
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <a class="col text-center" href="{{ path('company_index') }}">Retour à la liste des Entreprises</a>
+        </div>
+    </div>
 {% endblock %}
