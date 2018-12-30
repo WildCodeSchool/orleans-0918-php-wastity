@@ -5,25 +5,56 @@
         <table class="table table-striped mt-5 mb-5">
             <tbody>
             <tr>
-                <th scope="col">Nom</th>
-                <td>{{ offer.id }}</td>
+                <th scope="col">Quantité</th>
+                <td>{{ offer.weight }}</td>
             </tr>
             <tr>
-                <th scope="col">Type d'entreprise</th>
-                <td>{{ offer.weight }}</td>
+                <th scope="col">Date</th>
+                <td>{{ offer.end ? offer.end|date('d/m') : '' }}</td>
+            </tr>
+            <tr>
+                <th scope="col">image</th>
+                <td><img src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                         alt="ImageOffre"/></td>
+            </tr>
+            <tr>
+                <th scope="col">Description</th>
+                <td>{{ offer.description }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Informations Complémentaires</th>
+                <td>{{ offer.complementary }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Entreprise</th>
+                <td>{{ offer.company.name }}</td>
+            </tr>
+            {% if offer.association is not null %}
+                <tr>
+                    <th scope="col">Association bénéficiaire</th>
+                    <td>{{ offer.association.name}}</td>
+                </tr>
+            {% endif %}
+            {% if offer.foodhero is not null %}
+                <tr>
+                    <th scope="col">FoodHero</th>
+                    <td>{{ offer.foodhero.user.firstname ~ ' ' ~ offer.foodhero.user.lastname}}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th scope="col">Status</th>
+                <td>{{ offer.status.statustext }}</td>
             </tr>
             <tr>
                 <th scope="col">Action</th>
                 <td>
                     {{ include('Admin/activeForm.html.twig') }}
                 </td>
-
-
             </tr>
             </tbody>
         </table>
         <div class="row">
-            <a class="col text-center" href="{{ path('company_index') }}">Retour à la liste des Entreprises</a>
+            <a class="col text-center" href="{{ path('offer_index') }}">Retour à la liste des Offres</a>
         </div>
     </div>
 {% endblock %}
