@@ -19,7 +19,8 @@
         </div>
         <h2 class="text-center text-primary foodheroEdit"><strong>Modifier mes informations</strong><i class="ml-3 fas fa-pencil-alt"></i></h2>
         <div class="form-inline justify-content-center">
-             <img class="profileImage" src="{{vich_uploader_asset(foodhero, 'profileImageFile') }}" alt="Image de profil"/>
+             <img class="profileImage" src="{{ foodhero.profileImage ? vich_uploader_asset(foodhero, 'profileImageFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                  alt="Image de profil"/>
             {{ include('Visitor/FoodHero/_form.html.twig', {'button_label': 'Mettre à jour mes informations'}) }}
         </div>
     </div>
