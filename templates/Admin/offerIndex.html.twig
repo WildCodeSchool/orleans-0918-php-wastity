@@ -19,6 +19,9 @@
                 <th scope="col">
                     <div class="d-none d-md-block">Fin</div>
                 </th>
+                <th scope="col">
+                    <div class="d-none d-md-block">Fin</div>
+                </th>
                 <th scope="col">Entreprise</th>
                 <th scope="col">Association</th>
                 <th scope="col">FoodHero</th>
@@ -32,6 +35,9 @@
             <tbody>
             {% for offer in offers %}
                 <tr>
+                    <td>
+                        <div class="d-none d-md-block">{{ offer.start ? offer.start|date('m-d H:i') : '' }}</div>
+                    </td>
                     <td>
                         <div class="d-none d-md-block">{{ offer.end ? offer.end|date('m-d H:i') : '' }}</div>
                     </td>
@@ -48,7 +54,7 @@
                     </td>
                     <td>
                         {% if offer.foodhero is not null %}
-                            {{ offer.foodhero.user.firstname ~ ' ' ~ offer.foodhero.user.lastname}}
+                            {{ offer.foodhero.user.fullname}}
 
                         {% else %}
                             Non
