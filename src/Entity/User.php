@@ -228,4 +228,12 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function fullname(): ?string
+    {
+        return $this->fullname = $this->getLastname(). ' ' .$this->getFirstname();
+    }
 }
