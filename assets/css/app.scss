@@ -58,3 +58,31 @@ h1{
 .custom-file-label::after {
   content: $browse;
 }
+
+.card-body {
+  padding: 0;
+}
+.card-header{
+  padding: 0.2rem 1rem;
+}
+@media screen and (max-width: 460px) {
+  .card{
+    p {
+      font-size: 0.8em;
+      margin-bottom: 0;
+    }
+    img {
+      object-fit: cover;
+      height: 120px;
+    }
+    li{
+      font-size: 0.8em;
+    }
+  }
+}
+body .container .card{
+  margin-bottom: 0;
+}
+ul {
+  list-style-type: none;
+}

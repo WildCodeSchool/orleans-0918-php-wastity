@@ -10,6 +10,7 @@ use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,6 +61,7 @@ class CompanyController extends AbstractController
      * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
      * @return Response
+     * @IsGranted("view", subject="company")
      */
     public function show(Company $company): Response
     {
