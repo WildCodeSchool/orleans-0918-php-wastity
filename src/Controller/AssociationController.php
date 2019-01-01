@@ -140,6 +140,23 @@ class AssociationController extends AbstractController
     }
 
     /**
+     * @param OfferRepository $offerRepository
+     * @param Association $association
+     * @Route("/{id}/record", name="association_record", methods="GET")
+     * @return Response
+     * @throws \Exception
+     */
+    public function record(Association $association, OfferRepository $offerRepository)
+    {
+        $offers = $offerRepository->findAcceptedByAssociationBeforeEndDate(new \DateTime(), $association);
+
+        return $this->render('Visitor/Association/record.html.twig', [
+            'offers' => $offers,
+            'association' => $association,
+        ]);
+    }
+
+    /**
      * @Route("/{association}/oneOffer/{offer}", name="association_offer_card")
      * @return Response
      * @throws \Exception
