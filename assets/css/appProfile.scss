@@ -12,7 +12,7 @@ header {
 
 body{
   padding-bottom: 0;
-  background-color: darken($primaryColor, 10%);
+  background-color: darken($primaryColor, 15%);
 
 }
 section {
@@ -45,18 +45,13 @@ section {
     }
 
   }
-  .foodhero-picture{
-    height: 45vh;
-    width: auto;
-    padding-left: 3em;
 
-  }
   .text{
     background-color: white;
     color: black;
     width: 30vw;
     height: 45vh;
-    margin-top: -8vh;
+    margin-top: -6vh;
     margin-left: 4vw;
     padding-top: 9vh;
     h1{
@@ -75,6 +70,12 @@ section {
   .foodHeroProfileBorder{
     margin-bottom: 3em;
   }
+  .foodhero-picture{
+    height: 45vh;
+    width: auto;
+    padding-left: 3em;
+
+  }
 
   //
   //.foodHeroProfileBorder {
@@ -90,40 +91,77 @@ section {
   //}
 
   .companyProfileBorder {
-    margin: 3em;
-    background-color : rgba(23,162,184,0.05);
+    margin-top: 20em;
+    background-color : #6aa658;
 
-
-    &:hover {
-      border: 1px $companyColorHover solid;
-    }
+    //
+    //&:hover {
+    //  border: 1px $companyColorHover solid;
+    //}
   }
+
+  .companyProfile {
+    background-color : #6aa658;
+    //
+    //&:hover {
+    //  color: $companyColorHover;
+    //}
+  }
+  .company-picture{
+    height: 45vh;
+    width: auto;
+    padding-left: 3em;
+
+  }
+
 
   .associationProfileBorder {
-    background-color : rgba(87,166,57,0.05);
-    border: 1px $assoColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $assoColorHover solid;
-    }
+    margin-top: 20em;
+    background-color : #9064b6;
+margin-bottom: 20em;
+    //
+    //&:hover {
+    //  border: 1px $companyColorHover solid;
+    //}
   }
-
-  //
-  //.companyProfile {
-  //  color: $companyColor;
-  //
-  //  &:hover {
-  //    color: $companyColorHover;
-  //  }
-  //}
 
   .associationProfile {
-    color: $assoColor;
-
-    &:hover {
-      color: $assoColorHover;
-    }
+    background-color : #9064b6;
+    //
+    //&:hover {
+    //  color: $companyColorHover;
+    //}
   }
+  .association-picture{
+    height: 45vh;
+    width: auto;
+    padding-left: 3em;
+
+  }
+
+
+
+
+
+  //
+  //.associationProfileBorder {
+  //  background-color : rgba(87,166,57,0.05);
+  //  border: 1px $assoColor solid;
+  //  border-radius:20px;
+  //
+  //  &:hover {
+  //    border: 1px $assoColorHover solid;
+  //  }
+  //}
+  //
+  //
+  //
+  //.associationProfile {
+  //  color: $assoColor;
+  //
+  //  &:hover {
+  //    color: $assoColorHover;
+  //  }
+  //}
 
 }

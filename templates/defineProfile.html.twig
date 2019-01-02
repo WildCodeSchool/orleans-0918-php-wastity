@@ -31,21 +31,34 @@
                 </a>
             </article>
 
-            {#<article class="companyProfileBorder ">#}
-                {#<a class="row companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}#}
-{#">#}
-                    {#<div class="text col-lg-5 ">#}
-                        {#<h1>Entreprise</h1>#}
-                        {#<p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p>#}
-                    {#</div>#}
-                    {#<div class="col-lg-5 ml-5">#}
-                        {#<img class="association-picture"#}
-                             {#src="{{ asset('build/images/bonhomme-blanc-3d-foodheropetit.jpg') }} "#}
-                             {#alt="bonhomme blanc serre main" />#}
-                    {#</div>#}
-                {#</a>#}
-            {#</article>#}
-
+            <article class="companyProfileBorder ">
+                <a class="row companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}
+">
+                    <div class="col-lg-5 ml-5">
+                        <img class="company-picture"
+                             src="{{ asset('build/images/bonhomme-blanc-3d-company.jpg') }} "
+                             alt="bonhomme blanc fruits" />
+                    </div>
+                    <div class="text col-lg-5 ">
+                        <h1>Entreprise</h1>
+                        <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p>
+                    </div>
+                </a>
+            </article>
+            <article class="associationProfileBorder ">
+                <a class="row associationProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}
+">
+                    <div class="text col-lg-5 ">
+                        <h1>Association</h1>
+                        <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p>
+                    </div>
+                    <div class="col-lg-5 ml-5">
+                        <img class="association-picture mt-3"
+                             src="{{ asset('build/images/bonhomme-blanc-3d-association.jpg') }} "
+                             alt="bonhomme blanc fruits" />
+                    </div>
+                </a>
+            </article>
             {#<article class="companyProfileBorder d-flex align-items-center justify-content-center">#}
                 {#<a class="companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">#}
                     {#<h1>Entreprise</h1>#}
