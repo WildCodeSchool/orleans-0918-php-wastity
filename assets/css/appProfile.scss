@@ -3,19 +3,23 @@
 header {
   background-color: darken($primaryColor, 10%);
   margin: 0;
-  padding: 3%;
+  padding-top: 3%;
 
   p {
     margin: 0;
   }
 }
+
 body{
   padding-bottom: 0;
+  background-color: darken($primaryColor, 10%);
+
 }
 section {
   .title {
     padding: 2.5%;
     margin-top: 0.5em;
+    margin-bottom: 3em;
   }
 
   article {
@@ -31,6 +35,8 @@ section {
     a {
       text-decoration: none;
       color: #eee;
+      width: 100%;
+      height: 50vh;
 
       &:hover {
         text-decoration: none;
@@ -39,45 +45,54 @@ section {
     }
 
   }
+  .foodhero-picture{
+    height: 45vh;
+    width: auto;
+    padding-left: 3em;
+
+  }
+  .text{
+    background-color: white;
+    color: black;
+    width: 30vw;
+    height: 45vh;
+    margin-top: -8vh;
+    margin-left: 4vw;
+    padding-top: 9vh;
+    h1{
+      font-size: 3em;
+    }
+  }
 
   .foodHeroProfile {
-    color: $foodHeroColor;
+    background-color: #ddb23c;
 
-    &:hover {
-      color: $foodHeroColorHover;
-    }
+    //&:hover {
+    //  background-color: darken(#ddb23c, 10%);
+    //}
   }
 
-  .companyProfile {
-    color: $companyColor;
-
-    &:hover {
-      color: $companyColorHover;
-    }
+  .foodHeroProfileBorder{
+    margin-bottom: 3em;
   }
 
-  .associationProfile {
-    color: $assoColor;
-
-    &:hover {
-      color: $assoColorHover;
-    }
-  }
-
-  .foodHeroProfileBorder {
-    background-color : rgba(234,83,32,0.03);
-    border: 1px $foodHeroColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $foodHeroColorHover solid;
-    }
-  }
+  //
+  //.foodHeroProfileBorder {
+  //  background-color : #ddb23c;
+  //  width: 100%;
+  //  height: 45vh;
+  //  border: 1px $foodHeroColor solid;
+  //  border-radius:20px;
+  //
+  //  &:hover {
+  //    border: 1px $foodHeroColorHover solid;
+  //}
+  //}
 
   .companyProfileBorder {
+    margin: 3em;
     background-color : rgba(23,162,184,0.05);
-    border: 1px $companyColor solid;
-    border-radius:20px;
+
 
     &:hover {
       border: 1px $companyColorHover solid;
@@ -93,4 +108,22 @@ section {
       border: 1px $assoColorHover solid;
     }
   }
+
+  //
+  //.companyProfile {
+  //  color: $companyColor;
+  //
+  //  &:hover {
+  //    color: $companyColorHover;
+  //  }
+  //}
+
+  .associationProfile {
+    color: $assoColor;
+
+    &:hover {
+      color: $assoColorHover;
+    }
+  }
+
 }
