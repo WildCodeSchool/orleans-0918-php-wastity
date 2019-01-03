@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminOfferController extends AbstractController
 {
     /**
-     * @Route("/offers", name="offer_index", methods="GET")
+     * @Route("/offers", name="offer_admin_index", methods="GET")
      * @param OfferRepository $offerRepository
      * @return Response
      */
@@ -43,7 +43,7 @@ class AdminOfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('offer_admin_index');
         }
 
         return $this->render('Admin/offerShow.html.twig', [
