@@ -96,6 +96,7 @@ class CompanyController extends AbstractController
      * @Route("/{id}/record", name="company_record", methods="GET")
      * @param Company $company
      * @return Response
+     * @IsGranted("view", subject="company")
      */
     public function record(Company $company): Response
     {
@@ -109,6 +110,7 @@ class CompanyController extends AbstractController
      * @Route("/{id}/showCompany", name="company_show", methods="GET")
      * @param Company $company
      * @return Response
+     * @IsGranted("view", subject="company")
      */
     public function showCompany(Company $company): Response
     {
@@ -212,6 +214,7 @@ class CompanyController extends AbstractController
      * @Route("/{id}/statistics", name="company_show_statistics", methods="GET|POST")
      * @param company $company
      * @return Response
+     * @IsGranted("view", subject="company")
      */
     public function showStatistics(Company $company): Response
     {
