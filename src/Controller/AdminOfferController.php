@@ -33,23 +33,23 @@ class AdminOfferController extends AbstractController
     }
 
     /**
-     * @Route("/offer/{id}", name="offer_admin_show", methods="GET|POST")
+     * @Route("/offer/{id}", name="offer_admin_show", methods="GET")
      */
-    public function show(Offer $offer, Request $request): Response
+    public function show(Offer $offer): Response
     {
-        $form = $this->createForm(ActiveType::class, $offer);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('offer_admin_index');
-        }
-
         return $this->render('Admin/offerShow.html.twig', [
             'offer' => $offer,
-            'form' => $form->createView(),
-
         ]);
     }
+
+    /**
+     * @Route("/offer/{id}/activate", name="offer_admin_activate", methods="GET|POST")
+     */
+    public function activeOffer(Offer $offer): Response
+    {
+        $active = $offer->getActive();
+        $offer->setActive(!$active);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('offer_admin_show', ['id' => $offer->getId()]);    }
 }
