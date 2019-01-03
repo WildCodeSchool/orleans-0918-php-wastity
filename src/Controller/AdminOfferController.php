@@ -51,5 +51,6 @@ class AdminOfferController extends AbstractController
         $offer->setActive(!$active);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('offer_admin_show', ['id' => $offer->getId()]);    }
+        return $this->redirectToRoute('offer_admin_show', ['id' => $offer->getId()]);
+    }
 }
