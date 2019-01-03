@@ -29,7 +29,9 @@ class AdminOfferController extends AbstractController
      */
     public function index(OfferRepository $offerRepository): Response
     {
-        return $this->render('Admin/offerIndex.html.twig', ['offers' => $offerRepository->findBy([],['end'=>'DESC'])]);
+        return $this->render('Admin/offerIndex.html.twig', [
+            'offers' => $offerRepository->findBy([],['end'=>'DESC'])
+        ]);
     }
 
     /**
