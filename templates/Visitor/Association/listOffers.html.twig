@@ -3,11 +3,12 @@
 {% block title %}Offer index{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
 
+{% block header %}
+    {% include 'Visitor/Association/headerAssociation.html.twig' %}
+{% endblock %}
+
 {% block body %}
-    <div class="row header">
-        <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-home"></i></a>
-        <h1 class="col text-center">Annonces</h1>
-    </div>
+    <h1 class="col text-center">Annonces</h1>
     <div class="container">
 
         <h1 class="text-center">Liste des offres en attente d'association</h1>
@@ -15,7 +16,7 @@
 
             {% for offer in offers %}
                 {{ render(controller(
-                'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
+                    'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
                 )) }}
                 <div class=" d-flex justify-content-end">
                     <a href="{{ path('association_show_offer', {'association' : association.id , 'offer' : offer.id} ) }}"

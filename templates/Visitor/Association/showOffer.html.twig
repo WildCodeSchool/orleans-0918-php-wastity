@@ -2,11 +2,18 @@
 
 {% block title %}Offer index{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
-{% block body %}
-    <div class="row">
-        <a class="col-1 text-center" href="{{ path('association_list_offers', {'id' : association.id}) }}"><i class="fas fa-chevron-left"></i></a>
-        <div class="offset-1"></div>
+
+{% block header %}
+    <div>
+        <div class="row header">
+            <a class="col-1 text-center" href="{{ path('association_list_offers', {'id' : association.id}) }}"><i class="fas fa-chevron-left"></i></a>
+            <h1 class="col text-center">{{ association.name }}</h1>
+            <a class="col-1"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
+        </div>
     </div>
+{% endblock %}
+
+{% block body %}
     <div class="container">
         <h1 class="text-center">Offre sélectionnée</h1>
         <div class="row justify-content-center">
