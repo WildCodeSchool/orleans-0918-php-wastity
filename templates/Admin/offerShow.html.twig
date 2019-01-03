@@ -38,7 +38,7 @@
             {% if offer.foodhero is not null %}
                 <tr>
                     <th scope="col">FoodHero</th>
-                    <td>{{ offer.foodhero.user.firstname ~ ' ' ~ offer.foodhero.user.lastname}}</td>
+                    <td>{{ offer.foodhero.user.fullname}}</td>
                 </tr>
             {% endif %}
             <tr>
