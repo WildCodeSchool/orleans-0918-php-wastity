@@ -100,7 +100,7 @@ class FoodHeroController extends AbstractController
     public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
-        
+
         return $this->render('Visitor/FoodHero/listOffers.html.twig', [
             'offers' => $offers,
             'foodhero' => $foodHero
@@ -117,7 +117,7 @@ class FoodHeroController extends AbstractController
     public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
-        
+
         return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
             'offers' => $offers,
             'foodhero' => $foodHero
@@ -166,6 +166,25 @@ class FoodHeroController extends AbstractController
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
             'foodhero' => $foodhero,
             'offer' => $offer,
+        ]);
+    }
+
+    /**
+     * @Route("/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")
+     * @param Offer $offer
+     * @return Response
+     */
+    public function collectOffer(Offer $offer, StatusRepository $statusRepository)
+    {
+        $status = $statusRepository->findOneByConstStatus('WaitingForDelivery');
+
+        $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
+        $offer->setFoodhero($this->getUser()->getFoodHero());
+        $em->flush();
+
+        return $this->redirectToRoute('foodhero_list_pendingOffers', [
+            'id' => $this->getUser()->getFoodHero()->getId()
         ]);
     }
 }
