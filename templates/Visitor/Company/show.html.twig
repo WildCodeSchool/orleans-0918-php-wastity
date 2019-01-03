@@ -2,12 +2,16 @@
 
 {% block title %}{{ company.name }}{% endblock %}
 
+{% block header %}
+    {% include 'Visitor/Company/headerCompany.html.twig' %}
+{% endblock %}
+
 {% block body %}
     <div class="container mb-5 pb-5">
         <div class="row justify-content-center text-center">
             <div>
                 <p class="fa-2x text-center text-info mt-3 mb-2"><strong>Administration</strong><br>
-                    <i class="fas fa-toolbox fa-2x"></i></p>
+                    <i class="fas text-info fa-toolbox fa-2x"></i></p>
             </div>
         </div>
 
