@@ -1,0 +1,41 @@
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block header %}
+    {% include 'Visitor/Company/headerCompany.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center text-center">
+        <div>
+            <p class="fa-2x text-center text-info mt-3 mb-2"><strong>Statistiques</strong></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row text-info">
+            <h1><strong>Depuis votre inscription :</strong></h1>
+        </div>
+        <div class="row justify-content-center ">
+            <table class="infos">
+                <tbody>
+                <tr>
+                    <th>{{ company.offers|length }}</th>
+                    <td>offres proposées,</td>
+                </tr>
+                <tr>
+                    <th>{{ countAssociation }}</th>
+                    <td>associations bénéficiaires</td>
+                </tr>
+                <tr>
+
+                    <th>{{ weightTotal }} Kg</th>
+                    <td>sauvés du gaspillage</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

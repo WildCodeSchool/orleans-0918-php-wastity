@@ -14,15 +14,13 @@
 
         <div class="row justify-content-center">
 
-                {% for offer in offers %}
-                    {{ render(controller(
-                        'App\\Controller\\FoodHeroController::showOneOffer', {'foodhero' : foodhero.id , 'offer' : offer.id}
-                    )) }}
-                    <div class=" d-flex justify-content-end">
-                        <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id} ) }}"
-                           class="btn btn-foodhero align-content-end">Voir l'offre</a>
-                    </div>
-                {% endfor %}
+            {% for offer in offers %}
+                {{ render(controller(
+                    'App\\Controller\\FoodHeroController::showOneOffer', {'foodhero':foodhero.id, 'offer':offer.id}
+                )) }}
+            {% else %}
+                <p><strong>Aucune Offre à afficher</strong></p>
+            {% endfor %}
 
         </div>
 

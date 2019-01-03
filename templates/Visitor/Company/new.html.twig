@@ -4,11 +4,9 @@
 {% block title %}Création Entreprise{% endblock %}
 
 {% block header %}
-    <div class="row">
-        <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-home"></i></a>
-        <h1 class="col text-center">Inscription Entreprise</h1>
-    </div>
+    {% include 'Visitor/Company/headerCompany.html.twig' %}
 {% endblock %}
+
 {% block body %}
     <div class="form-inline justify-content-center">
         <p class="text-center mt-3 mb-3">

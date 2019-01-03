@@ -8,8 +8,11 @@ use App\Entity\DaysOfWeek;
 use App\Entity\Schedule;
 use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
+use App\Form\OfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
+use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,12 +62,46 @@ class CompanyController extends AbstractController
     /**
      * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
+     * @param OfferRepository $offerRepository
      * @return Response
+     * @IsGranted("view", subject="company")
      */
-    public function show(Company $company): Response
+    public function listOffers(Company $company, OfferRepository $offerRepository)
     {
+        $offers = $company->getOffers();
 
         return $this->render('Visitor/Company/listOffers.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+        ]);
+    }
+
+    /**
+     * @Route("/{company}/oneOffer/{offer}", name="company_offer_card")
+     * @return Response
+     * @throws \Exception
+     */
+    public function showOneOffer(
+        Company $company,
+        Offer $offer
+    ): Response {
+
+        return $this->render('Visitor/Company/showCard.html.twig', [
+            'company' => $company,
+            'offer' => $offer,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/record", name="company_record", methods="GET")
+     * @param Company $company
+     * @return Response
+     * @IsGranted("view", subject="company")
+     */
+    public function record(Company $company): Response
+    {
+
+        return $this->render('Visitor/Company/record.html.twig', [
             'company' => $company,
         ]);
     }
@@ -73,6 +110,7 @@ class CompanyController extends AbstractController
      * @Route("/{id}/showCompany", name="company_show", methods="GET")
      * @param Company $company
      * @return Response
+     * @IsGranted("view", subject="company")
      */
     public function showCompany(Company $company): Response
     {
@@ -102,6 +140,29 @@ class CompanyController extends AbstractController
         return $this->render('Visitor/Company/edit.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/{company}/offer/{offer}/edit", name="company_offer_edit", methods="GET|POST")
+     * @param Request $request
+     * @param Offer $offer
+     * @return Response
+     */
+    public function editOffer(Request $request, Company $company, Offer $offer): Response
+    {
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
+        }
+
+        return $this->render('Visitor/Offer/edit.html.twig', [
+            'offer' => $offer,
+            'form' => $form->createView(),
+            'company' => $company,
         ]);
     }
 
@@ -146,6 +207,30 @@ class CompanyController extends AbstractController
         return $this->render('Visitor/Company/editSchedule.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/statistics", name="company_show_statistics", methods="GET|POST")
+     * @param company $company
+     * @return Response
+     * @IsGranted("view", subject="company")
+     */
+    public function showStatistics(Company $company): Response
+    {
+        $offers = $company->getOffers();
+        $weightTotal = 0;
+        foreach ($offers as $offer) {
+            $weight = $offer->getWeight();
+            $weightTotal += $weight;
+            $associations[] = $offer->getassociation();
+        }
+        $countAssociation = count(array_unique($associations));
+        return $this->render('Visitor/Company/showStatistics.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+            'weightTotal' => $weightTotal,
+            'countAssociation'=>$countAssociation,
         ]);
     }
 }

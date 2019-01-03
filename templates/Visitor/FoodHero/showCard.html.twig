@@ -1,17 +1,30 @@
-<div class="col-12 col-sm-6 col-lg-4 pb-3">
-    <div class="associationOfferBorder">
-        <img class="card-img-top" src="{{ vich_uploader_asset(offer, 'pictureFile') }}" alt="Image de l'offre">
-        <div class="card-body">
-            <p class="card-text"><strong>Produits :</strong> {{ offer.description }}</p>
-            <p class="card-text"><strong>Quantité :</strong> {{ offer.weight }} kg </p>
-            {% if app.session.get('latitude') is not null %}
-                {% if distance %}
-                    <p class="card-text"><strong>Distance :</strong> {{ distance ? distance~ 'km' : 'non calculée' }} </p>
+<div class="card">
+    <div class="card-header">
+        <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}">
+
+            <div class="row">
+                <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
+            </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <ul class="col-6">
+                <li class="mt-1"><strong class="text-primary">Quantité :</strong> {{ offer.weight }} Kg </li>
+                {% if app.session.get('latitude') is not null %}
+                  {% if distance %}
+                    <li class="mt-1"><strong class="text-primary">Distance :</strong> {{ distance ? distance~ 'km' : 'non calculée' }} </li>
+                  {% endif %}
+                  {% if distanceTotal %}
+                    <li class="mt-1"><strong class="text-primary">Distance totale :</strong> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </li>
+                  {% endif %}
                 {% endif %}
-                {% if distanceTotal %}
-                    <p class="card-text"><strong>Distance totale :</strong> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </p>
-                {% endif %}
-            {% endif %}
+                <li class="mt-1"><strong class="text-primary">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}</li>
+
+            </ul>
+            <img class="col-6"
+                 src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                 alt="ImageOffre"/>
         </div>
     </div>
+    </a>
 </div>
