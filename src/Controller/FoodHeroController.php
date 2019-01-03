@@ -181,8 +181,8 @@ class FoodHeroController extends AbstractController
 
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
             'foodHero' => $foodhero,
-            'distance' => $distance ?? 'non calculée',
-            'distanceTotal' => $distanceTotal ?? 'non calculée',
+            'distance' => $distance,
+            'distanceTotal' => $distanceTotal,
             'offer' => $offer
         ]);
     }

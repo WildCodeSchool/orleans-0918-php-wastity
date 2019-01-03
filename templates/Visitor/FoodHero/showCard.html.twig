@@ -6,10 +6,10 @@
             <p class="card-text"><strong>Quantité :</strong> {{ offer.weight }} kg </p>
             {% if app.session.get('latitude') is not null %}
                 {% if distance %}
-                    <p class="card-text"><strong>Distance :</strong> {{ distance }} km </p>
+                    <p class="card-text"><strong>Distance :</strong> {{ distance ? distance~ 'km' : 'non calculée' }} </p>
                 {% endif %}
                 {% if distanceTotal %}
-                    <p class="card-text"><strong>Distance totale :</strong> {{ distanceTotal }} km </p>
+                    <p class="card-text"><strong>Distance totale :</strong> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </p>
                 {% endif %}
             {% endif %}
         </div>
