@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Offer;
 use App\Entity\Status;
 use App\Form\OfferType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,10 +51,12 @@ class OfferController extends AbstractController
     }
 
     /**
+
      * @Route("/{id}/edit", name="offer_edit", methods="GET|POST")
      * @param Request $request
      * @param Offer $offer
      * @return Response
+     * @IsGranted("edit", subject="offer")
      */
     public function edit(Request $request, Offer $offer): Response
     {

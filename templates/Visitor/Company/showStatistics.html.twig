@@ -1,0 +1,36 @@
+{% extends 'Visitor/Company/layoutCompany.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+    <div class="row header">
+        <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-home"></i></a>
+        <h1 class="col text-center">Statistiques</h1>
+    </div>
+    <div class="container">
+        <div class="row text-info">
+            <h1><strong>Depuis votre inscription :</strong></h1>
+        </div>
+        <div class="row justify-content-center ">
+            <table class="infos">
+                <tbody>
+                <tr>
+                    <th>{{ company.offers|length }}</th>
+                    <td>offres proposées,</td>
+                </tr>
+                <tr>
+                    <th>{{ countAssociation }}</th>
+                    <td>associations bénéficiaires</td>
+                </tr>
+                <tr>
+
+                    <th>{{ weightTotal }} Kg</th>
+                    <td>sauvés du gaspillage</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

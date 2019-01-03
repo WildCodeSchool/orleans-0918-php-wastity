@@ -60,8 +60,6 @@ class User implements UserInterface
      */
     private $lastname;
 
-
-
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\FoodHero", mappedBy="user")
      */
@@ -227,5 +225,13 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullname(): ?string
+    {
+        return $this->fullname = ucfirst($this->getLastname()). ' ' .ucfirst($this->getFirstname());
     }
 }

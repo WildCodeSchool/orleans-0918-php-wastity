@@ -11,28 +11,18 @@
         <a class="btn btn-info mt-4 mb-1"
            href="{{ path('offer_new') }}">{{ button_label|default('Nouvelle offre') }}</a>
     </div>
-    <div class="container">
 
-        {% for offer in company.offers %}
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <h2 class="col-lg-8 col-md-6"> {{ company.name }} </h2>
-                        <h4 class="col-lg-4 col-md-6"> Finit le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </h4>
-                        <h5 class="col-12"> {{ company.address }} </h5>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="col-6">Quantité : {{ offer.weight }} Kg</h4>
-                        <img class="col-6" src="{{vich_uploader_asset(offer, 'pictureFile') }}" alt="ImageOffre"/>
-                        <p class="col-12 mt-5 text-sm-center status"><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statusText }}</p>
-                    </div>
-                </div>
+<h1 class="text-center">Liste des offres en attente</h1>
 
-                <a class="offset-sm-10 offset-8 col-4 col-sm-2 btn btn-info mt-4"
-                   href="{{ path('offer_edit', {'id': offer.id}) }}">{{ button_label|default('Modifier') }}</a>
-            </div>
-        {% endfor %}
+
+<div class="container">
+    <div class="row justify-content-center">
+    {% for offer in company.offers %}
+            {{ render(controller(
+                'App\\Controller\\CompanyController::showOneOffer', {'company':company.id, 'offer':offer.id}
+            )) }}
+    {% endfor %}
     </div>
+    </div>
+
 {% endblock %}
