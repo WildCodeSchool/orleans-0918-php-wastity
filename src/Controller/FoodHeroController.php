@@ -114,7 +114,7 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
      */
-    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository, StatusRepository $statusRepository)
+    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
@@ -183,6 +183,8 @@ class FoodHeroController extends AbstractController
         $offer->setFoodhero($this->getUser()->getFoodHero());
         $em->flush();
 
-        return $this->redirectToRoute('foodhero_list_pendingOffers', ['id' => $this->getUser()->getFoodHero()->getId()]);
+        return $this->redirectToRoute('foodhero_list_pendingOffers', [
+            'id' => $this->getUser()->getFoodHero()->getId()
+        ]);
     }
 }
