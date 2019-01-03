@@ -133,11 +133,30 @@ class FoodHeroController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function showOffer(FoodHero $foodhero, Offer $offer)
-    {
+    public function showOffer(
+        FoodHero $foodhero,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator,
+        SessionInterface $session
+    ): Response {
+
+        $company = $offer->getCompany();
+        $association = $offer->getAssociation();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+
+        if ($session->has('latitude')) {
+            $distance = $distanceCalculator->calculateDistanceFromGps(
+                $session->get('latitude'),
+                $session->get('longitude'),
+                $company
+            );
+            $distanceTotal = $distance + $distanceAssoComp;
+        }
         return $this->render('Visitor/FoodHero/showOffer.html.twig', [
-            'offer' => $offer,
-            'foodhero' => $foodhero
+            'foodHero' => $foodhero,
+            'distance' => $distance,
+            'distanceTotal' => $distanceTotal,
+            'offer' => $offer
         ]);
     }
 
