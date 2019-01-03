@@ -61,10 +61,6 @@ section {
 
   .foodHeroProfile {
     background-color: #ddb23c;
-
-    //&:hover {
-    //  background-color: darken(#ddb23c, 10%);
-    //}
   }
 
   .foodHeroProfileBorder{
@@ -77,35 +73,14 @@ section {
 
   }
 
-  //
-  //.foodHeroProfileBorder {
-  //  background-color : #ddb23c;
-  //  width: 100%;
-  //  height: 45vh;
-  //  border: 1px $foodHeroColor solid;
-  //  border-radius:20px;
-  //
-  //  &:hover {
-  //    border: 1px $foodHeroColorHover solid;
-  //}
-  //}
 
   .companyProfileBorder {
     margin-top: 20em;
     background-color : #6aa658;
-
-    //
-    //&:hover {
-    //  border: 1px $companyColorHover solid;
-    //}
   }
 
   .companyProfile {
     background-color : #6aa658;
-    //
-    //&:hover {
-    //  color: $companyColorHover;
-    //}
   }
   .company-picture{
     height: 45vh;
@@ -119,18 +94,10 @@ section {
     margin-top: 20em;
     background-color : #9064b6;
 margin-bottom: 20em;
-    //
-    //&:hover {
-    //  border: 1px $companyColorHover solid;
-    //}
   }
 
   .associationProfile {
     background-color : #9064b6;
-    //
-    //&:hover {
-    //  color: $companyColorHover;
-    //}
   }
   .association-picture{
     height: 45vh;
@@ -140,28 +107,61 @@ margin-bottom: 20em;
   }
 
 
+  .foodHeroProfile1 {
+    background-color: #ddb23c;
+  }
+
+  .foodHeroProfileBorder1{
+    margin-bottom: 3em;
+  }
+  .foodhero-picture1{
+    height: 45vh;
+    width: auto;
+    padding-left: 2em;
+
+  }
 
 
+  .companyProfileBorder1 {
+    margin-top: 20em;
+    background-color : #6aa658;
+  }
 
-  //
-  //.associationProfileBorder {
-  //  background-color : rgba(87,166,57,0.05);
-  //  border: 1px $assoColor solid;
-  //  border-radius:20px;
-  //
-  //  &:hover {
-  //    border: 1px $assoColorHover solid;
-  //  }
-  //}
-  //
-  //
-  //
-  //.associationProfile {
-  //  color: $assoColor;
-  //
-  //  &:hover {
-  //    color: $assoColorHover;
-  //  }
-  //}
+  .companyProfile1 {
+    background-color : #6aa658;
+  }
+  .company-picture1{
+    height: 45vh;
+    width: auto;
+    padding-left: 2em;
+
+  }
+
+
+  .associationProfileBorder1 {
+    margin-top: 20em;
+    background-color : #9064b6;
+    margin-bottom: 20em;
+  }
+
+  .associationProfile1 {
+    background-color : #9064b6;
+  }
+  .association-picture1{
+    height: 45vh;
+    width: auto;
+    padding-left: 2em;
+
+  }
+
+
+  .text1{
+    color: black;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    h1{
+      font-size: 1.5em;
+    }
+  }
 
 }
