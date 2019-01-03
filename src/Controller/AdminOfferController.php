@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,5 +30,15 @@ class AdminOfferController extends AbstractController
         return $this->render('Admin/offerIndex.html.twig', [
             'offers' => $offerRepository->findAll(),
             ]);
+    }
+
+    /**
+     * @Route("/offer/{id}", name="offer_admin_show", methods="GET")
+     */
+    public function show(Offer $offer): Response
+    {
+        return $this->render('Admin/offerShow.html.twig', [
+            'offer' => $offer,
+        ]);
     }
 }
