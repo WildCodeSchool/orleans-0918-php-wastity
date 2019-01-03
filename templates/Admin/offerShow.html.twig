@@ -51,15 +51,9 @@
                 </th>
                 <td>
                     <a href="{{ path('offer_admin_activate', {'id': offer.id}) }}">
-                        {% if offer.active == true %}
-                            <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="false">
-                                Non
-                            </button>
-                        {% else %}
-                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="true">
-                                Oui
-                            </button>
-                        {% endif %}
+                        <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="{{offer.active}}">
+                            {{offer.active ~ 'Oui' ? 'Non' }}
+                        </button>
                     </a>
                 </td>
             </tr>
