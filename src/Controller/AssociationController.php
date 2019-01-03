@@ -93,11 +93,12 @@ class AssociationController extends AbstractController
     }
 
     /**
+     * @IsGranted("view", subject="association")
      * @Route("/{id}/showAssociation", name="association_show", methods="GET")
      * @param Association $association
      * @return Response
      */
-    public function showCompany(Association $association): Response
+    public function showAssociation(Association $association): Response
     {
 
         return $this->render('Visitor/Association/show.html.twig', [
@@ -140,6 +141,7 @@ class AssociationController extends AbstractController
     }
 
     /**
+     * @IsGranted("view", subject="association")
      * @param OfferRepository $offerRepository
      * @param Association $association
      * @Route("/{id}/record", name="association_record", methods="GET")
