@@ -24,7 +24,7 @@ class FoodHeroFixtures extends Fixture implements DependentFixtureInterface
             $endDate = new \DateTime('now + 30min');
             $foodHero->setUpdatedAt($endDate);
             $foodHero->setPhone($faker->phoneNumber);
-            $foodHero->setProfileImage($faker->imageUrl($width = 320, $height = 240));
+            $foodHero->setProfileImage('');
             $foodHero->setUser(
                 $this->getReference('user_'.$i)
             );

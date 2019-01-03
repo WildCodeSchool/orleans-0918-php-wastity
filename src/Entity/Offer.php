@@ -107,21 +107,26 @@ class Offer
     private $complementary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers",  fetch="EAGER")
      */
     private $association;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers",  fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $company;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FoodHero", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FoodHero", inversedBy="offers",  fetch="EAGER")
      */
     private $foodhero;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
 
     public function getId(): ?int
     {
@@ -242,6 +247,18 @@ class Offer
     public function setFoodhero(?FoodHero $foodhero): self
     {
         $this->foodhero = $foodhero;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

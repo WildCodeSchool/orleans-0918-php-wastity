@@ -1,0 +1,27 @@
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <ul class="col-6">
+                    <li ><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg </li>
+                    <li class="mt-1"><strong class="text-success">Entreprise :</strong> {{ offer.company.name }}</li>
+
+                </ul>
+                <img class="col-6"
+                     src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                     alt="ImageOffre"/>
+                <p class="col-12 mt-1"><strong class="text-success">Description</strong> : {{ offer.description }}
+                </p>
+                <p class="col-12 mt-1"><strong class="text-success">Informations complémentaires</strong>
+                    : {{ offer.complementary }}</p>
+
+            </div>
+        </div>
+        <a class="offset-sm-10 offset-6 col-6 col-sm-2 btn btn-info mt-4"
+           href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">{{ button_label|default('Modifier') }}</a>
+    </div>
+

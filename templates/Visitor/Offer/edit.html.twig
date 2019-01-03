@@ -4,18 +4,21 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 
 {% block header %}
-<div class="row header">
-    <div class="col-4">
-        <a href="{{ path('profile_index') }}"><p class="headerReturn"><span class="fas fa-chevron-left"></span> Retour</p></a>
+    <div class="row header">
+        <a class="col-3" href="{{ path('company_show_offers', {'id': company.id}) }}"><p class="headerReturn"><span
+                        class="fas fa-chevron-left"></span></p></a>
+        <h1 class="col text-center">{{ company.name }}</h1>
+        <a class="col-3 text-right"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
     </div>
-    <div class="col-6">
-        <h1 class="headerText">Modifier mon offre</h1>
-    </div>
-</div>
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    {{ include('Visitor/Offer/_form.html.twig', {'button_label': 'Modifier'}) }}
-</div>
+    <div class="container mb-5 pb-5">
+        <div class="row justify-content-center text-center">
+            <div>
+                <p class="fa-2x text-center text-info mt-3 mb-2"><strong>Modifier mon offre</strong></p>
+            </div>
+        </div>
+        {{ include('Visitor/Offer/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
 {% endblock %}
