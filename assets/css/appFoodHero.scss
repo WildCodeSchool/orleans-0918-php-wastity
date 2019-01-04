@@ -42,9 +42,9 @@ h2 {
   }
 }
 
-.profileImage img {
-  height: 100px;
-  width: 100px;
+.profileImage {
+  object-fit: cover;
+  height: 180px;
 }
 
 .foodheroOfferBorder {
