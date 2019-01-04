@@ -7,6 +7,7 @@
         <a class="col-md-3 text-md-right text-left" href="{{ path('admin_index') }}">
             <i class="fas fa-chevron-left text-secondary">Retour au panneau d'administration</i></a>
         <h1 class="col-md text-center">Liste des offres</h1>
+
         <div class="offset-md-3"></div>
     </div>
 {% endblock %}
@@ -55,6 +56,7 @@
                     <td>
                         {% if offer.foodhero is not null %}
                             {{ offer.foodhero.user.fullname}}
+
                         {% else %}
                             Non
                         {% endif %}
