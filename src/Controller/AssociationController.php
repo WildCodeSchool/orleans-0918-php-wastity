@@ -259,12 +259,12 @@ class AssociationController extends AbstractController
             $weightTotal += $weight;
             $companies[] = $offer->getassociation();
         }
-        $countAssociation = count(array_unique($companies));
+        $countCompany = count(array_unique($companies));
         return $this->render('Visitor/Association/showStatistics.html.twig', [
             'association' => $association,
             'offers' => $offers,
             'weightTotal' => $weightTotal,
-            'countAssociation'=>$countAssociation,
+            'countCompany'=>$countCompany,
         ]);
     }
 }
