@@ -4,11 +4,6 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
 {% block body %}
-    <div class="row header">
-        <a class="col-1" href="{{ path('foodhero_list_offers', {'id' : foodhero.id}) }}"><i
-                    class="fas fa-chevron-left"></i></a>
-        <h1 class="col text-center">Annonces</h1>
-    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="card">
@@ -21,7 +16,14 @@
                     <div class="row">
                         <ul class="col-6">
                             <li><strong class="text-primary">Quantité :</strong> {{ offer.weight }} Kg</li>
-
+                            {% if app.session.get('latitude') is not null %}
+                              {% if distance %}
+                                <li class="mt-1"><strong class="text-primary">Distance :</strong> {{ distance ? distance~ 'km' : 'non calculée' }} </li>
+                              {% endif %}
+                              {% if distanceTotal %}
+                                <li class="mt-1"><strong class="text-primary">Distance totale :</strong> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </li>
+                              {% endif %}
+                            {% endif %}
                             <li class="mt-1"><strong class="text-primary">Entreprise :</strong> {{ offer.company.name }}
                             </li>
 

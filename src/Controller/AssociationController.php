@@ -169,7 +169,7 @@ class AssociationController extends AbstractController
         DistanceCalculator $distanceCalculator
     ): Response {
         $company = $offer->getCompany();
-        $distance = $distanceCalculator->calculateDistance($company, $association);
+        $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
 
         return $this->render('Visitor/Association/showCard.html.twig', [
             'association' => $association,
@@ -190,7 +190,7 @@ class AssociationController extends AbstractController
         DistanceCalculator $distanceCalculator
     ): Response {
         $company = $offer->getCompany();
-        $distance = $distanceCalculator->calculateDistance($company, $association);
+        $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
             'offer' => $offer,
             'association' => $association,
@@ -240,6 +240,31 @@ class AssociationController extends AbstractController
         return $this->render('Visitor/Association/editSchedule.html.twig', [
             'association' => $association,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/statistics", name="association_show_statistics", methods="GET|POST")
+     * @param association $association
+     * @return Response
+     * @IsGranted("view", subject="association")
+     */
+    public function showStatistics(Association $association): Response
+    {
+        $offers = $association->getOffers();
+        $companies= [];
+        $weightTotal = 0;
+        foreach ($offers as $offer) {
+            $weight = $offer->getWeight();
+            $weightTotal += $weight;
+            $companies[] = $offer->getassociation();
+        }
+        $countCompany = count(array_unique($companies));
+        return $this->render('Visitor/Association/showStatistics.html.twig', [
+            'association' => $association,
+            'offers' => $offers,
+            'weightTotal' => $weightTotal,
+            'countCompany'=>$countCompany,
         ]);
     }
 }
