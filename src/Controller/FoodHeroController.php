@@ -46,7 +46,6 @@ class FoodHeroController extends AbstractController
         }
 
         return $this->render('Visitor/FoodHero/new.html.twig', [
-            'foodHero' => $foodHero,
             'form' => $form->createView(),
         ]);
     }
@@ -226,7 +225,7 @@ class FoodHeroController extends AbstractController
         }
 
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
-            'foodHero' => $foodhero,
+            'foodhero' => $foodhero,
             'distance' => $distance,
             'distanceTotal' => $distanceTotal,
             'offer' => $offer

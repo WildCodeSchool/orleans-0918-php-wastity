@@ -37,7 +37,7 @@ class OfferController extends AbstractController
             $offer->setCompany($company);
 
             $status = $statusRepository->findOneByConstStatus('AssociationResearch');
-
+            $offer->setActive(true);
             $offer->setStatus($status);
             $em->persist($offer);
             $em->flush();

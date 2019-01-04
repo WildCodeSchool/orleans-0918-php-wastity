@@ -16,7 +16,7 @@ class DistanceCalculator
 {
     const EARTH_RADIUS = 6378137;
 
-    private function calculateDistance(array $coordinatesStart, array $coordinatesEnd):float
+    public function calculateDistance(array $coordinatesStart, array $coordinatesEnd):float
     {
         $rlo1 = deg2rad($coordinatesStart[1]);
         $rla1 = deg2rad($coordinatesStart[0]);

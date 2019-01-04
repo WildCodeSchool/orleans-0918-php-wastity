@@ -129,7 +129,7 @@ class Offer
     private $status;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true, options={"default" : true})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $active;
 
