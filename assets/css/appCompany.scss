@@ -4,9 +4,16 @@
   padding-bottom: 2px;
   padding-top:20px;
   top : 0;
-  background-color: darken($primaryColor, 10%);
-  border-bottom : 1px grey solid;
+  background-color: $companyColor;
+  border-bottom : 2px $headerBorderColor solid;
+  h1{
+    color: $bodyBackground;
+  }
 }
+.wastity_blanc{
+  height: $headerTitle;
+}
+
 .headerReturn{
   margin-top:10px;
   font-size: $headerTitle;
@@ -23,13 +30,14 @@
 }
 
 a{
-  color: $companyColor;
+  color: $bodyBackground;
 }
 
 a:hover{
   color: $companyColorHover;
 }
 h1{
+  color: $companyColorHover;
   font-size: $headerTitle;
 }
 
@@ -40,13 +48,13 @@ label{
   margin-bottom: 1px;
 }
 
-
 .modal-title{
   font-size:1.2em;
   font-weight:bold;
 }
+
 .fas{
-  color: $companyColor;
+  color: $bodyBackground;
 }
 
 .container {
@@ -61,6 +69,11 @@ label{
 
 .status{
   font-size:1.2em;
+}
+
+.navbar{
+  border-top : 2px black solid;
+  background-color: $companyColor;
 }
 
 @media screen and (max-width:370px){

@@ -10,9 +10,9 @@ h1{
 h2 {
   font-size: 3vh;
 }
-.profileImage img {
-  height: 100px;
-  width: 100px;
+.profileImage {
+  object-fit: cover;
+  height: 180px;
 }
 
 .foodheroOfferBorder {
