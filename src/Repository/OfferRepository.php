@@ -77,8 +77,11 @@ class OfferRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
+            ->join('o.status', 's')
             ->andWhere('o.foodhero = :foodhero')
-            ->andWhere('o.active = true')
+            ->andWhere("s.constStatus = 'WaitingForRecuperation'")
+            ->orWhere("s.constStatus = 'WaitingForDelivery'")
+
             ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
             ->orderBy('o.end', 'ASC')
             ->getQuery();

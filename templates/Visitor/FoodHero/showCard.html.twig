@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}">
+        <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"></a>
 
             <div class="row">
                 <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
@@ -10,6 +10,14 @@
         <div class="row">
             <ul class="col-6">
                 <li class="mt-1"><strong class="text-primary">Quantité :</strong> {{ offer.weight }} Kg </li>
+                {% if app.session.get('latitude') is not null %}
+                  {% if distance %}
+                    <li class="mt-1"><strong class="text-primary">Distance :</strong> {{ distance ? distance~ 'km' : 'non calculée' }} </li>
+                  {% endif %}
+                  {% if distanceTotal %}
+                    <li class="mt-1"><strong class="text-primary">Distance totale :</strong> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </li>
+                  {% endif %}
+                {% endif %}
                 <li class="mt-1"><strong class="text-primary">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}</li>
 
             </ul>

@@ -1,11 +1,19 @@
 {% extends 'Visitor/FoodHero/layoutFoodHero.html.twig' %}
 
 {% block title %}Modifier FoodHero{% endblock %}
+
 {% block header %}
-    <h1 class="text-center mb-5 mt-1 ">Comment ça marche ? <i class="fas fa-cogs text-secondary"></i></h1>
+    {% include 'Visitor/FoodHero/headerFoodHero.html.twig' %}
 {% endblock %}
+
 {% block body %}
     <div class="container">
+        <div class="row justify-content-center text-center">
+            <div>
+                <p class="fa-2x text-center text-primary mt-3 mb-2"><strong>Comment ça marche ?</strong>
+                    <i class="ml-3 fas fa-cogs text-primary"></i></p>
+            </div>
+        </div>
         <div>
             <ul>
                 <li>Dans l'onglet <strong class="text-primary">Missions</strong>, acceptez les missions de votre choix
@@ -17,10 +25,48 @@
                 </li>
             </ul>
         </div>
-        <h2 class="text-center text-primary foodheroEdit"><strong>Modifier mes informations</strong><i class="ml-3 fas fa-pencil-alt"></i></h2>
+        <h2 class="text-center text-primary foodheroEdit"><strong>Modifier mes informations</strong><i
+                    class="ml-3 fas fa-pencil-alt text-primary"></i></h2>
         <div class="form-inline justify-content-center">
-             <img class="profileImage" src="{{vich_uploader_asset(foodhero, 'profileImageFile') }}" alt="Image de profil"/>
+            <img class="profileImage"
+                 src="{{ foodhero.profileImage ? vich_uploader_asset(foodhero, 'profileImageFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                 alt="Image de profil"/>
             {{ include('Visitor/FoodHero/_form.html.twig', {'button_label': 'Mettre à jour mes informations'}) }}
         </div>
+        <div id="infoposition"></div>
     </div>
+
+
+    <script>
+
+        function myPosition(position) {
+            fetch('/foodhero/position/'+position.coords.latitude+'/'+position.coords.longitude);
+        }
+
+        function erreurPosition(error) {
+            var info = "Erreur lors de la géolocalisation : ";
+            switch (error.code) {
+                case error.TIMEOUT:
+                    info += "Timeout !";
+                    break;
+                case error.PERMISSION_DENIED:
+                    info += "Vous n’avez pas donné la permission";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    info += "La position n’a pu être déterminée";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    info += "Erreur inconnue";
+                    break;
+            }
+            document.getElementById("infoposition").innerHTML = info;
+        }
+
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(myPosition, erreurPosition);
+        }
+
+    </script>
+
+
 {% endblock %}

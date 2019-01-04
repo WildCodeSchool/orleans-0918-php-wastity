@@ -13,6 +13,9 @@ body {
     .card {
       margin-top: 5%;
       margin-bottom: 5%;
+      .img{
+        max-height: 200px;
+      }
     }
     img{
       object-fit: cover;

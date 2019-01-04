@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\Status;
 use App\Form\OfferType;
@@ -45,6 +46,7 @@ class OfferController extends AbstractController
         }
 
         return $this->render('Visitor/Offer/new.html.twig', [
+            'company' => $company,
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
@@ -58,7 +60,7 @@ class OfferController extends AbstractController
      * @return Response
      * @IsGranted("edit", subject="offer")
      */
-    public function edit(Request $request, Offer $offer): Response
+    public function edit(Request $request, Offer $offer, Company $company): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
@@ -70,6 +72,7 @@ class OfferController extends AbstractController
         }
 
         return $this->render('Visitor/Offer/edit.html.twig', [
+            'company' => $company,
             'offer' => $offer,
             'form' => $form->createView(),
         ]);

@@ -1,18 +1,50 @@
 @import "app";
 
+.header {
+  padding-bottom: 2px;
+  padding-top:20px;
+  top : 0;
+  background-color: $foodHeroColor;
+  border-bottom : 2px $headerBorderColor solid;
+  h1{
+    color: $bodyBackground;
+    font-size: $headerTitle;
+  }
+}
+.wastity_blanc{
+  height: $headerTitle;
+}
+
+.headerReturn{
+  margin-top:10px;
+  font-size: $headerTitle;
+}
+.headerText{
+  margin-top:10px;
+  margin-left:-30px;
+  font-size:1em;
+}
+
 h1{
   font-size: $headerTitle;
 }
 
 .fas{
-  color: $foodHeroColor;
+  color: $bodyBackground;
 }
 h2 {
   font-size: 3vh;
 }
-.profileImage img {
-  height: 100px;
-  width: 100px;
+
+.container {
+  .card {
+    border-color: $foodHeroColor;
+  }
+}
+
+.profileImage {
+  object-fit: cover;
+  height: 180px;
 }
 
 .foodheroOfferBorder {
@@ -29,4 +61,17 @@ h2 {
   color: $primaryColor;
   background-color: $foodHeroColorHover;
   border-color: $foodHeroColorHover;
+}
+
+.navbar{
+  border-top : 2px black solid;
+  background-color: $foodHeroColor;
+}
+
+a{
+  color: $bodyBackground;
+}
+
+a:hover{
+  color: $bodyBackground;
 }

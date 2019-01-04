@@ -107,18 +107,18 @@ class Offer
     private $complementary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="offers",  fetch="EAGER")
      */
     private $association;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="offers",  fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $company;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FoodHero", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FoodHero", inversedBy="offers",  fetch="EAGER")
      */
     private $foodhero;
 
