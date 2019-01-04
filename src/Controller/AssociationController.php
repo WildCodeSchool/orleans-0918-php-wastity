@@ -181,7 +181,7 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function showOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator
+    public function showOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator)
     {
         $company = $offer->getCompany();
         $distance = $distanceCalculator->calculateDistance($company, $association);
