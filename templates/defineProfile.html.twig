@@ -10,108 +10,62 @@
         {% endblock %}
 {% block body %}
     <main class="container">
-        <section class="text-center">
-            <div class="title">
-                <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
-                <p>Indiquez-nous comment vous souhaitez agir.</p>
-            </div>
+    <section class="text-center ">
+        <div class="title row">
+            <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
+            <p>Indiquez-nous comment vous souhaitez agir.</p>
+        </div>
+        <div class="row justify-content-between">
+            <article class="col-12 col-lg-3 ">
+                <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}">
 
-            <article class="foodHeroProfileBorder">
-                <a class="row foodHeroProfile" href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}">
-                    <div class="text col-lg-5 ">
-                        <h1>Food Hero</h1>
-                        <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p>
-                    </div>
-                    <div class="col-lg-5 ml-5">
-                    <img class="foodhero-picture"
-                         src="{{ asset('build/images/bonhomme-blanc-3d-foodheropetit.jpg') }} "
-                         alt="bonhomme blanc foodhero" />
+                    <div class="card" style="width: 18rem;">
+                        <img class="foodhero-picture"
+                             src="{{ asset('build/images/bonhomme-blanc-3d-foodheroor.jpg') }} " style="height: 30vh"
+                             alt="bonhomme blanc foodhero"/>
+                        <div class="card-body">
+                            <h1 class="card-title">Food Hero</h1>
+                            <p class="card-text">Je souhaite aider les associations à collecter des offres alimentaires
+                                près de chez moi.</p>
+                        </div>
                     </div>
                 </a>
             </article>
 
-            <article class="companyProfileBorder ">
-                <a class="row companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <div class="col-lg-5 ml-5">
+
+            <article class="col-12 col-lg-3 ">
+                <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
+                    <div class="card" style="width: 18rem;">
                         <img class="company-picture"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-company.jpg') }} "
-                             alt="bonhomme blanc fruits" />
-                    </div>
-                    <div class="text col-lg-5 ">
-                        <h1>Entreprise</h1>
-                        <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p>
-                    </div>
-                </a>
-            </article>
-            <article class="associationProfileBorder ">
-                <a class="row associationProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <div class="text col-lg-5 ">
-                        <h1>Association</h1>
-                        <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p>
-                    </div>
-                    <div class="col-lg-5 ml-5">
-                        <img class="association-picture mt-3"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-association.jpg') }} "
-                             alt="bonhomme blanc fruits" />
-                    </div>
-                </a>
-            </article>
-        </section>
-
-
-
-        <section class="text-center">
-            <div class="title">
-                <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
-                <p>Indiquez-nous comment vous souhaitez agir.</p>
-            </div>
-
-            <article class="foodHeroProfileBorder1">
-                <a class="row foodHeroProfile1" href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}">
-                    <div class="text1 ">
-                        <h1>Food Hero</h1>
-                        <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p>
-                    </div>
-                    <div>
-                        <img class="foodhero-picture1"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-foodheropetitblc.jpg') }} "
-                             alt="bonhomme blanc foodhero" />
+                             src="{{ asset('build/images/bonhomme-blanc-3d-companyblue.jpg') }} " style="height: 30vh"
+                             alt="bonhomme blanc foodhero"/>
+                        <div class="card-body">
+                            <h1 class="card-title">Entreprise</h1>
+                            <p class="card-text">Je souhaite proposer mes surplus à une association d'aide
+                                alimentaire.</p>
+                        </div>
                     </div>
                 </a>
             </article>
 
-            <article class="companyProfileBorder1 ">
-                <a class="row companyProfile1" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <div class="text1  ">
-                        <h1>Entreprise</h1>
-                        <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p>
-                    </div>
-                    <div >
-                        <img class="company-picture1"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-companyblc.jpg') }} "
-                             alt="bonhomme blanc fruits" />
-                    </div>
 
-                </a>
-            </article>
-            <article class="associationProfileBorder1 ">
-                <a class="row associationProfile1" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <div class="text1 ">
-                        <h1>Association</h1>
-                        <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p>
-                    </div>
-                    <div>
-                        <img class="association-picture1 mt-3"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-associationblc.jpg') }} "
-                             alt="bonhomme blanc fruits" />
+            <article class="col-12 col-lg-3 ">
+                <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
+                    <div class="card" style="width: 18rem;">
+                        <img class="company-picture"
+                             src="{{ asset('build/images/bonhomme-blanc-3d-associationgreen.jpg') }} "
+                             style="height: 30vh"
+                             alt="bonhomme blanc foodhero"/>
+                        <div class="card-body">
+                            <h1 class="card-title">Association</h1>
+                            <p class="card-text">Je représente une association qui souhaite bénéficier d'offres
+                                alimentaires.</p>
+                        </div>
                     </div>
                 </a>
             </article>
-        </section>
-
-
-
-    </main>
+        </div>
+    </section>
 
 
 
