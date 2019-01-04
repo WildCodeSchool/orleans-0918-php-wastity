@@ -133,9 +133,14 @@ class FoodHeroController extends AbstractController
      */
     public function showOffer(FoodHero $foodhero, Offer $offer)
     {
+        $adressCompany=$offer->getCompany()->fullAddress();
+        $adressAsso=$offer->getAssociation()->fullAddress();
+
         return $this->render('Visitor/FoodHero/showOffer.html.twig', [
             'offer' => $offer,
-            'foodhero' => $foodhero
+            'foodhero' => $foodhero,
+            'adressCompany'=>$adressCompany,
+            'adressAsso'=>$adressAsso
         ]);
     }
     
@@ -162,14 +167,12 @@ class FoodHeroController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function showOneOffer(FoodHero $foodhero, Offer $offer, FindCoordinates $coordinates): Response
+    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
     {
-        $coordinates=$coordinates->findCoordinates($offer->getCompany());
 
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
             'foodhero' => $foodhero,
             'offer' => $offer,
-            'coordinates'=>$coordinates,
         ]);
     }
 }
