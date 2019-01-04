@@ -217,21 +217,20 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function showStatistics(Company $company, OfferRepository $offerRepository, StatusRepository $statusRepository): Response
+    public function showStat(Company $company, OfferRepository $offerRepository, StatusRepository $statusRepository)
+    : Response
     {
         $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
         $offers = $offerRepository->findBy(['company'=>$company, 'status'=>$deliveredStatus]);
-
         $weightTotal = 0;
         $associations = [];
         foreach ($offers as $offer) {
-            if ($offer->getAssociation()){
+            if ($offer->getAssociation()) {
                 $weight = $offer->getWeight();
                 $weightTotal += $weight;
                 $associations[] = $offer->getAssociation();
             }
         }
-
         $countAssociation = count(array_unique($associations));
         return $this->render('Visitor/Company/showStatistics.html.twig', [
             'company' => $company,
