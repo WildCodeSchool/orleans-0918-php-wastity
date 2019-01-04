@@ -45,10 +45,22 @@
                 <th scope="col">Status</th>
                 <td>{{ offer.status.statustext }}</td>
             </tr>
+            <tr>
+                <th scope="col">
+                    Activer
+                </th>
+                <td>
+                    <a href="{{ path('offer_admin_activate', {'id': offer.id}) }}">
+                        <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="{{offer.active}}">
+                            {{offer.active ? 'Oui' : 'Non' }}
+                        </button>
+                    </a>
+                </td>
+            </tr>
             </tbody>
         </table>
         <div class="row">
-            <a class="col text-center" href="{{ path('offer_index') }}">Retour à la liste des Offres</a>
+            <a class="col text-center" href="{{ path('offer_admin_index') }}">Retour à la liste des Offres</a>
         </div>
     </div>
 {% endblock %}
