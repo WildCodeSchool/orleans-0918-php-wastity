@@ -9,18 +9,18 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ food_hero.id }}</td>
+                <td>{{ foodhero.id }}</td>
             </tr>
             <tr>
                 <th>Phone</th>
-                <td>{{ food_hero.phone }}</td>
+                <td>{{ foodhero.phone }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('foodhero_index') }}">back to list</a>
 
-    <a href="{{ path('foodhero_edit', {'id': food_hero.id}) }}">edit</a>
+    <a href="{{ path('foodhero_edit', {'id': foodhero.id}) }}">edit</a>
 
     {{ include('Visitor/FoodHero/_delete_form.html.twig') }}
 
