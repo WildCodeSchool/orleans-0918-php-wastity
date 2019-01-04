@@ -9,6 +9,7 @@ use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
 use App\Repository\StatusRepository;
+use App\Service\FindCoordinates;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -161,11 +162,14 @@ class FoodHeroController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
+    public function showOneOffer(FoodHero $foodhero, Offer $offer, FindCoordinates $coordinates): Response
     {
+        $coordinates=$coordinates->findCoordinates($offer->getCompany());
+
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
             'foodhero' => $foodhero,
             'offer' => $offer,
+            'coordinates'=>$coordinates,
         ]);
     }
 }
