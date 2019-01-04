@@ -8,10 +8,13 @@ use App\Entity\Status;
 use App\Form\FoodHeroType;
 use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
+use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -29,7 +32,7 @@ class FoodHeroController extends AbstractController
         $foodHero = new FoodHero();
         $form = $this->createForm(FoodHeroType::class, $foodHero);
         $form->handleRequest($request);
-        
+
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
@@ -81,7 +84,7 @@ class FoodHeroController extends AbstractController
      */
     public function delete(Request $request, FoodHero $foodHero): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$foodHero->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $foodHero->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($foodHero);
             $em->flush();
@@ -89,7 +92,7 @@ class FoodHeroController extends AbstractController
 
         return $this->redirectToRoute('foodhero_index');
     }
-    
+
     /**
      * @param FoodHero $foodHero
      * @param OfferRepository $offerRepository
@@ -106,7 +109,7 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodHero
         ]);
     }
-    
+
     /**
      * @param FoodHero $foodHero
      * @param OfferRepository $offerRepository
@@ -130,21 +133,41 @@ class FoodHeroController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function showOffer(FoodHero $foodhero, Offer $offer)
-    {
+    public function showOffer(
+        FoodHero $foodhero,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator,
+        SessionInterface $session
+    ): Response {
+
+        $company = $offer->getCompany();
+        $association = $offer->getAssociation();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+
+        if ($session->has('latitude')) {
+            $distance = $distanceCalculator->calculateDistanceFromGps(
+                $session->get('latitude'),
+                $session->get('longitude'),
+                $company
+            );
+            $distanceTotal = $distance + $distanceAssoComp;
+        }
         return $this->render('Visitor/FoodHero/showOffer.html.twig', [
-            'offer' => $offer,
-            'foodhero' => $foodhero
+            'foodHero' => $foodhero,
+            'distance' => $distance,
+            'distanceTotal' => $distanceTotal,
+            'offer' => $offer
         ]);
     }
-    
+
     /**
      * @Route("/{foodhero}/offer/{offer}/accept", name="foodhero_accept_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(FoodHero $foodhero, Offer $offer, StatusRepository $statusRepository)
+
+    public function acceptOffer(FoodHero $foodhero, Offer $offer, StatusRepository $statusRepository): Response
     {
         $status = $statusRepository->findOneByConstStatus('WaitingForRecuperation');
 
@@ -152,20 +175,57 @@ class FoodHeroController extends AbstractController
         $offer->setStatus($status);
         $offer->setFoodhero($foodhero);
         $em->flush();
-        
+
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
     }
+
+
+    /**
+     * @Route("/position/{latitude}/{longitude}")
+     * @param float $latitude
+     * @param float $longitude
+     * @param SessionInterface $session
+     * @return Response
+     */
+    public function showCoordinates(?float $latitude, ?float $longitude, SessionInterface $session): Response
+    {
+
+        $session->set('latitude', $latitude);
+        $session->set('longitude', $longitude);
+        return new Response("");
+    }
+
 
     /**
      * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
      * @return Response
      * @throws \Exception
      */
-    public function showOneOffer(FoodHero $foodhero, Offer $offer): Response
-    {
+    public function showOneOffer(
+        FoodHero $foodhero,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator,
+        SessionInterface $session
+    ): Response {
+
+        $company = $offer->getCompany();
+        $association = $offer->getAssociation();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+
+        if ($session->has('latitude')) {
+            $distance = $distanceCalculator->calculateDistanceFromGps(
+                $session->get('latitude'),
+                $session->get('longitude'),
+                $company
+            );
+            $distanceTotal = $distance + $distanceAssoComp;
+        }
+
         return $this->render('Visitor/FoodHero/showCard.html.twig', [
-            'foodhero' => $foodhero,
-            'offer' => $offer,
+            'foodHero' => $foodhero,
+            'distance' => $distance,
+            'distanceTotal' => $distanceTotal,
+            'offer' => $offer
         ]);
     }
 
