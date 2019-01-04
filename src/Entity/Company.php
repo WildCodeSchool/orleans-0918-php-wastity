@@ -84,8 +84,8 @@ class Company implements HasAddress
      * @Assert\Regex("/[0-9 +-\.]+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
-     *      max = 10,
-     *      maxMessage = "Votre numéro de téléphone doit contenir {{ limit }} chiffres"
+     *      max = 255,
+     *      maxMessage = "Le nombre de caractères maximum est de 255"
      * )
      */
     private $phone;

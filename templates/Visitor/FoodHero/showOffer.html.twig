@@ -3,14 +3,6 @@
 {% block title %}Offer index{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
-{% block header %}
-    <div class="row header">
-    <a class="col-1" href="{{ path('foodhero_list_offers', {'id' : foodhero.id}) }}"><i
-                class="fas fa-chevron-left"></i></a>
-    <h1 class="col text-center">Detail d'une offre </h1>
-    </div>
-{% endblock %}
-
 {% block body %}
     <div class="container">
         <div class="row justify-content-center">
