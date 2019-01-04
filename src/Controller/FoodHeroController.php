@@ -156,7 +156,7 @@ class FoodHeroController extends AbstractController
             $distanceTotal = $distance + $distanceAssoComp;
         }
         return $this->render('Visitor/FoodHero/showOffer.html.twig', [
-            'foodHero' => $foodhero,
+            'foodhero' => $foodhero,
             'distance' => $distance,
             'distanceTotal' => $distanceTotal,
             'offer' => $offer

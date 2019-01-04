@@ -20,7 +20,7 @@
         <div class="row justify-content-center">
             {% for offer in offers %}
                 {{ render(controller(
-                    'App\\Controller\\AssociationController::showOffer', {'association':association.id, 'offer':offer.id}
+                    'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
                 )) }}
             {% endfor %}
             </div>
