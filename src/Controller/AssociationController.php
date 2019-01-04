@@ -164,7 +164,7 @@ class AssociationController extends AbstractController
      * @throws \Exception
      */
     public function showOneOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator)
-    : Response {
+    {
         $company = $offer->getCompany();
         $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
 
@@ -182,7 +182,7 @@ class AssociationController extends AbstractController
      * @return Response
      */
     public function showOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator
-    ): Response {
+    {
         $company = $offer->getCompany();
         $distance = $distanceCalculator->calculateDistance($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
@@ -218,7 +218,7 @@ class AssociationController extends AbstractController
      * @return Response
      */
     public function editSchedule(Request $request, Association $association, DaysOfWeekRepository $daysOfWeekRepository)
-    : Response {
+    {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
@@ -239,8 +239,11 @@ class AssociationController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="association")
      */
-    public function showStat(Association $association, OfferRepository $offerRepository, StatusRepository $statusRepository)
-    : Response {
+    public function showStat(
+        Association $association,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
         $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
         $offers = $offerRepository->findBy(['association' => $association, 'status' => $deliveredStatus]);
         $weightTotal = 0;
