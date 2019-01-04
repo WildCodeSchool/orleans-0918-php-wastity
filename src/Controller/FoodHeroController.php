@@ -53,14 +53,16 @@ class FoodHeroController extends AbstractController
 
     /**
      * @Route("/{id}", name="foodhero_show", methods="GET")
+     * @IsGranted("view", subject="foodHero")
      */
     public function show(FoodHero $foodHero): Response
     {
-        return $this->render('Visitor/FoodHero/show.html.twig', ['FoodHero' => $foodHero]);
+        return $this->render('Visitor/FoodHero/show.html.twig', ['foodhero' => $foodHero]);
     }
 
     /**
      * @Route("/{id}/edit", name="foodhero_edit", methods="GET|POST")
+     * @IsGranted("view", subject="foodHero")
      */
     public function edit(Request $request, FoodHero $foodHero): Response
     {
@@ -81,6 +83,7 @@ class FoodHeroController extends AbstractController
 
     /**
      * @Route("/{id}", name="foodhero_delete", methods="DELETE")
+     * @IsGranted("view", subject="foodHero")
      */
     public function delete(Request $request, FoodHero $foodHero): Response
     {
@@ -111,6 +114,7 @@ class FoodHeroController extends AbstractController
     }
 
     /**
+     * @IsGranted("view", subject="foodHero")
      * @param FoodHero $foodHero
      * @param OfferRepository $offerRepository
      * @return Response

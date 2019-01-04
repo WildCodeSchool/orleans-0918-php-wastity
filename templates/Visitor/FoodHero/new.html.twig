@@ -4,10 +4,7 @@
 {% block title %}Inscription FoodHero{% endblock %}
 
 {% block header %}
-    <div class="row">
-        <a class="col-1" href="{{ path('profile_index') }}"><i class="fas fa-chevron-left"></i></a>
-        <h1 class="col text-center">Inscription FoodHero</h1>
-    </div>
+    {% include 'Visitor/FoodHero/headerFoodHero.html.twig' %}
 {% endblock %}
 
 {% block body %}

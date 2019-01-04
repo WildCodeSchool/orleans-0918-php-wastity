@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}">
+        <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"></a>
 
             <div class="row">
                 <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
