@@ -249,16 +249,21 @@ class AssociationController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="association")
      */
-    public function showStatistics(Association $association): Response
+    public function showStatistics(Association $association, OfferRepository $offerRepository, StatusRepository $statusRepository): Response
     {
-        $offers = $association->getOffers();
-        $companies= [];
+        $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
+        $offers = $offerRepository->findBy(['association' => $association, 'status'=>$deliveredStatus]);
+
         $weightTotal = 0;
+        $companies= [];
         foreach ($offers as $offer) {
-            $weight = $offer->getWeight();
-            $weightTotal += $weight;
-            $companies[] = $offer->getassociation();
+            if ($offer->getAssociation()){
+                $weight = $offer->getWeight();
+                $weightTotal += $weight;
+                $companies[] = $offer->getassociation();
+            }
         }
+
         $countCompany = count(array_unique($companies));
         return $this->render('Visitor/Association/showStatistics.html.twig', [
             'association' => $association,
