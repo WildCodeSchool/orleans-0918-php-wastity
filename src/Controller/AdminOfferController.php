@@ -32,7 +32,6 @@ class AdminOfferController extends AbstractController
         return $this->render('Admin/offerIndex.html.twig', [
             'offers' => $offerRepository->findBy([], ['end'=>'DESC'])
         ]);
-
     }
 
     /**
