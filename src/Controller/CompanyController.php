@@ -227,7 +227,7 @@ class CompanyController extends AbstractController
             if ($offer->getAssociation()) {
                 $weight = $offer->getWeight();
                 $weightTotal += $weight;
-                $associations[] = $offer->getAssociation();
+                $associations[] = $offer->getAssociation()->getId();
             }
         }
         $countAssociation = count(array_unique($associations));
