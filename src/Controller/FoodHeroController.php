@@ -10,6 +10,7 @@ use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
+use App\Service\FindCoordinates;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -139,6 +140,7 @@ class FoodHeroController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
+
     public function showOffer(
         FoodHero $foodhero,
         Offer $offer,
@@ -147,8 +149,10 @@ class FoodHeroController extends AbstractController
     ): Response {
 
         $company = $offer->getCompany();
+        $addressCompany=$offer->getCompany()->fullAddress();
         $association = $offer->getAssociation();
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        $addressAsso=$offer->getAssociation()->fullAddress();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
 
         if ($session->has('latitude')) {
             $distance = $distanceCalculator->calculateDistanceFromGps(
@@ -162,7 +166,9 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodhero,
             'distance' => $distance,
             'distanceTotal' => $distanceTotal,
-            'offer' => $offer
+            'offer' => $offer,
+            'addressCompany'=>$addressCompany,
+            'addressAsso'=>$addressAsso
         ]);
     }
 
