@@ -17,6 +17,11 @@
             {{ message }}
         </div>
     {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success text-center msg-flash">
+            {{ message }}
+        </div>
+    {% endfor %}
     <header>
         {% block header %}{% endblock %}
     </header>
