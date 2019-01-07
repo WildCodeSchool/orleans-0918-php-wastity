@@ -53,6 +53,8 @@ class AssociationController extends AbstractController
             $em->persist($association);
             $em->flush();
 
+            $this->addFlash('success', "Votre association à bien été enregistrée !");
+
             return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
         }
 
@@ -82,6 +84,8 @@ class AssociationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', "Vos modifications ont été enregistrées !");
 
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
@@ -118,6 +122,7 @@ class AssociationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->remove($association);
             $em->flush();
+            $this->addFlash('success', "Votre association à bien été supprimée !");
         }
 
         return $this->redirectToRoute('association_index');
@@ -218,6 +223,7 @@ class AssociationController extends AbstractController
         $offer->setAssociation($association);
         $offer->setStatus($status);
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été acceptée !");
 
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
@@ -238,6 +244,8 @@ class AssociationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos horaires ont bien été modifiés !");
+
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 

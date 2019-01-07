@@ -50,6 +50,7 @@ class CompanyController extends AbstractController
             $company->setUser($user);
             $em->persist($company);
             $em->flush();
+            $this->addFlash('success', "Votre entreprise à bien été enregistrée !");
 
             return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
         }
@@ -136,6 +137,8 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', "Vos modifications ont été enregistrées !");
+
             return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
         return $this->render('Visitor/Company/edit.html.twig', [
@@ -157,6 +160,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'L\'offre à bien été modifiée !');
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
@@ -181,6 +185,8 @@ class CompanyController extends AbstractController
             $em->flush();
         }
 
+        $this->addFlash('success', 'Votre entreprise à bien été supprimée !');
+
         return $this->redirectToRoute('company_index');
     }
 
@@ -201,6 +207,7 @@ class CompanyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Les nouveaux horaires ont bien été enregistrés !");
 
             return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
