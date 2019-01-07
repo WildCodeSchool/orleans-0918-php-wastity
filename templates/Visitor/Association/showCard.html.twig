@@ -1,26 +1,26 @@
 <div class="card">
-<div class="card-header">
     <a href="{{ path('association_show_offer', {'association' : association.id , 'offer' : offer.id}) }}">
-
-    <div class="row">
-            <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
-        </div>
+    <div class="card-header d-flex align-items-center">
+        <h3>{{ offer.description|slice(0,25) ~ '...' }}</h3>
     </div>
+
     <div class="card-body">
-        <div class="row">
+        <div class="row align-items-center">
             <ul class="col-6">
-                <li class="mt-1"><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg </li>
+                <li class="mt-1"><i class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}</li>
+                <li class="mt-1"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg </li>
 
                 {% if distance %}
-                    <li class="mt-1"><strong class="text-success">Distance :</strong> {{ distance }} km </li>
+                    <li class="mt-1"><i class="fas fa-map-marker-alt mr-2 mr-md-4"></i>{{ distance }} km </li>
                 {% endif %}
-                <li class="mt-1"><strong class="text-success">Description</strong> : {{ offer.description|slice(0,50) ~ '...' }}</li>
 
             </ul>
-            <img class="col-6"
+            <img class="imgOffer col-5"
                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                  alt="ImageOffre"/>
         </div>
     </div>
     </a>
+
 </div>
+

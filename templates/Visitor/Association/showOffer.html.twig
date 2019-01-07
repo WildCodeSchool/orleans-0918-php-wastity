@@ -17,21 +17,19 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
-                    </div>
+                <div class="card-header align-items-center">
+                    <h3 class="col-12 mt-2 mb-0">{{ offer.description|slice(0,25) ~ '...' }}</h3>
+                    <p>proposée par l'entreprise {{ company }}</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <ul class="col-6">
-                            <li><strong class="text-success">Quantité :</strong> {{ offer.weight }} Kg</li>
+                            <li class="mt-2"><i class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}</li>
+                            <li class="mt-2"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg </li>
 
                             {% if distance %}
-                                <li class="mt-1"><strong class="text-success">Distance :</strong> {{ distance }} km</li>
+                                <li class="mt-1"><i class="fas fa-map-marker-alt mr-2 mr-md-4"></i>{{ distance }} km </li>
                             {% endif %}
-                            <li class="mt-1"><strong class="text-success">Entreprise :</strong> {{ offer.company.name }}
-                            </li>
 
                         </ul>
                         <img class="col-6"
@@ -46,7 +44,7 @@
                     </div>
                 </div>
                 <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}"
-                   class="offset-6 col-6 mt-2 btn btn-success">Accepter l'offre</a>
+                   class="offset-3 col-6 mt-2 mb-2 btn btn-success">Accepter l'offre</a>
             </div>
         </div>
     </div>

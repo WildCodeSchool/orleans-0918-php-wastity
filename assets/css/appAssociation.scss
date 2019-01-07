@@ -73,11 +73,6 @@ label{
   border-color: $assoColorHover;
 }
 
-.container {
-  .card {
-    border-color: $assoColor;
-  }
-}
 
 .navbar{
   border-top : 2px $headerBorderColor solid;
@@ -94,20 +89,46 @@ label{
       margin-bottom: 0;
     }
   }
+  .card-header{
+    font-size: 1.5vh;
+  }
 }
 
 .card {
+  box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
   a:link
   {
     text-decoration:none;
   }
   a{
-    color : black;
+    color : white;
+    font-weight: bold;
   }
-  a:hover{
-    color : $assoColor;
-  }
+
 }
 .associationActive{
   color: darken($assoColor,30%)
+}
+.card-header{
+  height: 12vh;
+  color:white;
+  background-color: $assoColor;
+  clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
+  h3{
+    font-size: 2.7vh;
+    font-weight: bold;
+  }
+  p{
+    font-size: 1.8vh;
+    margin-left: 15px;
+  }
+}
+
+.card-body{
+  .fas{
+    color: $assoColor;
+  }
+  .imgOffer{
+    margin: 1%;
+  }
 }
