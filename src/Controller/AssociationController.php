@@ -130,8 +130,10 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository)
-    {
+    public function listOffers(
+        Association $association,
+        OfferRepository $offerRepository
+    ): Response {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
         return $this->render('Visitor/Association/listOffers.html.twig', [
@@ -205,8 +207,11 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(Association $association, Offer $offer, StatusRepository $statusRepository)
-    {
+    public function acceptOffer(
+        Association $association,
+        Offer $offer,
+        StatusRepository $statusRepository
+    ): Response {
         $status = $statusRepository->findOneByConstStatus('FoodHeroResearch');
 
         $em = $this->getDoctrine()->getManager();
@@ -227,8 +232,7 @@ class AssociationController extends AbstractController
         Request $request,
         Association $association,
         DaysOfWeekRepository $daysOfWeekRepository
-    ): Response {
-
+    ):Response {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
@@ -249,22 +253,28 @@ class AssociationController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="association")
      */
-    public function showStatistics(Association $association): Response
-    {
-        $offers = $association->getOffers();
-        $companies= [];
+    public function showStatistics(
+        Association $association,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
+        $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
+        $offers = $offerRepository->findBy(['association' => $association, 'status' => $deliveredStatus]);
         $weightTotal = 0;
+        $companies = [];
         foreach ($offers as $offer) {
-            $weight = $offer->getWeight();
-            $weightTotal += $weight;
-            $companies[] = $offer->getassociation();
+            if ($offer->getAssociation()) {
+                $weight = $offer->getWeight();
+                $weightTotal += $weight;
+                $companies[] = $offer->getassociation()->getId();
+            }
         }
         $countCompany = count(array_unique($companies));
         return $this->render('Visitor/Association/showStatistics.html.twig', [
             'association' => $association,
             'offers' => $offers,
             'weightTotal' => $weightTotal,
-            'countCompany'=>$countCompany,
+            'countCompany' => $countCompany,
         ]);
     }
 }

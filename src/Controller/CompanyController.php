@@ -69,7 +69,7 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function listOffers(Company $company, OfferRepository $offerRepository)
+    public function listOffers(Company $company, OfferRepository $offerRepository): Response
     {
         $offers = $company->getOffers();
 
@@ -234,14 +234,21 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function showStatistics(Company $company): Response
-    {
-        $offers = $company->getOffers();
+    public function showStatistics(
+        Company $company,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
+        $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
+        $offers = $offerRepository->findBy(['company'=>$company, 'status'=>$deliveredStatus]);
         $weightTotal = 0;
+        $associations = [];
         foreach ($offers as $offer) {
-            $weight = $offer->getWeight();
-            $weightTotal += $weight;
-            $associations[] = $offer->getassociation();
+            if ($offer->getAssociation()) {
+                $weight = $offer->getWeight();
+                $weightTotal += $weight;
+                $associations[] = $offer->getAssociation()->getId();
+            }
         }
         $countAssociation = count(array_unique($associations));
         return $this->render('Visitor/Company/showStatistics.html.twig', [
