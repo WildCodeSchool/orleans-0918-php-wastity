@@ -14,7 +14,7 @@ class CompanyMemberType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, array(
-                'label' => 'Email',
+                'label' => 'Ajouter un membre via son email',
                 'attr' =>[
                     'placeholder' => 'email@email.com',
                     'class' => 'form-control'

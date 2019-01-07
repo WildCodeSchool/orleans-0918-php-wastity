@@ -95,10 +95,10 @@
         <div class="row text-info">
             <h1><strong>Vos membres</strong></h1>
         </div>
-        <div>
+        <div class="justify-content-center text-center">
             {% if company.members is not empty %}
                 {% for member in company.members  %}
-                    <p>{{ member.email }} - <a href="{{ path('removeMember', {'id': company.id, 'email': member.email }) }}" >Supprimer</a></p>
+                    <p>{{ member.email }}  <a href="{{ path('removeMember', {'id': company.id, 'email': member.email }) }}" ><i class="fas fa-user-times text-danger"></i></a></p>
                 {% endfor %}
             {% else %}
                 <p>aucun membre actuellement</p>
