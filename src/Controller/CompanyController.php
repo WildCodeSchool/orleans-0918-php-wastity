@@ -14,6 +14,7 @@ use App\Form\OfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\OfferRepository;
+use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
