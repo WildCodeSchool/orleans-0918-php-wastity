@@ -88,15 +88,6 @@ a:hover {
   color: $bodyBackground;
   text-decoration: none;
 }
-
-@media screen and (max-width: 360px) {
-  .navbar-brand{
-    .fas{
-      font-size:1em;
-    }
-    p {
-      font-size: 0.5em;
-      margin-bottom: 0;
-    }
-  }
+.foodheroActive{
+  color: darken($foodHeroColor,30%)
 }
