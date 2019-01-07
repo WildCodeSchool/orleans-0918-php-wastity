@@ -1,13 +1,26 @@
 @import "app";
 
 .header {
-  padding-bottom: 2px;
-  padding-top:20px;
+  padding-bottom: 5px;
+  padding-top: 10px;
   top : 0;
   background-color: $assoColor;
-  border-bottom : 2px $headerBorderColor solid;
+  box-shadow: 0 0 1.5em $headerBorderColor;
   h1{
     color: $bodyBackground;
+    font-size: $headerTitle;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+  }
+  a:hover {
+    color: $bodyBackground;
+    font-weight: bold;
+    text-decoration: none;
   }
 }
 
@@ -30,11 +43,12 @@
   -webkit-appearance: textfield;
 }
 
-a{
+a {
   color: $bodyBackground;
-}
-a:hover{
-  color: $assoColorHover;
+  :hover {
+    color: $bodyBackground;
+    text-decoration: none;
+  }
 }
 
 h1{
@@ -80,7 +94,7 @@ label{
 }
 
 .navbar{
-  border-top : 2px $headerBorderColor solid;
+  box-shadow: 0 0 1.5em $headerBorderColor;
   background-color: $assoColor;
 }
 
@@ -102,7 +116,7 @@ label{
     text-decoration:none;
   }
   a{
-    color : black;
+    color : $headerBorderColor;
   }
   a:hover{
     color : $assoColor;
