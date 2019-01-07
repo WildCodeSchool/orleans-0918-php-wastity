@@ -12,6 +12,7 @@ use App\Form\OfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\OfferRepository;
+use App\Repository\StatusRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +50,7 @@ class CompanyController extends AbstractController
             $company->setUser($user);
             $em->persist($company);
             $em->flush();
+            $this->addFlash('success', "Votre entreprise à bien été enregistrée !");
 
             return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
         }
@@ -66,7 +68,7 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function listOffers(Company $company, OfferRepository $offerRepository)
+    public function listOffers(Company $company, OfferRepository $offerRepository): Response
     {
         $offers = $company->getOffers();
 
@@ -135,6 +137,8 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', "Vos modifications ont été enregistrées !");
+
             return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
         return $this->render('Visitor/Company/edit.html.twig', [
@@ -156,6 +160,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'L\'offre à bien été modifiée !');
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
@@ -180,6 +185,8 @@ class CompanyController extends AbstractController
             $em->flush();
         }
 
+        $this->addFlash('success', 'Votre entreprise à bien été supprimée !');
+
         return $this->redirectToRoute('company_index');
     }
 
@@ -200,6 +207,7 @@ class CompanyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Les nouveaux horaires ont bien été enregistrés !");
 
             return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
@@ -216,14 +224,21 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function showStatistics(Company $company): Response
-    {
-        $offers = $company->getOffers();
+    public function showStatistics(
+        Company $company,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
+        $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
+        $offers = $offerRepository->findBy(['company'=>$company, 'status'=>$deliveredStatus]);
         $weightTotal = 0;
+        $associations = [];
         foreach ($offers as $offer) {
-            $weight = $offer->getWeight();
-            $weightTotal += $weight;
-            $associations[] = $offer->getassociation();
+            if ($offer->getAssociation()) {
+                $weight = $offer->getWeight();
+                $weightTotal += $weight;
+                $associations[] = $offer->getAssociation()->getId();
+            }
         }
         $countAssociation = count(array_unique($associations));
         return $this->render('Visitor/Company/showStatistics.html.twig', [
