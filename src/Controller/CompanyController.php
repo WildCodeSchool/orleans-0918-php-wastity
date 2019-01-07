@@ -119,12 +119,17 @@ class CompanyController extends AbstractController
     {
         $form = $this->createForm(CompanyMemberType::class);
         $form->handleRequest($request);
-    
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $user = $userRepository->findOneByEmail($form->getData()["email"]);
-            $company->addMember($user);
-            $em->flush();
+            if ($userRepository->findOneByEmail($form->getData())) {
+                $em = $this->getDoctrine()->getManager();
+                $user = $userRepository->findOneByEmail($form->getData());
+                $company->addMember($user);
+                $em->flush();
+                $this->addFlash('success', "Cet utilisateur a bien été ajouté");
+            } else {
+                $this->addFlash('danger', "Cet utilisateur n'existe pas");
+            }
         }
         
         return $this->render('Visitor/Company/show.html.twig', [
@@ -258,10 +263,13 @@ class CompanyController extends AbstractController
     public function deleteMember(Company $company, string $email, UserRepository $userRepository) :Response
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $userRepository->findOneByEmail($email);
-        $company->removeMember($user);
-        $em->flush();
-    
+        if ($userRepository->findOneByEmail($email)) {
+            $user = $userRepository->findOneByEmail($email);
+            $company->removeMember($user);
+            $em->flush();
+            $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+        }
+        
         return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
     }
 }
