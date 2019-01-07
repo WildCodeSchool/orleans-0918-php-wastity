@@ -41,6 +41,7 @@ class FoodHeroController extends AbstractController
             $foodHero->setUser($user);
             $em->persist($foodHero);
             $em->flush();
+            $this->addFlash('success', "Votre profil Food-Hero à bien été crée !");
 
             return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
@@ -70,6 +71,7 @@ class FoodHeroController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos modifications ont bien été appliquées !");
 
             return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
@@ -90,6 +92,7 @@ class FoodHeroController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->remove($foodHero);
             $em->flush();
+            $this->addFlash('success', "Votre compte Food-Hero à bien été supprimé !");
         }
 
         return $this->redirectToRoute('foodhero_index');
@@ -180,6 +183,7 @@ class FoodHeroController extends AbstractController
         $offer->setStatus($status);
         $offer->setFoodhero($foodhero);
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été acceptée !");
 
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
     }
@@ -250,6 +254,7 @@ class FoodHeroController extends AbstractController
         $offer->setStatus($status);
         $offer->setFoodhero($this->getUser()->getFoodHero());
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été collectée !");
 
         return $this->redirectToRoute('foodhero_list_pendingOffers', [
             'id' => $this->getUser()->getFoodHero()->getId()

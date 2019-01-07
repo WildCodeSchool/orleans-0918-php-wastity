@@ -71,3 +71,6 @@ h2 {
 a:hover{
   color: $bodyBackground;
 }
+.foodheroActive{
+  color: darken($foodHeroColor,30%)
+}

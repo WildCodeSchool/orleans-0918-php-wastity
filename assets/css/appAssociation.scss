@@ -108,4 +108,6 @@ label{
     color : $assoColor;
   }
 }
-
+.associationActive{
+  color: darken($assoColor,30%)
+}
