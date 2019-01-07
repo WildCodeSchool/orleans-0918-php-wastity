@@ -98,7 +98,7 @@
         <div>
             {% if company.members is not empty %}
                 {% for member in company.members  %}
-                    <p>{{ member.email }}</p>
+                    <p>{{ member.email }} - <a href="{{ path('removeMember', {'id': company.id, 'email': member.email }) }}" >Supprimer</a></p>
                 {% endfor %}
             {% else %}
                 <p>aucun membre actuellement</p>

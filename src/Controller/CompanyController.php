@@ -6,6 +6,7 @@ use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\DaysOfWeek;
 use App\Entity\Schedule;
+use App\Entity\User;
 use App\Form\CompanyMemberType;
 use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
@@ -121,7 +122,6 @@ class CompanyController extends AbstractController
     
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-//            $form->getData();
             $user = $userRepository->findOneByEmail($form->getData()["email"]);
             $company->addMember($user);
             $em->flush();
@@ -245,5 +245,23 @@ class CompanyController extends AbstractController
             'weightTotal' => $weightTotal,
             'countAssociation'=>$countAssociation,
         ]);
+    }
+    
+    /**
+     * @Route ("/{id}/removeMember/{email}", name="removeMember")
+     * @param Company $company
+     * @param UserRepository $userRepository
+     * @param string $email
+     * @return Response
+     * @IsGranted("view", subject="company")
+     */
+    public function deleteMember(Company $company, string $email, UserRepository $userRepository) :Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $userRepository->findOneByEmail($email);
+        $company->removeMember($user);
+        $em->flush();
+    
+        return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
     }
 }
