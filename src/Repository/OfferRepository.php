@@ -25,6 +25,7 @@ class OfferRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
+            ->andWhere('o.active = true')
             ->setParameter('date', $date)
             ->orderBy('o.end', 'ASC')
             ->getQuery();
@@ -37,6 +38,7 @@ class OfferRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
             ->andWhere('o.association is null')
+            ->andWhere('o.active = true')
             ->setParameter('date', $date)
             ->orderBy('o.end', 'ASC')
             ->getQuery();
@@ -50,6 +52,7 @@ class OfferRepository extends ServiceEntityRepository
             ->where('o.end > :date')
             ->andWhere('o.association is not null')
             ->andWhere('o.foodhero is null')
+            ->andWhere('o.active = true')
             ->setParameter('date', $date)
             ->orderBy('o.end', 'ASC')
             ->getQuery();
@@ -62,6 +65,7 @@ class OfferRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
             ->andWhere('o.association = :association')
+            ->andWhere('o.active = true')
             ->setParameters(['date' => $date, 'association' => $association->getId()])
             ->orderBy('o.end', 'ASC')
             ->getQuery();
@@ -73,7 +77,11 @@ class OfferRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.end > :date')
+            ->join('o.status', 's')
             ->andWhere('o.foodhero = :foodhero')
+            ->andWhere("s.constStatus = 'WaitingForRecuperation'")
+            ->orWhere("s.constStatus = 'WaitingForDelivery'")
+
             ->setParameters(['date' => $date, 'foodhero' => $foodHero ])
             ->orderBy('o.end', 'ASC')
             ->getQuery();
