@@ -267,7 +267,7 @@ class FoodHeroController extends AbstractController
     public function record(FoodHero $foodHero, OfferRepository $offerRepository): Response
     {
         $offers = $offerRepository->findAcceptedByFoodHeroBeforeEndDate(new \DateTime(), $foodHero);
-        var_dump($offers);
+
         return $this->render('Visitor/FoodHero/record.html.twig', [
             'offers' => $offers,
             'foodhero' => $foodHero,

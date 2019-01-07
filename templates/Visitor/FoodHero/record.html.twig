@@ -53,9 +53,9 @@
 
                                 <p class="col-12 mt-1"><strong class="text-primary">Entreprise
                                         :</strong> {{ offer.company.name }}</p>
-                                {% if offer.foodhero is not null %}
-                                    <p class="col-12 mt-1"><strong class="text-primary">FoodHero</strong>
-                                        : {{ offer.foodhero.user.fullname }}
+                                {% if offer.association is not null %}
+                                    <p class="col-12 mt-1"><strong class="text-primary">Association</strong>
+                                        : {{ offer.association.name }}
                                     </p>
                                 {% endif %}
                                 <p class="col-12 mt-1"><strong class="text-primary">Status</strong>

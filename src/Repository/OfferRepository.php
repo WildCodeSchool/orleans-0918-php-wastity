@@ -79,8 +79,7 @@ class OfferRepository extends ServiceEntityRepository
             ->where('o.end > :date')
             ->join('o.status', 's')
             ->andWhere('o.foodhero = :foodhero')
-            ->andWhere("s.constStatus = 'WaitingForRecuperation'")
-            ->orWhere("s.constStatus = 'WaitingForDelivery'")
+            ->andWhere("s.constStatus = 'Delivered'")
 
             ->setParameters(['date' => $date, 'foodhero' => $foodHero->getId()])
             ->orderBy('o.end', 'ASC')
