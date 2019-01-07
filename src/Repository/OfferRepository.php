@@ -72,7 +72,23 @@ class OfferRepository extends ServiceEntityRepository
 
         return $qb->execute();
     }
-    
+
+    public function findAcceptedByFoodHeroBeforeEndDate(\DateTime $date, FoodHero $foodHero): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->join('o.status', 's')
+            ->andWhere('o.foodhero = :foodhero')
+            ->andWhere("s.constStatus = 'WaitingForRecuperation'")
+            ->orWhere("s.constStatus = 'WaitingForDelivery'")
+
+            ->setParameters(['date' => $date, 'foodhero' => $foodHero->getId()])
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+
+        return $qb->execute();
+    }
+
     public function findAcceptedByFoodHero(\DateTime $date, FoodHero $foodHero): array
     {
         $qb = $this->createQueryBuilder('o')

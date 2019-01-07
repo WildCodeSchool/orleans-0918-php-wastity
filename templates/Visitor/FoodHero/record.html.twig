@@ -1,6 +1,6 @@
 {% extends 'Visitor/FoodHero/layoutFoodHero.html.twig' %}
 
-{% block title %}Food Hero - Livrées{% endblock %}
+{% block title %}Food Hero - Offres livrées{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
 {% block header %}
@@ -29,9 +29,9 @@
                 <td>{{ offer.weight }} kg</td>
                 <td><i class="fas {{ offer.status.classfontawesome }}"
                        style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
-                <td data-toggle="modal" data-target="#ModalOfferAssociation{{ offer.id }}"><i class="far fa-eye text-center text-primary"></i></td>
+                <td data-toggle="modal" data-target="#ModalOfferFoodHero{{ offer.id }}"><i class="far fa-eye text-center text-primary"></i></td>
             </tr>
-          <div class="modal fade" id="ModalOfferAssociation{{ offer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          <div class="modal fade" id="ModalOfferFoodHero{{ offer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -55,7 +55,7 @@
                                         :</strong> {{ offer.company.name }}</p>
                                 {% if offer.foodhero is not null %}
                                     <p class="col-12 mt-1"><strong class="text-primary">FoodHero</strong>
-                                        : {{ offer.foodhero.user.firstname ~ ' ' ~ offer.foodhero.user.lastname }}
+                                        : {{ offer.foodhero.user.fullname }}
                                     </p>
                                 {% endif %}
                                 <p class="col-12 mt-1"><strong class="text-primary">Status</strong>

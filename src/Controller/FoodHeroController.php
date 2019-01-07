@@ -239,6 +239,7 @@ class FoodHeroController extends AbstractController
     /**
      * @Route("/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")
      * @param Offer $offer
+     * @param StatusRepository $statusRepository
      * @return Response
      */
     public function collectOffer(Offer $offer, StatusRepository $statusRepository)
@@ -265,8 +266,8 @@ class FoodHeroController extends AbstractController
      */
     public function record(FoodHero $foodHero, OfferRepository $offerRepository): Response
     {
-        $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
-
+        $offers = $offerRepository->findAcceptedByFoodHeroBeforeEndDate(new \DateTime(), $foodHero);
+        var_dump($offers);
         return $this->render('Visitor/FoodHero/record.html.twig', [
             'offers' => $offers,
             'foodhero' => $foodHero,
