@@ -1,23 +1,74 @@
 @import "app";
 
+.header {
+  padding-bottom: 5px;
+  padding-top: 10px;
+  top : 0;
+  background-color: $assoColor;
+  box-shadow: 0 0 1.5em $headerBorderColor;
+  h1{
+    color: $bodyBackground;
+    font-size: $headerTitle;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+  }
+  a:hover {
+    color: $bodyBackground;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+.wastity_blanc{
+  height: $headerTitle;
+}
+
+.headerReturn{
+  margin-top:10px;
+  font-size: $headerTitle;
+}
+.headerText{
+  margin-top:10px;
+  margin-left:-30px;
+  font-size:1em;
+}
+
+.form-control {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+}
+
+a {
+  color: $bodyBackground;
+  :hover {
+    color: $bodyBackground;
+    text-decoration: none;
+  }
+}
+
+h1{
+  color: $assoColor;
+  font-size: $headerTitle;
+}
+
 .form-group{
   margin-bottom: 5px;
 }
 label{
   margin-bottom: 1px;
 }
-h1{
-  font-size: $headerTitle;
-}
-a{
-  color: $assoColor;
-}
+
 .fa-chevron-left{
-  color: $assoColor;
+  color: $bodyBackground;
 }
 
 .fas{
-  color: $assoColor;
+  color: $bodyBackground;
 }
 
 .associationOfferBorder {
@@ -36,6 +87,17 @@ a{
   border-color: $assoColorHover;
 }
 
+.container {
+  .card {
+    border-color: $assoColor;
+  }
+}
+
+.navbar{
+  box-shadow: 0 0 1.5em $headerBorderColor;
+  background-color: $assoColor;
+}
+
 @media screen and (max-width: 360px) {
   .navbar-brand{
     .fas{
@@ -48,3 +110,18 @@ a{
   }
 }
 
+.card {
+  a:link
+  {
+    text-decoration:none;
+  }
+  a{
+    color : $headerBorderColor;
+  }
+  a:hover{
+    color : $assoColor;
+  }
+}
+.associationActive{
+  color: darken($assoColor,30%)
+}

@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Offer;
+use App\Entity\Status;
 use App\Form\OfferType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\StatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +24,7 @@ class OfferController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, StatusRepository $statusRepository): Response
     {
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
@@ -31,25 +35,33 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer->setCompany($company);
+
+            $status = $statusRepository->findOneByConstStatus('AssociationResearch');
+            $offer->setActive(true);
+            $offer->setStatus($status);
             $em->persist($offer);
             $em->flush();
+            $this->addFlash('success', "L'offre à bien été enregistrée !");
 
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
         return $this->render('Visitor/Offer/new.html.twig', [
+            'company' => $company,
             'offer' => $offer,
             'form' => $form->createView(),
         ]);
     }
 
     /**
+
      * @Route("/{id}/edit", name="offer_edit", methods="GET|POST")
      * @param Request $request
      * @param Offer $offer
      * @return Response
+     * @IsGranted("edit", subject="offer")
      */
-    public function edit(Request $request, Offer $offer): Response
+    public function edit(Request $request, Offer $offer, Company $company): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
@@ -57,10 +69,13 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', "L'offre à bien été modifiée !");
+
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
         return $this->render('Visitor/Offer/edit.html.twig', [
+            'company' => $company,
             'offer' => $offer,
             'form' => $form->createView(),
         ]);

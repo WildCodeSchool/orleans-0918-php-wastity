@@ -1,12 +1,32 @@
 @import 'app';
 
 .header {
-  padding-bottom: 2px;
-  padding-top:20px;
+  padding-bottom: 5px;
+  padding-top:10px;
   top : 0;
-  background-color: darken($primaryColor, 10%);
-  border-bottom : 1px grey solid;
+  background-color: $companyColor;
+  box-shadow: 0 0 1.5em $headerBorderColor;
+  h1{
+    color: $bodyBackground;
+    font-size: $headerTitle;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+    :hover {
+      color: $bodyBackground;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
 }
+.wastity_blanc{
+  height: $headerTitle;
+}
+
 .headerReturn{
   margin-top:10px;
   font-size: $headerTitle;
@@ -22,14 +42,16 @@
   -webkit-appearance: textfield;
 }
 
-a{
-  color: $companyColor;
+a {
+  color: $bodyBackground;
+  :hover {
+    color: $bodyBackground;
+    text-decoration: none;
+  }
 }
 
-a:hover{
-  color: $companyColorHover;
-}
 h1{
+  color: $companyColorHover;
   font-size: $headerTitle;
 }
 
@@ -40,13 +62,13 @@ label{
   margin-bottom: 1px;
 }
 
-
 .modal-title{
   font-size:1.2em;
   font-weight:bold;
 }
+
 .fas{
-  color: $companyColor;
+  color: $bodyBackground;
 }
 
 .container {
@@ -61,6 +83,11 @@ label{
 
 .status{
   font-size:1.2em;
+}
+
+.navbar{
+  box-shadow: 0 0 1.5em $headerBorderColor;
+  background-color: $companyColor;
 }
 
 @media screen and (max-width:370px){
@@ -78,4 +105,7 @@ label{
       word-wrap: break-word;
     }
   }
+}
+.companyActive{
+  color: darken($companyColor,30%)
 }

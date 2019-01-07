@@ -80,6 +80,7 @@ header {
       text-shadow: darken($primaryColor, 60%) 0.2px 0.3px;
     }
   }
+
   .name{
     color: $color;
     font-weight: 600;
@@ -97,15 +98,14 @@ header {
       height: 1.5px;
       background: $color;
     }
-
   }
-
   @media (max-width: 576px) {
     .bussinesscard .front .top:after{
       width: 1.1em;
       height: 1.1em;
     }
   }
+
   @media (max-height:600px) {
     .nametroduction {
       .introduction {
