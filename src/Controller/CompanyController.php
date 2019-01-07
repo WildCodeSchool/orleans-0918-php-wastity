@@ -262,17 +262,15 @@ class CompanyController extends AbstractController
     }
     
     /**
-     * @Route ("/{id}/removeMember/{email}", name="removeMember")
+     * @Route ("/{id}/removeMember/{user}", name="removeMember", methods="POST")
      * @param Company $company
-     * @param UserRepository $userRepository
-     * @param string $email
+     * @param User $user
      * @return Response
      */
-    public function deleteMember(Company $company, string $email, UserRepository $userRepository) :Response
+    public function deleteMember(Company $company, User $user, Request $request) :Response
     {
-        $em = $this->getDoctrine()->getManager();
-        if ($userRepository->findOneByEmail($email)) {
-            $user = $userRepository->findOneByEmail($email);
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
             $company->removeMember($user);
             $em->flush();
             $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
