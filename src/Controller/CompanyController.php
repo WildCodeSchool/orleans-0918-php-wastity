@@ -258,7 +258,6 @@ class CompanyController extends AbstractController
      * @param UserRepository $userRepository
      * @param string $email
      * @return Response
-     * @IsGranted("view", subject="company")
      */
     public function deleteMember(Company $company, string $email, UserRepository $userRepository) :Response
     {
