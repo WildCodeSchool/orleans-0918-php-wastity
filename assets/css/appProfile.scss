@@ -9,89 +9,90 @@ header {
     margin: 0;
   }
 }
-body{
-  padding-bottom: 0;
-}
-section {
-  .title {
-    padding: 2.5%;
-    margin-top: 0.5em;
-  }
 
-  article {
-    //height: 25vh;
-    //margin: 1em;
-    //vertical-align: center;
 
-    h1 {
-      font-weight: bold;
-      padding-top: 0.3em;
+
+.bussinesscard{
+  height:27vh;
+  width:100%;
+  overflow: hidden;
+  box-shadow: 0px 0px 23px -10px black;
+  position: relative;
+
+  .front {
+    z-index: 11;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 2px  rgba(0, 0, 0, 0.25);
+    }
+  .top {
+    height: 45%;
+    background: $foodHeroColor;
+
+    &:after {
+      position: absolute;
+      content: '';
+      pointer-events: none;
     }
 
-    a {
-      text-decoration: none;
-      color:darken($primaryColor, 100%);
-      margin-right: 0;
+    &:after {
+      left: 45%;
+      transform: rotate(45deg);
+      bottom: 13.5vh;
+      z-index: 10;
+      background: inherit;
+      width: 2.5vw;
+      height: 5vh;
 
-      &:hover {
-        text-decoration: none;
-        color: darken($primaryColor, 100%);
-      }
+    }
+
+    .image {
+      margin-left: 35%;
+      margin-top: 5%;
+      height: 3.5em;
+      z-index: 20;
     }
 
   }
-  //
-  //.foodHeroProfile {
-  //  color: $foodHeroColor;
-  //
-  //  &:hover {
-  //    color: $foodHeroColorHover;
-  //  }
-  //}
-  //
-  //.companyProfile {
-  //  color: $companyColor;
-  //
-  //  &:hover {
-  //    color: $companyColorHover;
-  //  }
-  //}
-  //
-  //.associationProfile {
-  //  color: $assoColor;
-  //
-  //  &:hover {
-  //    color: $assoColorHover;
-  //  }
-  //}
-  //
-  //.foodHeroProfileBorder {
-  //  background-color : $foodHeroBackground;
-  //  border: 1px $foodHeroColor solid;
-  //  border-radius:20px;
-  //
-  //  &:hover {
-  //    border: 1px $foodHeroColorHover solid;
-  //  }
-  //}
-  //
-  //.companyProfileBorder {
-  //  background-color : $companyBackground;
-  //  border: 1px $companyColor solid;
-  //  border-radius:20px;
-  //
-  //  &:hover {
-  //    border: 1px $companyColorHover solid;
-  //  }
-  //}
-  //
-  //.associationProfileBorder {
-  //  background-color : $associationBackground;
-  //  border: 1px $assoColor solid;
-  //  border-radius:20px;
-  //
-  //  &:hover {
-  //    border: 1px $assoColorHover solid;
-  //  }
-  //}
+
 }
+
+.nametroduction{
+  margin-top: 0.5em;
+  .introduction{
+    color: $foodHeroColor;
+    font-family: 'Old Standard TT', serif;
+    font-style: italic;
+    word-wrap: break-word;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-size: 0.8em;
+    text-align: center;
+  }
+}
+.name{
+  color: $foodHeroColor;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-align: center;
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    top: 1.3em;
+    width: 20%;
+    left: 40%;
+    right: 40%;
+    height: 1.5px;
+    background: $foodHeroColor;
+  }
+
+}
+@media (max-width: 576px) {
+  .bussinesscard .front .top:after{
+    width: 1.1em;
+    height: 1.1em;
+  }
+   }

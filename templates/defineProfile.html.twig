@@ -9,63 +9,47 @@
             </div>
         {% endblock %}
 {% block body %}
-    <main class="container">
-    <section class="text-center ">
-        <div class="title row">
-            <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
-            <p>Indiquez-nous comment vous souhaitez agir.</p>
-        </div>
-        <div class="row justify-content-between">
-            <article class="col-12 col-lg-3 ">
-                <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}">
+    <main class="container mt-3">
 
-                    <div class="card" style="width: 18rem;">
-                        <img class="foodhero-picture"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-foodheroor.jpg') }} " style="height: 30vh"
-                             alt="bonhomme blanc foodhero"/>
-                        <div class="card-body">
-                            <h1 class="card-title">Food Hero</h1>
-                            <p class="card-text">Je souhaite aider les associations à collecter des offres alimentaires
-                                près de chez moi.</p>
-                        </div>
-                    </div>
-                </a>
-            </article>
+        <section class="bussinesscard ">
 
+            <div class="front">
+                <div class="top">
+                    <img class="image" src="{{ asset('build/images/super(3).png') }}" alt="superhero"/>
+                </div>
+                <div class="nametroduction">
+                    <div class="name">Foodhero</div>
+                    <div class="introduction">Je souhaite aider les associations à collecter des offres alimentaires.</div>
+                </div>
+            </div>
+        </section>
 
-            <article class="col-12 col-lg-3 ">
-                <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <div class="card" style="width: 18rem;">
-                        <img class="company-picture"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-companyblue.jpg') }} " style="height: 30vh"
-                             alt="bonhomme blanc foodhero"/>
-                        <div class="card-body">
-                            <h1 class="card-title">Entreprise</h1>
-                            <p class="card-text">Je souhaite proposer mes surplus à une association d'aide
-                                alimentaire.</p>
-                        </div>
-                    </div>
-                </a>
-            </article>
+        <section class="bussinesscard mt-3 row">
 
+            <div class="front">
+                <div class="top">
+                    <img class="image" src="{{ asset('build/images/heart.png') }}" alt="superhero"/>
+                </div>
+                <div class="nametroduction">
+                    <div class="name">Association</div>
+                    <div class="introduction">Je souhaite bénéficier d'offres alimentaires.</div>
+                </div>
+            </div>
+        </section>
+        <section class="bussinesscard mt-3 row">
 
-            <article class="col-12 col-lg-3 ">
-                <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <div class="card" style="width: 18rem;">
-                        <img class="company-picture"
-                             src="{{ asset('build/images/bonhomme-blanc-3d-associationgreen.jpg') }} "
-                             style="height: 30vh"
-                             alt="bonhomme blanc foodhero"/>
-                        <div class="card-body">
-                            <h1 class="card-title">Association</h1>
-                            <p class="card-text">Je représente une association qui souhaite bénéficier d'offres
-                                alimentaires.</p>
-                        </div>
-                    </div>
-                </a>
-            </article>
-        </div>
-    </section>
+            <div class="front">
+                <div class="top">
+                    <img class="image" src="{{ asset('build/images/company.png') }}" alt="superhero"/>
+                </div>
+                <div class="nametroduction">
+                    <div class="name">Entreprise</div>
+                    <div class="introduction">Je souhaite proposer mes surplus à une association d'aide alimentaire.</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
 
 
