@@ -45,11 +45,10 @@
 
 a {
   color: $bodyBackground;
-}
-
-a:hover {
-  color: $bodyBackground;
-  text-decoration: none;
+  :hover {
+    color: $bodyBackground;
+    text-decoration: none;
+  }
 }
 
 h1{

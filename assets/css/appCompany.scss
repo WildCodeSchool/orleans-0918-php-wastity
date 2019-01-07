@@ -16,12 +16,11 @@
   a {
     color: $bodyBackground;
     font-weight: bold;
-  }
-
-  a:hover {
-    color: $bodyBackground;
-    font-weight: bold;
-    text-decoration: none;
+    :hover {
+      color: $bodyBackground;
+      font-weight: bold;
+      text-decoration: none;
+    }
   }
 }
 .wastity_blanc{
@@ -45,11 +44,10 @@
 
 a {
   color: $bodyBackground;
-}
-
-a:hover {
-  color: $bodyBackground;
-  text-decoration: none;
+  :hover {
+    color: $bodyBackground;
+    text-decoration: none;
+  }
 }
 
 h1{
