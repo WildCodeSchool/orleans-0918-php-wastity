@@ -131,6 +131,7 @@ class CompanyController extends AbstractController
             } else {
                 $this->addFlash('danger', "Cet utilisateur n'existe pas");
             }
+            return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }
         
         return $this->render('Visitor/Company/show.html.twig', [
