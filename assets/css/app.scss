@@ -107,3 +107,12 @@ ul {
 .col-6 {
   flex: none;
 }
+
+label.required::after {
+  content:' *';
+  color: $required;
+}
+legend.required::after {
+  content:' *';
+  color: $required;
+}

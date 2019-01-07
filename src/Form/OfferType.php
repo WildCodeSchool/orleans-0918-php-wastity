@@ -19,18 +19,18 @@ class OfferType extends AbstractType
         $builder
             ->add('pictureFile', VichImageType::class, [
                 'allow_delete' => false,
-                'label' => 'Image de votre produit *',
+                'label' => 'Image de votre produit',
                 'download_uri' => false,
                 'image_uri' => false,
             ])
             ->add('weight', NumberType::class, [
                 'scale' => 2,
-                'label' => 'Poids *',
+                'label' => 'Poids',
                 'attr' => [
                 'placeholder' => 'en kg']
             ])
             ->add('start', DateTimeType::class, [
-                'label' => 'Disponible à partir de *',
+                'label' => 'Disponible à partir de',
                 'widget' => 'single_text',
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
@@ -39,7 +39,7 @@ class OfferType extends AbstractType
                     'placeholder' => '2019-01-31 20:30']
             ])
             ->add('end', DateTimeType::class, [
-                'label' => 'Jusqu\'à *',
+                'label' => 'Jusqu\'à',
                 'widget' => 'single_text',
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
