@@ -133,14 +133,14 @@ class FoodHeroController extends AbstractController
      */
     public function showOffer(FoodHero $foodhero, Offer $offer)
     {
-        $adressCompany=$offer->getCompany()->fullAddress();
-        $adressAsso=$offer->getAssociation()->fullAddress();
+        $addressCompany=$offer->getCompany()->fullAddress();
+        $addressAsso=$offer->getAssociation()->fullAddress();
 
         return $this->render('Visitor/FoodHero/showOffer.html.twig', [
             'offer' => $offer,
             'foodhero' => $foodhero,
-            'adressCompany'=>$adressCompany,
-            'adressAsso'=>$adressAsso
+            'addressCompany'=>$addressCompany,
+            'addressAsso'=>$addressAsso
         ]);
     }
     

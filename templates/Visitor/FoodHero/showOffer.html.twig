@@ -39,7 +39,7 @@
                 </div>
                 <div class="row">
                     <a class="btn btn-secondary mt-2"
-                       href="https://www.google.com/maps/dir/{{ adressAsso }}/{{ adressCompany }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">Voir
+                       href="https://www.google.com/maps/dir/{{ addressAsso }}/{{ addressCompany }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">Voir
                         la carte</a>
                     <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"
                        class="offset-1 col-6 mt-2 btn btn-primary">Accepter l'offre</a>
@@ -48,4 +48,5 @@
             </div>
         </div>
     </div>
+    {{ dump(app.session.get('latitude'))}}
 {% endblock %}
