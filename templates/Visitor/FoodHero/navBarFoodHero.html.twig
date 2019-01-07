@@ -14,7 +14,7 @@
          </div>
          <div class="col-3">
              <a class="navbar-brand ml-3" href="{{ path('foodhero_record', {'id' : foodhero.id}) }}">
-                 <i class="fas fa-clipboard-check fa-2x {% if ('#') == app.request.requestUri %} foodheroActive {% endif %}"></i>
+                 <i class="fas fa-clipboard-check fa-2x {% if (path('foodhero_record', {'id' : foodhero.id})) == app.request.requestUri %} foodheroActive {% endif %}"></i>
                  <p>Fait</p>
              </a>
          </div>
