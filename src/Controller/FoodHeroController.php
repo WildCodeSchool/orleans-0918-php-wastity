@@ -138,6 +138,8 @@ class FoodHeroController extends AbstractController
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
+     * @param DistanceCalculator $distanceCalculator
+     * @param SessionInterface $session
      * @return Response
      */
 
@@ -210,9 +212,11 @@ class FoodHeroController extends AbstractController
 
 
     /**
-     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @param DistanceCalculator $distanceCalculator
+     * @param SessionInterface $session
      * @return Response
-     * @throws \Exception
      */
     public function showOneOffer(
         FoodHero $foodhero,
@@ -245,6 +249,7 @@ class FoodHeroController extends AbstractController
     /**
      * @Route("/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")
      * @param Offer $offer
+     * @param StatusRepository $statusRepository
      * @return Response
      */
     public function collectOffer(Offer $offer, StatusRepository $statusRepository)
@@ -259,6 +264,24 @@ class FoodHeroController extends AbstractController
 
         return $this->redirectToRoute('foodhero_list_pendingOffers', [
             'id' => $this->getUser()->getFoodHero()->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/record", name="foodhero_record", methods="GET")
+     * @param FoodHero $foodHero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     * @IsGranted("view", subject="foodHero")
+     */
+    public function record(FoodHero $foodHero, OfferRepository $offerRepository): Response
+    {
+        $offers = $offerRepository->findAcceptedByFoodHeroBeforeEndDate(new \DateTime(), $foodHero);
+
+        return $this->render('Visitor/FoodHero/record.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodHero,
         ]);
     }
 }
