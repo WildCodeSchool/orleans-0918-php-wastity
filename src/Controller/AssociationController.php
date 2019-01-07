@@ -130,8 +130,10 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository)
-    {
+    public function listOffers(
+        Association $association,
+        OfferRepository $offerRepository
+    ): Response {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
         return $this->render('Visitor/Association/listOffers.html.twig', [
@@ -163,8 +165,11 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function showOneOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator)
-    {
+    public function showOneOffer(
+        Association $association,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator
+    ): Response {
         $company = $offer->getCompany();
         $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
 
@@ -181,8 +186,11 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function showOffer(Association $association, Offer $offer, DistanceCalculator $distanceCalculator)
-    {
+    public function showOffer(
+        Association $association,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator
+    ): Response {
         $company = $offer->getCompany();
         $distance = $distanceCalculator->calculateDistance($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
@@ -199,8 +207,11 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(Association $association, Offer $offer, StatusRepository $statusRepository)
-    {
+    public function acceptOffer(
+        Association $association,
+        Offer $offer,
+        StatusRepository $statusRepository
+    ): Response {
         $status = $statusRepository->findOneByConstStatus('FoodHeroResearch');
 
         $em = $this->getDoctrine()->getManager();
@@ -217,8 +228,11 @@ class AssociationController extends AbstractController
      * @param association $association
      * @return Response
      */
-    public function editSchedule(Request $request, Association $association, DaysOfWeekRepository $daysOfWeekRepository)
-    {
+    public function editSchedule(
+        Request $request,
+        Association $association,
+        DaysOfWeekRepository $daysOfWeekRepository
+    ):Response {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
@@ -239,7 +253,7 @@ class AssociationController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="association")
      */
-    public function showStat(
+    public function showStatistics(
         Association $association,
         OfferRepository $offerRepository,
         StatusRepository $statusRepository

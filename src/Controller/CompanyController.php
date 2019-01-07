@@ -67,7 +67,7 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function listOffers(Company $company, OfferRepository $offerRepository)
+    public function listOffers(Company $company, OfferRepository $offerRepository): Response
     {
         $offers = $company->getOffers();
 
@@ -217,8 +217,11 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function showStat(Company $company, OfferRepository $offerRepository, StatusRepository $statusRepository)
-    {
+    public function showStatistics(
+        Company $company,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
         $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
         $offers = $offerRepository->findBy(['company'=>$company, 'status'=>$deliveredStatus]);
         $weightTotal = 0;
