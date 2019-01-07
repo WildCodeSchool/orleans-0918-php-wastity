@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -74,6 +76,16 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\Company", mappedBy="user", cascade={"persist", "remove"})
      */
     private $company;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Company", mappedBy="members")
+     */
+    private $memberCompanies;
+
+    public function __construct()
+    {
+        $this->memberCompanies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -233,5 +245,33 @@ class User implements UserInterface
     public function getFullname(): ?string
     {
         return $this->fullname = ucfirst($this->getLastname()). ' ' .ucfirst($this->getFirstname());
+    }
+
+    /**
+     * @return Collection|Company[]
+     */
+    public function getMemberCompanies(): Collection
+    {
+        return $this->memberCompanies;
+    }
+
+    public function addMemberCompany(Company $memberCompany): self
+    {
+        if (!$this->memberCompanies->contains($memberCompany)) {
+            $this->memberCompanies[] = $memberCompany;
+            $memberCompany->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMemberCompany(Company $memberCompany): self
+    {
+        if ($this->memberCompanies->contains($memberCompany)) {
+            $this->memberCompanies->removeElement($memberCompany);
+            $memberCompany->removeMember($this);
+        }
+
+        return $this;
     }
 }

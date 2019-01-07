@@ -92,5 +92,21 @@
                 horaires</a>
         </div>
 
+        <div class="row text-info">
+            <h1><strong>Vos membres</strong></h1>
+        </div>
+        <div>
+            {% if company.members is not empty %}
+                {% for member in company.members  %}
+                    <p>{{ member.email }}</p>
+                {% endfor %}
+            {% else %}
+                <p>aucun membre actuellement</p>
+            {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
+        </div>
+
     </div>
 {% endblock %}

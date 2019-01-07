@@ -6,12 +6,14 @@ use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\DaysOfWeek;
 use App\Entity\Schedule;
+use App\Form\CompanyMemberType;
 use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
 use App\Form\OfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\OfferRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,16 +109,27 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/showCompany", name="company_show", methods="GET")
+     * @Route("/{id}/showCompany", name="company_show", methods="GET|POST")
      * @param Company $company
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function showCompany(Company $company): Response
+    public function showCompany(Company $company, Request $request, UserRepository $userRepository): Response
     {
-
+        $form = $this->createForm(CompanyMemberType::class);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+//            $form->getData();
+            $user = $userRepository->findOneByEmail($form->getData()["email"]);
+            $company->addMember($user);
+            $em->flush();
+        }
+        
         return $this->render('Visitor/Company/show.html.twig', [
             'company' => $company,
+            'form' => $form->createView(),
         ]);
     }
 
