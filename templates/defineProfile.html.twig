@@ -11,7 +11,8 @@
 {% block body %}
     <main class="container mt-3">
 <div class="fh">
-        <section class=" bussinesscard">
+    <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}
+"><section class=" bussinesscard">
 
             <div class="front">
                 <div class="top">
@@ -22,10 +23,11 @@
                     <div class="introduction mt-2">Je souhaite aider les associations à collecter des offres alimentaires.</div>
                 </div>
             </div>
-        </section>
+        </section></a>
 </div>
         <div class="asso">
-        <section class=" bussinesscard mt-3 ">
+            <a href="{% if app.user.association is null %}{{ path('association_new') }}{% else %}{{ path('association_show', {'id' : app.user.association.id}) }}{% endif %}">
+            <section class=" bussinesscard mt-3 ">
 
             <div class="front">
                 <div class="top">
@@ -36,10 +38,11 @@
                     <div class="introduction mt-2 pb-1">Je souhaite bénéficier d'offres alimentaires.</div>
                 </div>
             </div>
-        </section>
+            </section></a>
         </div>
         <div class="comp">
-        <section class=" bussinesscard mt-3">
+            <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
+                <section class=" bussinesscard mt-3">
 
             <div class="front">
                 <div class="top">
@@ -50,7 +53,7 @@
                     <div class="introduction mt-2">Je souhaite proposer mes surplus à une association d'aide alimentaire.</div>
                 </div>
             </div>
-        </section>
+                </section></a>
         </div>
     </main>
 
