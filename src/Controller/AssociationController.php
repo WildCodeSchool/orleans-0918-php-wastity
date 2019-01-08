@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Association;
 use App\Entity\Offer;
 use App\Entity\Status;
+use App\Entity\User;
 use App\Form\AssociationMemberType;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
@@ -313,5 +314,23 @@ class AssociationController extends AbstractController
             'weightTotal' => $weightTotal,
             'countCompany' => $countCompany,
         ]);
+    }
+    
+    /**
+     * @Route ("/{id}/removeMember/{user}", name="removeMember", methods="POST")
+     * @param Association $association
+     * @param User $user
+     * @return Response
+     */
+    public function deleteMember(Association $association, User $user, Request $request) :Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $association->removeMember($user);
+            $em->flush();
+            $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+        }
+        
+        return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
     }
 }
