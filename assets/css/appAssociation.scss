@@ -105,7 +105,7 @@ label{
     text-decoration:none;
   }
   a{
-    color : white;
+    color : $primaryColor;
     font-weight: bold;
   }
   .btn{
@@ -117,7 +117,7 @@ label{
 }
 .card-header{
   height: 12vh;
-  color:white;
+  color:$primaryColor;
   background-color: $assoColor;
   clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
   h3{
@@ -132,7 +132,7 @@ label{
 
 .card-body{
   li{
-    color: black;
+    color: darken($primaryColor, 100%);
     font-weight: 500;
   }
   .fas{

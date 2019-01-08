@@ -98,7 +98,7 @@ label{
 
 .card-header{
   height: 12vh;
-  color:white;
+  color:$primaryColor;
   background-color: $companyColor;
   clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
   h3{
