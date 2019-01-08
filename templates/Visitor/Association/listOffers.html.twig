@@ -9,22 +9,22 @@
 
 {% block body %}
     <div class="container">
-        <div class="container mb-5 pb-5">
+        <div class="container mb-2">
             <div class="row justify-content-center text-center">
                 <div>
-                    <p class="fa-2x text-center text-success mt-3 mb-2"><strong>Liste des offres en attente</strong></p>
+                    <p class="fa text-center text-success mt-3 mb-2"><strong>Liste des offres en attente</strong></p>
                 </div>
             </div>
         </div>
         <div class="container px-0 mb-5 pb-5">
-        <div class="row justify-content-center">
-            {% for offer in offers %}
+            <div class="row justify-content-center">
+                {% for offer in offers %}
 
-                {{ render(controller(
-                    'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
-                )) }}
+                    {{ render(controller(
+                        'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
+                    )) }}
 
-            {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>
