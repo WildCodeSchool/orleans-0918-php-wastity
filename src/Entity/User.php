@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -74,6 +76,16 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\Company", mappedBy="user", cascade={"persist", "remove"})
      */
     private $company;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Association", mappedBy="members")
+     */
+    private $memberAssociations;
+
+    public function __construct()
+    {
+        $this->memberAssociations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -233,5 +245,33 @@ class User implements UserInterface
     public function getFullname(): ?string
     {
         return $this->fullname = ucfirst($this->getLastname()). ' ' .ucfirst($this->getFirstname());
+    }
+
+    /**
+     * @return Collection|Association[]
+     */
+    public function getMemberAssociations(): Collection
+    {
+        return $this->memberAssociations;
+    }
+
+    public function addMemberAssociation(Association $memberAssociation): self
+    {
+        if (!$this->memberAssociations->contains($memberAssociation)) {
+            $this->memberAssociations[] = $memberAssociation;
+            $memberAssociation->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMemberAssociation(Association $memberAssociation): self
+    {
+        if ($this->memberAssociations->contains($memberAssociation)) {
+            $this->memberAssociations->removeElement($memberAssociation);
+            $memberAssociation->removeMember($this);
+        }
+
+        return $this;
     }
 }
