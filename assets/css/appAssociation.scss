@@ -11,6 +11,15 @@
   }
 }
 
+.page-link {
+  color:$assoColor;
+}
+
+.page-item.active .page-link {
+  background-color:$assoColor;
+  border-color:$assoColor;
+}
+
 .wastity_blanc{
   height: $headerTitle;
 }

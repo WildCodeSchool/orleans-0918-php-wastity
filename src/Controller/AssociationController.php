@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Association;
-
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Offer;
 use App\Entity\Status;
 use App\Form\AssociationType;
@@ -24,7 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 /**
  * @Route("/association")
  */
-class AssociationController extends AbstractController
+class AssociationController extends Controller
 {
     /**
      * @IsGranted("ROLE_USER")
@@ -130,12 +130,24 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository)
+    public function listOffers(Association $association, OfferRepository $offerRepository, Request $request)
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
+        $paginator  = $this->get('knp_paginator');
+
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+        // Doctrine Query, not results
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/Association/listOffers.html.twig', [
-            'offers' => $offers,
+            'appointments'=> $appointments,
             'association' => $association,
         ]);
     }
