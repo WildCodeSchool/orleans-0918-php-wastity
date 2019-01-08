@@ -4,16 +4,14 @@ namespace App\Controller;
 
 use App\Entity\FoodHero;
 use App\Entity\Offer;
-use App\Entity\Status;
 use App\Form\FoodHeroType;
-use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -21,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/foodhero")
  */
-class FoodHeroController extends Controller
+class FoodHeroController extends AbstractController
 {
     /**
      * @IsGranted("ROLE_USER")
@@ -102,12 +100,10 @@ class FoodHeroController extends Controller
      * @throws \Exception
      * @Route("/{id}/offers", name="foodhero_list_offers", methods="GET")
      */
-    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository, Request $request)
+    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository, Request $request, PaginatorInterface $paginator)
     {
         $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
 
-        $paginator  = $this->get('knp_paginator');
-        // Paginate the results of the query
         $appointments = $paginator->paginate(
             $offers,
             // Define the page parameter
@@ -130,12 +126,10 @@ class FoodHeroController extends Controller
      * @throws \Exception
      * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
      */
-    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository, Request $request)
+    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository, Request $request, PaginatorInterface $paginator)
     {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
-        $paginator  = $this->get('knp_paginator');
-        // Paginate the results of the query
         $appointments = $paginator->paginate(
             $offers,
             // Define the page parameter
