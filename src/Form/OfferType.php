@@ -18,7 +18,6 @@ class OfferType extends AbstractType
     {
         $builder
             ->add('pictureFile', VichImageType::class, [
-                'required' => false,
                 'allow_delete' => false,
                 'label' => 'Image de votre produit',
                 'download_uri' => false,
@@ -35,19 +34,22 @@ class OfferType extends AbstractType
                 'widget' => 'single_text',
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
+                'help' => 'ex:2019-01-31 20:30',
                 'attr' => [
-                    'placeholder' => '2018-12-31 20:30']
+                    'placeholder' => '2019-01-31 20:30']
             ])
             ->add('end', DateTimeType::class, [
                 'label' => 'Jusqu\'à',
                 'widget' => 'single_text',
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
+                'help' => 'ex:2019-12-31 20:30',
                 'attr' => [
-                    'placeholder' => '2018-12-31 20:30']
+                    'placeholder' => '2019-12-31 20:30']
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Décrivez votre produit. Ex : Baguettes, Boites de conserves, ...']
             ])
@@ -61,6 +63,7 @@ class OfferType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Offer::class,
+            'help' => '* champs obligatoires',
         ]);
     }
 }

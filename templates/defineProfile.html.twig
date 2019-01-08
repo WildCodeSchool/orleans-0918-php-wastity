@@ -9,31 +9,54 @@
             </div>
         {% endblock %}
 {% block body %}
-    <main class="container">
-        <section class="text-center">
-            <div class="title">
-                <b>Vous souhaitez contribuer à la réduction du gaspillage alimentaire?</b>
-                <p>Indiquez-nous comment vous souhaitez agir.</p>
+    <main class="container mt-3">
+<div class="fh">
+    <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}
+"><section class=" bussinesscard">
+
+            <div class="front">
+                <div class="top">
+                    <img class="image" src="{{ asset('build/images/super(3).png') }}" alt="superhero"/>
+                </div>
+                <div class="nametroduction">
+                    <div class="name">Foodhero</div>
+                    <div class="introduction mt-2">Je souhaite aider les associations à collecter des offres alimentaires.</div>
+                </div>
             </div>
+        </section></a>
+</div>
+        <div class="asso">
+            <a href="{% if app.user.association is null %}{{ path('association_new') }}{% else %}{{ path('association_show', {'id' : app.user.association.id}) }}{% endif %}">
+            <section class=" bussinesscard mt-3 ">
 
-            <article class="foodHeroProfileBorder d-flex align-items-center justify-content-center">
-                <a class="foodHeroProfile" href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}
-">
+            <div class="front">
+                <div class="top">
+                    <img class="image" src="{{ asset('build/images/heart.png') }}" alt="superhero"/>
+                </div>
+                <div class="nametroduction">
+                    <div class="name">Association</div>
+                    <div class="introduction mt-2 pb-1">Je souhaite bénéficier d'offres alimentaires.</div>
+                </div>
+            </div>
+            </section></a>
+        </div>
+        <div class="comp">
+            <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
+                <section class=" bussinesscard mt-3">
 
-                    <h1>Food Hero</h1>
-                    <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p></a>
-            </article>
-            <article class="companyProfileBorder d-flex align-items-center justify-content-center">
-                <a class="companyProfile" href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
-                    <h1>Entreprise</h1>
-                    <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p></a>
-            </article>
-            <article class="associationProfileBorder d-flex align-items-center justify-content-center"><a class="associationProfile" href="{% if app.user.association is null %}{{ path('association_new') }}{% else %}{{ path('association_show', {'id' : app.user.association.id}) }}{% endif %}">
-                    <h1>Association</h1>
-                    <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p></a>
-            </article>
-
-        </section>
+            <div class="front">
+                <div class="top">
+                    <img class="image" src="{{ asset('build/images/company.png') }}" alt="superhero"/>
+                </div>
+                <div class="nametroduction">
+                    <div class="name">Entreprise</div>
+                    <div class="introduction mt-2">Je souhaite proposer mes surplus à une association d'aide alimentaire.</div>
+                </div>
+            </div>
+                </section></a>
+        </div>
     </main>
+
+
 
 {% endblock %}
