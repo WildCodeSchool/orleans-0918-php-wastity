@@ -72,3 +72,54 @@ a:hover{
 .foodheroActive{
   color: darken($foodHeroColor,30%)
 }
+
+.fa{
+  font-size: 4vh;
+}
+
+.card-header{
+  height: 12vh;
+  color:white;
+  background-color: $foodHeroColor;
+  clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
+  h3{
+    font-size: 2.7vh;
+    font-weight: bold;
+  }
+  p{
+    font-size: 1.8vh;
+    margin-left: 15px;
+  }
+}
+
+.card-body{
+  li{
+    color: black;
+    font-weight: 500;
+  }
+  .fas{
+    color: $foodHeroColor;
+  }
+  .imgOffer{
+    margin-bottom: 1vh;
+  }
+  strong{
+    color:$foodHeroColor;
+  }
+}
+
+.card {
+  box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
+  a:link
+  {
+    text-decoration:none;
+  }
+  a{
+    color : white;
+    font-weight: bold;
+  }
+  .btn{
+    font-size: small;
+    background-color: $foodHeroColor;
+  }
+}

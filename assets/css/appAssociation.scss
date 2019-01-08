@@ -45,6 +45,7 @@ h1{
 .fa{
   font-size: 4vh;
 }
+
 .form-group{
   margin-bottom: 5px;
 }
@@ -107,7 +108,9 @@ label{
     color : white;
     font-weight: bold;
   }
-
+  .btn{
+    font-size: small;
+  }
 }
 .associationActive{
   color: darken($assoColor,30%)

@@ -2,46 +2,58 @@
 
 {% block title %}Offer index{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
-
+{% block header %}
+    <div class="row header">
+        <a class="col-3 col-md-4" href="{{ path('profile_index') }}"><i class="fas fa-home fa-2x"></i></a>
+        {% if foodhero is defined %}
+            <h1 class="col text-center">{{ foodhero.user.firstname }} {{ foodhero.user.lastname  }}</h1>
+        {% else %}
+            <h1 class="col text-center">Inscription</h1>
+        {% endif %}
+        <a class="col-3 text-right"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
+        <a class="col-12 col-md-1 text-center" href="/logout"><i class="fas fa-unlock"> Déconnexion</i></a>
+    </div>
+{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row justify-content-center">
             <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
-                    </div>
+                <div class="card-header align-items-center">
+                    <h3 class="col-12 mt-2 mb-0">{{ offer.description|slice(0,20) ~ '...' }}</h3>
+                    <p>proposée par {{ offer.company.name }}</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <ul class="col-6">
-                            <li><strong class="text-primary">Quantité :</strong> {{ offer.weight }} Kg</li>
+                            <li class="mt-2"><i class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}</li>
+                            <li class="mt-2"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg </li>
+
                             {% if app.session.get('latitude') is not null %}
-                              {% if distance %}
-                                <li class="mt-1"><strong class="text-primary">Distance :</strong> {{ distance ? distance~ 'km' : 'non calculée' }} </li>
-                              {% endif %}
-                              {% if distanceTotal %}
-                                <li class="mt-1"><strong class="text-primary">Distance totale :</strong> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </li>
-                              {% endif %}
+                                {% if distance %}
+                                    <li class="mt-1"><i class="fas fa-map-marker-alt mr-2 mr-md-4"></i> {{ distance ? distance~ 'km' : 'non calculée' }} </li>
+                                {% endif %}
+                                {% if distanceTotal %}
+                                    <li class="mt-1">
+                                        <i class="fas fa-route mr-2 mr-md-4"></i> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </li>
+                                {% endif %}
                             {% endif %}
-                            <li class="mt-1"><strong class="text-primary">Entreprise :</strong> {{ offer.company.name }}
-                            </li>
 
                         </ul>
                         <img class="col-6"
                              src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                              alt="ImageOffre"/>
-                        <p class="col-12 mt-1"><strong class="text-primary">Description</strong>
+                        <p class="col-12 mt-1"><strong >Description</strong>
                             : {{ offer.description }}
                         </p>
-                        <p class="col-12 mt-1"><strong class="text-primary">Informations complémentaires</strong>
+                        <p class="col-12 mt-1"><strong >Informations complémentaires</strong>
                             : {{ offer.complementary }}</p>
 
                     </div>
                 </div>
                 <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"
-                   class="offset-6 col-6 mt-2 btn btn-primary">Accepter l'offre</a>
+                   class="offset-3 col-6 mt-2 mb-2 btn">Accepter l'offre</a>
             </div>
         </div>
     </div>
+
 {% endblock %}

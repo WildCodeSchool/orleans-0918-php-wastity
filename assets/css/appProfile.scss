@@ -9,6 +9,7 @@ header {
 }
 body{
   height: auto;
+  margin-bottom: 0;
 }
 
 @mixin card($color){
