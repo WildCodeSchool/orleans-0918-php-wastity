@@ -232,7 +232,6 @@ class FoodHeroController extends AbstractController
         $distance = null;
         $distanceTotal = null;
         $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
-        dump($session->has('latitude'));
         if ($session->has('latitude')) {
             $distance = $distanceCalculator->calculateDistanceFromGps(
                 $session->get('latitude'),
