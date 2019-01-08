@@ -5,7 +5,7 @@
   padding-top: 10px;
   top : 0;
   background-color: $assoColor;
-  box-shadow: 0 0 1.5em $headerBorderColor;
+  box-shadow: 0 0 1em $headerBorderColor;
   h1{
     color: $bodyBackground;
     font-size: $headerTitle;
@@ -94,7 +94,7 @@ label{
 }
 
 .navbar{
-  box-shadow: 0 0 1.5em $headerBorderColor;
+  box-shadow: 0 0 1em $headerBorderColor;
   background-color: $assoColor;
 }
 
