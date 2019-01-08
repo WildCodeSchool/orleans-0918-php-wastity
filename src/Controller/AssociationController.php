@@ -100,8 +100,11 @@ class AssociationController extends AbstractController
      * @param Association $association
      * @return Response
      */
-    public function showAssociation(Association $association, Request $request, UserRepository $userRepository): Response
-    {
+    public function showAssociation(
+        Association $association,
+        Request $request,
+        UserRepository $userRepository
+    ): Response {
         $form = $this->createForm(AssociationMemberType::class);
         $form->handleRequest($request);
     
