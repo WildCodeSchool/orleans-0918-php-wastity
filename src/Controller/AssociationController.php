@@ -134,20 +134,8 @@ class AssociationController extends Controller
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
-        $paginator  = $this->get('knp_paginator');
-
-        // Paginate the results of the query
-        $appointments = $paginator->paginate(
-        // Doctrine Query, not results
-            $offers,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            8
-        );
-
         return $this->render('Visitor/Association/listOffers.html.twig', [
-            'appointments'=> $appointments,
+            'offers'=> $offers,
             'association' => $association,
         ]);
     }
