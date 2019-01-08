@@ -1,0 +1,11 @@
+{% block header %}
+    <div class="row header">
+        <a class="col-3 text-center" href="{{ path('company_show', {'id': company.id}) }}"><i
+                    class="fas fa-chevron-left"></i>
+            <p class="d-none d-md-block">
+                <img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></p></a>
+        <h1 class="col text-center">Entreprise</h1>
+        <a class="col-3 text-center" href="/logout"><i class="fas fa-unlock"></i>
+            <p class="d-none d-md-block">Déconnexion</p></a>
+    </div>
+{% endblock %}
