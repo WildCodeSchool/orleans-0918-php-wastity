@@ -184,7 +184,7 @@ class AssociationController extends AbstractController
         DistanceCalculator $distanceCalculator
     ): Response {
         $company = $offer->getCompany();
-        $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        $distance = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
 
         return $this->render('Visitor/Association/showCard.html.twig', [
             'association' => $association,
@@ -205,7 +205,7 @@ class AssociationController extends AbstractController
         DistanceCalculator $distanceCalculator
     ): Response {
         $company = $offer->getCompany();
-        $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        $distance = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
             'offer' => $offer,
             'association' => $association,
