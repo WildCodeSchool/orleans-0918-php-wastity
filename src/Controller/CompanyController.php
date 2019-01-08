@@ -122,9 +122,9 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($userRepository->findOneByEmail($form->getData())) {
+            if ($userRepository->findOneByEmail($form->getData()['email'])) {
                 $em = $this->getDoctrine()->getManager();
-                $user = $userRepository->findOneByEmail($form->getData());
+                $user = $userRepository->findOneByEmail($form->getData()['email']);
                 $company->addMember($user);
                 $em->flush();
                 $this->addFlash('success', "Cet utilisateur a bien été ajouté");
