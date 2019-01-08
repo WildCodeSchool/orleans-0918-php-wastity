@@ -16,6 +16,7 @@ use App\Repository\DaysOfWeekRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
 use App\Service\DistanceCalculator;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -156,13 +157,14 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(Association $association, OfferRepository $offerRepository)
-    {
+    public function listOffers(
+        Association $association,
+        OfferRepository $offerRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ) {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
-      
-        $paginator  = $this->get('knp_paginator');
 
-        // Paginate the results of the query
         $appointments = $paginator->paginate(
             $offers,
             // Define the page parameter
@@ -172,7 +174,7 @@ class AssociationController extends AbstractController
         );
 
         return $this->render('Visitor/Association/listOffers.html.twig', [
-            'offers'=> $offers,
+            'appointments'=> $appointments,
             'association' => $association,
         ]);
     }
