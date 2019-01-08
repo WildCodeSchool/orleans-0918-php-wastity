@@ -150,6 +150,8 @@ class FoodHeroController extends AbstractController
         SessionInterface $session
     ): Response {
 
+        $distance = null;
+        $distanceTotal = null;
         $company = $offer->getCompany();
         $addressCompany=$offer->getCompany()->fullAddress();
         $association = $offer->getAssociation();
@@ -227,8 +229,10 @@ class FoodHeroController extends AbstractController
 
         $company = $offer->getCompany();
         $association = $offer->getAssociation();
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
-
+        $distance = null;
+        $distanceTotal = null;
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
+        dump($session->has('latitude'));
         if ($session->has('latitude')) {
             $distance = $distanceCalculator->calculateDistanceFromGps(
                 $session->get('latitude'),
