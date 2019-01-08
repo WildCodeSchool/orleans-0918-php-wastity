@@ -33,7 +33,7 @@ class CompanyVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::VIEW:
-                return $user === $company->getUser();
+                return $user === $company->getUser() || $company->getMembers()->contains($user);
                 break;
         }
         

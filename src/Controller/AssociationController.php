@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Association;
-
 use App\Entity\Offer;
 use App\Entity\Status;
 use App\Entity\User;
@@ -56,6 +55,8 @@ class AssociationController extends AbstractController
             $em->persist($association);
             $em->flush();
 
+            $this->addFlash('success', "Votre association à bien été enregistrée !");
+
             return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
         }
 
@@ -85,6 +86,8 @@ class AssociationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', "Vos modifications ont été enregistrées !");
 
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
@@ -140,6 +143,7 @@ class AssociationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->remove($association);
             $em->flush();
+            $this->addFlash('success', "Votre association à bien été supprimée !");
         }
 
         return $this->redirectToRoute('association_index');
@@ -155,9 +159,20 @@ class AssociationController extends AbstractController
     public function listOffers(Association $association, OfferRepository $offerRepository)
     {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
+      
+        $paginator  = $this->get('knp_paginator');
+
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
 
         return $this->render('Visitor/Association/listOffers.html.twig', [
-            'offers' => $offers,
+            'offers'=> $offers,
             'association' => $association,
         ]);
     }
@@ -191,7 +206,7 @@ class AssociationController extends AbstractController
         DistanceCalculator $distanceCalculator
     ): Response {
         $company = $offer->getCompany();
-        $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        $distance = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
 
         return $this->render('Visitor/Association/showCard.html.twig', [
             'association' => $association,
@@ -212,7 +227,7 @@ class AssociationController extends AbstractController
         DistanceCalculator $distanceCalculator
     ): Response {
         $company = $offer->getCompany();
-        $distance = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        $distance = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
         return $this->render('Visitor/Association/showOffer.html.twig', [
             'offer' => $offer,
             'association' => $association,
@@ -227,14 +242,18 @@ class AssociationController extends AbstractController
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(Association $association, Offer $offer, StatusRepository $statusRepository)
-    {
+    public function acceptOffer(
+        Association $association,
+        Offer $offer,
+        StatusRepository $statusRepository
+    ): Response {
         $status = $statusRepository->findOneByConstStatus('FoodHeroResearch');
 
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);
         $offer->setStatus($status);
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été acceptée !");
 
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
@@ -249,13 +268,14 @@ class AssociationController extends AbstractController
         Request $request,
         Association $association,
         DaysOfWeekRepository $daysOfWeekRepository
-    ): Response {
-
+    ):Response {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos horaires ont bien été modifiés !");
+
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
@@ -271,22 +291,28 @@ class AssociationController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="association")
      */
-    public function showStatistics(Association $association): Response
-    {
-        $offers = $association->getOffers();
-        $companies= [];
+    public function showStatistics(
+        Association $association,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
+        $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
+        $offers = $offerRepository->findBy(['association' => $association, 'status' => $deliveredStatus]);
         $weightTotal = 0;
+        $companies = [];
         foreach ($offers as $offer) {
-            $weight = $offer->getWeight();
-            $weightTotal += $weight;
-            $companies[] = $offer->getassociation();
+            if ($offer->getAssociation()) {
+                $weight = $offer->getWeight();
+                $weightTotal += $weight;
+                $companies[] = $offer->getassociation()->getId();
+            }
         }
         $countCompany = count(array_unique($companies));
         return $this->render('Visitor/Association/showStatistics.html.twig', [
             'association' => $association,
             'offers' => $offers,
             'weightTotal' => $weightTotal,
-            'countCompany'=>$countCompany,
+            'countCompany' => $countCompany,
         ]);
     }
     

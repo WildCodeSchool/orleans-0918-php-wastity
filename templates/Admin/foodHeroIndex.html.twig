@@ -17,13 +17,23 @@
         <table class="table table-striped mt-5 mb-2">
             <thead>
             <tr>
+                <th scope="col">Nom</th>
                 <th scope="col">Numéro de téléphone</th>
+                <th scope="col">
+                    <div class="d-none d-md-block">Photo de Profil</div>
+                </th>
             </tr>
             </thead>
             <tbody>
             {% for food_hero in food_heroes %}
                 <tr>
+                    <td>{{ food_hero.user.fullname }}</td>
                     <td>{{ food_hero.phone }}</td>
+                    <td>
+                        <div class="d-none d-md-block">
+                            <img src="{{ food_hero.profileImage ? vich_uploader_asset(foodhero, 'profileImageFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                                 alt="Image de profil"/></div>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
