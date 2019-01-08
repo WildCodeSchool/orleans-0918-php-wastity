@@ -96,7 +96,7 @@
                 {% for member in association.members  %}
                     <div class="row">
                         <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
-                        {#<div class="col-1">{{ include('Visitor/Association/_deleteMember_form.html.twig') }}</div>#}
+                        <div class="col-1">{{ include('Visitor/Association/_deleteMember_form.html.twig') }}</div>
                     </div>
                 {% endfor %}
             {% else %}

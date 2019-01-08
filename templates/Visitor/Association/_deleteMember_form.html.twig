@@ -1,0 +1,5 @@
+<form  method="post" action="{{ path('removeMember', {'id': association.id, 'user': member.id}) }}" onsubmit="return confirm('Confirmez-vous la suppression de ce membre ?');">
+    <input type="hidden" name="_id" value={{ member.id }}>
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ member.id) }}">
+    <button class="btn btn-link"><i class="fas fa-user-times text-danger"></i></button>
+</form>
