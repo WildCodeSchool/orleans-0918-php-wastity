@@ -30,7 +30,7 @@ class DistanceCalculator
         return round(self::EARTH_RADIUS * $d / 1000, 2);
     }
     
-    public function calculateDistanceFromAdresses(HasAddress $start, HasAddress $end): ?float
+    public function calculateDistanceFromAddresses(HasAddress $start, HasAddress $end): ?float
     {
         $client = new Client(['base_uri' => 'https://api-adresse.data.gouv.fr']);
 

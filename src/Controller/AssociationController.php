@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Association;
-
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Offer;
 use App\Entity\Status;
 use App\Form\AssociationType;
@@ -24,7 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 /**
  * @Route("/association")
  */
-class AssociationController extends AbstractController
+class AssociationController extends Controller
 {
     /**
      * @IsGranted("ROLE_USER")
@@ -52,6 +52,8 @@ class AssociationController extends AbstractController
             $association->setUser($user);
             $em->persist($association);
             $em->flush();
+
+            $this->addFlash('success', "Votre association à bien été enregistrée !");
 
             return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
         }
@@ -82,6 +84,8 @@ class AssociationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', "Vos modifications ont été enregistrées !");
 
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
@@ -118,6 +122,7 @@ class AssociationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->remove($association);
             $em->flush();
+            $this->addFlash('success', "Votre association à bien été supprimée !");
         }
 
         return $this->redirectToRoute('association_index');
@@ -130,14 +135,23 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function listOffers(
-        Association $association,
-        OfferRepository $offerRepository
-    ): Response {
+    public function listOffers(Association $association, OfferRepository $offerRepository, Request $request)
+    {
         $offers = $offerRepository->findAllBeforeEndDateAssociation(new \DateTime());
 
+        $paginator  = $this->get('knp_paginator');
+
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/Association/listOffers.html.twig', [
-            'offers' => $offers,
+            'appointments'=> $appointments,
             'association' => $association,
         ]);
     }
@@ -218,6 +232,7 @@ class AssociationController extends AbstractController
         $offer->setAssociation($association);
         $offer->setStatus($status);
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été acceptée !");
 
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
@@ -238,6 +253,8 @@ class AssociationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos horaires ont bien été modifiés !");
+
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
