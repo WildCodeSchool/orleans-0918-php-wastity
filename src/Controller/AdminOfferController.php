@@ -9,10 +9,9 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
-use App\Form\ActiveType;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,17 +19,28 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin")
  */
-class AdminOfferController extends AbstractController
+class AdminOfferController extends Controller
 {
     /**
      * @Route("/offers", name="offer_admin_index", methods="GET")
      * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function index(OfferRepository $offerRepository): Response
+    public function index(OfferRepository $offerRepository, Request $request): Response
     {
+        $offers = $offerRepository->findBy([], ['end'=>'DESC']);
+
+        $paginator  = $this->get('knp_paginator');
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('Admin/offerIndex.html.twig', [
-            'offers' => $offerRepository->findBy([], ['end'=>'DESC'])
+            'appointments' => $appointments
         ]);
     }
 

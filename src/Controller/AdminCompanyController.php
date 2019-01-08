@@ -10,24 +10,36 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Repository\CompanyRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin")
  */
-class AdminCompanyController extends AbstractController
+class AdminCompanyController extends Controller
 {
     /**
      * @Route("/companies", name="company_index", methods="GET")
      * @param CompanyRepository $companyRepository
      * @return Response
      */
-    public function index(CompanyRepository $companyRepository): Response
+    public function index(CompanyRepository $companyRepository, Request $request): Response
     {
+        $companies = $companyRepository->findAll();
 
-        return $this->render('Admin/companyIndex.html.twig', ['companies' => $companyRepository->findAll()]);
+        $paginator  = $this->get('knp_paginator');
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $companies,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+
+        return $this->render('Admin/companyIndex.html.twig', ['appointments' => $appointments]);
     }
 
 
