@@ -4,12 +4,7 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 
 {% block header %}
-    <div class="row header">
-        <a class="col-3" href="{{ path('company_show_offers', {'id': company.id}) }}"><p class="headerReturn"><span
-                        class="fas fa-chevron-left"></span></p></a>
-        <h1 class="col text-center">{{ company.name }}</h1>
-        <a class="col-3 text-right"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
-    </div>
+    {% include 'headerLogo.html.twig' with {'type': 'Entreprise', 'route': path('company_show_offers', {'id': company.id}) } %}
 {% endblock %}
 
 {% block body %}

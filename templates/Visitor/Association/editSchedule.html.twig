@@ -1,7 +1,7 @@
 {% extends 'Visitor/Association/layoutAssociation.html.twig' %}
 
 {% block header %}
-    {% include 'Visitor/Association/headerEditAssociation.html.twig' %}
+    {% include 'headerLogo.html.twig' with {'type': 'Association', 'route': path('association_show', {'id':association.id}) } %}
 {% endblock %}
 
     {% block body %}

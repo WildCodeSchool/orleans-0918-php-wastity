@@ -1,7 +1,9 @@
 {% extends 'Visitor/Company/layoutCompany.html.twig' %}
 
+{% block title %}Modifier Entreprise{% endblock %}
+
 {% block header %}
-    {% include 'Visitor/Company/headerEditCompany.html.twig' %}
+    {% include 'headerLogo.html.twig' with {'type': 'Entreprise', 'route': path('company_show', {'id':company.id}) } %}
 {% endblock %}
 
 {% block body %}
