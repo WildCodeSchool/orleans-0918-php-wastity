@@ -15,38 +15,38 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            {% for offer in offers %}
+            {% for appointment in appointments %}
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
+                            <p class="col"> Expire le : {{ appointment.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <ul class="col-6">
-                                <li><strong class="text-primary">Quantité :</strong> {{ offer.weight }} Kg</li>
+                                <li><strong class="text-primary">Quantité :</strong> {{ appointment.weight }} Kg</li>
 
-                                <li class="mt-1"><strong class="text-primary">Entreprise :</strong> {{ offer.company.name }}
+                                <li class="mt-1"><strong class="text-primary">Entreprise :</strong> {{ appointment.company.name }}
                                 </li>
-                                <li><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</li>
+                                <li><i class="fas {{ appointment.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ appointment.status.statustext }}</li>
                             </ul>
                             <img class="col-6"
-                                 src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                                 src="{{ appointment.picture ? vich_uploader_asset(appointment, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                                  alt="ImageOffre"/>
                             <p class="col-12 mt-1"><strong class="text-primary">Description</strong>
-                                : {{ offer.description }}
+                                : {{ appointment.description }}
                             </p>
                             <p class="col-12 mt-1"><strong class="text-primary">Informations complémentaires</strong>
-                                : {{ offer.complementary }}</p>
+                                : {{ appointment.complementary }}</p>
 
                         </div>
                     </div>
-                    {% if offer.status.constStatus == 'WaitingForRecuperation' %}
-                    <a href="{{ path('foodhero_collect_offer', {'offer' : offer.id}) }}"
+                    {% if appointment.status.constStatus == 'WaitingForRecuperation' %}
+                    <a href="{{ path('foodhero_collect_offer', {'offer' : appointment.id}) }}"
                        class="offset-6 col-6 mt-2 btn btn-primary">Offre récupérée</a>
                     {% endif %}
-                    {% if offer.status.constStatus == 'WaitingForDelivery' %}
+                    {% if appointment.status.constStatus == 'WaitingForDelivery' %}
                         <a href="#"
                            class="offset-6 col-6 mt-2 btn btn-primary">Offre livrée</a>
                     {% endif %}
@@ -54,6 +54,10 @@
             {% else %}
                 <p><strong>Aucune Offre à afficher</strong></p>
             {% endfor %}
+            <div class="d-flex justify-content-center mt-5">
+                {{ knp_pagination_render(appointments) }}
+            </div>
+
 
         </div>
     </div>

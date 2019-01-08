@@ -11,6 +11,16 @@
     font-size: $headerTitle;
   }
 }
+
+.page-link {
+  color: $foodHeroColor;
+}
+
+.page-item.active .page-link {
+  background-color:$foodHeroColor;
+  border-color:$foodHeroColor;
+}
+
 .wastity_blanc{
   height: $headerTitle;
 }

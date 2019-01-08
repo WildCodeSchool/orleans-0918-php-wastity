@@ -10,7 +10,7 @@ use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -21,7 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/foodhero")
  */
-class FoodHeroController extends AbstractController
+class FoodHeroController extends Controller
 {
     /**
      * @IsGranted("ROLE_USER")
@@ -102,12 +102,22 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/offers", name="foodhero_list_offers", methods="GET")
      */
-    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository)
+    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository, Request $request)
     {
         $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
 
+        $paginator  = $this->get('knp_paginator');
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/FoodHero/listOffers.html.twig', [
-            'offers' => $offers,
+            'appointments' => $appointments,
             'foodhero' => $foodHero
         ]);
     }
@@ -120,12 +130,22 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
      */
-    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
+    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository, Request $request)
     {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
+        $paginator  = $this->get('knp_paginator');
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
-            'offers' => $offers,
+            'appointments' => $appointments,
             'foodhero' => $foodHero
         ]);
     }
