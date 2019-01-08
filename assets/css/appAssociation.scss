@@ -97,48 +97,11 @@ label{
     font-size: 1.5vh;
   }
 }
-
-.card {
-  box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
-  a:link
-  {
-    text-decoration:none;
-  }
-  a{
-    color : $primaryColor;
-    font-weight: bold;
-  }
-  .btn{
-    font-size: small;
-  }
-}
 .associationActive{
   color: darken($assoColor,30%)
 }
-.card-header{
-  height: 12vh;
-  color:$primaryColor;
-  background-color: $assoColor;
-  clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
-  h3{
-    font-size: 2.7vh;
-    font-weight: bold;
-  }
-  p{
-    font-size: 1.8vh;
-    margin-left: 15px;
-  }
-}
 
-.card-body{
-  li{
-    color: darken($primaryColor, 100%);
-    font-weight: 500;
-  }
-  .fas{
-    color: $assoColor;
-  }
-  .imgOffer{
-    margin-bottom: 1vh;
-  }
+
+.asso{
+  @include card($assoColor);
 }

@@ -1,7 +1,8 @@
-<div class="card">
+<div class="card fh">
     <a href="{{ path('foodhero_show_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}">
-        <div class="card-header d-flex align-items-center">
-            <h3>{{ offer.description|slice(0,25) ~ '...' }}</h3>
+        <div class="card-header align-items-center">
+            <h3  class="col-12 mt-2 mb-0">{{ offer.description|slice(0,25) ~ '...' }}</h3>
+            <p>proposée par {{ offer.company.name}}</p>
         </div>
 
         <div class="card-body">

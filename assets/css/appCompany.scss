@@ -96,30 +96,10 @@ label{
   color: darken($companyColor,30%)
 }
 
-.card-header{
-  height: 12vh;
-  color:$primaryColor;
-  background-color: $companyColor;
-  clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
-  h3{
-    font-size: 2.7vh;
-    font-weight: bold;
-  }
-  p{
-    font-size: 1.8vh;
-    margin-left: 15px;
-  }
-}
-
-.card-body{
-  .fas{
-    color: $companyColor;
-  }
-  .imgOffer{
-    margin: 1%;
-  }
-}
-
 .fa{
   font-size: 4vh;
+}
+
+.comp{
+  @include card($companyColor);
 }

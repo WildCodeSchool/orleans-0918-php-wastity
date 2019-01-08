@@ -12,34 +12,6 @@ body{
   margin-bottom: 0;
 }
 
-@mixin card($color){
-  box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
-  a:hover{
-    text-decoration: none;
-  }
-  .card-header{
-    background-color: $color;
-    clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
-    height: 12vh;
-    .image{
-      height: 8vh;
-    }
-  }
-  .card-body{
-    h1{
-      font-size: 3vh;
-      font-weight: bold;
-      margin-top: 1.5vh;
-    }
-    p{
-      font-size: 1.8vh;
-      margin-left: 1vw;
-      margin-right: 1vw;
-      margin-bottom: 2vh;
-    }
-      color: black;
-  }
-}
 
 .fh{
   @include card($foodHeroColor);
