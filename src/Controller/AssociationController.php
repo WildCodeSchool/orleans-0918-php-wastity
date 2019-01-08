@@ -138,7 +138,6 @@ class AssociationController extends Controller
 
         // Paginate the results of the query
         $appointments = $paginator->paginate(
-        // Doctrine Query, not results
             $offers,
             // Define the page parameter
             $request->query->getInt('page', 1),
