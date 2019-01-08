@@ -6,6 +6,8 @@ use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\DaysOfWeek;
 use App\Entity\Schedule;
+use App\Entity\User;
+use App\Form\CompanyMemberType;
 use App\Form\CompanyScheduleType;
 use App\Form\CompanyType;
 use App\Form\OfferType;
@@ -13,6 +15,7 @@ use App\Repository\CompanyRepository;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\OfferRepository;
 use App\Repository\StatusRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -109,16 +112,32 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/showCompany", name="company_show", methods="GET")
+     * @Route("/{id}/showCompany", name="company_show", methods="GET|POST")
      * @param Company $company
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function showCompany(Company $company): Response
+    public function showCompany(Company $company, Request $request, UserRepository $userRepository): Response
     {
-
+        $form = $this->createForm(CompanyMemberType::class);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($userRepository->findOneByEmail($form->getData()['email'])) {
+                $em = $this->getDoctrine()->getManager();
+                $user = $userRepository->findOneByEmail($form->getData()['email']);
+                $company->addMember($user);
+                $em->flush();
+                $this->addFlash('success', "Cet utilisateur a bien été ajouté");
+            } else {
+                $this->addFlash('danger', "Cet utilisateur n'existe pas");
+            }
+            return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
+        }
+        
         return $this->render('Visitor/Company/show.html.twig', [
             'company' => $company,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -247,5 +266,23 @@ class CompanyController extends AbstractController
             'weightTotal' => $weightTotal,
             'countAssociation'=>$countAssociation,
         ]);
+    }
+    
+    /**
+     * @Route ("/{id}/removeMember/{user}", name="removeMember", methods="POST")
+     * @param Company $company
+     * @param User $user
+     * @return Response
+     */
+    public function deleteMember(Company $company, User $user, Request $request) :Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $company->removeMember($user);
+            $em->flush();
+            $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+        }
+        
+        return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
     }
 }
