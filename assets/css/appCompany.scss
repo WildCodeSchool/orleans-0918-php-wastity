@@ -23,6 +23,16 @@
     }
   }
 }
+
+.page-link {
+  color:$companyColor;
+}
+
+.page-item.active .page-link {
+  background-color: $companyColor;
+  border-color: $companyColor;
+}
+
 .wastity_blanc{
   height: $headerTitle;
 }

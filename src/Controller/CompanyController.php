@@ -17,7 +17,7 @@ use App\Repository\OfferRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/company")
  */
-class CompanyController extends AbstractController
+class CompanyController extends Controller
 {
     /**
      * @Route("/new", name="company_new", methods="GET|POST")
@@ -71,13 +71,23 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function listOffers(Company $company, OfferRepository $offerRepository): Response
+    public function listOffers(Company $company, Request $request)
     {
         $offers = $company->getOffers();
 
+        $paginator  = $this->get('knp_paginator');
+
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/Company/listOffers.html.twig', [
             'company' => $company,
-            'offers' => $offers,
+            'appointments' => $appointments,
         ]);
     }
 
