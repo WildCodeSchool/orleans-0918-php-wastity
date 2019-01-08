@@ -51,6 +51,11 @@ class AdminOfferController extends AbstractController
     {
         $active = $offer->getActive();
         $offer->setActive(!$active);
+        if ($active == true) {
+            $this->addFlash('success', "L'offre à bien été activée !");
+        } else {
+            $this->addFlash('danger', "L'offre à bien été désactivée !");
+        }
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('offer_admin_show', ['id' => $offer->getId()]);

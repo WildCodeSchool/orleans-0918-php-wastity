@@ -1,7 +1,10 @@
 @import "app";
 
+body{
+  margin-bottom: 0px;
+}
 header {
-  background-color: darken($primaryColor, 10%);
+  background-color: darken($primaryColor, 20%);
   margin: 0;
   padding: 3%;
 
@@ -9,88 +12,116 @@ header {
     margin: 0;
   }
 }
-body{
-  padding-bottom: 0;
+
+.asso a:hover{
+  text-decoration: none;
 }
-section {
-  .title {
-    padding: 2.5%;
-    margin-top: 0.5em;
-  }
+.fh a:hover{
+  text-decoration: none;
+}
+.comp a:hover{
+  text-decoration: none;
+}
 
-  article {
-    height: 25vh;
-    margin: 1em;
-    vertical-align: center;
+@mixin style ($color){
 
-    h1 {
-      font-weight: bold;
-      padding-top: 0.3em;
+  .bussinesscard{
+    height:27vh;
+    width:100%;
+    overflow: hidden;
+    box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
+    position: relative;
+
+    .front {
+      height: 100%;
+    }
+    .top {
+      height: 40%;
+      background: $color;
+
+      &:after {
+        position: absolute;
+        content: '';
+        pointer-events: none;
+      }
+
+      &:after {
+        left: 45%;
+        transform: rotate(45deg);
+        bottom: 14.7vh;
+        z-index: 10;
+        background: inherit;
+        width: 2.5vw;
+        height: 5vh;
+
+      }
+
+      .image {
+        margin-left: 42%;
+        margin-top: 2vh;
+        height: 6.5vh;
+        z-index: 20;
+      }
+
     }
 
-    a {
-      text-decoration: none;
-      color: #eee;
+  }
 
-      &:hover {
-        text-decoration: none;
-        color: darken($primaryColor, 100%);
+  .nametroduction{
+    margin-top: 1em;
+    .introduction{
+      color: $color;
+      font-family: 'Old Standard TT', serif;
+      word-wrap: break-word;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      font-size: 0.8em;
+      text-align: center;
+      text-shadow: darken($primaryColor, 60%) 0.2px 0.3px;
+    }
+  }
+
+  .name{
+    color: $color;
+    font-weight: 600;
+    font-size: 1.5em;
+    text-align: center;
+    position: relative;
+
+    &:after{
+      content: '';
+      position: absolute;
+      top: 1.4em;
+      width: 20%;
+      left: 40%;
+      right: 40%;
+      height: 1.5px;
+      background: $color;
+    }
+  }
+  @media (max-width: 576px) {
+    .bussinesscard .front .top:after{
+      width: 1.1em;
+      height: 1.1em;
+    }
+  }
+
+  @media (max-height:600px) {
+    .nametroduction {
+      .introduction {
+        font-size: 0.7em;
       }
     }
-
+      .name{font-size: 1em;}
   }
+}
 
-  .foodHeroProfile {
-    color: $foodHeroColor;
-
-    &:hover {
-      color: $foodHeroColorHover;
-    }
-  }
-
-  .companyProfile {
-    color: $companyColor;
-
-    &:hover {
-      color: $companyColorHover;
-    }
-  }
-
-  .associationProfile {
-    color: $assoColor;
-
-    &:hover {
-      color: $assoColorHover;
-    }
-  }
-
-  .foodHeroProfileBorder {
-    background-color : $foodHeroBackground;
-    border: 1px $foodHeroColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $foodHeroColorHover solid;
-    }
-  }
-
-  .companyProfileBorder {
-    background-color : $companyBackground;
-    border: 1px $companyColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $companyColorHover solid;
-    }
-  }
-
-  .associationProfileBorder {
-    background-color : $associationBackground;
-    border: 1px $assoColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $assoColorHover solid;
-    }
-  }
+.fh {
+  @include style($foodHeroColor);
+}
+.asso{
+  @include style($assoColor);
+}
+.comp{
+  @include style($companyColor);
 }

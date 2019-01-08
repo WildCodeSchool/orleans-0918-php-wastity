@@ -6,4 +6,4 @@
 
 {% block body %}{% endblock %}
 {% block footer %}{% include 'Visitor/FoodHero/navBarFoodHero.html.twig' %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}

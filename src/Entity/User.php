@@ -81,10 +81,12 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Association", mappedBy="members")
      */
     private $memberAssociations;
+    private $memberCompanies;
 
     public function __construct()
     {
         $this->memberAssociations = new ArrayCollection();
+        $this->memberCompanies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -264,12 +266,41 @@ class User implements UserInterface
 
         return $this;
     }
-
+  
     public function removeMemberAssociation(Association $memberAssociation): self
     {
         if ($this->memberAssociations->contains($memberAssociation)) {
             $this->memberAssociations->removeElement($memberAssociation);
             $memberAssociation->removeMember($this);
+        }
+
+        return $this;
+    }
+          
+    /**
+     * @return Collection|Company[]
+     */
+    public function getMemberCompanies(): Collection
+    {
+        return $this->memberCompanies;
+    }
+
+    public function addMemberCompany(Company $memberCompany): self
+    {
+        if (!$this->memberCompanies->contains($memberCompany)) {
+            $this->memberCompanies[] = $memberCompany;
+            $memberCompany->addMember($this);
+        }
+
+        return $this;
+    }
+
+          
+    public function removeMemberCompany(Company $memberCompany): self
+    {
+        if ($this->memberCompanies->contains($memberCompany)) {
+            $this->memberCompanies->removeElement($memberCompany);
+            $memberCompany->removeMember($this);
         }
 
         return $this;
