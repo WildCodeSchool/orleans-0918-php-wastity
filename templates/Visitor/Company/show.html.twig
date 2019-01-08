@@ -103,7 +103,6 @@
                         <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
                         <div class="col-1">{{ include('Visitor/Company/_deleteMember_form.html.twig') }}</div>
                     </div>
-                    {#<p>{{ member.email }}  {{ include('Visitor/Company/_deleteMember_form.html.twig') }}</p>#}
                 {% endfor %}
             {% else %}
                 <p>aucun membre actuellement</p>
