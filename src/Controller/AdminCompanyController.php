@@ -26,8 +26,11 @@ class AdminCompanyController extends AbstractController
      * @param CompanyRepository $companyRepository
      * @return Response
      */
-    public function index(CompanyRepository $companyRepository, Request $request, PaginatorInterface $paginator): Response
-    {
+    public function index(
+        CompanyRepository $companyRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
         $companies = $companyRepository->findAll();
 
         // Paginate the results of the query

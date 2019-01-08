@@ -23,8 +23,11 @@ class AdminFoodHeroController extends AbstractController
     /**
      * @Route("/foodheroes", name="foodhero_index", methods="GET")
      */
-    public function index(FoodHeroRepository $foodHeroRepository, Request $request, PaginatorInterface $paginator): Response
-    {
+    public function index(
+        FoodHeroRepository $foodHeroRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
         $foodheroes = $foodHeroRepository->findAll();
 
         // Paginate the results of the query

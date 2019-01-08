@@ -24,8 +24,11 @@ class AdminAssociationController extends AbstractController
     /**
      * @Route("/associations", name="association_index", methods="GET")
      */
-    public function index(AssociationRepository $associationRepository, Request $request, PaginatorInterface $paginator): Response
-    {
+    public function index(
+        AssociationRepository $associationRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
         $associations = $associationRepository->findAll();
 
         // Paginate the results of the query
