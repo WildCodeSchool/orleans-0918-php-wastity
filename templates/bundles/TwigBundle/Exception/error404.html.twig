@@ -1,0 +1,27 @@
+{% extends 'Admin/layoutAdmin.html.twig' %}
+
+{% block body %}
+    <body>
+    <div class="container-fluid">
+        <div class="row justify-content-center pb-3">
+            <div class="col-7 col-lg-5">
+                <img src="{{ asset('build/images/logo-wastity.png') }}" class="img-fluid wastity">
+            </div>
+        </div>
+        <div class="row justify-content-center pt-2">
+            <div class="col-7">
+                <p class="fa-2x text-center text-danger"><strong>Page introuvable</strong><br><br></p>
+            </div>
+            <div class="col-7">
+                <p class="text-black-100 text-center community"><strong>La page demandée est introuvable.
+                        Vérifiez si une erreur ne s'est pas glissée dans l'url,<br><br> ou <br><a href="{{ path('profile_index') }}">retournez à l'accueil</a>.</strong></p>
+            </div>
+        </div>
+    </div>
+    </body>
+
+{% endblock %}
+
+
+
+
