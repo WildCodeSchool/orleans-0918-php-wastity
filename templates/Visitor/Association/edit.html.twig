@@ -3,9 +3,25 @@
 {% block title %}Modifier Association{% endblock %}
 
 {% block header %}
-    {% include 'Visitor/Association/headerAssociation.html.twig' %}
+    <div class="row header">
+        <a class="col-3 text-center" href="{{ path('association_show', {'id': association.id}) }}"><i
+                    class="fas fa-chevron-left"></i>
+            <p class="d-none d-md-block">
+                <img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></p></a>
+        <h1 class="col text-center">Association</h1>
+        <a class="col-3 text-center" href="/logout"><i class="fas fa-unlock"></i>
+            <p class="d-none d-md-block">Déconnexion</p></a>
+    </div>
 {% endblock %}
 
 {% block body %}
+    <div class="row justify-content-center text-center">
+        <div>
+            <p class="fa-2x text-center text-success mt-3 mb-2"><strong>Modification des informations</strong></p>
+        </div>
+        <div class="col-12 text-center text-success mt-3 mb-3">
+            <i class="far fa-edit fa-4x"></i>
+        </div>
+    </div>
     {{ include('Visitor/Association/_form.html.twig', {'button_label': 'Mettre à jour mon Association'}) }}
 {% endblock %}

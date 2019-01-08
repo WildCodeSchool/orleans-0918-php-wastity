@@ -1,25 +1,28 @@
 {% extends 'Visitor/Association/layoutAssociation.html.twig' %}
 
 {% block header %}
-    <div>
-        <div class="row header">
-            <a class="col-1 text-center" href="{{ path('association_edit', {'id': association.id}) }}"><i class="fas fa-chevron-left"></i></a>
-            <h1 class="col text-center">Enregistrement des horaires de {{ association.name }}</h1>
-            <a class="col-1"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
-        </div>
-        <div>
-            <div class="col-12 text-center text-success mt-3 mb-3"><i class="far fa-calendar-alt fa-7x"></i></div>
-        </div>
+    <div class="row header">
+        <a class="col-3 text-center" href="{{ path('association_show', {'id': association.id}) }}"><i
+                    class="fas fa-chevron-left"></i>
+            <p class="d-none d-md-block">
+                <img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></p></a>
+        <h1 class="col text-center">Association</h1>
+        <a class="col-3 text-center" href="/logout"><i class="fas fa-unlock"></i>
+            <p class="d-none d-md-block">Déconnexion</p></a>
     </div>
 {% endblock %}
 
-{% block body %}
-    <main class="container">
-        <div class="row">
-            <div class=" text-center ">
-                {{ include('Visitor/Association/_formSchedule.html.twig', {'button_label': 'Enregistrer les horaires'}) }}
+    {% block body %}
+        <main class="container">
+                <h1 class="col text-center">Modification des horraires</h1>
+                <div class="col-12 text-center text-success mt-3 mb-3"><i class="far fa-calendar-alt fa-4x"></i>
+                </div>
             </div>
-        </div>
-    </main>
-{% endblock %}
+            <div class="row">
+                <div class="row text-center ">
+                    {{ include('Visitor/Association/_formSchedule.html.twig', {'button_label': 'Enregistrer les horaires'}) }}
+                </div>
+            </div>
+        </main>
+    {% endblock %}
 {% block footer %}{% endblock %}
