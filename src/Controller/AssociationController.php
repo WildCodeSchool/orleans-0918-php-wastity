@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Association;
 use App\Entity\Offer;
 use App\Entity\Status;
+use App\Form\AssociationMemberType;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
 use App\Repository\OfferRepository;
@@ -12,6 +13,7 @@ use App\Entity\Schedule;
 use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\StatusRepository;
+use App\Repository\UserRepository;
 use App\Service\DistanceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,15 +99,34 @@ class AssociationController extends AbstractController
 
     /**
      * @IsGranted("view", subject="association")
-     * @Route("/{id}/showAssociation", name="association_show", methods="GET")
+     * @Route("/{id}/showAssociation", name="association_show", methods="GET|POST")
      * @param Association $association
      * @return Response
      */
-    public function showAssociation(Association $association): Response
-    {
-
+    public function showAssociation(
+        Association $association,
+        Request $request,
+        UserRepository $userRepository
+    ): Response {
+        $form = $this->createForm(AssociationMemberType::class);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($userRepository->findOneByEmail($form->getData()['email'])) {
+                $em = $this->getDoctrine()->getManager();
+                $user = $userRepository->findOneByEmail($form->getData()['email']);
+                $association->addMember($user);
+                $em->flush();
+                $this->addFlash('success', "Cet utilisateur a bien été ajouté");
+            } else {
+                $this->addFlash('danger', "Cet utilisateur n'existe pas");
+            }
+            return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
+        }
+        
         return $this->render('Visitor/Association/show.html.twig', [
             'association' => $association,
+            'form' => $form->createView(),
         ]);
     }
 

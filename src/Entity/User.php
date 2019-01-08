@@ -78,12 +78,14 @@ class User implements UserInterface
     private $company;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Company", mappedBy="members")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Association", mappedBy="members")
      */
+    private $memberAssociations;
     private $memberCompanies;
 
     public function __construct()
     {
+        $this->memberAssociations = new ArrayCollection();
         $this->memberCompanies = new ArrayCollection();
     }
 
@@ -248,6 +250,34 @@ class User implements UserInterface
     }
 
     /**
+     * @return Collection|Association[]
+     */
+    public function getMemberAssociations(): Collection
+    {
+        return $this->memberAssociations;
+    }
+
+    public function addMemberAssociation(Association $memberAssociation): self
+    {
+        if (!$this->memberAssociations->contains($memberAssociation)) {
+            $this->memberAssociations[] = $memberAssociation;
+            $memberAssociation->addMember($this);
+        }
+
+        return $this;
+    }
+  
+    public function removeMemberAssociation(Association $memberAssociation): self
+    {
+        if ($this->memberAssociations->contains($memberAssociation)) {
+            $this->memberAssociations->removeElement($memberAssociation);
+            $memberAssociation->removeMember($this);
+        }
+
+        return $this;
+    }
+          
+    /**
      * @return Collection|Company[]
      */
     public function getMemberCompanies(): Collection
@@ -265,6 +295,7 @@ class User implements UserInterface
         return $this;
     }
 
+          
     public function removeMemberCompany(Company $memberCompany): self
     {
         if ($this->memberCompanies->contains($memberCompany)) {
