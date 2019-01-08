@@ -53,6 +53,8 @@ class AssociationController extends Controller
             $em->persist($association);
             $em->flush();
 
+            $this->addFlash('success', "Votre association à bien été enregistrée !");
+
             return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
         }
 
@@ -82,6 +84,8 @@ class AssociationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', "Vos modifications ont été enregistrées !");
 
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
@@ -118,6 +122,7 @@ class AssociationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($association);
             $em->flush();
+            $this->addFlash('success', "Votre association à bien été supprimée !");
         }
 
         return $this->redirectToRoute('association_index');
@@ -216,14 +221,18 @@ class AssociationController extends Controller
      * @param Offer $offer
      * @return Response
      */
-    public function acceptOffer(Association $association, Offer $offer, StatusRepository $statusRepository)
-    {
+    public function acceptOffer(
+        Association $association,
+        Offer $offer,
+        StatusRepository $statusRepository
+    ): Response {
         $status = $statusRepository->findOneByConstStatus('FoodHeroResearch');
 
         $em = $this->getDoctrine()->getManager();
         $offer->setAssociation($association);
         $offer->setStatus($status);
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été acceptée !");
 
         return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
     }
@@ -238,13 +247,14 @@ class AssociationController extends Controller
         Request $request,
         Association $association,
         DaysOfWeekRepository $daysOfWeekRepository
-    ): Response {
-
+    ):Response {
         $form = $this->createForm(AssociationScheduleType::class, $association);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos horaires ont bien été modifiés !");
+
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
 
@@ -260,22 +270,28 @@ class AssociationController extends Controller
      * @return Response
      * @IsGranted("view", subject="association")
      */
-    public function showStatistics(Association $association): Response
-    {
-        $offers = $association->getOffers();
-        $companies= [];
+    public function showStatistics(
+        Association $association,
+        OfferRepository $offerRepository,
+        StatusRepository $statusRepository
+    ): Response {
+        $deliveredStatus = $statusRepository->findOneByConstStatus('Delivered');
+        $offers = $offerRepository->findBy(['association' => $association, 'status' => $deliveredStatus]);
         $weightTotal = 0;
+        $companies = [];
         foreach ($offers as $offer) {
-            $weight = $offer->getWeight();
-            $weightTotal += $weight;
-            $companies[] = $offer->getassociation();
+            if ($offer->getAssociation()) {
+                $weight = $offer->getWeight();
+                $weightTotal += $weight;
+                $companies[] = $offer->getassociation()->getId();
+            }
         }
         $countCompany = count(array_unique($companies));
         return $this->render('Visitor/Association/showStatistics.html.twig', [
             'association' => $association,
             'offers' => $offers,
             'weightTotal' => $weightTotal,
-            'countCompany'=>$countCompany,
+            'countCompany' => $countCompany,
         ]);
     }
 }
