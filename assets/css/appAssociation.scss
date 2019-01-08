@@ -128,10 +128,14 @@ label{
 }
 
 .card-body{
+  li{
+    color: black;
+    font-weight: 500;
+  }
   .fas{
     color: $assoColor;
   }
   .imgOffer{
-    margin: 1%;
+    margin-bottom: 1vh;
   }
 }
