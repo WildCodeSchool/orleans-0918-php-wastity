@@ -10,7 +10,8 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Repository\CompanyRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,18 +19,17 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin")
  */
-class AdminCompanyController extends Controller
+class AdminCompanyController extends AbstractController
 {
     /**
      * @Route("/companies", name="company_index", methods="GET")
      * @param CompanyRepository $companyRepository
      * @return Response
      */
-    public function index(CompanyRepository $companyRepository, Request $request): Response
+    public function index(CompanyRepository $companyRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $companies = $companyRepository->findAll();
 
-        $paginator  = $this->get('knp_paginator');
         // Paginate the results of the query
         $appointments = $paginator->paginate(
             $companies,

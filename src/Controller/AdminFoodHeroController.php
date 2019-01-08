@@ -9,7 +9,8 @@
 namespace App\Controller;
 
 use App\Repository\FoodHeroRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,16 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin")
  */
-class AdminFoodHeroController extends Controller
+class AdminFoodHeroController extends AbstractController
 {
     /**
      * @Route("/foodheroes", name="foodhero_index", methods="GET")
      */
-    public function index(FoodHeroRepository $foodHeroRepository, Request $request): Response
+    public function index(FoodHeroRepository $foodHeroRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $foodheroes = $foodHeroRepository->findAll();
 
-        $paginator  = $this->get('knp_paginator');
         // Paginate the results of the query
         $appointments = $paginator->paginate(
             $foodheroes,
