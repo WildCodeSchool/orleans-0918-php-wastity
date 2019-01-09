@@ -1,18 +1,30 @@
 @import "app";
 
 .header {
-  padding-bottom: 2px;
-  padding-top:20px;
+  padding-bottom: 5px;
+  padding-top:10px;
   top : 0;
   background-color: $foodHeroColor;
-  border-bottom : 2px $headerBorderColor solid;
+  box-shadow: 0 0 1.5em $headerBorderColor;
   h1{
     color: $bodyBackground;
     font-size: $headerTitle;
   }
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+    :hover {
+      color: $bodyBackground;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
 }
 .wastity_blanc{
-  height: $headerTitle;
+  height: $pictureTitle;
 }
 
 .headerReturn{
@@ -63,11 +75,19 @@ h2 {
   border-color: $foodHeroColorHover;
 }
 
-.navbar{
-  border-top : 2px black solid;
+.navbar {
+  box-shadow: 0 0 1.5em $headerBorderColor;
   background-color: $foodHeroColor;
 }
 
-a:hover{
+a {
   color: $bodyBackground;
+}
+
+a:hover {
+  color: $bodyBackground;
+  text-decoration: none;
+}
+.foodheroActive{
+  color: darken($foodHeroColor,30%)
 }

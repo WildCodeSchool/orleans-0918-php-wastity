@@ -1,0 +1,78 @@
+{% extends 'Admin/layoutAdmin.html.twig' %}
+
+{% block title %}Users index{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <a class="col-md-3 text-md-right text-left" href="{{ path('admin_index') }}">
+            <i class="fas fa-chevron-left text-secondary">Retour au panneau d'administration</i></a>
+        <h1 class="col-md text-center">Liste des Utilisateurs</h1>
+        <div class="offset-md-3"></div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <table class="table table-striped mt-5 mb-2">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">
+                    <div class="d-none d-md-block">FoodHero</div>
+                </th>
+                <th scope="col">
+                    <div class="d-none d-md-block">Association</div>
+                </th>
+                <th scope="col">
+                    <div class="d-none d-md-block">Entreprise</div>
+                </th>
+                <th class="text-center" scope="col">Voir plus</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                <td>{{ user.fullname }}</td>
+                <td>
+                    <div class="d-none d-md-block">
+                        {% if user.foodhero %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="d-none d-md-block">
+                        {% if user.association %}
+                            {{ user.association.name }}
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </div>
+                </td>
+                    <td>
+                        <div class="d-none d-md-block">
+                {% if user.company %}
+                    {{ user.company.name }}
+                {% else %}
+                   Non
+                {% endif %}
+                        </div>
+                    </td>
+                <td>
+                    <div class="text-center">
+                        <a href="#">
+                            <i class="far fa-eye text-center text-primary"></i></a>
+                    </div>
+                </td>
+            {% else %}
+                <tr>
+                    <td>Aucun Utilisateur à afficher</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

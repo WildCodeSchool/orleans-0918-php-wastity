@@ -12,13 +12,15 @@
         {% endblock %}
     </head>
     <body>
-    {% for message in app.flashes('danger') %}
-        <div class="alert alert-danger text-center msg-flash">
-            {{ message }}
-        </div>
-    {% endfor %}
     <header>
         {% block header %}{% endblock %}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} text-center msg-flash">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
     </header>
         {% block body %}{% endblock %}
     {% block javascripts %}

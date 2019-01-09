@@ -24,7 +24,6 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         $session->clear();
 
         return $this->render('login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
@@ -47,6 +46,8 @@ class SecurityController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash('success', "Votre compte à bien été crée !");
 
             return $this->redirectToRoute('app_login');
         }
