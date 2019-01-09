@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +27,7 @@ class AdminUserController extends AbstractController
     public function index(UserRepository $userRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $users = $userRepository->findAll();
+        dump($users);
 
         $users = $paginator->paginate(
             $users,
@@ -36,5 +38,22 @@ class AdminUserController extends AbstractController
         );
 
         return $this->render('Admin/userIndex.html.twig', ['users' => $users]);
+    }
+
+    /**
+     * @Route("/users/{id}/activate", name="user_admin_activate", methods="GET")
+     */
+    public function userActivate(User $user): Response
+    {
+        $active = $user->getActivate();
+        $user->setActivate(!$active);
+        if ($active == true) {
+            $this->addFlash('success', "L'utilisateur à bien été activée !");
+        } else {
+            $this->addFlash('danger', "L'utilisateur à bien été désactivée !");
+        }
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('user_admin_index');
     }
 }
