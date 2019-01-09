@@ -65,6 +65,10 @@ h1{
   font-size: $headerTitle;
 }
 
+.fa{
+  font-size: 4vh;
+}
+
 .form-group{
   margin-bottom: 5px;
 }
@@ -96,11 +100,6 @@ label{
   border-color: $assoColorHover;
 }
 
-.container {
-  .card {
-    border-color: $assoColor;
-  }
-}
 
 .navbar{
   box-shadow: 0 0 1.5em $headerBorderColor;
@@ -108,34 +107,27 @@ label{
 }
 
 @media screen and (max-width: 360px) {
-  .navbar-brand{
-    .fas{
-      font-size:1em;
+  .navbar-brand {
+    .fas {
+      font-size: 1em;
     }
+
     p {
       font-size: 0.5em;
       margin-bottom: 0;
     }
   }
 }
-
-.card {
-  a:link
-  {
-    text-decoration:none;
-  }
-  a{
-    color : $headerBorderColor;
-  }
-  a:hover{
-    color : $assoColor;
-  }
-}
 .associationActive{
   color: darken($assoColor,30%)
+}
+
+.asso{
+  @include card($assoColor);
 }
 
 .showSchedule {
   padding-right: 5px;
   padding-left: 5px;
 }
+

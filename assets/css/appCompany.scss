@@ -120,7 +120,17 @@ label{
   color: darken($companyColor,30%)
 }
 
+
+.fa{
+  font-size: 4vh;
+}
+
+.comp{
+  @include card($companyColor);
+}
+
 .showSchedule {
   padding-right: 5px;
   padding-left: 5px;
 }
+

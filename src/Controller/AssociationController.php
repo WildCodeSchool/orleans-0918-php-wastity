@@ -245,6 +245,7 @@ class AssociationController extends AbstractController
             'offer' => $offer,
             'association' => $association,
             'distance' => $distance,
+            'company'=>$company->getName(),
         ]);
     }
 

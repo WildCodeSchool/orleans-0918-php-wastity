@@ -24,6 +24,7 @@
   }
 }
 
+
 .page-link {
   color: $foodHeroColor;
 }
@@ -101,3 +102,16 @@ a:hover {
 .foodheroActive{
   color: darken($foodHeroColor,30%)
 }
+
+
+.fa{
+  font-size: 4vh;
+}
+
+.fh{
+  @include card($foodHeroColor);
+  .btn-secondary{
+    background-color: darken($primaryColor,40%);
+  }
+}
+
