@@ -8,7 +8,6 @@ use App\Form\FoodHeroType;
 use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use App\Service\FindCoordinates;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
