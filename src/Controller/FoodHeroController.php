@@ -142,7 +142,6 @@ class FoodHeroController extends AbstractController
     ) {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
-
         $appointments = $paginator->paginate(
             $offers,
             // Define the page parameter
@@ -156,6 +155,48 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodHero,
         ]);
     }
+
+    /**
+     * @Route("/{foodhero}/distance/{offer}", name="foodhero_distance_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @param DistanceCalculator $distanceCalculator
+     * @param SessionInterface $session
+     * @return Response
+     */
+
+    public function showDistanceOffer(
+        FoodHero $foodhero,
+        Offer $offer,
+        DistanceCalculator $distanceCalculator,
+        SessionInterface $session
+    ): Response {
+        $distance = null;
+        $distanceTotal = null;
+        $company = $offer->getCompany();
+        $addressCompany=$offer->getCompany()->fullAddress();
+        $association = $offer->getAssociation();
+        $addressAsso=$offer->getAssociation()->fullAddress();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
+
+        if ($session->has('latitude')) {
+            $distance = $distanceCalculator->calculateDistanceFromGps(
+                $session->get('latitude'),
+                $session->get('longitude'),
+                $company
+            );
+            $distanceTotal = $distance + $distanceAssoComp;
+        }
+        return $this->render('Visitor/FoodHero/showDistanceOffer.html.twig', [
+            'foodhero' => $foodhero,
+            'distance' => $distance,
+            'distanceTotal' => $distanceTotal,
+            'offer' => $offer,
+            'addressCompany'=>$addressCompany,
+            'addressAsso'=>$addressAsso
+        ]);
+    }
+
 
     /**
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
@@ -172,7 +213,6 @@ class FoodHeroController extends AbstractController
         DistanceCalculator $distanceCalculator,
         SessionInterface $session
     ): Response {
-
         $distance = null;
         $distanceTotal = null;
         $company = $offer->getCompany();

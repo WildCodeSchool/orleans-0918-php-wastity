@@ -22,16 +22,9 @@
                             <ul class="col-6">
                                 <li class="mt-2"><i class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}</li>
                                 <li class="mt-1"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg </li>
-                                {#{% if app.session.get('latitude') is not null %}#}
-                                    {#{% if distance %}#}
-                                        {#<li class="mt-1"><i class="fas fa-map-marker-alt mr-2 mr-md-4"></i> {{ distance ? distance~ 'km' : 'non calculée' }} </li>#}
-                                    {#{% endif %}#}
-                                    {#{% if distanceTotal %}#}
-                                        {#<li class="mt-1">#}
-                                            {#<i class="fas fa-route mr-2 mr-md-4"></i> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }} </li>#}
-                                    {#{% endif %}#}
-                                {#{% endif %}#}
-
+                                {{ render(controller(
+                                    'App\\Controller\\FoodHeroController::showDistanceOffer', {'foodhero':foodhero.id, 'offer':offer.id}
+                                )) }}
                                 <li><i class="fas {{ offer.status.classfontawesome }}" style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</li>
                             </ul>
                             <img class="col-6"
