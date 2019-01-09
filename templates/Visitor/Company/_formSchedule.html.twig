@@ -19,15 +19,15 @@
     </div>
     <div class="row">
         {% for scheduleForm in form.schedules %}
-            <div class="col-md-2 col-12 day mb-1"><strong>{{ scheduleForm.vars.data.day.name }}</strong></div>
-            <div class="col-4 text-center d-lg-none d-block">matin</div>
-            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.openingAM) }}</div>
-            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.closingAM) }}</div>
+            <div class="showSchedule col-md-2 col-12 day mb-1"><strong>{{ scheduleForm.vars.data.day.name }}</strong></div>
+            <div class="showSchedule col-12 text-center d-lg-none d-block">matin</div>
+            <div class="showSchedule col-md-2 col-6 text-center mb-1">{{ form_widget (scheduleForm.openingAM) }}</div>
+            <div class="showSchedule col-md-2 col-6 text-center mb-1">{{ form_widget (scheduleForm.closingAM) }}</div>
 
-            <div class="col-4 text-center d-lg-none d-block">après-midi</div>
-            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.openingPM) }}</div>
-            <div class="col-md-2 col-4 text-center mb-1">{{ form_widget (scheduleForm.closingPM) }}</div>
-            <div class="offset-md-1"></div>
+            <div class="showSchedule col-12 text-center d-lg-none d-block">après-midi</div>
+            <div class="showSchedule col-md-2 col-6 text-center mb-1">{{ form_widget (scheduleForm.openingPM) }}</div>
+            <div class="showSchedule col-md-2 col-6 text-center mb-1">{{ form_widget (scheduleForm.closingPM) }}</div>
+            <div class="showSchedule offset-md-1"></div>
         {% endfor %}
 
     </div>
