@@ -1,41 +1,35 @@
-{% extends 'Visitor/Association/layoutAssociation.html.twig' %}
+{#{% extends 'Visitor/Association/layoutAssociation.html.twig' %}#}
 
-{% block title %}Offer index{% endblock %}
-{% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
+{#{% block title %}Offer index{% endblock %}#}
+{#{% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}#}
 
-{% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card asso">
-                <div class="card-header align-items-center">
-                    <h3 class="col-12 mt-2 mb-0">{{ offer.description|slice(0,20) ~ '...' }}</h3>
-                    <p>proposée par {{ company }}</p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <ul class="col-6">
-                            <li class="mt-2"><i class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}</li>
-                            <li class="mt-2"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg </li>
+{#{% block body %}#}
+    {#<div class="container">#}
+        {#<div class="row justify-content-center">#}
+            {#<div class="card asso">#}
+                {#<div class="card-header align-items-center">#}
+                    {#<h3 class="col-12 mt-2 mb-0">{{ offer.description|slice(0,20) ~ '...' }}</h3>#}
+                    {#<p>proposée par {{ company }}</p>#}
+                {#</div>#}
+                {#<div class="card-body">#}
+                    {#<div class="row">#}
+                        {#<ul class="col-6">#}
+                            {#<li class="mt-2"><i class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}</li>#}
+                            {#<li class="mt-2"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg </li>#}
 
-                            {% if distance %}
-                                <li class="mt-1"><i class="fas fa-map-marker-alt mr-2 mr-md-4"></i>{{ distance }} km </li>
-                            {% endif %}
+                            {#{% if distance %}#}
+                                {#<li class="mt-1"><i class="fas fa-map-marker-alt mr-2 mr-md-4"></i>{{ distance }} km </li>#}
+                            {#{% endif %}#}
 
-                        </ul>
-                        <img class="col-6"
-                             src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
-                             alt="ImageOffre"/>
-                        <p class="col-12 mt-1"><strong class="text-success">Description</strong>
-                            : {{ offer.description }}
-                        </p>
-                        <p class="col-12 mt-1"><strong class="text-success">Informations complémentaires</strong>
-                            : {{ offer.complementary }}</p>
+                        {#</ul>#}
+                        {#<img class="col-6"#}
+                             {#src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"#}
+                             {#alt="ImageOffre"/>#}
 
-                    </div>
-                </div>
-                <a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}"
-                   class="offset-3 col-6 mt-2 mb-2 btn btn-success">Accepter l'offre</a>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+                {#</div>#}
+                {#<a href="{{ path('association_accept_offer', {'association' : association.id , 'offer' : offer.id}) }}"#}
+                   {#class="offset-3 col-6 mt-2 mb-2 btn btn-success">Accepter l'offre</a>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+{#{% endblock %}#}
