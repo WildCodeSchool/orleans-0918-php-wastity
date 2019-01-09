@@ -109,11 +109,17 @@ class Association implements HasAddress
      * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="association", cascade={"persist"}, fetch="EAGER")
      */
     private $schedules;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="memberAssociations")
+     */
+    private $members;
     
     public function __construct()
     {
         $this->offers = new ArrayCollection();
         $this->schedules = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
     
 
@@ -271,5 +277,31 @@ class Association implements HasAddress
     {
         $fullAddress=$this->address.' '.$this->postalCode.' '.$this->city;
         return $fullAddress;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(User $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+        }
+
+        return $this;
+    }
+
+    public function removeMember(User $member): self
+    {
+        if ($this->members->contains($member)) {
+            $this->members->removeElement($member);
+        }
+
+        return $this;
     }
 }

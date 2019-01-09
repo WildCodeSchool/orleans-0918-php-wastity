@@ -4,16 +4,15 @@ namespace App\Controller;
 
 use App\Entity\FoodHero;
 use App\Entity\Offer;
-use App\Entity\Status;
 use App\Form\FoodHeroType;
-use App\Repository\FoodHeroRepository;
 use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
+use App\Service\FindCoordinates;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -41,6 +40,7 @@ class FoodHeroController extends AbstractController
             $foodHero->setUser($user);
             $em->persist($foodHero);
             $em->flush();
+            $this->addFlash('success', "Votre profil Food-Hero à bien été crée !");
 
             return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
@@ -70,6 +70,7 @@ class FoodHeroController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos modifications ont bien été appliquées !");
 
             return $this->redirectToRoute('foodhero_edit', ['id' => $foodHero->getId()]);
         }
@@ -90,6 +91,7 @@ class FoodHeroController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->remove($foodHero);
             $em->flush();
+            $this->addFlash('success', "Votre compte Food-Hero à bien été supprimé !");
         }
 
         return $this->redirectToRoute('foodhero_index');
@@ -102,12 +104,24 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/offers", name="foodhero_list_offers", methods="GET")
      */
-    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository)
-    {
+    public function listOffers(
+        FoodHero $foodHero,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
         $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
 
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/FoodHero/listOffers.html.twig', [
-            'offers' => $offers,
+            'appointments' => $appointments,
             'foodhero' => $foodHero
         ]);
     }
@@ -120,12 +134,24 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
      */
-    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository)
-    {
+    public function listOffersAccepted(
+        FoodHero $foodHero,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            8
+        );
+
         return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
-            'offers' => $offers,
+            'appointments' => $appointments,
             'foodhero' => $foodHero
         ]);
     }
@@ -134,8 +160,11 @@ class FoodHeroController extends AbstractController
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
+     * @param DistanceCalculator $distanceCalculator
+     * @param SessionInterface $session
      * @return Response
      */
+
     public function showOffer(
         FoodHero $foodhero,
         Offer $offer,
@@ -143,9 +172,13 @@ class FoodHeroController extends AbstractController
         SessionInterface $session
     ): Response {
 
+        $distance = null;
+        $distanceTotal = null;
         $company = $offer->getCompany();
+        $addressCompany=$offer->getCompany()->fullAddress();
         $association = $offer->getAssociation();
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
+        $addressAsso=$offer->getAssociation()->fullAddress();
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
 
         if ($session->has('latitude')) {
             $distance = $distanceCalculator->calculateDistanceFromGps(
@@ -159,7 +192,9 @@ class FoodHeroController extends AbstractController
             'foodhero' => $foodhero,
             'distance' => $distance,
             'distanceTotal' => $distanceTotal,
-            'offer' => $offer
+            'offer' => $offer,
+            'addressCompany'=>$addressCompany,
+            'addressAsso'=>$addressAsso
         ]);
     }
 
@@ -178,6 +213,7 @@ class FoodHeroController extends AbstractController
         $offer->setStatus($status);
         $offer->setFoodhero($foodhero);
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été acceptée !");
 
         return $this->redirectToRoute('foodhero_list_offers', ['id' => $foodhero->getId()]);
     }
@@ -200,9 +236,11 @@ class FoodHeroController extends AbstractController
 
 
     /**
-     * @Route("/{foodhero}/oneOffer/{offer}", name="foodhero_offer_card")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @param DistanceCalculator $distanceCalculator
+     * @param SessionInterface $session
      * @return Response
-     * @throws \Exception
      */
     public function showOneOffer(
         FoodHero $foodhero,
@@ -213,8 +251,9 @@ class FoodHeroController extends AbstractController
 
         $company = $offer->getCompany();
         $association = $offer->getAssociation();
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAdresses($company, $association);
-
+        $distance = null;
+        $distanceTotal = null;
+        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
         if ($session->has('latitude')) {
             $distance = $distanceCalculator->calculateDistanceFromGps(
                 $session->get('latitude'),
@@ -235,6 +274,7 @@ class FoodHeroController extends AbstractController
     /**
      * @Route("/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")
      * @param Offer $offer
+     * @param StatusRepository $statusRepository
      * @return Response
      */
     public function collectOffer(Offer $offer, StatusRepository $statusRepository)
@@ -245,9 +285,60 @@ class FoodHeroController extends AbstractController
         $offer->setStatus($status);
         $offer->setFoodhero($this->getUser()->getFoodHero());
         $em->flush();
+        $this->addFlash('success', "L'offre à bien été collectée !");
 
         return $this->redirectToRoute('foodhero_list_pendingOffers', [
             'id' => $this->getUser()->getFoodHero()->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/offer/{offer}/delivered", name="foodhero_delivered_offer", methods="GET")
+     * @param Offer $offer
+     * @param StatusRepository $statusRepository
+     * @return Response
+     */
+    public function deliveredOffer(Offer $offer, StatusRepository $statusRepository)
+    {
+        $status = $statusRepository->findOneByConstStatus('Delivered');
+
+        $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
+        $em->flush();
+        $this->addFlash('success', "L'offre à bien été livrée !");
+
+        return $this->redirectToRoute('foodhero_list_pendingOffers', [
+            'id' => $this->getUser()->getFoodHero()->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/record", name="foodhero_record", methods="GET")
+     * @param FoodHero $foodHero
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @throws \Exception
+     * @IsGranted("view", subject="foodHero")
+     */
+    public function record(
+        FoodHero $foodHero,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        $offers = $offerRepository->findAcceptedByFoodHeroBeforeEndDate(new \DateTime(), $foodHero);
+
+        $offers = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+
+        return $this->render('Visitor/FoodHero/record.html.twig', [
+            'offers' => $offers,
+            'foodhero' => $foodHero,
         ]);
     }
 }

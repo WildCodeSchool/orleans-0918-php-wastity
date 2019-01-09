@@ -2,8 +2,10 @@
 
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 {% block title %}{% endblock %}
-{% block header %}{% endblock %}
+{% block header %}
+    {% include 'headerLogo.html.twig' with {'type': 'Food Hero'} %}
+{% endblock %}
 
 {% block body %}{% endblock %}
 {% block footer %}{% include 'Visitor/FoodHero/navBarFoodHero.html.twig' %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}

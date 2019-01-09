@@ -1,15 +1,38 @@
 @import 'app';
 
 .header {
-  padding-bottom: 2px;
-  padding-top:20px;
+  padding-bottom: 5px;
+  padding-top:10px;
   top : 0;
   background-color: $companyColor;
-  border-bottom : 2px $headerBorderColor solid;
+  box-shadow: 0 0 1.5em $headerBorderColor;
   h1{
     color: $bodyBackground;
+    font-size: $headerTitle;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+    :hover {
+      color: $bodyBackground;
+      font-weight: bold;
+      text-decoration: none;
+    }
   }
 }
+
+.page-link {
+  color:$companyColor;
+}
+
+.page-item.active .page-link {
+  background-color: $companyColor;
+  border-color: $companyColor;
+}
+
 .wastity_blanc{
   height: $headerTitle;
 }
@@ -29,13 +52,14 @@
   -webkit-appearance: textfield;
 }
 
-a{
+a {
   color: $bodyBackground;
+  :hover {
+    color: $bodyBackground;
+    text-decoration: none;
+  }
 }
 
-a:hover{
-  color: $companyColorHover;
-}
 h1{
   color: $companyColorHover;
   font-size: $headerTitle;
@@ -72,7 +96,7 @@ label{
 }
 
 .navbar{
-  border-top : 2px black solid;
+  box-shadow: 0 0 1.5em $headerBorderColor;
   background-color: $companyColor;
 }
 
@@ -92,3 +116,21 @@ label{
     }
   }
 }
+.companyActive{
+  color: darken($companyColor,30%)
+}
+
+
+.fa{
+  font-size: 4vh;
+}
+
+.comp{
+  @include card($companyColor);
+}
+
+.showSchedule {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+

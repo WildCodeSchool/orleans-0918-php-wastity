@@ -1,96 +1,45 @@
 @import "app";
 
-header {
-  background-color: darken($primaryColor, 10%);
-  margin: 0;
-  padding: 3%;
-
+body{
+  margin-bottom: 0px;
+}
+.header {
+  padding-bottom: 5px;
+  padding-top: 10px;
+  top : 0;
+  background-color: darken($primaryColor,40%);
+  box-shadow: 0 0 1.5em $headerBorderColor;
+  h1{
+    color: $bodyBackground;
+    font-size: $headerTitle/1.2;
+  }
   p {
-    margin: 0;
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+  }
+  a:hover {
+    color: $bodyBackground;
+    font-weight: bold;
+    text-decoration: none;
   }
 }
 body{
-  padding-bottom: 0;
+  height: auto;
+  margin-bottom: 0;
 }
-section {
-  .title {
-    padding: 2.5%;
-    margin-top: 0.5em;
-  }
 
-  article {
-    height: 25vh;
-    margin: 1em;
-    vertical-align: center;
 
-    h1 {
-      font-weight: bold;
-      padding-top: 0.3em;
-    }
+.fh{
+  @include card($foodHeroColor);
+}
 
-    a {
-      text-decoration: none;
-      color: #eee;
+.comp{
+  @include card($companyColor);
+}
 
-      &:hover {
-        text-decoration: none;
-        color: darken($primaryColor, 100%);
-      }
-    }
-
-  }
-
-  .foodHeroProfile {
-    color: $foodHeroColor;
-
-    &:hover {
-      color: $foodHeroColorHover;
-    }
-  }
-
-  .companyProfile {
-    color: $companyColor;
-
-    &:hover {
-      color: $companyColorHover;
-    }
-  }
-
-  .associationProfile {
-    color: $assoColor;
-
-    &:hover {
-      color: $assoColorHover;
-    }
-  }
-
-  .foodHeroProfileBorder {
-    background-color : $foodHeroBackground;
-    border: 1px $foodHeroColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $foodHeroColorHover solid;
-    }
-  }
-
-  .companyProfileBorder {
-    background-color : $companyBackground;
-    border: 1px $companyColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $companyColorHover solid;
-    }
-  }
-
-  .associationProfileBorder {
-    background-color : $associationBackground;
-    border: 1px $assoColor solid;
-    border-radius:20px;
-
-    &:hover {
-      border: 1px $assoColorHover solid;
-    }
-  }
+.asso {
+  @include card($assoColor);
 }

@@ -10,7 +10,9 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Repository\CompanyRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,10 +26,23 @@ class AdminCompanyController extends AbstractController
      * @param CompanyRepository $companyRepository
      * @return Response
      */
-    public function index(CompanyRepository $companyRepository): Response
-    {
+    public function index(
+        CompanyRepository $companyRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        $companies = $companyRepository->findAll();
 
-        return $this->render('Admin/companyIndex.html.twig', ['companies' => $companyRepository->findAll()]);
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $companies,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+
+        return $this->render('Admin/companyIndex.html.twig', ['appointments' => $appointments]);
     }
 
 

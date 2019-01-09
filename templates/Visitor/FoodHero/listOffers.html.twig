@@ -3,25 +3,24 @@
 {% block title %}Offer index{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
-{% block header %}
-    {% include 'Visitor/FoodHero/headerFoodHero.html.twig' %}
-{% endblock %}
-
 {% block body %}
     <div class="container mb-5 pb-5">
         <div class="row justify-content-center text-center">
             <div>
-                <p class="fa-2x text-center text-primary mt-3 mb-2"><strong>Liste des offres en attente</strong></p>
+                <p class="fa text-center text-primary mt-3 mb-2"><strong>Liste des offres en attente</strong></p>
             </div>
         </div>
         <div class="row justify-content-center">
-            {% for offer in offers %}
+            {% for appointment in appointments %}
                 {{ render(controller(
-                    'App\\Controller\\FoodHeroController::showOneOffer', {'foodhero':foodhero.id, 'offer':offer.id}
+                    'App\\Controller\\FoodHeroController::showOneOffer', {'foodhero':foodhero.id, 'offer':appointment.id}
                 )) }}
             {% else %}
                 <p><strong>Aucune Offre à afficher</strong></p>
             {% endfor %}
+            <div class="d-flex justify-content-center mt-5">
+                {{ knp_pagination_render(appointments) }}
+            </div>
 
         </div>
 
