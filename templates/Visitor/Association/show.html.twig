@@ -92,16 +92,20 @@
                 {% for member in association.members  %}
                     <div class="row">
                         <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
+                        {% if app.user == association.user %}
                         <div class="col-1">{{ include('Visitor/Association/_deleteMember_form.html.twig') }}</div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             {% else %}
                 <p>Aucun membre actuellement</p>
             {% endif %}
         </div>
+        {% if app.user == association.user %}
         <div class="row justify-content-center">
             {{ include('Visitor/Association/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
         </div>
+        {% endif %}
 
     </div>
 {% endblock %}
