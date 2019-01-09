@@ -33,40 +33,33 @@
                   aria-labelledby="exampleModalLabel" aria-hidden="true">
                  <div class="modal-dialog" role="document">
                      <div class="modal-content">
-                         <div class="modal-body">
-                             <div class="row">
+                         <div class="card comp">
+                             <div class="card-header">
+                                 <div class="card-header px-0 align-items-center">
+                                     <h3 class="col-12 mt-1 mb-0"> {{ offer.description|slice(0,20) ~ '...' }}</h3>
+                                     <p>proposée par {{ offer.company.name }}</p>
+                                 </div>
+                             </div>
+                             <div class="row align-items-center">
                                  <ul class="col-6">
-                                     <li><strong class="text-info">Quantité :</strong> {{ offer.weight }} Kg</li>
-                                     <li><strong class="text-info">Date
-                                             :</strong> {{ offer.end ? offer.end|date('d/m') : '' }}</li>
-
+                                     <li class="mt-1"><i
+                                                 class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}
+                                     </li>
+                                     <li class="mt-1"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }}
+                                         Kg
+                                     </li>
                                  </ul>
                                  <img class="col-6"
                                       src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                                       alt="ImageOffre"/>
-                                 <p class="col-12 mt-1"><strong class="text-info">Description</strong>
-                                     : {{ offer.description }}
-                                 </p>
-                                 <p class="col-12 mt-1"><strong class="text-info">Informations complémentaires</strong>
-                                     : {{ offer.complementary }}</p>
-
-                                 {% if offer.association is not null %}
-                                     <p class="col-12 mt-1"><strong class="text-info">Association bénéficiaire</strong>
-                                         : {{ offer.association.name }}
+                                 <div>
+                                     <p class="col-12 mt-1"><strong class="text-info">Description</strong>
+                                         : {{ offer.description }}
                                      </p>
-                                 {% endif %}
-
-                                 {% if offer.foodhero is not null %}
-                                     <p class="col-12 mt-1"><strong class="text-info">FoodHero</strong>
-                                         : {{ offer.foodhero.user.firstname ~ ' ' ~ offer.foodhero.user.lastname }}
-                                     </p>
-                                 {% endif %}
-                                 <p class="col-12 mt-1"><strong class="text-info">Status</strong>
-                                     : {{ offer.status.statustext }}</p>
-
+                                     <p class="col-12 mt-1"><strong class="text-info">Informations complémentaires</strong>
+                                         : {{ offer.complementary }}</p>
+                                 </div>
                              </div>
-                         </div>
-                         <div class="modal-footer">
                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                          </div>
                      </div>

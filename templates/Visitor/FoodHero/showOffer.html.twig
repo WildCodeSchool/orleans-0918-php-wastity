@@ -29,7 +29,7 @@
                     : {{ offer.complementary }}</p>
             </div>
             <div class="row">
-                <a class="btn btn-secondary my-2 ml-2"
+                <a class="btn btn-secondary my-2 ml-2 text-center"
                    href="https://www.google.com/maps/dir/{{ addressAsso }}/{{ addressCompany }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">Voir
                     la carte</a>
                 <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"

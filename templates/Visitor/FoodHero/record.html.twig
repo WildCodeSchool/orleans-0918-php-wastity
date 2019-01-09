@@ -25,42 +25,46 @@
                 <td>{{ offer.weight }} kg</td>
                 <td><i class="fas {{ offer.status.classfontawesome }}"
                        style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
-                <td data-toggle="modal" data-target="#ModalOfferFoodHero{{ offer.id }}"><i class="far fa-eye text-center text-primary"></i></td>
+                <td data-toggle="modal" data-target="#ModalOfferFoodHero{{ offer.id }}"><i
+                            class="far fa-eye text-center text-primary"></i></td>
             </tr>
-          <div class="modal fade" id="ModalOfferFoodHero{{ offer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="ModalOfferFoodHero{{ offer.id }}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="row">
-                                <ul class="col-6">
-                                    <li><strong class="text-primary">Quantité :</strong> {{ offer.weight }} Kg</li>
-                                    <li><strong class="text-primary">Date
-                                            :</strong> {{ offer.end ? offer.end|date('d/m') : '' }}</li>
-                                </ul>
-                                <img class="col-6"
-                                     src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
-                                     alt="ImageOffre"/>
-                                <p class="col-12 mt-1"><strong class="text-primary">Description</strong>
-                                    : {{ offer.description }}
-                                </p>
-                                <p class="col-12 mt-1"><strong class="text-primary">Informations complémentaires</strong>
-                                    : {{ offer.complementary }}</p>
+                        <div class="row">
+                            <div class="card fh">
+                                <div class="card-header align-items-center">
+                                    <h3 class="col-12 mt-2 mb-0">{{ offer.description|slice(0,20) ~ '...' }}</h3>
+                                    <p>proposée par {{ offer.company.name }}</p>
+                                </div>
+                                <div class="row">
+                                    <ul class="col-6">
+                                        <li class="mt-2"><i
+                                                    class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}
+                                        </li>
+                                        <li class="mt-2"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }}
+                                            Kg
+                                        </li>
+                                        {{ render(controller(
+                                            'App\\Controller\\FoodHeroController::showDistanceOffer', {'foodhero':foodhero.id, 'offer':offer.id}
+                                        )) }}
 
-                                <p class="col-12 mt-1"><strong class="text-primary">Entreprise
-                                        :</strong> {{ offer.company.name }}</p>
-                                {% if offer.association is not null %}
-                                    <p class="col-12 mt-1"><strong class="text-primary">Association</strong>
-                                        : {{ offer.association.name }}
+                                    </ul>
+                                    <img class="col-6"
+                                         src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                                         alt="ImageOffre"/>
+                                </div>
+                                <div>
+                                    <p class="col-12 mt-1"><strong>Description</strong>
+                                        : {{ offer.description }}
                                     </p>
-                                {% endif %}
-                                <p class="col-12 mt-1"><strong class="text-primary">Status</strong>
-                                    : {{ offer.status.statustext }}</p>
-
+                                    <p class="col-12 mt-1"><strong>Informations complémentaires</strong>
+                                        : {{ offer.complementary }}</p>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
                         </div>
                     </div>
                 </div>

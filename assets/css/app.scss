@@ -123,7 +123,7 @@ legend.required::after {
 }
 
 @mixin card($color){
-  box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
+  box-shadow: 1px 1px 7px 1px darken($primaryColor, 60%);
   a:hover{
     text-decoration: none;
   }
@@ -162,13 +162,13 @@ legend.required::after {
       font-weight: 500;
     }
     .fas{
-      color: $foodHeroColor;
+      color: $color;
     }
     .imgOffer{
       margin-bottom: 1vh;
     }
     strong{
-      color:$foodHeroColor;
+      color:$color;
     }
     color: darken($primaryColor, 100%);
   }
@@ -197,5 +197,10 @@ legend.required::after {
       }
     }
 
+  }
+  .modal{
+    .fas{
+      color: $color;
+    }
   }
 }
