@@ -13,7 +13,7 @@
         <div class="row justify-content-center">
             {% for appointment in appointments %}
                 {{ render(controller(
-                    'App\\Controller\\FoodHeroController::showOneOffer', {'foodhero':foodhero.id, 'offer':appointment.id}
+                    'App\\Controller\\FoodHeroController::showOffer', {'foodhero':foodhero.id, 'offer':appointment.id}
                 )) }}
             {% else %}
                 <p><strong>Aucune Offre à afficher</strong></p>

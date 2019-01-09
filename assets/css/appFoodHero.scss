@@ -110,8 +110,6 @@ a:hover {
 
 .fh{
   @include card($foodHeroColor);
-  .btn-secondary{
-    background-color: darken($primaryColor,40%);
-  }
+
 }
 

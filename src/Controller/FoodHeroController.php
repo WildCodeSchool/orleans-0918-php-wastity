@@ -142,6 +142,7 @@ class FoodHeroController extends AbstractController
     ) {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
+
         $appointments = $paginator->paginate(
             $offers,
             // Define the page parameter
@@ -152,7 +153,7 @@ class FoodHeroController extends AbstractController
 
         return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
             'appointments' => $appointments,
-            'foodhero' => $foodHero
+            'foodhero' => $foodHero,
         ]);
     }
 
@@ -234,42 +235,6 @@ class FoodHeroController extends AbstractController
         return new Response("");
     }
 
-
-    /**
-     * @param FoodHero $foodhero
-     * @param Offer $offer
-     * @param DistanceCalculator $distanceCalculator
-     * @param SessionInterface $session
-     * @return Response
-     */
-    public function showOneOffer(
-        FoodHero $foodhero,
-        Offer $offer,
-        DistanceCalculator $distanceCalculator,
-        SessionInterface $session
-    ): Response {
-
-        $company = $offer->getCompany();
-        $association = $offer->getAssociation();
-        $distance = null;
-        $distanceTotal = null;
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
-        if ($session->has('latitude')) {
-            $distance = $distanceCalculator->calculateDistanceFromGps(
-                $session->get('latitude'),
-                $session->get('longitude'),
-                $company
-            );
-            $distanceTotal = $distance + $distanceAssoComp;
-        }
-
-        return $this->render('Visitor/FoodHero/showCard.html.twig', [
-            'foodhero' => $foodhero,
-            'distance' => $distance,
-            'distanceTotal' => $distanceTotal,
-            'offer' => $offer
-        ]);
-    }
 
     /**
      * @Route("/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")
