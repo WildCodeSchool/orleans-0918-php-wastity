@@ -18,14 +18,16 @@
         </div>
         <div class="container px-0 mb-5 pb-5">
             <div class="row justify-content-center">
-                {% for offer in offers %}
 
-                    {{ render(controller(
-                        'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':offer.id}
-                    )) }}
-
-                {% endfor %}
+            {% for appointment in appointments %}
+                {{ render(controller(
+                    'App\\Controller\\AssociationController::showOneOffer', {'association':association.id, 'offer':appointment.id}
+                )) }}
+            {% endfor %}
             </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            {{ knp_pagination_render(appointments) }}
         </div>
     </div>
 {% endblock %}

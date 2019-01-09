@@ -1,11 +1,30 @@
 @import "app";
 
-header {
+body{
+  margin-bottom: 0px;
+}
+.header {
+  padding-bottom: 5px;
+  padding-top: 10px;
+  top : 0;
+  background-color: darken($primaryColor,40%);
+  box-shadow: 0 0 1.5em $headerBorderColor;
   h1{
-    font-size: 3.1vh;
+    color: $bodyBackground;
+    font-size: $headerTitle/1.2;
   }
-  background-color:darken($primaryColor, 30%) ;
-  padding-top: 2vh;
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+  }
+  a:hover {
+    color: $bodyBackground;
+    font-weight: bold;
+    text-decoration: none;
+  }
 }
 body{
   height: auto;
@@ -21,6 +40,6 @@ body{
   @include card($companyColor);
 }
 
-.asso{
+.asso {
   @include card($assoColor);
 }

@@ -3,8 +3,8 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appProfile') }}{% endblock %}
 
         {% block header %}
-            <div class="row header">
-                <a class="col-3 text-center"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
+            <div class="row header align-items-center">
+                <a class="col-3  text-center"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
                 <h1 class="col text-center">Choisissez votre profil</h1>
                 <a class="col-3 col-md-1 text-center" href="/logout"><i class="fas fa-unlock "></i><p class="d-none d-md-block">Déconnexion</p></a>
             </div>
@@ -53,5 +53,7 @@
 
         </section>
     </main>
+
+
 
 {% endblock %}
