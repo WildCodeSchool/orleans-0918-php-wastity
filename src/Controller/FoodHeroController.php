@@ -11,6 +11,7 @@ use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
 use App\Service\FindCoordinates;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -271,6 +272,26 @@ class FoodHeroController extends AbstractController
     }
 
     /**
+     * @Route("/offer/{offer}/delivered", name="foodhero_delivered_offer", methods="GET")
+     * @param Offer $offer
+     * @param StatusRepository $statusRepository
+     * @return Response
+     */
+    public function deliveredOffer(Offer $offer, StatusRepository $statusRepository)
+    {
+        $status = $statusRepository->findOneByConstStatus('Delivered');
+
+        $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
+        $em->flush();
+        $this->addFlash('success', "L'offre à bien été livrée !");
+
+        return $this->redirectToRoute('foodhero_list_pendingOffers', [
+            'id' => $this->getUser()->getFoodHero()->getId()
+        ]);
+    }
+
+    /**
      * @Route("/{id}/record", name="foodhero_record", methods="GET")
      * @param FoodHero $foodHero
      * @param OfferRepository $offerRepository
@@ -278,9 +299,21 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @IsGranted("view", subject="foodHero")
      */
-    public function record(FoodHero $foodHero, OfferRepository $offerRepository): Response
-    {
+    public function record(
+        FoodHero $foodHero,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
         $offers = $offerRepository->findAcceptedByFoodHeroBeforeEndDate(new \DateTime(), $foodHero);
+
+        $offers = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
 
         return $this->render('Visitor/FoodHero/record.html.twig', [
             'offers' => $offers,

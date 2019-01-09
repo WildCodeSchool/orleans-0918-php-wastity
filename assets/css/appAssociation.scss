@@ -122,7 +122,12 @@ label{
   color: darken($assoColor,30%)
 }
 
-
 .asso{
   @include card($assoColor);
 }
+
+.showSchedule {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+

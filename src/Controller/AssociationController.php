@@ -187,10 +187,21 @@ class AssociationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function record(Association $association, OfferRepository $offerRepository)
-    {
+    public function record(
+        Association $association,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
         $offers = $offerRepository->findAcceptedByAssociationBeforeEndDate(new \DateTime(), $association);
 
+        $offers = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('Visitor/Association/record.html.twig', [
             'offers' => $offers,
             'association' => $association,

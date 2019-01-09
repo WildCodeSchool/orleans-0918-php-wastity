@@ -3,10 +3,6 @@
 {% block title %}Association - Historique{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
 
-{% block header %}
-    {% include 'Visitor/Association/headerAssociation.html.twig' %}
-{% endblock %}
-
 {% block body %}
     <div class="row justify-content-center text-center">
         <div>
@@ -72,4 +68,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-5">
+        {{ knp_pagination_render(offers) }}
+    </div>
 {% endblock %}

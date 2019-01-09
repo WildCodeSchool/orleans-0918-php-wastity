@@ -112,11 +112,22 @@ class CompanyController extends AbstractController
      * @return Response
      * @IsGranted("view", subject="company")
      */
-    public function record(Company $company): Response
+    public function record(Company $company, PaginatorInterface $paginator, Request $request): Response
     {
+
+        $offers = $company->getOffers();
+
+        $offers = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
 
         return $this->render('Visitor/Company/record.html.twig', [
             'company' => $company,
+            'offers' => $offers,
         ]);
     }
 
