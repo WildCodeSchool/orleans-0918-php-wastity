@@ -116,7 +116,6 @@ class AssociationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($userRepository->findOneByEmail($form->getData()['email'])
                 and $association->getMembers()->isEmpty()) {
-                
                 $em = $this->getDoctrine()->getManager();
                 $user = $userRepository->findOneByEmail($form->getData()['email']);
                 $association->addMember($user);
