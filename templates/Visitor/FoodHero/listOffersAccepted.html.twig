@@ -43,7 +43,7 @@
                        class="offset-6 col-6 mt-2 btn btn-primary">Offre récupérée</a>
                     {% endif %}
                     {% if offer.status.constStatus == 'WaitingForDelivery' %}
-                        <a href="#"
+                        <a href="{{ path('foodhero_delivered_offer', {'offer': offer.id}) }}"
                            class="offset-6 col-6 mt-2 btn btn-primary">Offre livrée</a>
                     {% endif %}
                 </div>
