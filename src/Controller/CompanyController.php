@@ -282,6 +282,7 @@ class CompanyController extends AbstractController
      * @param Company $company
      * @param User $user
      * @return Response
+     * @IsGranted("companyAdmin", subject="company")
      */
     public function deleteMember(Company $company, User $user, Request $request) :Response
     {

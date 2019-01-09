@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CompanyVoter extends Voter
 {
     const VIEW = 'view';
+    const COMPANY_ADMIN = 'companyAdmin';
     
     protected function supports($attribute, $subject)
     {
@@ -34,6 +35,9 @@ class CompanyVoter extends Voter
         switch ($attribute) {
             case self::VIEW:
                 return $user === $company->getUser() || $company->getMembers()->contains($user);
+                break;
+            case self::COMPANY_ADMIN:
+                return $user === $company->getUser();
                 break;
         }
         
