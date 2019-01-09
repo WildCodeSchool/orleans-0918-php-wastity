@@ -10,7 +10,9 @@ namespace App\Controller;
 
 use App\Entity\Association;
 use App\Repository\AssociationRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,10 +24,24 @@ class AdminAssociationController extends AbstractController
     /**
      * @Route("/associations", name="association_index", methods="GET")
      */
-    public function index(AssociationRepository $associationRepository): Response
-    {
+    public function index(
+        AssociationRepository $associationRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        $associations = $associationRepository->findAll();
+
+        // Paginate the results of the query
+        $appointments = $paginator->paginate(
+            $associations,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+
         return $this->render('Admin/associationIndex.html.twig', [
-            'associations' => $associationRepository->findAll()
+            'appointments' => $appointments
         ]);
     }
 

@@ -25,13 +25,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for food_hero in food_heroes %}
+            {% for appointment in appointments %}
                 <tr>
-                    <td>{{ food_hero.user.fullname }}</td>
-                    <td>{{ food_hero.phone }}</td>
+                    <td>{{ appointment.user.fullname }}</td>
+                    <td>{{ appointment.phone }}</td>
                     <td>
                         <div class="d-none d-md-block">
-                            <img src="{{ food_hero.profileImage ? vich_uploader_asset(foodhero, 'profileImageFile') : asset('/build/images/wastityPlaceHolder.png') }}"
+                            <img src="{{ appointment.profileImage ? vich_uploader_asset(appointment, 'profileImageFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                                  alt="Image de profil"/></div>
                     </td>
                 </tr>
@@ -42,5 +42,8 @@
             {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        {{ knp_pagination_render(appointments) }}
     </div>
 {% endblock %}
