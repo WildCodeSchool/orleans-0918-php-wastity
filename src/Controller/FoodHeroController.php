@@ -271,6 +271,26 @@ class FoodHeroController extends AbstractController
     }
 
     /**
+     * @Route("/offer/{offer}/delivered", name="foodhero_delivered_offer", methods="GET")
+     * @param Offer $offer
+     * @param StatusRepository $statusRepository
+     * @return Response
+     */
+    public function deliveredOffer(Offer $offer, StatusRepository $statusRepository)
+    {
+        $status = $statusRepository->findOneByConstStatus('Delivered');
+
+        $em = $this->getDoctrine()->getManager();
+        $offer->setStatus($status);
+        $em->flush();
+        $this->addFlash('success', "L'offre à bien été livrée !");
+
+        return $this->redirectToRoute('foodhero_list_pendingOffers', [
+            'id' => $this->getUser()->getFoodHero()->getId()
+        ]);
+    }
+
+    /**
      * @Route("/{id}/record", name="foodhero_record", methods="GET")
      * @param FoodHero $foodHero
      * @param OfferRepository $offerRepository
