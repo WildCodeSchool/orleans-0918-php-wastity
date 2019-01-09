@@ -100,8 +100,12 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/offers", name="foodhero_list_offers", methods="GET")
      */
-    public function listOffers(FoodHero $foodHero, OfferRepository $offerRepository, Request $request, PaginatorInterface $paginator)
-    {
+    public function listOffers(
+        FoodHero $foodHero,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
         $offers = $offerRepository->findAllBeforeEndDateFoodhero(new \DateTime());
 
         $appointments = $paginator->paginate(
@@ -126,8 +130,12 @@ class FoodHeroController extends AbstractController
      * @throws \Exception
      * @Route("/{id}/pendingOffers", name="foodhero_list_pendingOffers", methods="GET")
      */
-    public function listOffersAccepted(FoodHero $foodHero, OfferRepository $offerRepository, Request $request, PaginatorInterface $paginator)
-    {
+    public function listOffersAccepted(
+        FoodHero $foodHero,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
         $offers = $offerRepository->findAcceptedByFoodHero(new \DateTime(), $foodHero);
 
         $appointments = $paginator->paginate(
