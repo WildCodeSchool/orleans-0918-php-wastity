@@ -14,7 +14,7 @@
     <main class="container d-flex justify-content-center">
         <section class="text-center">
             <div class="card fh">
-                <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_edit', {'id' : app.user.foodhero.id}) }}{% endif %}
+                <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_list_offers', {'id' : app.user.foodhero.id}) }}{% endif %}
 ">
                 <div class="card-header">
                     <div class="card-header align-items-center">
@@ -27,7 +27,13 @@
                 </div></a>
             </div>
             <div class="card comp">
-                <a href="{% if app.user.company is null %}{{ path('company_new') }}{% else %}{{ path('company_show', {'id' : app.user.company.id}) }}{% endif %}">
+                <a href="
+                    {% if app.user.company is null %}
+                        {% if app.user.memberCompanies is empty %}
+                            {{ path('company_new') }}
+                        {% else  %}{{ path('company_show_offers', {'id' : app.user.memberCompanies[0].id}) }} {% endif %}
+                    {% else %}{{ path('company_show_offers', {'id' : app.user.company.id}) }}{% endif %}
+                ">
                     <div class="card-header">
                         <div class="card-header align-items-center">
                             <img class="image" src="{{ asset('build/images/company.png') }}" alt="entreprise"/>
@@ -39,7 +45,13 @@
                     </div></a>
             </div>
             <div class="card asso">
-                <a href="{% if app.user.association is null %}{{ path('association_new') }}{% else %}{{ path('association_show', {'id' : app.user.association.id}) }}{% endif %}">
+                <a href="
+                    {% if app.user.association is null %}
+                        {% if app.user.memberAssociations is empty %}
+                            {{ path('association_new') }}
+                        {% else  %}{{ path('association_list_offers', {'id' : app.user.memberAssociations[0].id}) }} {% endif %}
+                    {% else %}{{ path('association_list_offers', {'id' : app.user.association.id}) }}{% endif %}
+                ">
                     <div class="card-header">
                         <div class="card-header align-items-center">
                             <img class="image" src="{{ asset('build/images/heart.png') }}" alt="association"/>
@@ -48,7 +60,8 @@
                     <div class="card-body">
                         <h1>Association</h1>
                         <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p>
-                    </div></a>
+                    </div>
+                </a>
             </div>
 
         </section>
