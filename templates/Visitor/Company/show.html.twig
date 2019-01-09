@@ -97,16 +97,20 @@
                 {% for member in company.members  %}
                     <div class="row">
                         <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
+                        {% if app.user == company.user %}
                         <div class="col-1">{{ include('Visitor/Company/_deleteMember_form.html.twig') }}</div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             {% else %}
                 <p>aucun membre actuellement</p>
             {% endif %}
         </div>
-        <div class="row justify-content-center">
-            {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
-        </div>
+        {% if app.user == company.user %}
+            <div class="row justify-content-center">
+                {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
+            </div>
+        {% endif %}
 
     </div>
 {% endblock %}
