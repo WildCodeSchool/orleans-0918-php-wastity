@@ -5,22 +5,14 @@
 {% block title %}Inscription Association{% endblock %}
 
 {% block header %}
-    <div class="row header">
-    <a class="col-4" href="{{ path('profile_index') }}"><i class="fas fa-home fa-2x"></i></a>
-    <h1 class="col text-center">Inscription Association</h1>
-    <a class="col-3 text-right"><img src="{{ asset('build/images/logo-wastity_blanc.png') }}" class="img-fluid wastity_blanc"></a>
-    <a class="col-1 text-center" href="/logout"><i class="fas fa-unlock text-danger"></i></a>
-    </div>
+    {% include 'Visitor/Association/headerAssociation.html.twig' %}
 {% endblock %}
-
 {% block body %}
-
     <div class="form-inline justify-content-center">
         <p class="text-center mt-3 mb-3">
             <strong>Wastiti facilite la collecte des dons alimentaires pour votre association</strong>
             en localisant en temps réel les offres des commerces à proximité
         </p>
     </div>
-
     {{ include('Visitor/Association/_form.html.twig') }}
 {% endblock %}

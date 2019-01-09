@@ -118,10 +118,16 @@ class Company implements HasAddress
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="memberCompanies")
+     */
+    private $members;
+
     public function __construct()
     {
         $this->schedules = new ArrayCollection();
         $this->offers = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     /**
@@ -346,5 +352,31 @@ class Company implements HasAddress
     {
         $fullAddress=$this->address.' '.$this->postalCode.' '.$this->city;
         return $fullAddress;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(User $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+        }
+
+        return $this;
+    }
+
+    public function removeMember(User $member): self
+    {
+        if ($this->members->contains($member)) {
+            $this->members->removeElement($member);
+        }
+
+        return $this;
     }
 }
