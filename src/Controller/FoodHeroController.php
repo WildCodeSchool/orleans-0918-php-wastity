@@ -9,6 +9,7 @@ use App\Repository\OfferRepository;
 use App\Service\DistanceCalculator;
 use App\Repository\StatusRepository;
 use App\Service\FindCoordinates;
+use Knp\Component\Pager\PaginatorInterface; 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
