@@ -3,6 +3,8 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appAssociation') }}{% endblock %}
 {% block header %}
     {% include 'headerLogo.html.twig' with {'type': 'Association'} %}
+    {% include 'Visitor/Association/dropdownAssociationChoice.html.twig' %}
+
 {% endblock %}
 {% block body %}
 {% endblock %}
