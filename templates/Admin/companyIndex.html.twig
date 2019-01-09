@@ -28,16 +28,16 @@
             </tr>
             </thead>
             <tbody>
-            {% for company in companies %}
+            {% for appointment in appointments %}
                 <tr>
-                    <td>{{ company.name }}</td>
-                    <td>{{ company.city }}</td>
+                    <td>{{ appointment.name }}</td>
+                    <td>{{ appointment.city }}</td>
                     <td>
-                        <div class="d-none d-md-block">{{ company.type }}</div>
+                        <div class="d-none d-md-block">{{ appointment.type }}</div>
                     </td>
                     <td>
                         <div class="text-center">
-                            <a href="{{ path('company_admin_show', {'id': company.id}) }}">
+                            <a href="{{ path('company_admin_show', {'id': appointment.id}) }}">
                                 <i class="far fa-eye text-center"></i></a>
                         </div>
                     </td>
@@ -49,5 +49,8 @@
             {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        {{ knp_pagination_render(appointments) }}
     </div>
 {% endblock %}

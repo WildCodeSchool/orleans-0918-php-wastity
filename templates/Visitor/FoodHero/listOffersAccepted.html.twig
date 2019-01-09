@@ -3,10 +3,6 @@
 {% block title %}Offres acceptées{% endblock %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
-{% block header %}
-    {% include 'Visitor/FoodHero/headerFoodHero.html.twig' %}
-{% endblock %}
-
 {% block body %}
     <div class="container mb-5 pb-5">
         <div class="row justify-content-center text-center">
@@ -46,8 +42,8 @@
                     <a href="{{ path('foodhero_collect_offer', {'offer' : appointment.id}) }}"
                        class="offset-6 col-6 mt-2 btn btn-primary">Offre récupérée</a>
                     {% endif %}
-                    {% if appointment.status.constStatus == 'WaitingForDelivery' %}
-                        <a href="#"
+                    {% if offer.status.constStatus == 'WaitingForDelivery' %}
+                        <a href="{{ path('foodhero_delivered_offer', {'offer': offer.id}) }}"
                            class="offset-6 col-6 mt-2 btn btn-primary">Offre livrée</a>
                     {% endif %}
                 </div>

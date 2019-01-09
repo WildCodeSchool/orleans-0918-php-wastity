@@ -9,9 +9,9 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
-use App\Form\ActiveType;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,10 +27,19 @@ class AdminOfferController extends AbstractController
      * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function index(OfferRepository $offerRepository): Response
+    public function index(OfferRepository $offerRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $offers = $offerRepository->findBy([], ['end'=>'DESC']);
+
+        $appointments = $paginator->paginate(
+            $offers,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('Admin/offerIndex.html.twig', [
-            'offers' => $offerRepository->findBy([], ['end'=>'DESC'])
+            'appointments' => $appointments
         ]);
     }
 
