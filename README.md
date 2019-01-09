@@ -30,13 +30,13 @@ Créer une base de données, avec la commande :
 
 Mettre à jour la base de données, avec la commande :
 
-`php bin/console doctrine:schema:update --force
+`php bin/console doctrine:doctrine:migration:migrate
 `
 
 
 Exécuter Webpack, avec la commande :
 
-`yarn encore
+`yarn encore production
 `
 
 
