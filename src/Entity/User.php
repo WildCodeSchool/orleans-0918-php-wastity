@@ -83,6 +83,11 @@ class User implements UserInterface
     private $memberAssociations;
     private $memberCompanies;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : true})
+     */
+    private $activate;
+
     public function __construct()
     {
         $this->memberAssociations = new ArrayCollection();
@@ -302,6 +307,18 @@ class User implements UserInterface
             $this->memberCompanies->removeElement($memberCompany);
             $memberCompany->removeMember($this);
         }
+
+        return $this;
+    }
+
+    public function getActivate(): ?bool
+    {
+        return $this->activate;
+    }
+
+    public function setActivate(bool $activate): self
+    {
+        $this->activate = $activate;
 
         return $this;
     }

@@ -27,11 +27,11 @@
                 <th scope="col">
                     <div class="d-none d-md-block">Entreprise</div>
                 </th>
-                <th class="text-center" scope="col">Voir plus</th>
+                <th class="text-center" scope="col">Activer</th>
             </tr>
             </thead>
             <tbody>
-            {% for user in users %}
+            {% for user in users if user!=app.user %}
                 <tr>
                 <td>{{ user.fullname }}</td>
                 <td>
@@ -61,11 +61,12 @@
                 {% endif %}
                         </div>
                     </td>
-                <td>
-                    <div class="text-center">
-                        <a href="#">
-                            <i class="far fa-eye text-center text-primary"></i></a>
-                    </div>
+                <td class="text-center">
+                    <a href="{{ path('user_admin_activate', {'id': user.id}) }}">
+                        <button type="button" class="btn btn-{{ user.activate ? 'danger' : 'success' }}" data-toggle="button" aria-pressed="{{user.activate}}">
+                            {{ user.activate ? 'Non' : 'Oui' }}
+                        </button>
+                    </a>
                 </td>
             {% else %}
                 <tr>
