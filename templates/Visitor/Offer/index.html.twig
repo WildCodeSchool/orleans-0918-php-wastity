@@ -5,7 +5,11 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center">Liste des offres en attente</h1>
+        <div class="row justify-content-center text-center">
+            <div>
+                <p class="fa text-center text-info mt-3 mb-2"><strong>Liste des offres en attente</strong></p>
+            </div>
+        </div>
         <div class="row justify-content-center">
             {% for offer in offers %}
                 <div class="col-12 col-sm-6 col-lg-4 pb-3">
