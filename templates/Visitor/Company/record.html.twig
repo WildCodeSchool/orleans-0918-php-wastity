@@ -23,7 +23,7 @@
          </tr>
          </thead>
          <tbody>
-         {% for offer in company.offers %}
+         {% for offer in offers %}
              <tr>
                  <th scope="row">{{ offer.end ? offer.end|date('d/m') : '' }}</th>
                  <td>{{ offer.weight }} kg</td>
@@ -73,4 +73,7 @@
          {% endfor %}
          </tbody>
      </table>
+     <div class="d-flex justify-content-center mt-5">
+         {{ knp_pagination_render(offers) }}
+     </div>
  {% endblock %}
