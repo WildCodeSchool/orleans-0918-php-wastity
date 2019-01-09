@@ -23,6 +23,17 @@
     }
   }
 }
+
+
+.page-link {
+  color: $foodHeroColor;
+}
+
+.page-item.active .page-link {
+  background-color:$foodHeroColor;
+  border-color:$foodHeroColor;
+}
+
 .wastity_blanc{
   height: $pictureTitle;
 }
@@ -87,3 +98,16 @@ a:hover {
 .foodheroActive{
   color: darken($foodHeroColor,30%)
 }
+
+
+.fa{
+  font-size: 4vh;
+}
+
+.fh{
+  @include card($foodHeroColor);
+  .btn-secondary{
+    background-color: darken($primaryColor,40%);
+  }
+}
+

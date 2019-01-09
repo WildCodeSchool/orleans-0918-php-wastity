@@ -28,6 +28,9 @@ body {
   font-size: $sizeTitlePage;
 }
 
+.wastity_blanc{
+  height: $headerTitle;
+}
 .container-fluid {
   padding: 0;
   margin: 0;
@@ -119,4 +122,75 @@ label.required::after {
 legend.required::after {
   content:' *';
   color: $required;
+}
+
+@mixin card($color){
+  box-shadow: 1px 1px 10px 1.5px darken($primaryColor, 80%);
+  a:hover{
+    text-decoration: none;
+  }
+  .card-header{
+    color: $primaryColor;
+    background-color: $color;
+    clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
+    height: 12vh;
+    .image{
+      height: 8vh;
+    }
+    h3{
+      font-size:2.5vh;
+      font-weight: bold;
+      padding-left: 0;
+    }
+    p{
+      font-size:2vh;
+      margin-left:4px;
+    }
+  }
+  .card-body{
+    h1{
+      font-size: 3vh;
+      font-weight: bold;
+      margin-top: 1.5vh;
+    }
+    p{
+      font-size: 1.8vh;
+      margin-left: 1vw;
+      margin-right: 1vw;
+      margin-bottom: 2vh;
+    }
+    li{
+      color: darken($primaryColor, 100%);
+      font-weight: 500;
+    }
+    .fas{
+      color: $foodHeroColor;
+    }
+    .imgOffer{
+      margin-bottom: 1vh;
+    }
+    strong{
+      color:$foodHeroColor;
+    }
+    color: darken($primaryColor, 100%);
+  }
+
+  .btn {
+    font-size: small;
+    padding-left:1vw;
+    background-color: $color;
+    color : $primaryColor;
+    font-weight: bold;
+  }
+  .card {
+    color : $primaryColor;
+    font-weight: bold;
+    a{
+
+      &:link {
+        text-decoration: none;
+      }
+    }
+
+  }
 }

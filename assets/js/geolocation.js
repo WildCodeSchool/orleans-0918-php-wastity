@@ -1,9 +1,3 @@
-let positionOption = {
-    enableHighAccuracy: true,
-    maximumAge        : 0,
-    timeout           : 2
-};
-
 function myPosition(position) {
     fetch('/foodhero/position/'+position.coords.latitude+'/'+position.coords.longitude);
 }
@@ -29,5 +23,5 @@ function erreurPosition(error) {
 
 if(navigator.geolocation) {
 
-    navigator.geolocation.getCurrentPosition(myPosition, erreurPosition, positionOption);
+    navigator.geolocation.getCurrentPosition(myPosition, erreurPosition);
 }
