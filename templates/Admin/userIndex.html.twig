@@ -63,7 +63,7 @@
                     </td>
                 <td class="text-center">
                     <a href="{{ path('user_admin_activate', {'id': user.id}) }}">
-                        <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="{{user.activate}}">
+                        <button type="button" class="btn btn-{{ user.activate ? 'danger' : 'success' }}" data-toggle="button" aria-pressed="{{user.activate}}">
                             {{ user.activate ? 'Non' : 'Oui' }}
                         </button>
                     </a>
