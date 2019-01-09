@@ -143,14 +143,15 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($userRepository->findOneByEmail($form->getData()['email'])) {
+            if ($userRepository->findOneByEmail($form->getData()['email'])
+                and $company->getMembers()->isEmpty()) {
                 $em = $this->getDoctrine()->getManager();
                 $user = $userRepository->findOneByEmail($form->getData()['email']);
                 $company->addMember($user);
                 $em->flush();
                 $this->addFlash('success', "Cet utilisateur a bien été ajouté");
             } else {
-                $this->addFlash('danger', "Cet utilisateur n'existe pas");
+                $this->addFlash('danger', "Cet utilisateur n'existe pas, ou est déjà membre d'une autre entreprise");
             }
             return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
         }

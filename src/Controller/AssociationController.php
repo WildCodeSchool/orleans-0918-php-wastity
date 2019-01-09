@@ -114,14 +114,16 @@ class AssociationController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($userRepository->findOneByEmail($form->getData()['email'])) {
+            if ($userRepository->findOneByEmail($form->getData()['email'])
+                and $association->getMembers()->isEmpty()) {
+                
                 $em = $this->getDoctrine()->getManager();
                 $user = $userRepository->findOneByEmail($form->getData()['email']);
                 $association->addMember($user);
                 $em->flush();
                 $this->addFlash('success', "Cet utilisateur a bien été ajouté");
             } else {
-                $this->addFlash('danger', "Cet utilisateur n'existe pas");
+                $this->addFlash('danger', "Cet utilisateur n'existe pas, ou est déjà membre d'une autre association");
             }
             return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
         }
