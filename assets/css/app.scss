@@ -24,6 +24,10 @@ body {
   }
 }
 
+.titlePage {
+  font-size: $sizeTitlePage;
+}
+
 .container-fluid {
   padding: 0;
   margin: 0;
@@ -35,10 +39,11 @@ body {
 }
 .msg-flash{
   margin-bottom:-15px;
+  font-size: 3vh;
 }
 
 h1 {
-  font-size: $headerTitle;
+  font-size: $sizeTitlePage;
 }
 
 .navbar {
@@ -60,10 +65,6 @@ h1 {
     font-size: 0.8em;
     margin-bottom: 0;
   }
-}
-
-.msg-flash {
-  font-size: 1.5em;
 }
 
 .custom-file-label::after {

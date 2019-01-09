@@ -1,7 +1,7 @@
 <div class="card">
 <div class="card-header">
     <a href="{{ path('association_show_offer', {'association' : association.id , 'offer' : offer.id}) }}">
-
+    </a>
     <div class="row">
             <p class="col"> Expire le : {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }} </p>
         </div>
