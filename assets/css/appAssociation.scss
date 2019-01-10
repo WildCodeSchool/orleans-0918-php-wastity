@@ -79,9 +79,6 @@ label{
   color: $bodyBackground;
 }
 
-.fas{
-  color: $bodyBackground;
-}
 
 .associationOfferBorder {
   border: 1px $assoColor solid;
@@ -130,3 +127,9 @@ label{
   padding-left: 5px;
 }
 
+
+.modal{
+  .fas{
+    color: $assoColor;
+  }
+}

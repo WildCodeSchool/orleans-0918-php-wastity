@@ -1,7 +1,7 @@
 <div class="card comp">
     <div class="card-header">
         <div class="card-header px-0 align-items-center">
-            <h3 class="col-12 mt-1 mb-0"> {{ offer.description|slice(0,20) ~ '...'  }}</h3>
+            <h3 class="col-12 mt-1 mb-0"> {{ offer.description}}</h3>
             <p>proposée par  {{ offer.company.name }}</p>
         </div>
     </div>
@@ -17,8 +17,21 @@
                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                  alt="ImageOffre"/>
         </div>
+        <details>
+            <summary class="btn btn-outline-secondary"><i class="fas fa-search-plus mr-2"></i>Voir plus</summary>
+            <div>
+                <p class="col-12 mt-1"><strong class="text-info">Description</strong>
+                    : {{ offer.description }}
+                </p>
+                <p class="col-12 mt-1"><strong class="text-info">Informations complémentaires</strong>
+                    : {{ offer.complementary }}</p>
+            </div>
+            <div class="row">
+                <a class="offset-3 col-6 mt-2 mb-2 btn btn-info mt-4"
+                   href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">{{ button_label|default('Modifier') }}</a>
+            </div>
+        </details>
+
     </div>
-    <a class="offset-3 col-6 mt-2 mb-2 btn btn-info mt-4"
-       href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">{{ button_label|default('Modifier') }}</a>
 </div>
 
