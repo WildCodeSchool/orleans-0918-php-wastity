@@ -29,7 +29,6 @@ class CompanyVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-        $request = Request::createFromGlobals();
         $company=$subject;
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
