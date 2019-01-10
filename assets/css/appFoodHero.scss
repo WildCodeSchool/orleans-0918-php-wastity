@@ -48,10 +48,6 @@
   font-size:1em;
 }
 
-h1{
-  font-size: $headerTitle;
-}
-
 .fas{
   color: $bodyBackground;
 }
@@ -110,8 +106,6 @@ a:hover {
 
 .fh{
   @include card($foodHeroColor);
-  .btn-secondary{
-    background-color: darken($primaryColor,40%);
-  }
+
 }
 

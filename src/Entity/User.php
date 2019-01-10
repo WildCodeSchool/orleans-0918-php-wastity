@@ -81,7 +81,16 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Association", mappedBy="members")
      */
     private $memberAssociations;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Company", mappedBy="members")
+     */
     private $memberCompanies;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : true})
+     */
+    private $activate;
 
     public function __construct()
     {
@@ -302,6 +311,18 @@ class User implements UserInterface
             $this->memberCompanies->removeElement($memberCompany);
             $memberCompany->removeMember($this);
         }
+
+        return $this;
+    }
+
+    public function getActivate(): ?bool
+    {
+        return $this->activate;
+    }
+
+    public function setActivate(bool $activate): self
+    {
+        $this->activate = $activate;
 
         return $this;
     }

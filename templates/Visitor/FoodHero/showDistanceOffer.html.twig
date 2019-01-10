@@ -1,0 +1,13 @@
+
+{% if app.session.get('latitude') is not null %}
+    {% if distance %}
+        <li class="mt-1"><i
+                    class="fas fa-map-marker-alt mr-2 mr-md-4"></i> {{ distance ? distance~ 'km' : 'non calculée' }}
+        </li>
+    {% endif %}
+    {% if distanceTotal %}
+        <li class="mt-1">
+            <i class="fas fa-route mr-2 mr-md-4"></i> {{ distanceTotal ? distanceTotal~ 'km' : 'non calculée' }}
+        </li>
+    {% endif %}
+{% endif %}
