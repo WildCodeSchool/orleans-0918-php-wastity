@@ -1,0 +1,24 @@
+<div class="text-center">
+    <div class="dropdown float-sm-right mt-3 mr-3">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Choisir une autre entreprise
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if app.user.company is defined %}
+                <p class="ml-2 font-weight-bold">Admin</p>
+                <a class="dropdown-item {{ company==app.user.company ? 'active' }}"
+                   href="{{ path('company_show', {'id':app.user.company.id}) }}">{{ app.user.company.name }}</a>
+                <div class="dropdown-divider"></div>
+            {% endif %}
+            {% for memberCompany in app.user.memberCompanies %}
+                {% if loop.first %}
+                    <p class="ml-2 font-weight-bold">Membre</p>
+                {% endif %}
+                <a class="dropdown-item {{ company==memberCompany ? 'active' }} "
+                   href="{{ path('company_show', {'id':memberCompany.id}) }}">{{ memberCompany.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
