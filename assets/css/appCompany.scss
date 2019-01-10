@@ -133,6 +133,11 @@ label{
   padding-left: 5px;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: $companyColor;
+}
 
 .modal{
   .fas{
