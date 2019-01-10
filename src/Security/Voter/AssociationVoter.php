@@ -36,7 +36,7 @@ class AssociationVoter extends Voter
                 return $user === $association->getUser() || $association->getMembers()->contains($user);
                 break;
             case self::ASSO_ADMIN:
-                return $user === $association->getUser() || $user->getId() == $_POST['_id'];
+                return $user === $association->getUser();
                 break;
         }
 
