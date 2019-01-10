@@ -31,5 +31,19 @@
             {% block footer %}
             {% endblock %}
         </footer>
+
+    <script>
+        document.querySelectorAll("summary").forEach( function (bouton) {
+            bouton.addEventListener("click", function (e) {
+                console.log(e);
+                var text=e.target.childNodes[1];
+                if (text.textContent === "Voir moins") {
+                    text.textContent = "Voir plus";
+                } else {
+                    text.textContent ='Voir moins';
+                }
+            });
+        })
+    </script>
     </body>
 </html>
