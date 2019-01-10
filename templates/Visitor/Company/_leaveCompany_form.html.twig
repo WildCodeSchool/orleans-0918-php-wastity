@@ -1,0 +1,5 @@
+<form  method="post" action="{{ path('removeMember', {'id': company.id, 'user': app.user.id}) }}" onsubmit="return confirm('Voulez vous vraiment quitter l\'entreprise ?');">
+    <input type="hidden" name="_id" value={{ app.user.id }}>
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+    <button class="btn btn-info">Quitter l'entreprise</button>
+</form>

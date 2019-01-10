@@ -343,7 +343,13 @@ class AssociationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $association->removeMember($user);
             $em->flush();
-            $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+            if ($this->getUser() !== $association->getUser()) {
+                $this->addFlash('danger', 'Vous avez quitté l\'association : '. $association->getName());
+
+                return $this->redirectToRoute('profile_index');
+            } else {
+                $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+            }
         }
         
         return $this->redirectToRoute('association_show', ['id' => $association->getId()]);

@@ -301,9 +301,15 @@ class CompanyController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $company->removeMember($user);
             $em->flush();
-            $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+            if ($this->getUser() !== $company->getUser()) {
+                $this->addFlash('danger', 'Vous avez quitté l\'entreprise : '. $company->getName());
+
+                return $this->redirectToRoute('profile_index');
+            } else {
+                $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+            }
         }
-        
+
         return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
     }
 }
