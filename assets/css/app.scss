@@ -139,6 +139,10 @@ legend.required::after {
       font-size:2.5vh;
       font-weight: bold;
       padding-left: 0;
+      width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     p{
       font-size:2vh;

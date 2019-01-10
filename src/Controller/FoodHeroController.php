@@ -174,9 +174,7 @@ class FoodHeroController extends AbstractController
         $distance = null;
         $distanceTotal = null;
         $company = $offer->getCompany();
-        $addressCompany=$offer->getCompany()->fullAddress();
         $association = $offer->getAssociation();
-        $addressAsso=$offer->getAssociation()->fullAddress();
         $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
 
         if ($session->has('latitude')) {
@@ -192,8 +190,22 @@ class FoodHeroController extends AbstractController
             'distance' => $distance,
             'distanceTotal' => $distanceTotal,
             'offer' => $offer,
-            'addressCompany'=>$addressCompany,
-            'addressAsso'=>$addressAsso
+        ]);
+    }
+    /**
+     * @Route("/{foodhero}/map/{offer}", name="foodhero_map_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @return Response
+     */
+
+    public function showMapOffer(
+        FoodHero $foodhero,
+        Offer $offer
+    ): Response {
+        return $this->render('Visitor/FoodHero/showMapOffer.html.twig', [
+            'foodhero' => $foodhero,
+            'offer' => $offer,
         ]);
     }
 
@@ -202,40 +214,16 @@ class FoodHeroController extends AbstractController
      * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
-     * @param DistanceCalculator $distanceCalculator
-     * @param SessionInterface $session
      * @return Response
      */
 
     public function showOffer(
         FoodHero $foodhero,
-        Offer $offer,
-        DistanceCalculator $distanceCalculator,
-        SessionInterface $session
+        Offer $offer
     ): Response {
-        $distance = null;
-        $distanceTotal = null;
-        $company = $offer->getCompany();
-        $addressCompany=$offer->getCompany()->fullAddress();
-        $association = $offer->getAssociation();
-        $addressAsso=$offer->getAssociation()->fullAddress();
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
-
-        if ($session->has('latitude')) {
-            $distance = $distanceCalculator->calculateDistanceFromGps(
-                $session->get('latitude'),
-                $session->get('longitude'),
-                $company
-            );
-            $distanceTotal = $distance + $distanceAssoComp;
-        }
         return $this->render('Visitor/FoodHero/showOffer.html.twig', [
             'foodhero' => $foodhero,
-            'distance' => $distance,
-            'distanceTotal' => $distanceTotal,
             'offer' => $offer,
-            'addressCompany'=>$addressCompany,
-            'addressAsso'=>$addressAsso
         ]);
     }
 
