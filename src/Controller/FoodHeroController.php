@@ -152,12 +152,12 @@ class FoodHeroController extends AbstractController
 
         return $this->render('Visitor/FoodHero/listOffersAccepted.html.twig', [
             'appointments' => $appointments,
-            'foodhero' => $foodHero
+            'foodhero' => $foodHero,
         ]);
     }
 
     /**
-     * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
+     * @Route("/{foodhero}/distance/{offer}", name="foodhero_distance_offer", methods="GET")
      * @param FoodHero $foodhero
      * @param Offer $offer
      * @param DistanceCalculator $distanceCalculator
@@ -165,19 +165,16 @@ class FoodHeroController extends AbstractController
      * @return Response
      */
 
-    public function showOffer(
+    public function showDistanceOffer(
         FoodHero $foodhero,
         Offer $offer,
         DistanceCalculator $distanceCalculator,
         SessionInterface $session
     ): Response {
-
         $distance = null;
         $distanceTotal = null;
         $company = $offer->getCompany();
-        $addressCompany=$offer->getCompany()->fullAddress();
         $association = $offer->getAssociation();
-        $addressAsso=$offer->getAssociation()->fullAddress();
         $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
 
         if ($session->has('latitude')) {
@@ -188,13 +185,45 @@ class FoodHeroController extends AbstractController
             );
             $distanceTotal = $distance + $distanceAssoComp;
         }
-        return $this->render('Visitor/FoodHero/showOffer.html.twig', [
+        return $this->render('Visitor/FoodHero/showDistanceOffer.html.twig', [
             'foodhero' => $foodhero,
             'distance' => $distance,
             'distanceTotal' => $distanceTotal,
             'offer' => $offer,
-            'addressCompany'=>$addressCompany,
-            'addressAsso'=>$addressAsso
+        ]);
+    }
+    /**
+     * @Route("/{foodhero}/map/{offer}", name="foodhero_map_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @return Response
+     */
+
+    public function showMapOffer(
+        FoodHero $foodhero,
+        Offer $offer
+    ): Response {
+        return $this->render('Visitor/FoodHero/showMapOffer.html.twig', [
+            'foodhero' => $foodhero,
+            'offer' => $offer,
+        ]);
+    }
+
+
+    /**
+     * @Route("/{foodhero}/offer/{offer}", name="foodhero_show_offer", methods="GET")
+     * @param FoodHero $foodhero
+     * @param Offer $offer
+     * @return Response
+     */
+
+    public function showOffer(
+        FoodHero $foodhero,
+        Offer $offer
+    ): Response {
+        return $this->render('Visitor/FoodHero/showOffer.html.twig', [
+            'foodhero' => $foodhero,
+            'offer' => $offer,
         ]);
     }
 
@@ -234,42 +263,6 @@ class FoodHeroController extends AbstractController
         return new Response("");
     }
 
-
-    /**
-     * @param FoodHero $foodhero
-     * @param Offer $offer
-     * @param DistanceCalculator $distanceCalculator
-     * @param SessionInterface $session
-     * @return Response
-     */
-    public function showOneOffer(
-        FoodHero $foodhero,
-        Offer $offer,
-        DistanceCalculator $distanceCalculator,
-        SessionInterface $session
-    ): Response {
-
-        $company = $offer->getCompany();
-        $association = $offer->getAssociation();
-        $distance = null;
-        $distanceTotal = null;
-        $distanceAssoComp = $distanceCalculator->calculateDistanceFromAddresses($company, $association);
-        if ($session->has('latitude')) {
-            $distance = $distanceCalculator->calculateDistanceFromGps(
-                $session->get('latitude'),
-                $session->get('longitude'),
-                $company
-            );
-            $distanceTotal = $distance + $distanceAssoComp;
-        }
-
-        return $this->render('Visitor/FoodHero/showCard.html.twig', [
-            'foodhero' => $foodhero,
-            'distance' => $distance,
-            'distanceTotal' => $distanceTotal,
-            'offer' => $offer
-        ]);
-    }
 
     /**
      * @Route("/offer/{offer}/collect", name="foodhero_collect_offer", methods="GET")

@@ -27,7 +27,7 @@ class StatusFixtures extends Fixture
         '#E77471',
         '#000000',
         '#E95420',
-        '#FFFF00',
+        '#696969',
         '#57a639',
     ];
 

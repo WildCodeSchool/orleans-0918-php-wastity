@@ -62,7 +62,6 @@ a {
 
 h1{
   color: $companyColorHover;
-  font-size: $headerTitle;
 }
 
 .form-group{
@@ -138,4 +137,10 @@ label{
   color: #fff;
   text-decoration: none;
   background-color: $companyColor;
+}
+
+.modal{
+  .fas{
+    color: $companyColor;
+  }
 }

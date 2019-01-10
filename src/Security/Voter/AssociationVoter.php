@@ -9,13 +9,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class AssociationVoter extends Voter
 {
-    const VIEW = 'view';
+    const VIEW = 'associationView';
+    const ASSO_ADMIN = 'associationAdmin';
     
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::VIEW])
+        return in_array($attribute, [self::VIEW, self::ASSO_ADMIN])
             && $subject instanceof Association;
     }
 
@@ -32,6 +33,9 @@ class AssociationVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::VIEW:
+                return $user === $association->getUser() || $association->getMembers()->contains($user);
+                break;
+            case self::ASSO_ADMIN:
                 return $user === $association->getUser();
                 break;
         }

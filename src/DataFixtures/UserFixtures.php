@@ -34,6 +34,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->passwordEncoder->encodePassword($user, 'azerty'));
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
+            $user->setActivate(true);
             $this->addReference('user_'.$i, $user);
             $manager->persist($user);
         }
@@ -44,6 +45,7 @@ class UserFixtures extends Fixture
         $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'azerty'));
         $admin->setFirstname($faker->firstName);
         $admin->setLastname($faker->lastName);
+        $admin->setActivate(true);
         $manager->persist($admin);
 
         $manager->flush();

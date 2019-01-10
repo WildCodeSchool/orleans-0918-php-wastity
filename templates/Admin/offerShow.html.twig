@@ -51,7 +51,7 @@
                 </th>
                 <td>
                     <a href="{{ path('offer_admin_activate', {'id': offer.id}) }}">
-                        <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="{{offer.active}}">
+                        <button type="button" class="btn btn-{{offer.active ? 'success' : 'danger' }}" data-toggle="button" aria-pressed="{{offer.active}}">
                             {{offer.active ? 'Oui' : 'Non' }}
                         </button>
                     </a>
