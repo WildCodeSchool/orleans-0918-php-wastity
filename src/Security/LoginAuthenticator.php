@@ -6,6 +6,10 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -28,17 +32,20 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $session;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        SessionInterface $session
     ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->session = $session;
     }
 
     public function supports(Request $request)
@@ -88,6 +95,10 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
     {
         if (in_array((new Role('ROLE_ADMIN')), $token->getRoles())) {
             return new RedirectResponse($this->router->generate('admin_index'));
+        } elseif ($token->getUser()->getActivate() === false) {
+            $this->session->getFlashBag()->add('danger', 'Votre compte a été désactivé');
+
+            return new RedirectResponse($this->router->generate('app_login'));
         }
 
         return new RedirectResponse($this->router->generate('profile_index'));

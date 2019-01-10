@@ -1,0 +1,24 @@
+<div class="text-center">
+    <div class="dropdown float-sm-right mt-3 mr-3">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Choisir une autre association
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if app.user.association is defined %}
+                <p class="ml-2 font-weight-bold">Admin</p>
+                <a class="dropdown-item {{ association==app.user.association ? 'active' }}"
+                   href="{{ path('association_show', {'id':app.user.association.id}) }}">{{ app.user.association.name }}</a>
+                <div class="dropdown-divider"></div>
+            {% endif %}
+            {% for memberAssociation in app.user.memberAssociations %}
+                {% if loop.first %}
+                    <p class="ml-2 font-weight-bold">Membre</p>
+                {% endif %}
+                <a class="dropdown-item {{ association==memberAssociation ? 'active' }} "
+                   href="{{ path('association_show', {'id':memberAssociation.id}) }}">{{ memberAssociation.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

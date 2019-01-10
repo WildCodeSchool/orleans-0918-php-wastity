@@ -100,7 +100,7 @@ class AssociationController extends AbstractController
     }
 
     /**
-     * @IsGranted("view", subject="association")
+     * @IsGranted("associationView", subject="association")
      * @Route("/{id}/showAssociation", name="association_show", methods="GET|POST")
      * @param Association $association
      * @return Response
@@ -180,7 +180,7 @@ class AssociationController extends AbstractController
     }
 
     /**
-     * @IsGranted("view", subject="association")
+     * @IsGranted("associationView", subject="association")
      * @param OfferRepository $offerRepository
      * @param Association $association
      * @Route("/{id}/record", name="association_record", methods="GET")
@@ -225,7 +225,6 @@ class AssociationController extends AbstractController
             'association' => $association,
             'distance' => $distance,
             'offer' => $offer,
-            'company'=>$company->getName(),
         ]);
     }
 
@@ -304,7 +303,7 @@ class AssociationController extends AbstractController
      * @Route("/{id}/statistics", name="association_show_statistics", methods="GET|POST")
      * @param association $association
      * @return Response
-     * @IsGranted("view", subject="association")
+     * @IsGranted("associationView", subject="association")
      */
     public function showStatistics(
         Association $association,
@@ -332,10 +331,11 @@ class AssociationController extends AbstractController
     }
     
     /**
-     * @Route ("/{id}/removeMember/{user}", name="removeMember", methods="POST")
+     * @Route ("/{id}/removeMember/{user}", name="removeMemberAssociation", methods="POST")
      * @param Association $association
      * @param User $user
      * @return Response
+     * @IsGranted("associationAdmin", subject="association")
      */
     public function deleteMember(Association $association, User $user, Request $request) :Response
     {
