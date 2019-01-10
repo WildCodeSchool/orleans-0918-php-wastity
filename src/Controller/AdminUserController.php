@@ -46,7 +46,7 @@ class AdminUserController extends AbstractController
     {
         $active = $user->getActivate();
         $user->setActivate(!$active);
-        if ($active == true) {
+        if ($active == false) {
             $this->addFlash('success', "L'utilisateur à bien été activée !");
         } else {
             $this->addFlash('danger', "L'utilisateur à bien été désactivée !");
