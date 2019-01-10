@@ -74,10 +74,8 @@ final class Version20190110131313 extends AbstractMigration
         $this->addSql('DROP TABLE company');
         $this->addSql('DROP TABLE company_user');
         $this->addSql('DROP TABLE status');
-        $this->addSql('TRUNCATE status');
         $this->addSql('DROP TABLE food_hero');
         $this->addSql('DROP TABLE schedule');
-        $this->addSql('TRUNCATE days_of_week');
         $this->addSql('DROP TABLE days_of_week');
         $this->addSql('DROP TABLE offer');
     }
