@@ -16,6 +16,7 @@
              <th scope="col">Date</th>
              <th scope="col" class="ml-3">Poids</th>
              <th scope="col">Status</th>
+             <th scope="col" class="d-none d-md-table-cell">Association</th>
              <th scope="col">Détails</th>
          </tr>
          </thead>
@@ -26,6 +27,11 @@
                  <td>{{ offer.weight }} kg</td>
                  <td><i class="fas {{ offer.status.classfontawesome }}"
                         style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
+                 {% if offer.status.statustext!="En attente d'association" %}
+                 <th scope="row" class="d-none d-md-table-cell">{{ offer.association.name }}</th>
+                 {% else %}
+                 <th scope="row" class="d-none d-md-table-cell"> - </th>
+                 {% endif %}
                  <td data-toggle="modal" data-target="#ModalOffer{{ offer.id }}"><i
                              class="far fa-eye text-center text-info"></i></td>
              </tr>
