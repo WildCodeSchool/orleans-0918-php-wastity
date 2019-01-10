@@ -30,8 +30,8 @@ class Offer
      * @Vich\UploadableField(mapping="offer", fileNameProperty="picture")
      * @var File
      * @Assert\File(
-     *     maxSize = "3000k",
-     *     maxSizeMessage = "Veuillez ajouter une image de moins de 2 Mo",
+     *     maxSize = "3072k",
+     *     maxSizeMessage = "Veuillez ajouter une image de moins de 3 Mo",
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
      *     mimeTypesMessage = "Veuillez ajouter un fichier image"
      * )
