@@ -39,6 +39,14 @@ final class Version20190110131313 extends AbstractMigration
         $this->addSql('ALTER TABLE offer ADD CONSTRAINT FK_29D6873E979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id)');
         $this->addSql('ALTER TABLE offer ADD CONSTRAINT FK_29D6873EBD4686ED FOREIGN KEY (foodhero_id) REFERENCES food_hero (id)');
         $this->addSql('ALTER TABLE offer ADD CONSTRAINT FK_29D6873E6BF700BD FOREIGN KEY (status_id) REFERENCES status (id)');
+        $this->addSql('INSERT INTO days_of_week (name) VALUES (\'Lundi\'),(\'Mardi\'),(\'Mercredi\'),(\'Jeudi\'),(\'Vendredi\'),(\'Samedi\'),(\'Dimanche\')');
+        $this->addSql('INSERT INTO status (const_status,color,status_text,class_font_awesome) VALUES
+                            ("AssociationResearch","#E77471","En attente d\'association","fa-hands-helping"),
+                            ("FoodHeroResearch","#000000","En attente de FoodHero","fa-user-ninja"),
+                            ("WaitingForRecuperation","#E95420","En route vers l\'entreprise","fa-bicycle"),
+                            ("WaitingForDelivery","#696969","En route vers l\'association","fa-box"),
+                            ("Delivered","#57a639","Livré","fa-box-check")
+        ');
     }
 
     public function down(Schema $schema) : void
@@ -66,8 +74,10 @@ final class Version20190110131313 extends AbstractMigration
         $this->addSql('DROP TABLE company');
         $this->addSql('DROP TABLE company_user');
         $this->addSql('DROP TABLE status');
+        $this->addSql('TRUNCATE status');
         $this->addSql('DROP TABLE food_hero');
         $this->addSql('DROP TABLE schedule');
+        $this->addSql('TRUNCATE days_of_week');
         $this->addSql('DROP TABLE days_of_week');
         $this->addSql('DROP TABLE offer');
     }
