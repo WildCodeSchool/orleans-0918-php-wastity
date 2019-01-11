@@ -3,31 +3,26 @@
 {% block title %}Annonces{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="container mb-2 ">
-            <div class="row justify-content-center text-center">
-                <div>
-                    <p class="fa text-center text-info mt-3 mb-2"><strong>Offres en attente</strong></p>
-                </div>
-            </div>
-            <div class="row justify-content-center text-center">
-                <a class="btn btn-info mt-3 mb-1"
-                   href="{{ path('offer_new') }}">{{ button_label|default('Nouvelle offre') }}</a>
-            </div>
+    <div class="container mb-5 pb-5">
+
+        <div class="row justify-content-center text-center my-3">
+            <h2>Offres en cours</h2>
+        </div>
+        <div class="row justify-content-center text-center">
+            <a class="btn btn-info mb-1"
+               href="{{ path('offer_new') }}"><i
+                        class="fas fa-plus"></i> {{ button_label|default('Créer une nouvelle offre') }}</a>
         </div>
 
-        <div class="container px-0">
-            <div class="row justify-content-center">
-                {% for appointment in appointments %}
-                    {{ render(controller(
-                        'App\\Controller\\CompanyController::showOneOffer', {'company':company.id, 'offer': appointment.id}
-                    )) }}
-                {% endfor %}
-            </div>
-            <div class="d-flex justify-content-center mt-5">
-                {{ knp_pagination_render(appointments) }}
-            </div>
-            </div>
+        <div class="row justify-content-center">
+            {% for appointment in appointments %}
+                {{ render(controller(
+                    'App\\Controller\\CompanyController::showOneOffer', {'company':company.id, 'offer': appointment.id}
+                )) }}
+            {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(appointments) }}
         </div>
     </div>
 

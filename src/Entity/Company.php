@@ -151,7 +151,7 @@ class Company implements HasAddress
      * @param $type
      * @return Company
      */
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
         return $this;
