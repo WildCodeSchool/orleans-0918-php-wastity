@@ -41,10 +41,12 @@
                             <div class="card fh">
                                 <div class="card-header align-items-center">
                                     <h3 class="col-12 mt-2 mb-0">{{ offer.description }}</h3>
-                                    <p>proposée par {{ offer.company.name }}</p>
                                 </div>
                                 <div class="row">
                                     <ul class="col-6">
+                                        <li class="mt-2">
+                                            <strong>proposée par  : </strong>{{ offer.company.name }}
+                                        </li>
                                         <li class="mt-2">
                                             <strong >à livrer à : </strong >{{ offer.association.name }}
                                         </li>

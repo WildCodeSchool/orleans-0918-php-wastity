@@ -193,22 +193,6 @@ class FoodHeroController extends AbstractController
             'offer' => $offer,
         ]);
     }
-    /**
-     * @Route("/{foodhero}/map/{offer}", name="foodhero_map_offer", methods="GET")
-     * @param FoodHero $foodhero
-     * @param Offer $offer
-     * @return Response
-     */
-
-    public function showMapOffer(
-        FoodHero $foodhero,
-        Offer $offer
-    ): Response {
-        return $this->render('Visitor/FoodHero/showMapOffer.html.twig', [
-            'foodhero' => $foodhero,
-            'offer' => $offer,
-        ]);
-    }
 
 
     /**
