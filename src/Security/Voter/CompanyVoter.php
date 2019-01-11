@@ -3,7 +3,6 @@
 namespace App\Security\Voter;
 
 use App\Entity\Company;
-use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,7 +11,7 @@ class CompanyVoter extends Voter
 {
     const VIEW = 'companyView';
     const COMPANY_ADMIN = 'companyAdmin';
-    
+
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
@@ -28,9 +27,7 @@ class CompanyVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-
         $company=$subject;
-        
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::VIEW:

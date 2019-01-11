@@ -98,7 +98,7 @@
                     <div class="row">
                         <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
                         {% if app.user == company.user %}
-                        <div class="col-1">{{ include('Visitor/Company/_deleteMember_form.html.twig') }}</div>
+                            <div class='col-1'>{{ include('Visitor/Company/_deleteMember_form.html.twig') }}</div>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -109,6 +109,10 @@
         {% if app.user == company.user %}
             <div class="row justify-content-center">
                 {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
+            </div>
+        {% else %}
+            <div class="row justify-content-center">
+                {{ include('Visitor/Company/_leaveCompany_form.html.twig') }}
             </div>
         {% endif %}
 
