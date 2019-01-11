@@ -41,7 +41,7 @@ class OfferController extends AbstractController
             $offer->setStatus($status);
             $em->persist($offer);
             $em->flush();
-            $this->addFlash('success', "L'offre à bien été enregistrée !");
+            $this->addFlash('success', "L'offre a bien été enregistrée !");
 
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
@@ -69,7 +69,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', "L'offre à bien été modifiée !");
+            $this->addFlash('success', "L'offre a bien été modifiée !");
 
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
