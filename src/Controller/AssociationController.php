@@ -114,6 +114,12 @@ class AssociationController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->findOneByEmail($form->getData()['email']);
+            if ($form->getData()['email']===$this->getUser()->getEmail()||$association->getMembers()->contains($user)) {
+                $this->addFlash('danger', "Cet utilisateur fait déjà parti de cette association");
+
+                return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
+            }
             if ($userRepository->findOneByEmail($form->getData()['email'])) {
                 $em = $this->getDoctrine()->getManager();
                 $user = $userRepository->findOneByEmail($form->getData()['email']);
@@ -343,9 +349,33 @@ class AssociationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $association->removeMember($user);
             $em->flush();
-            $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+            if ($this->getUser() !== $association->getUser()) {
+                $this->addFlash('danger', 'Vous avez quitté l\'association : '. $association->getName());
+
+                return $this->redirectToRoute('profile_index');
+            } else {
+                $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
+            }
         }
         
         return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
+    }
+
+    /**
+     * @Route ("/{id}/leaveAssociation", name="leaveAssociation", methods="POST")
+     * @param Association $association
+     * @return Response
+     * @IsGranted("associationView", subject="association")
+     */
+    public function leaveCompany(Association $association, Request $request) :Response
+    {
+        if ($this->isCsrfTokenValid('leaveAssociation', $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $association->removeMember($this->getUser());
+            $em->flush();
+            $this->addFlash('danger', 'Vous avez quitté l\'association : '. $association->getName());
+        }
+
+        return $this->redirectToRoute('profile_index');
     }
 }

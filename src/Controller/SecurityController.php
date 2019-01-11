@@ -43,6 +43,7 @@ class SecurityController extends AbstractController
                 $user,
                 $user->getPassword()
             ));
+            $user->setActivate(true);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

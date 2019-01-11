@@ -81,6 +81,10 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Association", mappedBy="members")
      */
     private $memberAssociations;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Company", mappedBy="members")
+     */
     private $memberCompanies;
 
     /**
