@@ -237,5 +237,8 @@ legend.required::after {
     .fas {
       color: $color;
     }
+    img{
+      object-fit: cover;
+    }
   }
 }

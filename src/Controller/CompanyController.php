@@ -143,9 +143,14 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->findOneByEmail($form->getData()['email']);
+            if ($form->getData()['email'] === $this->getUser()->getEmail() || $company->getMembers()->contains($user)) {
+                $this->addFlash('danger', "Cet utilisateur fait déjà parti de cette entreprise");
+
+                return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
+            }
             if ($userRepository->findOneByEmail($form->getData()['email'])) {
                 $em = $this->getDoctrine()->getManager();
-                $user = $userRepository->findOneByEmail($form->getData()['email']);
                 $company->addMember($user);
                 $em->flush();
                 $this->addFlash('success', "Cet utilisateur a bien été ajouté");
@@ -302,7 +307,25 @@ class CompanyController extends AbstractController
             $em->flush();
             $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
         }
-        
+
         return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
+    }
+
+    /**
+     * @Route ("/{id}/leaveCompany", name="leaveCompany", methods="POST")
+     * @param Company $company
+     * @return Response
+     * @IsGranted("companyView", subject="company")
+     */
+    public function leaveCompany(Company $company, Request $request) :Response
+    {
+        if ($this->isCsrfTokenValid('leaveCompany', $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $company->removeMember($this->getUser());
+            $em->flush();
+            $this->addFlash('danger', 'Vous avez quitté l\'entreprise : '. $company->getName());
+        }
+
+        return $this->redirectToRoute('profile_index');
     }
 }
