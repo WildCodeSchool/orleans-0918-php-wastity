@@ -82,7 +82,6 @@ class CompanyController extends AbstractController
         PaginatorInterface $paginator
     ) {
         $offers = $offerRepository->findNotDeliveredForCompany(new \DateTime(), $company);
-//        $offers = $company->getOffers();
 
         $appointments = $paginator->paginate(
             $offers,
