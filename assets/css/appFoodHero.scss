@@ -101,11 +101,12 @@ a:hover {
 
 .fh{
   @include card($foodHeroColor);
-  strong {
-    color: $foodHeroColor;
-  }
+
   i {
     color: $foodHeroColor;
+  a{
+        font-size:15em;
+      }
   }
 
 }

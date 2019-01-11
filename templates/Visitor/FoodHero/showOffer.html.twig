@@ -1,11 +1,13 @@
 <div class="card fh">
     <div class="card-header align-items-center">
-        <h3 class="col-12 mt-2 mb-0">{{ offer.description }}</h3>
-        <p>proposée par {{ offer.company.name }}</p>
+        <h3 class="col-12 mt-2 mb-2">{{ offer.description }}</h3>
     </div>
     <div class="card-body">
         <div class="row">
             <ul class="col-6">
+                <li class="mt-2">
+                    <strong>proposée par  : </strong>{{ offer.company.name }}
+                </li>
                 <li class="mt-2">
                     <strong>à livrer à : </strong>{{ offer.association.name }}
                 </li>
@@ -22,21 +24,21 @@
                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                  alt="ImageOffre"/>
         </div>
-        <details>
-            <summary class="btn btn-outline-secondary"><i class="fas fa-search-plus mr-2"></i>Voir plus</summary>
+        <details class="justify-content-center">
+            <summary class="btn btn-outline-secondary col-10 offset-1 col-sm-6 offset-sm-3 my-3"><i class="fas fa-search-plus mr-2"></i>Voir plus</summary>
             <div>
-                <p class="col-12 mt-1"><strong>Description</strong>
+                <p class="col-12 mt-1"><strong >Description</strong>
                     : {{ offer.description }}
                 </p>
                 <p class="col-12 mt-1"><strong>Informations complémentaires</strong>
                     : {{ offer.complementary }}</p>
             </div>
-            <div class="row">
-                {{ render(controller(
-                    'App\\Controller\\FoodHeroController::showMapOffer', {'foodhero':foodhero.id, 'offer':offer.id}
-                )) }}
+            <div class="row justify-content-around">
+                {% include 'Visitor/FoodHero/showMapOffer.html.twig' %}
+            </div>
+            <div class="row justify-content-center">
                 <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"
-                   class="offset-1 col-5 my-2 btn ">Accepter l'offre</a>
+                   class="col-10 offset-1 col-sm-6 offset-sm-3 mx-0 my-3 btn ">Accepter l'offre</a>
 
             </div>
         </details>
