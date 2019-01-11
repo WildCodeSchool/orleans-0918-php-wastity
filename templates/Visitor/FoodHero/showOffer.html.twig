@@ -35,6 +35,8 @@
                 <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"
                    class="offset-1 col-5 my-2 btn ">Accepter l'offre</a>
 
+                <a href="{{ path('foodhero_showOfferCompany', {'id': foodhero.id, 'company': offer.company.id}) }}">{{ offer.company.name }}</a>
+
             </div>
         </details>
 

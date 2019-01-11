@@ -1,0 +1,73 @@
+{% extends 'Visitor/FoodHero/layoutFoodHero.html.twig' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block body %}
+    <div class="container mb-5 pb-5">
+        <div class="row text-primary">
+            <h1><strong>L'entreprise</strong></h1>
+        </div>
+        <div class="row justify-content-center ">
+            <table class="infos">
+                <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ company.name }}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>{{ company.type }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ company.address }}</td>
+                </tr>
+                <tr>
+                    <th>Code postal</th>
+                    <td>{{ company.postalCode }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ company.city }}</td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>{{ company.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ company.email }}</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="row text-primary">
+            <h1><strong>Les horaires</strong></h1>
+        </div>
+        <div class="row justify-content-center">
+            <table>
+                <thead>
+                <tr>
+                    <th class="col-md-3"></th>
+                    <td class="col-md-3 text-center"><strong>Matin</strong></td>
+                    <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for shedule in company.schedules %}
+                    <tr>
+                        <th>{{ shedule.day.name }}</th>
+                        <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                        <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+{% endblock %}

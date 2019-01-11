@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\FoodHero;
 use App\Entity\Offer;
 use App\Form\FoodHeroType;
@@ -331,6 +332,19 @@ class FoodHeroController extends AbstractController
 
         return $this->render('Visitor/FoodHero/record.html.twig', [
             'offers' => $offers,
+            'foodhero' => $foodHero,
+        ]);
+    }
+    
+    /**
+     * @Route("/{id}/showCompany/{company}", name="foodhero_showOfferCompany", methods="GET")
+     * @param Company $company
+     * @return Response
+     */
+    public function showOfferCompany(FoodHero $foodHero, Company $company): Response
+    {
+        return $this->render('Visitor/FoodHero/showOfferCompany.html.twig', [
+            'company' => $company,
             'foodhero' => $foodHero,
         ]);
     }
