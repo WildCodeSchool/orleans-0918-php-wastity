@@ -69,12 +69,19 @@ class CompanyController extends AbstractController
      * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
      * @param OfferRepository $offerRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return Response
+     * @throws \Exception
      * @IsGranted("companyView", subject="company")
      */
-    public function listOffers(Company $company, Request $request, PaginatorInterface $paginator)
-    {
-        $offers = $company->getOffers();
+    public function listOffers(
+        Company $company,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
+        $offers = $offerRepository->findNotDeliveredForCompany(new \DateTime(), $company);
 
         $appointments = $paginator->paginate(
             $offers,
@@ -92,8 +99,9 @@ class CompanyController extends AbstractController
 
     /**
      * @Route("/{company}/oneOffer/{offer}", name="company_offer_card")
+     * @param Company $company
+     * @param Offer $offer
      * @return Response
-     * @throws \Exception
      */
     public function showOneOffer(
         Company $company,
@@ -143,9 +151,14 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->findOneByEmail($form->getData()['email']);
+            if ($form->getData()['email'] === $this->getUser()->getEmail() || $company->getMembers()->contains($user)) {
+                $this->addFlash('danger', "Cet utilisateur fait déjà parti de cette entreprise");
+
+                return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
+            }
             if ($userRepository->findOneByEmail($form->getData()['email'])) {
                 $em = $this->getDoctrine()->getManager();
-                $user = $userRepository->findOneByEmail($form->getData()['email']);
                 $company->addMember($user);
                 $em->flush();
                 $this->addFlash('success', "Cet utilisateur a bien été ajouté");
@@ -171,7 +184,6 @@ class CompanyController extends AbstractController
     {
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -303,7 +315,25 @@ class CompanyController extends AbstractController
             $em->flush();
             $this->addFlash('danger', "Cet utilisateur a bien été supprimé");
         }
-        
+
         return $this->redirectToRoute('company_show', ['id' => $company->getId()]);
+    }
+
+    /**
+     * @Route ("/{id}/leaveCompany", name="leaveCompany", methods="POST")
+     * @param Company $company
+     * @return Response
+     * @IsGranted("companyView", subject="company")
+     */
+    public function leaveCompany(Company $company, Request $request) :Response
+    {
+        if ($this->isCsrfTokenValid('leaveCompany', $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $company->removeMember($this->getUser());
+            $em->flush();
+            $this->addFlash('danger', 'Vous avez quitté l\'entreprise : '. $company->getName());
+        }
+
+        return $this->redirectToRoute('profile_index');
     }
 }

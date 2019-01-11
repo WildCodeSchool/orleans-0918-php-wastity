@@ -106,6 +106,12 @@ a:hover {
 
 .fh{
   @include card($foodHeroColor);
+  strong {
+    color: $foodHeroColor;
+  }
+  i {
+    color: $foodHeroColor;
+  }
 
 }
 

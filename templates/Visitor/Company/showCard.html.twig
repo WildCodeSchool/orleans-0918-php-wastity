@@ -1,34 +1,36 @@
 <div class="card comp">
     <div class="card-header">
         <div class="card-header px-0 align-items-center">
-            <h3 class="col-12 mt-1 mb-0"> {{ offer.description}}</h3>
-            <p>proposée par  {{ offer.company.name }}</p>
+            <h3 class=""> {{ offer.company.name }}</h3>
+            <p class="ellipsis">{{ offer.description }}</p>
         </div>
     </div>
     <div class="card-body">
         <div class="row align-items-center">
             <ul class="col-6">
-                <li class="mt-1"><i
-                            class="fas fa-clock mr-2 mr-md-4"></i>{{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}
+                <li class="">
+                    <i class="fas fa-clock"></i> {{ offer.end ? offer.end|date('d/m/Y H:i') : '' }}
                 </li>
-                <li class="mt-1"><i class="fas fa-dumbbell mr-2 mr-md-4"></i>{{ offer.weight }} Kg</li>
+                <li class=""><i class="fas fa-dumbbell"></i> {{ offer.weight }}Kg</li>
             </ul>
             <img class="col-6"
                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                  alt="ImageOffre"/>
         </div>
-        <details>
+        <details class="my-2">
             <summary class="btn btn-outline-secondary"><i class="fas fa-search-plus mr-2"></i>Voir plus</summary>
             <div>
-                <p class="col-12 mt-1"><strong class="text-info">Description</strong>
+                <p class=""><strong class="text-info">Description</strong>
                     : {{ offer.description }}
                 </p>
-                <p class="col-12 mt-1"><strong class="text-info">Informations complémentaires</strong>
+                <p class=""><strong class="text-info">Informations complémentaires</strong>
                     : {{ offer.complementary }}</p>
             </div>
-            <div class="row">
-                <a class="offset-3 col-6 mt-2 mb-2 btn btn-info mt-4"
-                   href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">{{ button_label|default('Modifier') }}</a>
+            <div class="row justify-content-center">
+                <a class=" btn btn-outline-info mt-2 btn-block w-50"
+                   href="{{ path('company_offer_edit', {'offer': offer.id, 'company': company.id}) }}">
+                    <i class="fas fa-edit text-white"></i> {{ button_label|default('Modifier') }}
+                </a>
             </div>
         </details>
 

@@ -4,113 +4,129 @@
 
 {% block body %}
     <div class="container mb-5 pb-5">
-        <div class="row justify-content-center text-center">
-            <div>
-                <p class="fa text-center text-info mt-3 mb-2"><strong>Administration</strong><br>
-                    <i class="fas text-info fa-toolbox fa-2x"></i></p>
+        <div class="row justify-content-center text-center my-3">
+            <h2>Administration</h2>
+        </div>
+        <section class="mb-3">
+            <div class="row text-info">
+                <h3><i class="fas fa-book"></i> Entreprise
+                    <a class="ml-2 btn btn-outline-info btn-sm float-right"
+                       href="{{ path('company_edit', {'id': company.id}) }}">
+                        <i class="fas text-info fa-edit "></i> Modifier
+                    </a></h3>
             </div>
-        </div>
-
-        <div class="row text-info">
-            <h1><strong>Votre entreprise</strong></h1>
-        </div>
-        <div class="row justify-content-center ">
-            <table class="infos">
-                <tbody>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ company.name }}</td>
-                </tr>
-                <tr>
-                    <th>Type</th>
-                    <td>{{ company.type }}</td>
-                </tr>
-                <tr>
-                    <th>Adresse</th>
-                    <td>{{ company.address }}</td>
-                </tr>
-                <tr>
-                    <th>Code postal</th>
-                    <td>{{ company.postalCode }}</td>
-                </tr>
-                <tr>
-                    <th>Ville</th>
-                    <td>{{ company.city }}</td>
-                </tr>
-                <tr>
-                    <th>Téléphone</th>
-                    <td>{{ company.phone }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ company.email }}</td>
-                </tr>
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <div class="row justify-content-center">
-
-            <a class="btn btn-info  mt-5 mb-5" href="{{ path('company_edit', {'id': company.id}) }}">Modifier les
-                informations</a>
-        </div>
-
-
-        <div class="row text-info">
-            <h1><strong>Vos horaires</strong></h1>
-        </div>
-        <div class="row justify-content-center">
-            <table>
-                <thead>
-                <tr>
-                    <th class="col-md-3"></th>
-                    <td class="col-md-3 text-center"><strong>Matin</strong></td>
-                    <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
-                </tr>
-                </thead>
-                <tbody>
-
-                {% for shedule in company.schedules %}
+            <div class="row justify-content-center ">
+                <table class="table table-striped table-borderless table-sm">
+                    <tbody>
                     <tr>
-                        <th>{{ shedule.day.name }}</th>
-                        <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
-                        <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                        <th >Nom</th>
+                        <td>{{ company.name }}</td>
                     </tr>
-                {% endfor %}
-                </tbody>
+                    <tr>
+                        <th >Type</th>
+                        <td>{{ company.type }}</td>
+                    </tr>
+                    <tr>
+                        <th >Adresse</th>
+                        <td>{{ company.address }}</td>
+                    </tr>
+                    <tr>
+                        <th >Code postal</th>
+                        <td>{{ company.postalCode }}</td>
+                    </tr>
+                    <tr>
+                        <th >Ville</th>
+                        <td>{{ company.city }}</td>
+                    </tr>
+                    <tr>
+                        <th >Téléphone</th>
+                        <td>{{ company.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th >Email</th>
+                        <td>{{ company.email }}</td>
+                    </tr>
+                    </tbody>
 
-            </table>
-        </div>
-        <div class="row justify-content-center">
-            <a class="btn btn-info mt-5 mb-5" href="{{ path('company_edit_shedule', {'id': company.id}) }}">Modifier les
-                horaires</a>
-        </div>
+                </table>
 
-        <div class="row text-info">
-            <h1><strong>Vos membres</strong></h1>
-        </div>
-        <div class="justify-content-center text-center">
-
-            {% if company.members is not empty %}
-                {% for member in company.members  %}
-                    <div class="row">
-                        <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
-                        {% if app.user == company.user %}
-                        <div class="col-1">{{ include('Visitor/Company/_deleteMember_form.html.twig') }}</div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>aucun membre actuellement</p>
-            {% endif %}
-        </div>
-        {% if app.user == company.user %}
-            <div class="row justify-content-center">
-                {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
             </div>
-        {% endif %}
+        </section>
 
+        <section class="mb-3">
+            <div class="row text-info">
+                <h3><i class="fas fa-clock"></i> Horaires</h3>
+                <a class="btn btn-outline-info btn-sm ml-2 float-right"
+                   href="{{ path('company_edit_shedule', {'id': company.id}) }}">
+                    <i class="fas text-info fa-edit"></i> Modifier
+                </a>
+
+            </div>
+            <div class="row justify-content-center">
+                <table class="table table-borderless table-sm table-striped">
+                    <thead>
+                    <tr>
+                        <th class=""></th>
+                        <td class=" text-center"><strong>Matin</strong></td>
+                        <td class=" text-center"><strong>Après-midi</strong></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for shedule in company.schedules %}
+                        <tr>
+                            <th>{{ shedule.day.name }}</th>
+                            <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                            <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-3">
+
+            <div class="row text-info">
+                <h3><i class="fas fa-user"></i> Vos membres</h3>
+            </div>
+            <div class="justify-content-center text-center">
+
+                {% if company.members is not empty %}
+                    <table class="table  table-sm table-striped">
+                        <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Retirer</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        {% for member in company.members %}
+                            <tr>
+                                <td>
+                                    {{ member.email }}
+                                </td>
+                                <td>
+                                    {% if app.user == company.user %}
+                                        {{ include('Visitor/Company/_deleteMember_form.html.twig') }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="alert alert-info">Aucun membre actuellement</p>
+                {% endif %}
+            </div>
+            {% if app.user == company.user %}
+                <div class="row justify-content-center">
+                    {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
+                </div>
+            {% endif %}
+        </section>
     </div>
+
 {% endblock %}

@@ -1,0 +1,4 @@
+<form  method="post" action="{{ path('leaveAssociation', {'id': association.id}) }}" onsubmit="return confirm('Voulez vous vraiment quitter l\'association ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('leaveAssociation') }}">
+    <button class="btn btn-success">Quitter l'association</button>
+</form>

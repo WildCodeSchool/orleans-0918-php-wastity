@@ -1,26 +1,9 @@
 @import 'app';
 
 .header {
-  padding-bottom: 5px;
-  padding-top:10px;
-  top : 0;
   background-color: $companyColor;
-  box-shadow: 0 0 1.5em $headerBorderColor;
-  h1{
+  h1 {
     color: $bodyBackground;
-    font-size: $headerTitle;
-  }
-  p {
-    margin-bottom: 0;
-  }
-  a {
-    color: $bodyBackground;
-    font-weight: bold;
-    :hover {
-      color: $bodyBackground;
-      font-weight: bold;
-      text-decoration: none;
-    }
   }
 }
 
@@ -60,10 +43,18 @@ a {
   }
 }
 
-h1{
-  color: $companyColorHover;
-}
+h2{
+  font-size:20pt;
+  color: $companyColor;
+  font-weight: bold;
 
+}
+h3 {
+  font-size:16pt;
+  .fas {
+    color: $companyColor;
+  }
+}
 .form-group{
   margin-bottom: 5px;
 }
@@ -76,9 +67,12 @@ label{
   font-weight:bold;
 }
 
-.fas{
-  color: $bodyBackground;
+.navbar {
+  .fas{
+    color: $bodyBackground;
+  }
 }
+
 
 .container {
   .card {

@@ -13,21 +13,46 @@ body {
     .card {
       margin-top: 5%;
       margin-bottom: 5%;
-      .img{
+      .img {
         max-height: 200px;
       }
     }
-    img{
+    img {
       object-fit: cover;
       max-height: 200px;
     }
   }
 }
 
-
-.wastity_blanc{
-  height: $headerTitle;
+.header {
+  padding-bottom: 5px;
+  padding-top: 10px;
+  top : 0;
+  background-color: darken($primaryColor,70%);
+  color:$dark;
+  box-shadow: 0 0 1em $headerBorderColor;
+  h1{
+    color: $bodyBackground;
+    font-size: 16pt;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    color: $bodyBackground;
+    font-weight: bold;
+  }
+  a:hover {
+    color: $bodyBackground;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .wastity_blanc {
+    height: 30px;
+  }
 }
+
+
 .container-fluid {
   padding: 0;
   margin: 0;
@@ -37,9 +62,10 @@ body {
   margin-left: 0;
   margin-right: 0;
 }
-.msg-flash{
-  margin-bottom:-15px;
-  font-size: 3vh;
+
+.msg-flash {
+  margin-bottom: -15px;
+  font-size: 2em;
 }
 
 h1 {
@@ -108,92 +134,98 @@ body .container .card {
 ul {
   list-style-type: none;
 }
+
 .col-6 {
   flex: none;
 }
 
 label.required::after {
-  content:' *';
-  color: $required;
-}
-legend.required::after {
-  content:' *';
+  content: ' *';
   color: $required;
 }
 
-@mixin card($color){
-  box-shadow: 1px 1px 7px 1px darken($primaryColor, 60%);
-  a:hover{
+legend.required::after {
+  content: ' *';
+  color: $required;
+}
+
+@mixin card($color) {
+  box-shadow: 0px 0px 12px -6px darken($primaryColor, 40%);
+  a:hover {
     text-decoration: none;
   }
-  .card-header{
+  .card-header {
     color: $primaryColor;
     background-color: $color;
-    clip-path: polygon(0 0, 100% 0, 100% 85%,55% 85%,50% 100%,45% 85%,0 85%);
-    height: 12vh;
-    .image{
-      height: 8vh;
+    padding-bottom:0.8em;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 55% 75%, 50% 100%, 45% 75%, 0 75%);
+
+    .image {
+      padding: 0.3em;
+      height: 3em;
     }
-    h3{
-      font-size:2.5vh;
+    h3 {
+      font-size: 16pt;
       font-weight: bold;
       padding-left: 0;
-      width: 250px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-bottom:0;
     }
-    p{
-      font-size:2vh;
-      margin-left:4px;
+    p {
+      font-size: 14pt;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
     }
   }
-  .card-body{
-    h1{
-      font-size: 3vh;
+  .card-body {
+    h2 {
+      font-size: 16pt;
       font-weight: bold;
-      margin-top: 1.5vh;
+      margin-top: 0.5em;
+      color:$color;
     }
-    p{
-      font-size: 1.8vh;
-      margin-left: 1vw;
-      margin-right: 1vw;
-      margin-bottom: 2vh;
+    p {
+      font-size: 14pt;
+      margin: 0.6em;
     }
-    li{
-      color: darken($primaryColor, 100%);
-      font-weight: 500;
+    li {
+      font-size:14pt;
+      color: darken($primaryColor, 80%);
     }
-    .fas{
+    .fas {
       color: $color;
     }
-    .imgOffer{
-      margin-bottom: 1vh;
+    details p {
+      font-size: 12pt;
     }
-    strong{
-      color:$color;
+    strong {
+      color: $color;
     }
     color: darken($primaryColor, 100%);
   }
   .btn {
     font-size: small;
-    padding-left:1vw;
+    padding-left: 1em;
     background-color: $color;
-    color : $primaryColor;
+    color: $primaryColor;
     font-weight: bold;
   }
-  .btn-outline-secondary{
+  .btn-outline-secondary {
     background-color: $primaryColor;
-    color:$color;
+    color: $color;
     border: 2.5px solid $color;
     margin: 2% 28% 2% 28%;
     width: 35%;
   }
 
   .card {
-    color : $primaryColor;
+    color: $primaryColor;
     font-weight: bold;
-    a{
+    a {
 
       &:link {
         text-decoration: none;
@@ -201,9 +233,12 @@ legend.required::after {
     }
 
   }
-  .modal{
-    .fas{
+  .modal {
+    .fas {
       color: $color;
+    }
+    img{
+      object-fit: cover;
     }
   }
 }
