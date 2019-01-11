@@ -170,6 +170,9 @@ legend.required::after {
     .imgOffer{
       margin-bottom: 1vh;
     }
+    img {
+      object-fit: cover;
+    }
     strong{
       color:$color;
     }
@@ -204,6 +207,9 @@ legend.required::after {
   .modal{
     .fas{
       color: $color;
+    }
+    img{
+      object-fit: cover;
     }
   }
 }

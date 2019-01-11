@@ -36,28 +36,37 @@
                             <img class="col-6"
                                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"
                                  alt="ImageOffre"/>
+
+                        </div>
+                        <details>
+                            <summary class="btn btn-outline-secondary"><i class="fas fa-search-plus mr-2"></i>Voir plus</summary>
+
+                            <div>
                             <p class="col-12 mt-1"><strong>Description</strong>
+
                                 : {{ offer.description }}
                             </p>
                             <p class="col-12 mt-1"><strong>Informations complémentaires</strong>
                                 : {{ offer.complementary }}</p>
 
                         </div>
-                    </div>
-                    <div class="row">
-                        {{ render(controller(
-                            'App\\Controller\\FoodHeroController::showMapOffer', {'foodhero':foodhero.id, 'offer':offer.id}
-                        )) }}
 
-                        {% if offer.status.constStatus == 'WaitingForRecuperation' %}
-                            <a href="{{ path('foodhero_collect_offer', {'offer' : offer.id}) }}"
-                               class="offset-3 col-6 mt-2 mb-2 btn btn-primary">Offre récupérée</a>
-                        {% endif %}
-                        {% if offer.status.constStatus == 'WaitingForDelivery' %}
-                            <a href="{{ path('foodhero_delivered_offer', {'offer': offer.id}) }}"
-                               class="offset-3 col-6 mt-2 mb-2 btn btn-primary">Offre livrée</a>
+                        <div class="row">
+                            {{ render(controller(
+                                'App\\Controller\\FoodHeroController::showMapOffer', {'foodhero':foodhero.id, 'offer':offer.id}
+                            )) }}
 
-                        {% endif %}
+                            {% if offer.status.constStatus == 'WaitingForRecuperation' %}
+                                <a href="{{ path('foodhero_collect_offer', {'offer' : offer.id}) }}"
+                                   class="offset-1 col-5 mt-2 mb-2 btn btn-primary">Offre récupérée</a>
+                            {% endif %}
+                            {% if offer.status.constStatus == 'WaitingForDelivery' %}
+                                <a href="{{ path('foodhero_delivered_offer', {'offer': offer.id}) }}"
+                                   class="offset-1 col-5 mt-2 mb-2 btn btn-primary">Offre livrée</a>
+
+                            {% endif %}
+                        </div>
+                        </details>
                     </div>
                 </div>
             {% else %}
