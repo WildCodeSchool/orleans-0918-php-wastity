@@ -1,14 +1,16 @@
 {% extends 'Visitor/Company/layoutCompany.html.twig' %}
 
- {% block title %}Entreprise - Historique{% endblock %}
+ {% block title %}Wastity - Historique Entreprise{% endblock %}
  {% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 
 
  {% block body %}
      <div class="container mb-5 pb-5">
 
-         <div class="row justify-content-center text-center my-3">
-             <h2>Historique</h2>
+         <div class="row justify-content-center text-center">
+             <div>
+                 <p class="fa text-center text-info mt-3 mb-2"><strong>Historique</strong></p>
+             </div>
          </div>
 
         <table class="table  table-sm">
@@ -38,7 +40,6 @@
                                  <div class="card-header">
                                      <div class="card-header px-0 align-items-center">
                                          <h3 class="col-12 mt-1 mb-0"> {{ offer.description }}</h3>
-                                         <p>proposée par {{ offer.company.name }}</p>
                                      </div>
                                  </div>
                                  <div class="row align-items-center">

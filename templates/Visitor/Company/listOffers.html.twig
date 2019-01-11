@@ -1,13 +1,15 @@
 {% extends 'Visitor/Company/layoutCompany.html.twig' %}
 
-{% block title %}Annonces{% endblock %}
-
+{% block title %}Wastity - Offres Entreprise{% endblock %}
 {% block body %}
     <div class="container mb-5 pb-5">
 
-        <div class="row justify-content-center text-center my-3">
-            <h2>Offres en cours</h2>
+        <div class="row justify-content-center text-center">
+            <div>
+                <p class="fa text-center text-info mt-3 mb-2"><strong>Offres en cours</strong></p>
+            </div>
         </div>
+
         <div class="row justify-content-center text-center">
             <a class="btn btn-info mb-1"
                href="{{ path('offer_new') }}"><i

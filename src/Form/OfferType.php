@@ -49,7 +49,7 @@ class OfferType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Décrivez votre produit. Ex : Baguettes, Boites de conserves, ...']
             ])

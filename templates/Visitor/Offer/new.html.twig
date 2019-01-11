@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
-{% block title %}Création Offre{% endblock %}
+{% block title %}Wastity - Création Offre{% endblock %}
 
 {% block header %}
     {% include 'headerLogo.html.twig' with {'type': 'Entreprise', 'route': path('company_show_offers', {'id': company.id}) } %}

@@ -208,7 +208,7 @@ legend.required::after {
     color: darken($primaryColor, 100%);
   }
   .btn {
-    font-size: small;
+    font-size:large;
     padding-left: 1em;
     background-color: $color;
     color: $primaryColor;
@@ -218,8 +218,6 @@ legend.required::after {
     background-color: $primaryColor;
     color: $color;
     border: 2.5px solid $color;
-    margin: 2% 28% 2% 28%;
-    width: 35%;
   }
 
   .card {
@@ -237,8 +235,15 @@ legend.required::after {
     .fas {
       color: $color;
     }
-    img{
-      object-fit: cover;
-    }
+
+  }
+  strong {
+    color: $color;
+  }
+  img{
+    object-fit: cover;
+  }
+  strong {
+    color: $color;
   }
 }

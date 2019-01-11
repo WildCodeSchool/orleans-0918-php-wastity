@@ -50,9 +50,9 @@ class AdminUserController extends AbstractController
         $type = "success";
         if (!$user->getActivate()) {
             $type = 'danger';
-            $activeMessage = 'desactivé';
+            $activeMessage = 'désactivé';
         }
-        $this->addFlash($type, 'L\'utilisateur à bien été '. $activeMessage . '!');
+        $this->addFlash($type, 'L\'utilisateur a bien été '. $activeMessage . '!');
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('user_admin_index');
