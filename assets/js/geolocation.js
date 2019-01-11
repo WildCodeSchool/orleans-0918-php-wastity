@@ -14,7 +14,7 @@ document.getElementById("geolocBtn").addEventListener("click", function(){
                 info += "Timeout !";
                 break;
             case error.PERMISSION_DENIED:
-                info += "Vous n’avez pas donné la permission ou Veuillez activer la géolocalisation sur votre appareil.";
+                info += "Vous n’avez pas donné la permission ou veuillez activer la géolocalisation sur votre appareil et réactualiser la page.";
                 break;
             case error.POSITION_UNAVAILABLE:
                 info += "La position n’a pu être déterminée";
@@ -26,3 +26,4 @@ document.getElementById("geolocBtn").addEventListener("click", function(){
         document.getElementById("infoposition").innerHTML = info;
     }
 });
+

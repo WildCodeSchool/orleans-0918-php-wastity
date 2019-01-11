@@ -36,12 +36,15 @@
     <script>
         document.querySelectorAll("summary").forEach( function (bouton) {
             bouton.addEventListener("click", function (e) {
-                console.log(e);
                 var text=e.target.childNodes[1];
+                console.log(e.target.childNodes[0].className);
+
                 if (text.textContent === "Voir moins") {
                     text.textContent = "Voir plus";
+                    e.target.childNodes[0].className='fas fa-search-plus';
                 } else {
                     text.textContent ='Voir moins';
+                    e.target.childNodes[0].className='fas fa-search-minus';
                 }
             });
         })
