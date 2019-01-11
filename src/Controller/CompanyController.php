@@ -54,7 +54,7 @@ class CompanyController extends AbstractController
             $company->setUser($user);
             $em->persist($company);
             $em->flush();
-            $this->addFlash('success', "Votre entreprise à bien été enregistrée !");
+            $this->addFlash('success', "Votre entreprise a bien été enregistrée !");
 
             return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
         }
@@ -211,7 +211,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'L\'offre à bien été modifiée !');
+            $this->addFlash('success', 'L\'offre a bien été modifiée !');
             return $this->redirectToRoute('company_show_offers', ['id' => $offer->getCompany()->getId()]);
         }
 
@@ -236,7 +236,7 @@ class CompanyController extends AbstractController
             $em->flush();
         }
 
-        $this->addFlash('success', 'Votre entreprise à bien été supprimée !');
+        $this->addFlash('success', 'Votre entreprise a bien été supprimée !');
 
         return $this->redirectToRoute('company_index');
     }
