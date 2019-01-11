@@ -1,5 +1,8 @@
 {{ form_start(form) }}
 <div class="row justify-content-center-sm justify-content-left-xs">
+    <div class="col-12 mt-5 mr-2 ml-2 text-center">
+        <img src="{{ vich_uploader_asset(offer, 'pictureFile') }}" alt="" class="img-fluid">
+    </div>
     <div class="col-md-11 col-xs-12 mt-5 mr-2 ml-2 text-center">
         {{ form_row(form.pictureFile) }}
     </div>
