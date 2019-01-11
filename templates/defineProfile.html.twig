@@ -12,15 +12,16 @@
             <div class="card fh">
                 <a href="{% if app.user.foodhero is null %}{{ path('foodhero_new') }}{% else %}{{ path('foodhero_list_offers', {'id' : app.user.foodhero.id}) }}{% endif %}
 ">
-                <div class="card-header">
-                    <div class="card-header align-items-center">
-                        <img class="image" src="{{ asset('build/images/super(3).png') }}" alt="superhero"/>
+                    <div class="card-header">
+                        <div class="card-header align-items-center">
+                            <img class="image" src="{{ asset('build/images/super(3).png') }}" alt="superhero"/>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h1>Food Hero</h1>
-                    <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p>
-                </div></a>
+                    <div class="card-body">
+                        <h2>Food Hero</h2>
+                        <p>Je souhaite aider les associations à collecter des offres alimentaires près de chez moi</p>
+                    </div>
+                </a>
             </div>
             <div class="card comp">
                 <a href="
@@ -36,9 +37,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h1>Entreprise</h1>
+                        <h2>Entreprise</h2>
                         <p>Je souhaite proposer mes surplus à une association d'aide alimentaire</p>
-                    </div></a>
+                    </div>
+                </a>
             </div>
             <div class="card asso">
                 <a href="
@@ -54,7 +56,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h1>Association</h1>
+                        <h2>Association</h2>
                         <p>Je représente une association qui souhaite bénéficier d'offres alimentaires</p>
                     </div>
                 </a>
