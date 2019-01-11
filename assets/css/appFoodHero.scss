@@ -8,7 +8,6 @@
   box-shadow: 0 0 1.5em $headerBorderColor;
   h1{
     color: $bodyBackground;
-    font-size: $headerTitle;
   }
   p {
     margin-bottom: 0;
@@ -32,10 +31,6 @@
 .page-item.active .page-link {
   background-color:$foodHeroColor;
   border-color:$foodHeroColor;
-}
-
-.wastity_blanc{
-  height: $pictureTitle;
 }
 
 .headerReturn{

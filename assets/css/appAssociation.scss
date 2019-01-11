@@ -8,7 +8,6 @@
   box-shadow: 0 0 1.5em $headerBorderColor;
   h1{
     color: $bodyBackground;
-    font-size: $headerTitle;
   }
   p {
     margin-bottom: 0;
@@ -33,9 +32,6 @@
   border-color:$assoColor;
 }
 
-.wastity_blanc{
-  height: $headerTitle;
-}
 
 .headerReturn{
   margin-top:10px;
