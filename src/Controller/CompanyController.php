@@ -79,8 +79,8 @@ class CompanyController extends AbstractController
         Company $company,
         OfferRepository $offerRepository,
         Request $request,
-        PaginatorInterface $paginator)
-    {
+        PaginatorInterface $paginator
+    ) {
         $offers = $offerRepository->findNotDeliveredForCompany(new \DateTime(), $company);
 //        $offers = $company->getOffers();
 
