@@ -129,6 +129,10 @@
                 <div class="row justify-content-center">
                     {{ include('Visitor/Company/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
                 </div>
+            {% else %}
+                <div class="row justify-content-center">
+                    {{ include('Visitor/Company/_leaveCompany_form.html.twig') }}
+                </div>
             {% endif %}
         </section>
     </div>
