@@ -78,6 +78,8 @@ class Offer
     /**
      * @ORM\Column(type="datetime")
      *
+     * @Assert\NotNull(message="La date de début doit être obligatoirement renseignée")
+     *
      * @Assert\DateTime(format="Y-m-d H:i",
      *     message="Votre date doit etre de la forme AAAA-MM-JJ HH:MM")
      *
@@ -87,15 +89,22 @@ class Offer
     /**
      * @ORM\Column(type="datetime")
      *
+     *
+     * @Assert\NotNull(message="La date de fin doit être obligatoirement renseignée")
      * @Assert\DateTime(format="Y-m-d H:i",
      *     message="Votre date doit etre de la forme AAAA-MM-JJ HH:MM")
      * @Assert\GreaterThanOrEqual(propertyPath="start",
      *     message="Votre date de fin ne doit pas être antérieure à la date de début")
+     * @Assert\Range(
+     *      min = "now",
+     *      minMessage="La date et l'heure de fin de l'offre doit être supérieur à la date et l'heure actuelle"
+     *  )
      */
     private $end;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank(message="La description ne peut pas être vide")
      *
      */
     private $description;
@@ -167,7 +176,7 @@ class Offer
         return $this->start;
     }
 
-    public function setStart(\DateTimeInterface $start): self
+    public function setStart(?\DateTimeInterface $start): self
     {
         $this->start = $start;
 
@@ -179,7 +188,7 @@ class Offer
         return $this->end;
     }
 
-    public function setEnd(\DateTimeInterface $end): self
+    public function setEnd(?\DateTimeInterface $end): self
     {
         $this->end = $end;
 
