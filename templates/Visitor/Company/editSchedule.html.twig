@@ -1,5 +1,7 @@
 {% extends 'Visitor/Company/layoutCompany.html.twig' %}
 
+{% block title %}Wastity - Modification Horaire Entreprise{% endblock %}
+
 {% block header %}
     {% include 'headerLogo.html.twig' with {'type': 'Entreprise', 'route': path('company_show', {'id':company.id}) } %}
 {% endblock %}
