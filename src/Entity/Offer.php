@@ -97,7 +97,7 @@ class Offer
      *     message="Votre date de fin ne doit pas être antérieure à la date de début")
      * @Assert\Range(
      *      min = "now",
-     *      minMessage="La date de fin de l'offre doit être supérieur à la date d'aujourd'hui"
+     *      minMessage="La date et l'heure de fin de l'offre doit être supérieur à la date et l'heure actuelle"
      *  )
      */
     private $end;
