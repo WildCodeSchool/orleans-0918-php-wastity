@@ -69,12 +69,19 @@ class CompanyController extends AbstractController
      * @Route("/{id}/offers", name="company_show_offers", methods="GET")
      * @param Company $company
      * @param OfferRepository $offerRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return Response
+     * @throws \Exception
      * @IsGranted("companyView", subject="company")
      */
-    public function listOffers(Company $company, Request $request, PaginatorInterface $paginator)
-    {
-        $offers = $company->getOffers();
+    public function listOffers(
+        Company $company,
+        OfferRepository $offerRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ) {
+        $offers = $offerRepository->findNotDeliveredForCompany(new \DateTime(), $company);
 
         $appointments = $paginator->paginate(
             $offers,
@@ -92,8 +99,9 @@ class CompanyController extends AbstractController
 
     /**
      * @Route("/{company}/oneOffer/{offer}", name="company_offer_card")
+     * @param Company $company
+     * @param Offer $offer
      * @return Response
-     * @throws \Exception
      */
     public function showOneOffer(
         Company $company,

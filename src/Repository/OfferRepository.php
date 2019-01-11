@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Association;
+use App\Entity\Company;
 use App\Entity\FoodHero;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -101,6 +102,21 @@ class OfferRepository extends ServiceEntityRepository
             ->orderBy('o.end', 'ASC')
             ->getQuery();
         
+        return $qb->execute();
+    }
+
+    public function findNotDeliveredForCompany(\DateTime $date, Company $company): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.end > :date')
+            ->join('o.status', 's')
+            ->andWhere('o.company = :company')
+            ->andWhere("s.constStatus != 'Delivered'")
+
+            ->setParameters(['date' => $date, 'company' => $company->getId() ])
+            ->orderBy('o.end', 'ASC')
+            ->getQuery();
+
         return $qb->execute();
     }
 }
