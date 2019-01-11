@@ -14,6 +14,7 @@
         <tr>
             <th scope="col">Date</th>
             <th scope="col" class="ml-3">Poids</th>
+            <th scope="col" class="d-none d-md-table-cell">Entreprise</th>
             <th scope="col">Status</th>
             <th scope="col">Détails</th>
         </tr>
@@ -23,6 +24,7 @@
         <tr>
             <th scope="row">{{ offer.end ? offer.end|date('d/m') : '' }}</th>
             <td>{{ offer.weight }} kg</td>
+            <th scope="row" class="d-none d-md-table-cell">{{ offer.company.name }}</th>
             <td><i class="fas {{ offer.status.classfontawesome }}"
                    style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</td>
             <td data-toggle="modal" data-target="#ModalOfferAssociation{{ offer.id }}"><i
