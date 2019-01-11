@@ -324,7 +324,7 @@ class AssociationController extends AbstractController
             if ($offer->getAssociation()) {
                 $weight = $offer->getWeight();
                 $weightTotal += $weight;
-                $companies[] = $offer->getassociation()->getId();
+                $companies[] = $offer->getCompany()->getId();
             }
         }
         $countCompany = count(array_unique($companies));
