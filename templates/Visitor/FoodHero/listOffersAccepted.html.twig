@@ -14,12 +14,16 @@
             {% for offer in appointments %}
                 <div class="card fh">
                     <div class="card-header align-items-center">
-                        <h3 class="col-12 mt-2 mb-0">{{ offer.description }}</h3>
-                        <p>proposée par {{ offer.company.name }}</p>
+                        <h3 class="col-12 mt-2 mb-1">{{ offer.description }}</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <ul class="col-6">
+                                <li class="font-italic mb-3"><i class="fas {{ offer.status.classfontawesome }}"
+                                       style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</li>
+                                <li class="mt-2">
+                                    <strong>proposée par  : </strong>{{ offer.company.name }}
+                                </li>
                                 <li class="mt-2">
                                     <strong>à livrer à : </strong>{{ offer.association.name }}
                                 </li>
@@ -30,8 +34,6 @@
                                 {{ render(controller(
                                     'App\\Controller\\FoodHeroController::showDistanceOffer', {'foodhero':foodhero.id, 'offer':offer.id}
                                 )) }}
-                                <li><i class="fas {{ offer.status.classfontawesome }}"
-                                       style="color:{{ offer.status.color }}"></i> {{ offer.status.statustext }}</li>
                             </ul>
                             <img class="col-6"
                                  src="{{ offer.picture ? vich_uploader_asset(offer, 'pictureFile') : asset('/build/images/wastityPlaceHolder.png') }}"

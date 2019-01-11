@@ -1,11 +1,13 @@
 <div class="card fh">
     <div class="card-header align-items-center">
-        <h3 class="col-12 mt-2 mb-0">{{ offer.description }}</h3>
-        <p>proposée par {{ offer.company.name }}</p>
+        <h3 class="col-12 mt-2 mb-2">{{ offer.description }}</h3>
     </div>
     <div class="card-body">
         <div class="row">
             <ul class="col-6">
+                <li class="mt-2">
+                    <strong>proposée par  : </strong>{{ offer.company.name }}
+                </li>
                 <li class="mt-2">
                     <strong>à livrer à : </strong>{{ offer.association.name }}
                 </li>
@@ -31,12 +33,14 @@
                 <p class="col-12 mt-1"><strong>Informations complémentaires</strong>
                     : {{ offer.complementary }}</p>
             </div>
-            <div class="row">
+            <div class="row justify-content-around">
                 {{ render(controller(
                     'App\\Controller\\FoodHeroController::showMapOffer', {'foodhero':foodhero.id, 'offer':offer.id}
                 )) }}
+            </div>
+            <div class="row justify-content-center">
                 <a href="{{ path('foodhero_accept_offer', {'foodhero' : foodhero.id , 'offer' : offer.id}) }}"
-                   class="offset-1 col-5 my-2 btn ">Accepter l'offre</a>
+                   class="col-5 mt-3 mb-2 btn ">Accepter l'offre</a>
 
             </div>
         </details>

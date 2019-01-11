@@ -1,3 +1,155 @@
-<a class="btn btn-secondary my-2 ml-2 text-center" target="_blank"
-   href="https://www.google.com/maps/dir/{{ offer.association.fullAddress }}/{{ offer.company.fullAddress }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">Voir
-    la carte</a>
+    <a class="btn btn-outline-secondary col-3 my-2 mx-0 px-0 text-center" target="_blank"
+       href="https://www.google.com/maps/dir/{{ offer.association.fullAddress }}/{{ offer.company.fullAddress }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}"><i class="fas fa-globe "></i><br/>Carte</a>
+    <a class="btn btn-outline-secondary col-3 my-2 mx-2 px-0 text-center " data-toggle="modal" data-target="#CompanyModal" href=""><i class="fas fa-map-marker-alt mr-1"></i><i class="far fa-clock "></i><br/>Entreprise</a>
+    <!-- Modal -->
+    <div class="modal fade" id="CompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="container mb-5 pb-5">
+                    <div class="row text-primary">
+                        <h1 class="mt-3 mb-2"><strong>L'entreprise</strong></h1>
+                    </div>
+                    <div class="row justify-content-center ">
+                        <table class="infos">
+                            <tbody>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ offer.company.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>{{ offer.company.type }}</td>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>
+                                <td>{{ offer.company.address }}</td>
+                            </tr>
+                            <tr>
+                                <th>Code postal</th>
+                                <td>{{ offer.company.postalCode }}</td>
+                            </tr>
+                            <tr>
+                                <th>Ville</th>
+                                <td>{{ offer.company.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone</th>
+                                <td>{{ offer.company.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ offer.company.email }}</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="row text-primary">
+                        <h1 class="mt-3 mb-2"><strong>Les horaires</strong></h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="col-md-3"></th>
+                                <td class="col-md-3 text-center"><strong>Matin</strong></td>
+                                <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for shedule in offer.company.schedules %}
+                                <tr>
+                                    <th>{{ shedule.day.name }}</th>
+                                    <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                                    <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-outline-secondary col-3 my-2 mx-2 px-0 text-center " data-toggle="modal" data-target="#AssoModal" href=""><i class="fas fa-map-marker-alt mr-1"></i><i class="far fa-clock "></i><br/>Association</a>
+    <!-- Modal -->
+    <div class="modal fade" id="AssoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="container mb-5 pb-5">
+                    <div class="row text-primary">
+                        <h1 class="mt-3 mb-2"><strong>L'association</strong></h1>
+                    </div>
+                    <div class="row justify-content-center ">
+                        <table class="infos">
+                            <tbody>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ offer.association.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>
+                                <td>{{ offer.association.address }}</td>
+                            </tr>
+                            <tr>
+                                <th>Code postal</th>
+                                <td>{{ offer.association.postalCode }}</td>
+                            </tr>
+                            <tr>
+                                <th>Ville</th>
+                                <td>{{ offer.association.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone</th>
+                                <td>{{ offer.association.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ offer.association.mail }}</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="row text-primary">
+                        <h1 class="mt-3 mb-2"><strong>Les horaires</strong></h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="col-md-3"></th>
+                                <td class="col-md-3 text-center"><strong>Matin</strong></td>
+                                <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for shedule in offer.association.schedules %}
+                                <tr>
+                                    <th>{{ shedule.day.name }}</th>
+                                    <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                                    <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

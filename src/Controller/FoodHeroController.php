@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\FoodHero;
 use App\Entity\Offer;
 use App\Form\FoodHeroType;
