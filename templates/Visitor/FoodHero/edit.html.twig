@@ -4,6 +4,8 @@
 
 {% block body %}
     <div class="container">
+        <div id="infoposition"></div>
+
         <div class="row justify-content-center text-center">
             <div>
                 <p class="fa text-center text-primary mt-3 mb-2"><strong>Comment ça marche ?</strong>
@@ -29,7 +31,6 @@
                  alt="Image de profil"/>
             {{ include('Visitor/FoodHero/_form.html.twig', {'button_label': 'Mettre à jour mes informations'}) }}
         </div>
-        <div id="infoposition"></div>
     </div>
 {% endblock %}
 {% block javascripts %}{{ encore_entry_script_tags('geolocation') }}{% endblock %}

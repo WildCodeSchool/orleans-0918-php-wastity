@@ -4,6 +4,9 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
 {% block body %}
+    <button id="geolocBtn">Me localiser</button>
+    <div class="text-center" id="infoposition"></div>
+
     <div class="row justify-content-center text-center">
         <div>
             <p class="fa text-center text-primary mt-3 mb-2"><strong>Offres livrées</strong></p>
@@ -85,3 +88,4 @@
         {{ knp_pagination_render(offers) }}
     </div>
 {% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('geolocation') }}{% endblock %}

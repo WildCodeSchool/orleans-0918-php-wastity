@@ -1,27 +1,29 @@
-function myPosition(position) {
-    fetch('/foodhero/position/'+position.coords.latitude+'/'+position.coords.longitude);
-}
+document.getElementById("geolocBtn").addEventListener("click", function(){
 
-function erreurPosition(error) {
-    var info = "Erreur lors de la géolocalisation : ";
-    switch (error.code) {
-        case error.TIMEOUT:
-            info += "Timeout !";
-            break;
-        case error.PERMISSION_DENIED:
-            info += "Vous n’avez pas donné la permission";
-            break;
-        case error.POSITION_UNAVAILABLE:
-            info += "La position n’a pu être déterminée";
-            break;
-        case error.UNKNOWN_ERROR:
-            info += "Erreur inconnue";
-            break;
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(myPosition, erreurPosition);
     }
-    document.getElementById("infoposition").innerHTML = info;
-}
+    function myPosition(position) {
+        fetch('/foodhero/position/'+position.coords.latitude+'/'+position.coords.longitude);
+    }
 
-if(navigator.geolocation) {
+    function erreurPosition(error) {
+        var info = "Erreur lors de la géolocalisation : ";
+        switch (error.code) {
+            case error.TIMEOUT:
+                info += "Timeout !";
+                break;
+            case error.PERMISSION_DENIED:
+                info += "Vous n’avez pas donné la permission ou veuillez activer la géolocalisation sur votre appareil et réactualiser la page.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                info += "La position n’a pu être déterminée";
+                break;
+            case error.UNKNOWN_ERROR:
+                info += "Erreur inconnue";
+                break;
+        }
+        document.getElementById("infoposition").innerHTML = info;
+    }
+});
 
-    navigator.geolocation.getCurrentPosition(myPosition, erreurPosition);
-}
