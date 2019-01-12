@@ -6,7 +6,7 @@
         </button>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {% if app.user.company is defined %}
+            {% if app.user.company.id is defined %}
                 <p class="ml-2 font-weight-bold">Admin</p>
                 <a class="dropdown-item {{ company==app.user.company ? 'active' }}"
                    href="{{ path('company_show', {'id':app.user.company.id}) }}">{{ app.user.company.name }}</a>
