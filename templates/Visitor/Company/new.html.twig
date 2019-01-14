@@ -2,10 +2,12 @@
 
 {% block stylesheets %}{{ encore_entry_link_tags('css/appCompany') }}{% endblock %}
 {% block title %}Wastity - Creation Entreprise{% endblock %}
-
+{% block header %}
+    {% include 'headerLogo.html.twig' with {'type': 'Entreprise'} %}
+{% endblock %}
 {% block body %}
     <div class="form-inline justify-content-center">
-        <p class="fa text-center mt-3 mb-3">
+        <p class="text-center mt-3 mb-3">
             <strong>Rejoignez la communauté des commerces engagés contre le gaspillage alimentaire !</strong>
         </p>
     </div>
