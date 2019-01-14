@@ -350,7 +350,7 @@ class Company implements HasAddress
 
     public function fullAddress():string
     {
-        $fullAddress=urlencode($this->address.' '.$this->postalCode.' '.$this->city);
+        $fullAddress=$this->address.' '.$this->postalCode.' '.$this->city;
         return $fullAddress;
     }
 
