@@ -35,8 +35,6 @@ class OfferType extends AbstractType
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
                 'help' => 'ex:2019-01-31 20:30',
-                'attr' => [
-                    'placeholder' => '2019-01-31 20:30']
             ])
             ->add('end', DateTimeType::class, [
                 'label' => 'Jusqu\'à',
@@ -44,8 +42,6 @@ class OfferType extends AbstractType
                 'invalid_message' => 'La date doit être 
                 de la forme AAAA-MM-JJ HH:MM',
                 'help' => 'ex:2019-12-31 20:30',
-                'attr' => [
-                    'placeholder' => '2019-12-31 20:30']
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
