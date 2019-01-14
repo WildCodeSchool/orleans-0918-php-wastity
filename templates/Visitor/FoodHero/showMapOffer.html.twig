@@ -2,12 +2,12 @@
        href="https://www.google.com/maps/dir/{{ offer.association.fullAddress }}/{{ offer.company.fullAddress }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">
         <i class="fas fa-globe "></i> Carte
     </a>
-    <a class="btn btn-block btn-outline-secondary col-10 col-sm-6 mx-1 my-2 text-center " data-toggle="modal" data-target="#CompanyModal" href="">
+    <button class="btn btn-block btn-outline-secondary col-10 col-sm-6 mx-1 my-2 text-center " data-toggle="modal" data-target="#CompanyModal" href="#">
         <i class="far fa-clock"></i> Entreprise
-    </a>
-    <a class="btn btn-outline-secondary col-10 col-sm-6 my-2 mx-1 text-center " data-toggle="modal" data-target="#AssoModal" href="">
+    </button>
+    <button class="btn btn-outline-secondary col-10 col-sm-6 my-2 mx-1 text-center " data-toggle="modal" data-target="#AssoModal" href="#">
         <i class="far fa-clock "></i> Association
-    </a>
+    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="CompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

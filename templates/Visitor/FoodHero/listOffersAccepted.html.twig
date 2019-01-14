@@ -5,7 +5,7 @@
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 
 {% block body %}
-    <button id="geolocBtn">Me localiser</button>
+    <button class="btn btn-outline-primary mt-2 ml-2" id="geolocBtn"><i class="fas fa-search-location text-primary"></i> Me localiser</button>
 
     <div class="container mb-5 pb-5">
         <div id="infoposition"></div>
@@ -78,4 +78,7 @@
         </div>
     </div>
 {% endblock %}
-{% block javascripts %}{{ encore_entry_script_tags('geolocation') }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('geolocation') }}
+{% endblock %}
