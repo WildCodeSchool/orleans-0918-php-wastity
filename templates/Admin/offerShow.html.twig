@@ -42,17 +42,17 @@
                 </tr>
             {% endif %}
             <tr>
-                <th scope="col">Status</th>
+                <th scope="col">Statut</th>
                 <td>{{ offer.status.statustext }}</td>
             </tr>
             <tr>
                 <th scope="col">
-                    Activer
+                    Activer/Désactiver
                 </th>
                 <td>
                     <a href="{{ path('offer_admin_activate', {'id': offer.id}) }}">
-                        <button type="button" class="btn btn-{{offer.active ? 'success' : 'danger' }}" data-toggle="button" aria-pressed="{{offer.active}}">
-                            {{offer.active ? 'Oui' : 'Non' }}
+                        <button type="button" class="btn btn-{{offer.active ? 'danger' : 'success' }}" data-toggle="button" aria-pressed="{{offer.active}}">
+                            {{offer.active ? 'Inactif' : 'Actif' }}
                         </button>
                     </a>
                 </td>
