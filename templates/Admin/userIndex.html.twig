@@ -27,7 +27,7 @@
                 <th scope="col">
                     <div class="d-none d-md-block">Entreprise</div>
                 </th>
-                <th class="text-center" scope="col">Activer</th>
+                <th class="text-center" scope="col">Actif / Inactif</th>
             </tr>
             </thead>
             <tbody>
@@ -63,8 +63,8 @@
                     </td>
                 <td class="text-center">
                     <a href="{{ path('user_admin_activate', {'id': user.id}) }}">
-                        <button type="button" class="btn btn-{{ user.activate ? 'danger' : 'success' }}" data-toggle="button" aria-pressed="{{user.activate}}">
-                            {{ user.activate ? 'Non' : 'Oui' }}
+                        <button type="button" class=" checkButton btn btn-{{ user.activate ? 'success' : 'danger' }}" data-toggle="button" aria-pressed="{{user.activate}}">
+                            {{ user.activate ? 'Actif' : 'Inactif' }}
                         </button>
                     </a>
                 </td>
