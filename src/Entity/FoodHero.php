@@ -26,7 +26,7 @@ class FoodHero implements \Serializable
     /**
      * @ORM\Column(type="string", length=20)
      * @Assert\NotBlank(
-     *     message = "Veuillez renseigner un numéro de téléphone pour l'association")
+     *     message = "Veuillez renseigner un numéro de téléphone")
      * @Assert\Regex("/[0-9 +-\.]+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
@@ -50,6 +50,7 @@ class FoodHero implements \Serializable
     /**
      * @Vich\UploadableField(mapping="profile", fileNameProperty="profileImage")
      * @var File
+     * @Assert\NotBlank(message="L'image doit etre renseignée")
      * @Assert\File(
      *     maxSize = "2048k",
      *     maxSizeMessage = "Veuillez ajouter une image de moins de 2 Mo",

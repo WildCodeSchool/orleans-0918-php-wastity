@@ -15,14 +15,15 @@ class FoodHeroType extends AbstractType
     {
         $builder
             ->add('profileImageFile', VichImageType::class, [
-                'required' => false,
                 'allow_delete' => false,
                 'label' => 'Votre image de profil',
                 'download_uri' => false,
                 'image_uri' => false,
+                'required' => true
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
+                'required' => true,
                 'attr' => [
                     'placeholder' => '0202030303',
                 ]]);
