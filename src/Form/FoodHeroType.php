@@ -20,9 +20,11 @@ class FoodHeroType extends AbstractType
                 'label' => 'Votre image de profil',
                 'download_uri' => false,
                 'image_uri' => false,
+                'require' => true
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
+                'require' => true,
                 'attr' => [
                     'placeholder' => '0202030303',
                 ]]);
