@@ -2,11 +2,13 @@
 
 {% block stylesheets %}{{ encore_entry_link_tags('css/appFoodHero') }}{% endblock %}
 {% block title %}Wastity - Creation FoodHero{% endblock %}
-
+{% block header %}
+    {% include 'headerLogo.html.twig' with {'type': 'Food Hero'} %}
+{% endblock %}
 {% block body %}
     <div class="container">
         <div>
-            <p class="fa text-center mt-3 mb-3">
+            <p class="text-center mt-3 mb-3">
                 <strong>
                     Devenez acteur de la lutte contre le gaspillage alimentaire en faveur des plus démunis !
                 </strong><br/>

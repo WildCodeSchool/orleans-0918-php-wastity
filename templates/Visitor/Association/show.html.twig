@@ -1,116 +1,132 @@
 {% extends 'Visitor/Association/layoutAssociation.html.twig' %}
 
-{% block title %}Wastyti - Association{% endblock %}
+ {% block title %}Wastity - Administration Association{% endblock %}
 
 {% block body %}
-
     <div class="container mb-5 pb-5">
+
         <div class="row justify-content-center text-center">
             <div>
-                <p class="fa text-center text-success mt-3 mb-2"><strong>Administration</strong><br>
-                    <i class="fas text-success fa-toolbox fa-2x"></i></p>
+                <p class="fa text-center text-success mt-3 mb-2"><strong>Administration</strong></p>
             </div>
         </div>
 
-        <div class="row text-success">
-            <h1><strong>Votre association</strong></h1>
-        </div>
-        <div class="row justify-content-center ">
-            <table class="infos">
-                <tbody>
-                <tr>
-                    <th>Nom</th>
-                    <td >{{ association.name }}</td>
-                </tr>
-                <tr>
-                    <th>Adresse</th>
-                    <td >{{ association.address }}</td>
-                </tr>
-                <tr>
-                    <th>Code postal</th>
-                    <td >{{ association.postalCode }}</td>
-                </tr>
-                <tr>
-                    <th>Ville</th>
-                    <td >{{ association.city }}</td>
-                </tr>
-                <tr>
-                    <th>Téléphone</th>
-                    <td>{{ association.phone }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td >{{ association.mail }}</td>
-                </tr>
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <div class="row justify-content-center">
-
-            <a class="btn btn-success  mt-5 mb-5" href="{{ path('association_edit', {'id': association.id}) }}">Modifier les informations</a>
-        </div>
-
-
-        <div class="row text-success">
-            <h1><strong>Vos horaires</strong></h1>
-        </div>
-        <div class="row justify-content-center">
-            <table>
-                <thead>
-                <tr>
-                    <th class="col-md-3"></th>
-                    <td class="col-md-3 text-center"><strong>Matin</strong></td>
-                    <td class="col-md-3 text-center"><strong>Après-midi</strong></td>
-                </tr>
-                </thead>
-                <tbody>
-
-                {% for schedule in association.schedules %}
+        <section class="mb-3">
+            <div class="row text-success">
+                <h3><i class="fas fa-book"></i> Association
+                    <a class="ml-2 btn btn-outline-success btn-sm float-right"
+                       href="{{ path('association_edit', {'id': association.id}) }}">
+                        <i class="fas text-success fa-edit "></i> Modifier
+                    </a></h3>
+            </div>
+            <div class="row justify-content-center ">
+                <table class="table table-striped table-borderless table-sm">
+                    <tbody>
                     <tr>
-                        <th>{{ schedule.day.name }}</th>
-                        <td class="text-center">{% if schedule.openingAM== null and schedule.closingAM==null %} fermé {% else %} {{ schedule.openingAM|date('H:i') }}-{{ schedule.closingAM|date('H:i') }}{% endif %}</td>
-                        <td class="text-center">{% if schedule.openingPM== null and schedule.closingPM==null %} fermé {% else %}{{ schedule.openingPM|date('H:i') }}-{{ schedule.closingPM|date('H:i') }}{% endif %}</td>
+                        <th >Nom</th>
+                        <td>{{ association.name }}</td>
                     </tr>
-                {% endfor %}
-                </tbody>
+                    <tr>
+                        <th >Adresse</th>
+                        <td>{{ association.address }}</td>
+                    </tr>
+                    <tr>
+                        <th >Code postal</th>
+                        <td>{{ association.postalCode }}</td>
+                    </tr>
+                    <tr>
+                        <th >Ville</th>
+                        <td>{{ association.city }}</td>
+                    </tr>
+                    <tr>
+                        <th >Téléphone</th>
+                        <td>{{ association.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th >Email</th>
+                        <td>{{ association.mail }}</td>
+                    </tr>
+                    </tbody>
 
-            </table>
-        </div>
-        <div class="row justify-content-center">
-            <a class="btn btn-success mt-5 mb-5" href="{{ path('association_edit_schedule', {'id': association.id}) }}">Modifier les horaires</a>
-        </div>
+                </table>
 
-        <div class="row text-info">
-            <h1><strong>Vos membres</strong></h1>
-        </div>
-        <div class="justify-content-center text-center">
-
-            {% if association.members is not empty %}
-                {% for member in association.members  %}
-                    <div class="row">
-                        <div class="col-7 offset-2"><p>{{ member.email }}</p></div>
-                        {% if app.user == association.user %}
-                        <div class="col-1">{{ include('Visitor/Association/_deleteMember_form.html.twig') }}</div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Aucun membre actuellement</p>
-            {% endif %}
-        </div>
-        {% if app.user == association.user %}
-        <div class="row justify-content-center">
-            {{ include('Visitor/Association/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
-        </div>
-        {% else %}
-            <div class="row justify-content-center">
-                {{ include('Visitor/Association/_leaveAssociation_form.html.twig') }}
             </div>
-        {% endif %}
+        </section>
 
+        <section class="mb-3">
+            <div class="row text-success">
+                <h3><i class="fas fa-clock"></i> Horaires</h3>
+                <a class="btn btn-outline-success btn-sm ml-2 float-right"
+                   href="{{ path('association_edit_schedule', {'id': association.id}) }}">
+                    <i class="fas text-success fa-edit"></i> Modifier
+                </a>
+
+            </div>
+            <div class="row justify-content-center">
+                <table class="table table-borderless table-sm table-striped">
+                    <thead>
+                    <tr>
+                        <th class=""></th>
+                        <td class=" text-center"><strong>Matin</strong></td>
+                        <td class=" text-center"><strong>Après-midi</strong></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for shedule in association.schedules %}
+                        <tr>
+                            <th>{{ shedule.day.name }}</th>
+                            <td class="text-center">{% if shedule.openingAM== null and shedule.closingAM==null %} fermé {% else %} {{ shedule.openingAM|date('H:i') }}-{{ shedule.closingAM|date('H:i') }}{% endif %}</td>
+                            <td class="text-center">{% if shedule.openingPM== null and shedule.closingPM==null %} fermé {% else %}{{ shedule.openingPM|date('H:i') }}-{{ shedule.closingPM|date('H:i') }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-3">
+
+            <div class="row text-success">
+                <h3><i class="fas fa-user"></i> Vos membres</h3>
+            </div>
+            <div class="justify-content-center text-center">
+
+                {% if association.members is not empty %}
+                    <table class="table  table-sm table-striped">
+                        <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Retirer</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        {% for member in association.members %}
+                            <tr>
+                                <td>
+                                    {{ member.email }}
+                                </td>
+                                <td>
+                                    {% if app.user == association.user %}
+                                        {{ include('Visitor/association/_deleteMember_form.html.twig') }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="alert alert-success">Aucun membre actuellement</p>
+                {% endif %}
+            </div>
+            {% if app.user == association.user %}
+                <div class="row justify-content-center">
+                    {{ include('Visitor/Association/_formMember.html.twig', {'button_label': 'Enregistrer nouveau membre'}) }}
+                </div>
+            {% endif %}
+        </section>
     </div>
-{% endblock %}
 
+{% endblock %}

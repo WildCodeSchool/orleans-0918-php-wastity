@@ -11,12 +11,13 @@ class CompanyVoter extends Voter
 {
     const VIEW = 'companyView';
     const COMPANY_ADMIN = 'companyAdmin';
+    const OFFER_EDIT = 'offerEdit';
 
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::VIEW, self::COMPANY_ADMIN])
+        return in_array($attribute, [self::VIEW, self::COMPANY_ADMIN, self::OFFER_EDIT])
             && $subject instanceof Company;
     }
 

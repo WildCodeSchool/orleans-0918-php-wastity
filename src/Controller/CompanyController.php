@@ -179,6 +179,7 @@ class CompanyController extends AbstractController
      * @param Request $request
      * @param company $company
      * @return Response
+     * @IsGranted("companyView", subject="company")
      */
     public function edit(Request $request, Company $company): Response
     {
@@ -202,6 +203,8 @@ class CompanyController extends AbstractController
      * @param Request $request
      * @param Offer $offer
      * @return Response
+     * @IsGranted("companyView", subject="company")
+     * @IsGranted("edit", subject="offer")
      */
     public function editOffer(Request $request, Company $company, Offer $offer): Response
     {
@@ -227,6 +230,7 @@ class CompanyController extends AbstractController
      * @param Request $request
      * @param Company $company
      * @return Response
+     * @IsGranted("companyView", subject="company")
      */
     public function delete(Request $request, Company $company): Response
     {
@@ -247,6 +251,7 @@ class CompanyController extends AbstractController
      * @param Request $request
      * @param company $company
      * @return Response
+     * @IsGranted("companyView", subject="company")
      */
     public function editSchedule(
         Request $request,

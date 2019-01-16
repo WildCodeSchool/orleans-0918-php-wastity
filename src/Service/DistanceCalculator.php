@@ -34,8 +34,8 @@ class DistanceCalculator
     {
         $client = new Client(['base_uri' => 'https://api-adresse.data.gouv.fr']);
 
-        $resStart= $client->request('GET', 'search', ['query' => ['q' => $start->fullAddress()]]);
-        $resEnd= $client->request('GET', 'search', ['query' => ['q' => $end->fullAddress()]]);
+        $resStart= $client->request('GET', 'search', ['query' => ['q' => urlencode($start->fullAddress())]]);
+        $resEnd= $client->request('GET', 'search', ['query' => ['q' => urlencode($end->fullAddress())]]);
 
         $resStart = json_decode($resStart->getBody(), true);
         $resEnd = json_decode($resEnd->getBody(), true);
