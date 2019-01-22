@@ -22,6 +22,8 @@ class OfferType extends AbstractType
                 'label' => 'Image de votre produit',
                 'download_uri' => false,
                 'image_uri' => false,
+                'help' => 'formats valides : jpg , jpeg, png',
+
             ])
             ->add('weight', NumberType::class, [
                 'scale' => 2,

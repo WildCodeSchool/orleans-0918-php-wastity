@@ -19,7 +19,8 @@ class FoodHeroType extends AbstractType
                 'label' => 'Votre image de profil',
                 'download_uri' => false,
                 'image_uri' => false,
-                'required' => true
+                'required' => true,
+                'help' => 'formats valides : jpg , jpeg, png',
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
