@@ -1,5 +1,7 @@
+
     <a class="btn btn-outline-secondary col-10 col-sm-6 mx-1 my-2  text-center" target="_blank"
-       href="https://www.google.com/maps/dir/{{ offer.association.fullAddress }}/{{ offer.company.fullAddress }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">
+        href="https://www.google.com/maps/dir/{{ offer.association.fullAddress }}/{{ offer.company.fullAddress }}
+        {% if app.session.get('latitude') is not empty %}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}{% endif %}">
         <i class="fas fa-globe "></i> Carte
     </a>
     <button class="btn btn-block btn-outline-secondary col-10 col-sm-6 mx-1 my-2 text-center " data-toggle="modal" data-target="#CompanyModal">
