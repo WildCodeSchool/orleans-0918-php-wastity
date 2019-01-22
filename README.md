@@ -30,7 +30,7 @@ Créer une base de données, avec la commande :
 
 Mettre à jour la base de données, avec la commande :
 
-`php bin/console doctrine:doctrine:migration:migrate
+`php bin/console doctrine:migration:migrate
 `
 
 
