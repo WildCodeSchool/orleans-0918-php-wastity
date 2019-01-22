@@ -1,4 +1,3 @@
-{{ dump(app.session.get('latitude')) }}
 {% if app.session.get('latitude') is not empty %}
 <a class="btn btn-outline-secondary col-10 col-sm-6 mx-1 my-2  text-center" target="_blank"
    href="https://www.google.com/maps/dir/{{ offer.association.fullAddress }}/{{ offer.company.fullAddress }}/{{ app.session.get('latitude') }},{{ app.session.get('longitude') }}">
