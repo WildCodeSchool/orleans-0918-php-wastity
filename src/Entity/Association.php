@@ -70,7 +70,7 @@ class Association implements HasAddress
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message = "Veuillez renseigner un numéro de téléphone pour l'association")
-     * @Assert\Regex("/[0-9 +-\.]+/",
+     * @Assert\Regex("/(\[0-9])+/",
      *     message = "Le numéro de téléphone '{{ value }}' n'est pas valide")
      * @Assert\Length(
      *      max = 255,

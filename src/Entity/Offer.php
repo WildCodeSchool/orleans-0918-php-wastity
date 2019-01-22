@@ -33,7 +33,7 @@ class Offer
      *     maxSize = "2048k",
      *     maxSizeMessage = "Veuillez ajouter une image de moins de 2 Mo",
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Veuillez ajouter un fichier image"
+     *     mimeTypesMessage = "Veuillez ajouter un fichier jpg,jpeg ou png"
      * )
      */
     private $pictureFile;
@@ -97,7 +97,7 @@ class Offer
      *     message="Votre date de fin ne doit pas être antérieure à la date de début")
      * @Assert\Range(
      *      min = "now",
-     *      minMessage="La date et l'heure de fin de l'offre doit être supérieur à la date et l'heure actuelle"
+     *      minMessage="La date et l'heure de fin de l'offre doivent être supérieures à la date et l'heure actuelles"
      *  )
      */
     private $end;
