@@ -29,6 +29,14 @@ class UserRegisterType extends AbstractType
                 'first_options'  => ['label' => 'Mot de Passe'],
                 'second_options' => ['label' => 'Confirmez le mot de passe']
             ])
+            ->add('firstname', TextType::class, [
+                'label' => 'Votre prénom :',
+                'attr' => ['placeholder' => 'Prénom']
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'Votre nom :',
+                'attr' => ['placeholder' => 'Nom']
+            ])
         ;
     }
 
