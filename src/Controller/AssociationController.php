@@ -116,7 +116,7 @@ class AssociationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $userRepository->findOneByEmail($form->getData()['email']);
             if ($form->getData()['email']===$this->getUser()->getEmail()||$association->getMembers()->contains($user)) {
-                $this->addFlash('danger', "Cet utilisateur fait déjà parti de cette association");
+                $this->addFlash('danger', "Cet utilisateur fait déjà partie de cette association");
 
                 return $this->redirectToRoute('association_show', ['id' => $association->getId()]);
             }
