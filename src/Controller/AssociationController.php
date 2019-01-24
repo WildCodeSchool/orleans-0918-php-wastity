@@ -35,8 +35,11 @@ class AssociationController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/new", name="association_new", methods="GET|POST")
      */
-    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository, CheckAddress $checkAddress): Response
-    {
+    public function new(
+        Request $request,
+        DaysOfWeekRepository $daysOfWeekRepository,
+        CheckAddress $checkAddress
+    ): Response {
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
