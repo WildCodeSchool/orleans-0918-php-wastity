@@ -64,12 +64,7 @@ class CompanyController extends AbstractController
 
                 return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
             } else {
-                $this->addFlash('danger', 'L\'adresse n\'a pas pu être trouvée !');
-
-                return $this->redirectToRoute('company_new', [
-                    'company' => $company,
-                    'form' => $form->createView(),
-                ]);
+                $this->addFlash('danger', "L'adresse n'a pas été trouvée !");
             }
         }
 

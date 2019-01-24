@@ -68,11 +68,6 @@ class AssociationController extends AbstractController
                 return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
             } else {
                 $this->addFlash('danger', "L'adresse n'a pas été trouvée !");
-
-                return $this->redirectToRoute("association_new", [
-                    'association' => $association,
-                    'form' => $form->createView()
-                ]);
             }
         }
 
