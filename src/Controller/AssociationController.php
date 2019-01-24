@@ -15,7 +15,9 @@ use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
+use App\Service\CheckAddress;
 use App\Service\DistanceCalculator;
+use GuzzleHttp\Client;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +35,7 @@ class AssociationController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/new", name="association_new", methods="GET|POST")
      */
-    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository): Response
+    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository, CheckAddress $checkAddress): Response
     {
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
@@ -51,14 +53,24 @@ class AssociationController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $association->setUser($user);
-            $em->persist($association);
-            $em->flush();
+            $address = $association->fullAddress();
+            if ($checkAddress->checkAdress($address)) {
+                $em = $this->getDoctrine()->getManager();
+                $association->setUser($user);
+                $em->persist($association);
+                $em->flush();
 
-            $this->addFlash('success', "Votre association a bien été enregistrée !");
+                $this->addFlash('success', "Votre association a bien été enregistrée !");
 
-            return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
+                return $this->redirectToRoute('association_list_offers', ['id' => $association->getId()]);
+            } else {
+                $this->addFlash('danger', "L'adresse n'a pas été trouvée !");
+
+                return $this->redirectToRoute("association_new", [
+                    'association' => $association,
+                    'form' => $form->createView()
+                ]);
+            }
         }
 
         return $this->render('Visitor/Association/new.html.twig', [
