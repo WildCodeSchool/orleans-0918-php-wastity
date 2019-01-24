@@ -10,7 +10,6 @@ namespace App\Service;
 
 use GuzzleHttp\Client;
 
-
 class CheckAddress
 {
     public function checkAdress(string $address)
