@@ -16,7 +16,7 @@ use App\Repository\DaysOfWeekRepository;
 use App\Repository\OfferRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
-use App\Service\CheckAddress;
+use App\Service\AddressChecker;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,7 +37,7 @@ class CompanyController extends AbstractController
     public function new(
         Request $request,
         DaysOfWeekRepository $daysOfWeekRepository,
-        CheckAddress $checkAddress
+        AddressChecker $checkAddress
     ): Response {
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
@@ -55,7 +55,7 @@ class CompanyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $address = $company->fullAddress();
-            if ($checkAddress->checkAdress($address)) {
+            if ($checkAddress->checkAddress($address)) {
                 $em = $this->getDoctrine()->getManager();
                 $company->setUser($user);
                 $em->persist($company);

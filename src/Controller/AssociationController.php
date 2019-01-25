@@ -15,7 +15,7 @@ use App\Form\AssociationScheduleType;
 use App\Repository\DaysOfWeekRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
-use App\Service\CheckAddress;
+use App\Service\AddressChecker;
 use App\Service\DistanceCalculator;
 use GuzzleHttp\Client;
 use Knp\Component\Pager\PaginatorInterface;
@@ -38,7 +38,7 @@ class AssociationController extends AbstractController
     public function new(
         Request $request,
         DaysOfWeekRepository $daysOfWeekRepository,
-        CheckAddress $checkAddress
+        AddressChecker $checkAddress
     ): Response {
         $association = new Association();
         $form = $this->createForm(AssociationType::class, $association);
@@ -57,7 +57,7 @@ class AssociationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $address = $association->fullAddress();
-            if ($checkAddress->checkAdress($address)) {
+            if ($checkAddress->checkAddress($address)) {
                 $em = $this->getDoctrine()->getManager();
                 $association->setUser($user);
                 $em->persist($association);

@@ -10,17 +10,13 @@ namespace App\Service;
 
 use GuzzleHttp\Client;
 
-class CheckAddress
+class AddressChecker
 {
-    public function checkAdress(string $address)
+    public function checkAddress(string $address)
     {
         $client = new Client(['base_uri' => 'https://api-adresse.data.gouv.fr']);
         $req = $client->request('GET', 'search', ['query' => ['q' => urlencode($address)]]);
         $coordinates =  json_decode($req->getBody(), true);
-        if (isset($coordinates['features'][0]['geometry']['coordinates'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return isset($coordinates['features'][0]['geometry']['coordinates']);
     }
 }
