@@ -16,6 +16,7 @@ use App\Repository\DaysOfWeekRepository;
 use App\Repository\OfferRepository;
 use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
+use App\Service\AddressChecker;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,8 +34,11 @@ class CompanyController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request, DaysOfWeekRepository $daysOfWeekRepository): Response
-    {
+    public function new(
+        Request $request,
+        DaysOfWeekRepository $daysOfWeekRepository,
+        AddressChecker $checkAddress
+    ): Response {
         $company = new Company();
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
@@ -50,13 +54,18 @@ class CompanyController extends AbstractController
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $company->setUser($user);
-            $em->persist($company);
-            $em->flush();
-            $this->addFlash('success', "Votre entreprise a bien été enregistrée !");
+            $address = $company->fullAddress();
+            if ($checkAddress->checkAddress($address)) {
+                $em = $this->getDoctrine()->getManager();
+                $company->setUser($user);
+                $em->persist($company);
+                $em->flush();
+                $this->addFlash('success', "Votre entreprise a bien été enregistrée !");
 
-            return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
+                return $this->redirectToRoute('company_show_offers', ['id' => $company->getId()]);
+            } else {
+                $this->addFlash('danger', "L'adresse n'a pas été trouvée !");
+            }
         }
 
         return $this->render('Visitor/Company/new.html.twig', [
