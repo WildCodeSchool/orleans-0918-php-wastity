@@ -138,3 +138,9 @@ label{
     color: $companyColor;
   }
 }
+
+#offer_start div, #offer_start select, #offer_end div, #offer_end select {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}

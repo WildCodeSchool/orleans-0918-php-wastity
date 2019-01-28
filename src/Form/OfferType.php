@@ -33,15 +33,14 @@ class OfferType extends AbstractType
             ])
             ->add('start', DateTimeType::class, [
                 'label' => 'Disponible à partir de',
-                'widget' => 'single_text',
-                'invalid_message' => 'La date doit être 
+                'time_widget' => 'choice',
+                'invalid_message' => 'La date doit être
                 de la forme AAAA-MM-JJ HH:MM',
                 'help' => 'ex:2019-01-31 20:30',
             ])
             ->add('end', DateTimeType::class, [
                 'label' => 'Jusqu\'à',
-                'widget' => 'single_text',
-                'invalid_message' => 'La date doit être 
+                'invalid_message' => 'La date doit être
                 de la forme AAAA-MM-JJ HH:MM',
                 'help' => 'ex:2019-12-31 20:30',
             ])

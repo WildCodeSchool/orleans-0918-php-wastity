@@ -14,19 +14,11 @@
     <div class="col-4 mt-5 mr-1 ml-1">
         {{ form_widget(form.weight) }}
     </div>
-    <div class="col-7 mt-4 col-xs-10 mr-1 ml-1">
-        {{ form_label(form.start) }}
+    <div class="col-md-7 col-xs-12 mt-4 mr-1 ml-1">
+        {{ form_row(form.start) }}
     </div>
-    <div class="col-md-4 col-xs-7 mt-4 mr-1 ml-1">
-        {{ form_widget(form.start) }}
-        {{ form_help(form.start) }}
-    </div>
-    <div class="col-md-7 col-xs-10 mt-4 mr-1 ml-1">
-        {{ form_label(form.end) }}
-    </div>
-    <div class="col-md-4 col-xs-7 mt-4 mr-1 ml-1">
-        {{ form_widget(form.end) }}
-        {{ form_help(form.end) }}
+    <div class="col-md-7 col-xs-12 mt-4 mr-1 ml-1">
+        {{ form_row(form.end) }}
     </div>
     <div class="col-md-11 col-xs-12 mt-4 mr-1 ml-1">
         {{ form_label(form.description) }}
